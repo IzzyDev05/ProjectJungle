@@ -181,7 +181,8 @@ public class TimeTrackerStatsWindow : EditorWindow
 	{ get { return data.settings.dateFormat; } }
 
 
-//    [MenuItem("Tools/TimeTracker/Reset")]
+    //    [MenuItem("Tools/TimeTracker/Reset")]
+    [Obsolete]
     public static void TestReset()
     {
         TimeTracker.instance.data.entries = new List<TimeTrackerEntry>();

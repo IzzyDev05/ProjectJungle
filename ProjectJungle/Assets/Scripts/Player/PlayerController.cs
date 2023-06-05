@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce;
 
     [Header("GroundCheck")]
-    [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundDrag = 3f;
 
@@ -20,12 +19,17 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
     private Vector3 moveDirection;
     private Rigidbody rb;
+    private CapsuleCollider coll;
+    private PlayerAnimation playerAnimation;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
+        coll = GetComponent<CapsuleCollider>();
+        playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
 
     private void Update() {
+        print(IsGrounded());
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump() {
+        playerAnimation.SetJumpingTrue();
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
@@ -65,7 +70,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool IsGrounded() {
-        return Physics.Raycast(groundCheckObj.position, Vector3.down, groundCheckDistance, groundLayer);
+        float radius = coll.radius * 0.9f;
+        Vector3 pos = transform.position + Vector3.up * (radius * 0.9f);
+        return Physics.CheckSphere(pos, radius, groundLayer);
     }
 
     private void SpeedCap() {

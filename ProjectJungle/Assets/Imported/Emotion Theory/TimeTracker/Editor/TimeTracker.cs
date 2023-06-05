@@ -10,6 +10,7 @@ using System.Linq;
 [InitializeOnLoad]
 public static class TimeTrackerInitializer
 {
+    [Obsolete]
     static TimeTrackerInitializer()
     {
     	TimeTracker.Init();
@@ -675,6 +676,7 @@ public class TimeTracker : ScriptableObject
         Handles.EndGUI();
     }
 
+    [Obsolete]
     public void Initialize()
     {
         SceneView.onSceneGUIDelegate -= OnSceneGUI;
@@ -716,6 +718,7 @@ public class TimeTracker : ScriptableObject
 
     }
 
+    [Obsolete]
     void OnDestroy()
     {
         Save();
@@ -723,7 +726,8 @@ public class TimeTracker : ScriptableObject
         EditorApplication.update -= Update;
     }
 
-//    [MenuItem("Tools/TimeTracker/Show")]
+    //    [MenuItem("Tools/TimeTracker/Show")]
+    [Obsolete]
     public static void Init()
     {
         if (instance == null)
