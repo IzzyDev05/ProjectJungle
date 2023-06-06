@@ -13,6 +13,9 @@ public class PlayerInputManager : MonoBehaviour
 
     private bool sprintInput;
     private bool jumpInput;
+    private bool grappleInput;
+
+    public bool TempGrappleMode = false;
 
     #region PROPERTIES
     public float MoveAmount {
@@ -30,6 +33,11 @@ public class PlayerInputManager : MonoBehaviour
             return horizontalInput;
         }
     }
+    public bool GrappleInput {
+        get {
+            return grappleInput;
+        }
+    }
     #endregion
 
     private void OnEnable() {
@@ -40,6 +48,10 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Actions.Sprint.performed += i => sprintInput = true;
             playerControls.Actions.Sprint.canceled += i => sprintInput = false;
             playerControls.Actions.Jump.performed += i => jumpInput = true;
+            playerControls.Actions.Grapple.performed += i => grappleInput = true;
+            playerControls.Actions.Grapple.canceled += i => grappleInput = false;
+
+            playerControls.Actions.TempGrapple.performed += i => TempGrappleMode = !TempGrappleMode;
         }
 
         playerControls.Enable();

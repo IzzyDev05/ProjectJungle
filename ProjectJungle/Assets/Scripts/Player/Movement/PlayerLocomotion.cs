@@ -25,11 +25,13 @@ public class PlayerLocomotion : MonoBehaviour
     private Vector3 moveDirection;
     private Transform cam;
     private Rigidbody rb;
+    private Vector3 velocityToSet;
 
     private bool isSprinting;
     private float inAirTimer;
     private bool isGrounded = true;
     private bool isJumping;
+    private bool isGrappling;
 
     #region PROPERTIES
     public bool IsSpriting {
@@ -53,6 +55,14 @@ public class PlayerLocomotion : MonoBehaviour
             return isGrounded;
         }
     }
+    public bool IsGrappling {
+        get {
+            return isGrappling;
+        }
+        set {
+            isGrappling = value;
+        }
+    }
     #endregion
 
     private void Start() {
@@ -66,8 +76,8 @@ public class PlayerLocomotion : MonoBehaviour
     public void HandleAllMovement() {
         HandleFallingAndLanding();
 
-        if (playerManager.IsInteracting) return;
-
+        if (playerManager.IsInteracting || isGrappling) return;
+        
         HandleMovement();
         HandleRotation();
     }
@@ -114,7 +124,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleFallingAndLanding() {
         RaycastHit hit;
         Vector3 raycastOrigin = transform.position;
-        Vector3 targetPosition = transform.position; // <STAIRS>
+        Vector3 targetPosition = transform.position; // Floating capsule
 
         raycastOrigin.y += raycastHeightOffset;
 
@@ -135,8 +145,8 @@ public class PlayerLocomotion : MonoBehaviour
                 playerAnimatorManager.PlayTargetAnimation("Landing", true);
             }
 
-            Vector3 rayCastHitPoint = hit.point; // <STAIRS>
-            targetPosition.y = rayCastHitPoint.y; // <STAIRS>
+            Vector3 rayCastHitPoint = hit.point; // Floating capsule
+            targetPosition.y = rayCastHitPoint.y; // Floating capsule
             inAirTimer = 0;
             playerManager.IsInteracting = false;
             isGrounded = true;
@@ -145,7 +155,7 @@ public class PlayerLocomotion : MonoBehaviour
             isGrounded = false;
         }
 
-        // <STAIRS>
+        // Floating capsule
         if (isGrounded && !isJumping) {
             if (playerManager.IsInteracting || inputManager.MoveAmount > 0) {
                 // Smoothly pushing us up (So that our feet our on the ground) if we're moving or interacting
@@ -167,5 +177,29 @@ public class PlayerLocomotion : MonoBehaviour
             playerVelocity.y = jumpingVelocity;
             rb.velocity = playerVelocity;
         }
+    }
+
+    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight) {
+        isGrappling = true;
+        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
+        Invoke(nameof(SetVelocity), 0.1f);
+    }
+
+    private void SetVelocity() {
+        rb.velocity = velocityToSet;
+    }
+
+    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight) {
+        float displacementY = endPoint.y - startPoint.y;
+        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravityIntensity * trajectoryHeight);
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravityIntensity) + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravityIntensity));
+
+        return velocityXZ + velocityY;
+    }
+
+    private void OnCollisionStay(Collision other) {
+        if (other.gameObject.layer == groundLayer) isGrounded = true;
     }
 }
