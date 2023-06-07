@@ -138,18 +138,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Grapple",
+                    "name": "Aim",
                     "type": "Button",
-                    "id": "53820e48-0dea-4048-bd34-af1c69dec0dc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TempGrapple",
-                    "type": "Button",
-                    "id": "1888f97d-83bf-4350-9e30-15eb403a18b1",
+                    "id": "f26b864f-58e6-4128-967d-38bd7cc5e465",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -203,23 +194,12 @@
                 },
                 {
                     "name": "",
-                    "id": "2bbebc32-821e-400e-8ae5-85f9557c2dc8",
+                    "id": "14d34648-273d-488b-b449-60b12178454d",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grapple",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "33c4a124-f7ee-41fe-92e4-8052497dc3c0",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TempGrapple",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

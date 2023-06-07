@@ -160,18 +160,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Grapple"",
+                    ""name"": ""Aim"",
                     ""type"": ""Button"",
-                    ""id"": ""53820e48-0dea-4048-bd34-af1c69dec0dc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TempGrapple"",
-                    ""type"": ""Button"",
-                    ""id"": ""1888f97d-83bf-4350-9e30-15eb403a18b1"",
+                    ""id"": ""f26b864f-58e6-4128-967d-38bd7cc5e465"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -225,23 +216,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2bbebc32-821e-400e-8ae5-85f9557c2dc8"",
+                    ""id"": ""14d34648-273d-488b-b449-60b12178454d"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Grapple"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""33c4a124-f7ee-41fe-92e4-8052497dc3c0"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TempGrapple"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -258,8 +238,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_Sprint = m_Actions.FindAction("Sprint", throwIfNotFound: true);
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
-        m_Actions_Grapple = m_Actions.FindAction("Grapple", throwIfNotFound: true);
-        m_Actions_TempGrapple = m_Actions.FindAction("TempGrapple", throwIfNotFound: true);
+        m_Actions_Aim = m_Actions.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -377,16 +356,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
     private readonly InputAction m_Actions_Sprint;
     private readonly InputAction m_Actions_Jump;
-    private readonly InputAction m_Actions_Grapple;
-    private readonly InputAction m_Actions_TempGrapple;
+    private readonly InputAction m_Actions_Aim;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
         public ActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Sprint => m_Wrapper.m_Actions_Sprint;
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
-        public InputAction @Grapple => m_Wrapper.m_Actions_Grapple;
-        public InputAction @TempGrapple => m_Wrapper.m_Actions_TempGrapple;
+        public InputAction @Aim => m_Wrapper.m_Actions_Aim;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -402,12 +379,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Grapple.started += instance.OnGrapple;
-            @Grapple.performed += instance.OnGrapple;
-            @Grapple.canceled += instance.OnGrapple;
-            @TempGrapple.started += instance.OnTempGrapple;
-            @TempGrapple.performed += instance.OnTempGrapple;
-            @TempGrapple.canceled += instance.OnTempGrapple;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -418,12 +392,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Grapple.started -= instance.OnGrapple;
-            @Grapple.performed -= instance.OnGrapple;
-            @Grapple.canceled -= instance.OnGrapple;
-            @TempGrapple.started -= instance.OnTempGrapple;
-            @TempGrapple.performed -= instance.OnTempGrapple;
-            @TempGrapple.canceled -= instance.OnTempGrapple;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -450,7 +421,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnGrapple(InputAction.CallbackContext context);
-        void OnTempGrapple(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }
