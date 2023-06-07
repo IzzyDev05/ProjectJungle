@@ -13,6 +13,7 @@ public class PlayerInputManager : MonoBehaviour
 
     private bool sprintInput;
     private bool jumpInput;
+    private bool inventoryInput;
 
     #region PROPERTIES
     public float MoveAmount {
@@ -32,7 +33,7 @@ public class PlayerInputManager : MonoBehaviour
     }
     #endregion
 
-    private void OnEnable() {
+    public void OnEnable() {
         if (playerControls == null) {
             playerControls = new PlayerControls();
 
@@ -40,12 +41,14 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Actions.Sprint.performed += i => sprintInput = true;
             playerControls.Actions.Sprint.canceled += i => sprintInput = false;
             playerControls.Actions.Jump.performed += i => jumpInput = true;
+            playerControls.Actions.OpenInventory.performed += i => inventoryInput = true;
+            playerControls.Inventory.CloseInventory.performed += i => inventoryInput = false;
         }
 
         playerControls.Enable();
     }
 
-    private void OnDisable() {
+    public void OnDisable() {
         playerControls.Disable();
     }
 
@@ -58,6 +61,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpingInput();
+        HandleInventoryInput();
     }
 
     private void HandleMovementInput() {
@@ -81,6 +85,28 @@ public class PlayerInputManager : MonoBehaviour
         if (jumpInput) {
             jumpInput = false;
             playerLocomotion.HandleJumping();
+        }
+    }
+
+    private void HandleInventoryInput()
+    {
+        if (inventoryInput)
+        {
+            playerControls.Inventory.Enable();
+
+            playerControls.Movement.Disable();
+            playerControls.Actions.Disable();
+
+            GetComponent<InventoryManager>().GetInventoryUI().SetActive(true);
+        }
+        else
+        {
+            GetComponent<InventoryManager>().GetInventoryUI().SetActive(false);
+
+            playerControls.Movement.Enable();
+            playerControls.Actions.Enable();
+
+            playerControls.Inventory.Disable();
         }
     }
 }
