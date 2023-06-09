@@ -10,7 +10,10 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (inventoryUI == null)
+        {
+            inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
+        }
     }
 
     // Update is called once per frame
@@ -19,8 +22,31 @@ public class InventoryManager : MonoBehaviour
         
     }
 
-    public GameObject GetInventoryUI()
+    public void OpenInventory()
     {
-        return inventoryUI;
+        inventoryUI.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        Time.timeScale = 0;
+    }
+
+    public void CloseInventory()
+    {
+        inventoryUI.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        Time.timeScale = 1;
+    }
+
+    public GameObject GetInventoryUI
+    {
+        get
+        {
+            return inventoryUI;
+        }
     }
 }

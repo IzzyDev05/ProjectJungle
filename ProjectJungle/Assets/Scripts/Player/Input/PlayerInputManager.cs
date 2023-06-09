@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour
 {
@@ -33,22 +34,22 @@ public class PlayerInputManager : MonoBehaviour
     }
     #endregion
 
-    public void OnEnable() {
+    private void OnEnable() {
         if (playerControls == null) {
             playerControls = new PlayerControls();
 
-            playerControls.Movement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-            playerControls.Actions.Sprint.performed += i => sprintInput = true;
-            playerControls.Actions.Sprint.canceled += i => sprintInput = false;
-            playerControls.Actions.Jump.performed += i => jumpInput = true;
-            playerControls.Actions.OpenInventory.performed += i => inventoryInput = true;
-            playerControls.Inventory.CloseInventory.performed += i => inventoryInput = false;
+            playerControls.Movement.Movement.performed += Move => movementInput = Move.ReadValue<Vector2>();
+            playerControls.Actions.Sprint.performed += Sprint => sprintInput = true;
+            playerControls.Actions.Sprint.canceled += Sprint => sprintInput = false;
+            playerControls.Actions.Jump.performed += Jump => jumpInput = true;
+            playerControls.Actions.OpenInventory.performed += OpenInventory => inventoryInput = true;
+            playerControls.Inventory.CloseInventory.performed += CloseInventory => inventoryInput = false;
         }
 
         playerControls.Enable();
     }
 
-    public void OnDisable() {
+    private void OnDisable() {
         playerControls.Disable();
     }
 
@@ -97,16 +98,24 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Movement.Disable();
             playerControls.Actions.Disable();
 
-            GetComponent<InventoryManager>().GetInventoryUI().SetActive(true);
+            GetComponent<InventoryManager>().OpenInventory();
         }
         else
         {
-            GetComponent<InventoryManager>().GetInventoryUI().SetActive(false);
+            GetComponent<InventoryManager>().CloseInventory();
 
             playerControls.Movement.Enable();
             playerControls.Actions.Enable();
 
             playerControls.Inventory.Disable();
         }
+    }
+
+    public void CloseInventoryByButton()
+    {
+        if (inventoryInput)
+        {
+            inventoryInput = false;
+        }      
     }
 }
