@@ -16,7 +16,7 @@ public class PlayerAnimationManager : MonoBehaviour
         horizontal = Animator.StringToHash("horizontal");
         vertical = Animator.StringToHash("vertical");
     }
-
+    
     public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting) {
         // Animation snapping
         float snappedHorizontal;

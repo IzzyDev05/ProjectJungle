@@ -21,6 +21,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     private PlayerInputManager inputManager;
+    private PlayerManager playerManager;
     private PlayerAnimationManager animationManager;
     private CharacterController characterController;
     private Rigidbody rb;
@@ -57,6 +58,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Start() {
         inputManager = GetComponent<PlayerInputManager>();
+        playerManager = GetComponent<PlayerManager>();
         animationManager = GetComponentInChildren<PlayerAnimationManager>();
         characterController = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
@@ -67,9 +69,12 @@ public class PlayerLocomotion : MonoBehaviour
         inputManager.HandleAllInputs();
         isGrounded = IsPlayerGrounded();
         
+        HandleFallingAndLanding();
+
+        if (playerManager.IsInteracting) return;
+
         HandleMovement();
         HandleRotation();
-        HandleFallingAndLanding();
     }
 
     private void HandleMovement() {
@@ -110,20 +115,48 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleFallingAndLanding() {
         if (!isGrounded && !isJumping) {
+            if (!playerManager.IsInteracting) {
+                animationManager.PlayTargetAnimation("Falling", true);
+            }
+
             characterController.Move(transform.forward * leapingSpeed * Time.deltaTime);
             characterController.Move(Vector3.down * fallingSpeed * Time.deltaTime);
         }
+
+        RaycastHit hit;
+        if (Physics.SphereCast(groundCheck.position, 0.2f, Vector3.down, out hit, 0.5f, groundLayer)) {
+            if (!isGrounded && playerManager.IsInteracting) {
+                print("Just landed");
+                animationManager.PlayTargetAnimation("Landing", true);
+            }
+
+            playerManager.IsInteracting = false;
+        }
+
+        /*
+        if (Physics.SphereCast(raycastOrigin, 0.2f, -Vector3.up, out hit, 0.5f, groundLayer)) {
+            if (!isGrounded && playerManager.IsInteracting) {
+                // If we just grounded and we were interacting, that means we're landing
+                playerAnimatorManager.PlayTargetAnimation("Landing", true);
+            }
+
+            Vector3 rayCastHitPoint = hit.point; // Floating capsule
+            targetPosition.y = rayCastHitPoint.y; // Floating capsule
+            inAirTimer = 0;
+            playerManager.IsInteracting = false;
+           
+        */
     }
 
     public void HandleJumping() {
         if (!isGrounded) return;
-
+        
         animationManager.SetBool("isJumping", true);
         animationManager.PlayTargetAnimation("Jump", false);
 
-        float jumpSpeed = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+        float jumpSpeed = Mathf.Sqrt(-3 * gravityIntensity * jumpHeight);
         Vector3 playerVelocity = moveDirection;
-        playerVelocity.y = jumpSpeed;
+        playerVelocity.y += jumpSpeed;
         characterController.Move(playerVelocity * Time.deltaTime);
     }
 

@@ -6,6 +6,17 @@ public class PlayerManager : MonoBehaviour
     private PlayerLocomotion playerLocomotion;
     private PlayerAnimationManager animationManager;
 
+    private bool isInteracting;
+
+    public bool IsInteracting {
+        get {
+            return isInteracting;
+        }
+        set {
+            isInteracting = value;
+        }
+    }
+
     private void Start() {
         inputManager = GetComponent<PlayerInputManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
@@ -17,6 +28,8 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void LateUpdate() {
+        isInteracting = animationManager.GetBool("isInteracting");
+        
         animationManager.UpdateAnimatorValues(0, inputManager.MoveAmount, playerLocomotion.IsSprinting);
         playerLocomotion.IsJumping = animationManager.GetBool("isJumping");
         animationManager.SetBool("isGrounded", playerLocomotion.IsGrounded);
