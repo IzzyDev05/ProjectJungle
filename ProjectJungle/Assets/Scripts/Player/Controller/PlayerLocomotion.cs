@@ -28,9 +28,9 @@ public class PlayerLocomotion : MonoBehaviour
     private Transform cam;
     private Vector3 moveDirection;
     
-    private bool isSprinting;
-    private bool isGrounded;
-    private bool isJumping;
+    [SerializeField] private bool isSprinting;
+    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isJumping;
 
     #region PROPERTIES
     public bool IsSprinting {
@@ -123,29 +123,11 @@ public class PlayerLocomotion : MonoBehaviour
             characterController.Move(Vector3.down * fallingSpeed * Time.deltaTime);
         }
 
-        RaycastHit hit;
-        if (Physics.SphereCast(groundCheck.position, 0.2f, Vector3.down, out hit, 0.5f, groundLayer)) {
-            if (!isGrounded && playerManager.IsInteracting) {
-                print("Just landed");
+        if (Physics.Raycast(groundCheck.position, Vector3.down, 1f, groundLayer)) {
+            if (!isGrounded) {
                 animationManager.PlayTargetAnimation("Landing", true);
             }
-
-            playerManager.IsInteracting = false;
         }
-
-        /*
-        if (Physics.SphereCast(raycastOrigin, 0.2f, -Vector3.up, out hit, 0.5f, groundLayer)) {
-            if (!isGrounded && playerManager.IsInteracting) {
-                // If we just grounded and we were interacting, that means we're landing
-                playerAnimatorManager.PlayTargetAnimation("Landing", true);
-            }
-
-            Vector3 rayCastHitPoint = hit.point; // Floating capsule
-            targetPosition.y = rayCastHitPoint.y; // Floating capsule
-            inAirTimer = 0;
-            playerManager.IsInteracting = false;
-           
-        */
     }
 
     public void HandleJumping() {
@@ -161,6 +143,15 @@ public class PlayerLocomotion : MonoBehaviour
     }
 
     private bool IsPlayerGrounded() {
-        return Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
+        return Physics.Raycast(groundCheck.position, Vector3.down, 0.2f, groundLayer);
+    }
+
+    private void OnDrawGizmos() {
+        RaycastHit hit;
+        bool isHit = Physics.Raycast(groundCheck.position, Vector3.down, out hit, 0.2f, groundLayer);
+
+        // Draw the raycast in the scene view
+        Gizmos.color = isHit ? Color.green : Color.red;
+        Gizmos.DrawRay(groundCheck.position, Vector3.down * 0.2f);
     }
 }

@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerLocomotion playerLocomotion;
     private PlayerAnimationManager animationManager;
 
-    private bool isInteracting;
+    [SerializeField] private bool isInteracting;
 
     public bool IsInteracting {
         get {
@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
         
         animationManager.UpdateAnimatorValues(0, inputManager.MoveAmount, playerLocomotion.IsSprinting);
         playerLocomotion.IsJumping = animationManager.GetBool("isJumping");
+        print(playerLocomotion.IsGrounded);
         animationManager.SetBool("isGrounded", playerLocomotion.IsGrounded);
     }
 }
