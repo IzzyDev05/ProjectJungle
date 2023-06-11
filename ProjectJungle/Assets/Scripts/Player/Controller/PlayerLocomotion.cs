@@ -15,6 +15,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private float gravityIntensity = -9.81f;
+    [Range(0, 0.5f)] [SerializeField] private float groundRaycastDistance = 0.1f;
+    [SerializeField] private float considerAirborneTime = 0.25f;
 
     [Header("References")]
     [SerializeField] private Transform groundCheck;
@@ -27,6 +29,8 @@ public class PlayerLocomotion : MonoBehaviour
     private Rigidbody rb;
     private Transform cam;
     private Vector3 moveDirection;
+    private Vector3 playerVelocity;
+    private float airTimer;
     
     [SerializeField] private bool isSprinting;
     [SerializeField] private bool isGrounded = true;
@@ -65,10 +69,7 @@ public class PlayerLocomotion : MonoBehaviour
         cam = Camera.main.transform;
     }
 
-    public void HandleAllInputs() {
-        inputManager.HandleAllInputs();
-        isGrounded = IsPlayerGrounded();
-        
+    public void HandleAllMovement() {
         HandleFallingAndLanding();
 
         if (playerManager.IsInteracting) return;
@@ -114,8 +115,10 @@ public class PlayerLocomotion : MonoBehaviour
     }
 
     private void HandleFallingAndLanding() {
+        playerVelocity = moveDirection;
+
         if (!isGrounded && !isJumping) {
-            if (!playerManager.IsInteracting) {
+            if (!playerManager.IsInteracting && airTimer > considerAirborneTime) {
                 animationManager.PlayTargetAnimation("Falling", true);
             }
 
@@ -123,10 +126,18 @@ public class PlayerLocomotion : MonoBehaviour
             characterController.Move(Vector3.down * fallingSpeed * Time.deltaTime);
         }
 
-        if (Physics.Raycast(groundCheck.position, Vector3.down, 1f, groundLayer)) {
-            if (!isGrounded) {
+        if (Physics.CheckSphere(groundCheck.position, groundRaycastDistance, groundLayer)) {
+            if (!isGrounded && playerManager.IsInteracting && airTimer > considerAirborneTime) {
                 animationManager.PlayTargetAnimation("Landing", true);
             }
+
+            playerManager.IsInteracting = false;
+            airTimer = 0;
+            isGrounded = true;
+        }
+        else {
+            airTimer += Time.deltaTime;
+            isGrounded = false;
         }
     }
 
@@ -136,22 +147,16 @@ public class PlayerLocomotion : MonoBehaviour
         animationManager.SetBool("isJumping", true);
         animationManager.PlayTargetAnimation("Jump", false);
 
-        float jumpSpeed = Mathf.Sqrt(-3 * gravityIntensity * jumpHeight);
-        Vector3 playerVelocity = moveDirection;
-        playerVelocity.y += jumpSpeed;
+        playerVelocity.y += Mathf.Sqrt(-2f * gravityIntensity * jumpHeight);
+        playerVelocity.y += gravityIntensity * Time.deltaTime;
+
         characterController.Move(playerVelocity * Time.deltaTime);
     }
 
-    private bool IsPlayerGrounded() {
-        return Physics.Raycast(groundCheck.position, Vector3.down, 0.2f, groundLayer);
-    }
-
     private void OnDrawGizmos() {
-        RaycastHit hit;
-        bool isHit = Physics.Raycast(groundCheck.position, Vector3.down, out hit, 0.2f, groundLayer);
+        bool hasHit = Physics.CheckSphere(groundCheck.position, groundRaycastDistance, groundLayer);
 
-        // Draw the raycast in the scene view
-        Gizmos.color = isHit ? Color.green : Color.red;
-        Gizmos.DrawRay(groundCheck.position, Vector3.down * 0.2f);
+        Gizmos.color = hasHit ? Color.green : Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundRaycastDistance);
     }
 }

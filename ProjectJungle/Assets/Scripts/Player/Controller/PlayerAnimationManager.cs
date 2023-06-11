@@ -16,6 +16,12 @@ public class PlayerAnimationManager : MonoBehaviour
         horizontal = Animator.StringToHash("horizontal");
         vertical = Animator.StringToHash("vertical");
     }
+
+    private void Update() {
+        if (animator.GetBool("isGrounded")) {
+            animator.SetBool("isInteracting", false);
+        }
+    }
     
     public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting) {
         // Animation snapping

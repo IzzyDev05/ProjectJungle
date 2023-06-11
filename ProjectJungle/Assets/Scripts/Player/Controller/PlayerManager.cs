@@ -24,15 +24,16 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void Update() {
-        playerLocomotion.HandleAllInputs();
+        inputManager.HandleAllInputs();
+        playerLocomotion.HandleAllMovement();
     }
 
     private void LateUpdate() {
         isInteracting = animationManager.GetBool("isInteracting");
         
-        animationManager.UpdateAnimatorValues(0, inputManager.MoveAmount, playerLocomotion.IsSprinting);
+        if (!isInteracting) animationManager.UpdateAnimatorValues(0, inputManager.MoveAmount, playerLocomotion.IsSprinting);
+
         playerLocomotion.IsJumping = animationManager.GetBool("isJumping");
-        print(playerLocomotion.IsGrounded);
         animationManager.SetBool("isGrounded", playerLocomotion.IsGrounded);
     }
 }
