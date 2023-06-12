@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Default",
             "id": "8f703f2f-633b-4bfb-b0cb-94196bcb123c",
             "actions": [
                 {
@@ -19,6 +19,42 @@
                     "type": "PassThrough",
                     "id": "d22cb258-e29c-4eda-a675-333b03cf3fea",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "8215dfcc-63f9-4b0f-aab7-250dd8de166e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "8cc259eb-1d50-444d-81dd-ab40f0f57eb4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "b915c3bd-0e89-42b4-904d-9e9f17b079b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Swing",
+                    "type": "Button",
+                    "id": "4b9ee57d-dac8-4c37-b81d-2b12b789b19f",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -112,45 +148,10 @@
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Actions",
-            "id": "1b331757-58c4-44e9-b148-b97a67f8c5fd",
-            "actions": [
-                {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "a49f04f9-4135-4c24-afca-3d7d284bbe43",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "2b60eb5e-1a71-49e2-9274-5d38278aa12a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Aim",
-                    "type": "Button",
-                    "id": "f26b864f-58e6-4128-967d-38bd7cc5e465",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
                 {
                     "name": "",
-                    "id": "9e4ca72a-f360-416c-a903-9f36aea4e400",
+                    "id": "87e19b3d-a6fc-4e2e-a98c-494b438ae376",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
@@ -161,7 +162,7 @@
                 },
                 {
                     "name": "",
-                    "id": "8c7a2653-4257-4c85-9fcd-1bda84cd619b",
+                    "id": "941e4a63-44f5-4fe0-b3e2-9c2029ad5819",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
@@ -172,7 +173,7 @@
                 },
                 {
                     "name": "",
-                    "id": "02a291c3-56a6-47ca-a449-0d7fbb057d12",
+                    "id": "832b3575-cdb6-46d6-b09e-a2d97c182a8f",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
@@ -183,7 +184,7 @@
                 },
                 {
                     "name": "",
-                    "id": "6f701c6e-ac67-46f8-ade8-acd09d25485e",
+                    "id": "6307db90-746a-40d9-9320-0351f6359733",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -194,12 +195,45 @@
                 },
                 {
                     "name": "",
-                    "id": "14d34648-273d-488b-b449-60b12178454d",
+                    "id": "22963e5c-c2b0-4bd5-8ca4-8db3e6e27026",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "774b780d-66b4-43a0-8b15-a029946d0c56",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5087a1fb-e9fd-488c-a8c9-74f60aeb9f03",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "760ab700-0c84-4ddd-9896-cb9fa75c1310",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swing",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

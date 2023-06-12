@@ -2,52 +2,43 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
-    [Header("Grounded speeds")]
-    [SerializeField] private float walkingSpeed = 4f;
-    [SerializeField] private float runningSpeed = 8f;
-    [SerializeField] private float sprintingSpeed = 15f;
+    [Header("Movement speeds")]
+    [SerializeField] private float walkingSpeed = 1.5f;
+    [SerializeField] private float runningSpeed = 5f;
+    [SerializeField] private float sprintingSpeed = 7f;
     [SerializeField] private float rotationSpeed = 15f;
 
-    [Header("Aerial speeds")]
-    [SerializeField] private float jumpHeight = 5f;
-    [SerializeField] private float leapingSpeed = 2f;
-    [SerializeField] private float fallingSpeed = 6f;
-
-    [Header("General")]
+    [Header("Air variables")]
     [SerializeField] private float gravityIntensity = -9.81f;
-    [Range(0, 0.5f)] [SerializeField] private float groundRaycastDistance = 0.1f;
-    [SerializeField] private float considerAirborneTime = 0.25f;
+    [SerializeField] private float jumpHeight = 3f;
+    [SerializeField] private float leapingVelocity = 3f;
+    [SerializeField] private float fallingVelocity = 33f;
+    [SerializeField] private float fallingSpeedMultiplier = 3f;
+    [SerializeField] private float raycastHeightOffset = 0.5f;
 
     [Header("References")]
-    [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    private PlayerInputManager inputManager;
-    private PlayerManager playerManager;
-    private PlayerAnimationManager animationManager;
-    private CharacterController characterController;
-    private Rigidbody rb;
-    private Transform cam;
+    PlayerInputManager inputManager;
+    // PlayerManager playerManager;
+    // PlayerAnimatorManager playerAnimatorManager;
     private Vector3 moveDirection;
-    private Vector3 playerVelocity;
-    private float airTimer;
-    
-    [SerializeField] private bool isSprinting;
-    [SerializeField] private bool isGrounded = true;
-    [SerializeField] private bool isJumping;
+    private Transform cam;
+    private Rigidbody rb;
+    private float inAirTimer;
+
+    private bool isSprinting;
+    private bool isGrounded = true;
+    private bool isJumping;
+    private bool isSwinging;
 
     #region PROPERTIES
-    public bool IsSprinting {
+    public bool IsSpriting {
         get {
             return isSprinting;
         }
         set {
             isSprinting = value;
-        }
-    }
-    public bool IsGrounded {
-        get {
-            return isGrounded;
         }
     }
     public bool IsJumping {
@@ -58,27 +49,39 @@ public class PlayerLocomotion : MonoBehaviour
             isJumping = value;
         }
     }
+    public bool IsGrounded {
+        get {
+            return isGrounded;
+        }
+    }
+    public bool IsSwinging {
+        get {
+            return isSwinging;
+        }
+        set {
+            isSwinging = value;
+        }
+    }
     #endregion
 
     private void Start() {
         inputManager = GetComponent<PlayerInputManager>();
-        playerManager = GetComponent<PlayerManager>();
-        animationManager = GetComponentInChildren<PlayerAnimationManager>();
-        characterController = GetComponent<CharacterController>();
-        rb = GetComponent<Rigidbody>();
+        // playerManager = GetComponent<PlayerManager>();
+        // playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         cam = Camera.main.transform;
+        rb = GetComponent<Rigidbody>();
     }
 
     public void HandleAllMovement() {
         HandleFallingAndLanding();
 
-        if (playerManager.IsInteracting) return;
-
-        HandleMovement();
         HandleRotation();
+        HandleMovement();
     }
 
     private void HandleMovement() {
+        if (isJumping) return;
+
         moveDirection = cam.forward * inputManager.VerticalInput + cam.right * inputManager.HorizontalInput;
         moveDirection.Normalize();
         moveDirection.y = 0f;
@@ -95,12 +98,13 @@ public class PlayerLocomotion : MonoBehaviour
                 moveDirection *= walkingSpeed;
             }
         }
-
         Vector3 movementVelocity = moveDirection;
-        characterController.Move(movementVelocity * Time.deltaTime);
+        rb.velocity = movementVelocity;
     }
 
     private void HandleRotation() {
+        if (isJumping) return;
+
         Vector3 targetDirection = Vector3.zero;
         targetDirection = cam.forward * inputManager.VerticalInput + cam.right * inputManager.HorizontalInput;
         moveDirection.Normalize();
@@ -109,54 +113,57 @@ public class PlayerLocomotion : MonoBehaviour
         if (targetDirection == Vector3.zero) targetDirection = transform.forward;
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
         transform.rotation = playerRotation;
     }
 
     private void HandleFallingAndLanding() {
-        playerVelocity = moveDirection;
+        RaycastHit hit;
+        Vector3 raycastOrigin = transform.position;
+        Vector3 targetPosition = transform.position; // Floating capsule
 
-        if (!isGrounded && !isJumping) {
-            if (!playerManager.IsInteracting && airTimer > considerAirborneTime) {
-                animationManager.PlayTargetAnimation("Falling", true);
-            }
+        raycastOrigin.y += raycastHeightOffset;
 
-            characterController.Move(transform.forward * leapingSpeed * Time.deltaTime);
-            characterController.Move(Vector3.down * fallingSpeed * Time.deltaTime);
+        if (!isGrounded && !isJumping && !isSwinging) {
+            // play falling animation
+
+            inAirTimer += Time.deltaTime;
+            rb.AddForce(transform.forward * leapingVelocity);
+            rb.AddForce(Vector3.down * fallingVelocity * fallingSpeedMultiplier * inAirTimer);
         }
 
-        if (Physics.CheckSphere(groundCheck.position, groundRaycastDistance, groundLayer)) {
-            if (!isGrounded && playerManager.IsInteracting && airTimer > considerAirborneTime) {
-                animationManager.PlayTargetAnimation("Landing", true);
+        if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out hit, 0.5f, groundLayer)) {
+            if (!isGrounded && !isSwinging) {
+                // play landing animation
             }
 
-            playerManager.IsInteracting = false;
-            airTimer = 0;
+            targetPosition.y = hit.point.y; // Floating capsule
+            inAirTimer = 0;
             isGrounded = true;
         }
         else {
-            airTimer += Time.deltaTime;
             isGrounded = false;
+        }
+
+        // Floating capsule
+        if (isGrounded && !isJumping && !isSwinging) {
+            if (inputManager.MoveAmount > 0) {
+                // Smoothly pushes us up if we're moving
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime / 0.1f);
+            }
+            else {
+                transform.position = targetPosition;
+            }
         }
     }
 
     public void HandleJumping() {
-        if (!isGrounded) return;
-        
-        animationManager.SetBool("isJumping", true);
-        animationManager.PlayTargetAnimation("Jump", false);
-
-        playerVelocity.y += Mathf.Sqrt(-2f * gravityIntensity * jumpHeight);
-        playerVelocity.y += gravityIntensity * Time.deltaTime;
-
-        characterController.Move(playerVelocity * Time.deltaTime);
-    }
-
-    private void OnDrawGizmos() {
-        bool hasHit = Physics.CheckSphere(groundCheck.position, groundRaycastDistance, groundLayer);
-
-        Gizmos.color = hasHit ? Color.green : Color.red;
-        Gizmos.DrawWireSphere(groundCheck.position, groundRaycastDistance);
+        if (isGrounded && !isSwinging) {
+            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+            Vector3 playerVelocity = moveDirection;
+            playerVelocity.y = jumpingVelocity;
+            rb.velocity = playerVelocity;
+        }
     }
 }

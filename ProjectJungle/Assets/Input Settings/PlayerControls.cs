@@ -24,7 +24,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Movement"",
+            ""name"": ""Default"",
             ""id"": ""8f703f2f-633b-4bfb-b0cb-94196bcb123c"",
             ""actions"": [
                 {
@@ -41,6 +41,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""d22cb258-e29c-4eda-a675-333b03cf3fea"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""8215dfcc-63f9-4b0f-aab7-250dd8de166e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""8cc259eb-1d50-444d-81dd-ab40f0f57eb4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""b915c3bd-0e89-42b4-904d-9e9f17b079b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Swing"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b9ee57d-dac8-4c37-b81d-2b12b789b19f"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -134,45 +170,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Actions"",
-            ""id"": ""1b331757-58c4-44e9-b148-b97a67f8c5fd"",
-            ""actions"": [
-                {
-                    ""name"": ""Sprint"",
-                    ""type"": ""Button"",
-                    ""id"": ""a49f04f9-4135-4c24-afca-3d7d284bbe43"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""2b60eb5e-1a71-49e2-9274-5d38278aa12a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Aim"",
-                    ""type"": ""Button"",
-                    ""id"": ""f26b864f-58e6-4128-967d-38bd7cc5e465"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""9e4ca72a-f360-416c-a903-9f36aea4e400"",
+                    ""id"": ""87e19b3d-a6fc-4e2e-a98c-494b438ae376"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -183,7 +184,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8c7a2653-4257-4c85-9fcd-1bda84cd619b"",
+                    ""id"": ""941e4a63-44f5-4fe0-b3e2-9c2029ad5819"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -194,7 +195,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""02a291c3-56a6-47ca-a449-0d7fbb057d12"",
+                    ""id"": ""832b3575-cdb6-46d6-b09e-a2d97c182a8f"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -205,7 +206,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6f701c6e-ac67-46f8-ade8-acd09d25485e"",
+                    ""id"": ""6307db90-746a-40d9-9320-0351f6359733"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -216,12 +217,45 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""14d34648-273d-488b-b449-60b12178454d"",
+                    ""id"": ""22963e5c-c2b0-4bd5-8ca4-8db3e6e27026"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""774b780d-66b4-43a0-8b15-a029946d0c56"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5087a1fb-e9fd-488c-a8c9-74f60aeb9f03"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""760ab700-0c84-4ddd-9896-cb9fa75c1310"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swing"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -230,15 +264,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Movement
-        m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-        m_Movement_Movement = m_Movement.FindAction("Movement", throwIfNotFound: true);
-        m_Movement_Look = m_Movement.FindAction("Look", throwIfNotFound: true);
-        // Actions
-        m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
-        m_Actions_Sprint = m_Actions.FindAction("Sprint", throwIfNotFound: true);
-        m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
-        m_Actions_Aim = m_Actions.FindAction("Aim", throwIfNotFound: true);
+        // Default
+        m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
+        m_Default_Movement = m_Default.FindAction("Movement", throwIfNotFound: true);
+        m_Default_Look = m_Default.FindAction("Look", throwIfNotFound: true);
+        m_Default_Sprint = m_Default.FindAction("Sprint", throwIfNotFound: true);
+        m_Default_Jump = m_Default.FindAction("Jump", throwIfNotFound: true);
+        m_Default_Aim = m_Default.FindAction("Aim", throwIfNotFound: true);
+        m_Default_Swing = m_Default.FindAction("Swing", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -297,82 +330,40 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Movement
-    private readonly InputActionMap m_Movement;
-    private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
-    private readonly InputAction m_Movement_Movement;
-    private readonly InputAction m_Movement_Look;
-    public struct MovementActions
+    // Default
+    private readonly InputActionMap m_Default;
+    private List<IDefaultActions> m_DefaultActionsCallbackInterfaces = new List<IDefaultActions>();
+    private readonly InputAction m_Default_Movement;
+    private readonly InputAction m_Default_Look;
+    private readonly InputAction m_Default_Sprint;
+    private readonly InputAction m_Default_Jump;
+    private readonly InputAction m_Default_Aim;
+    private readonly InputAction m_Default_Swing;
+    public struct DefaultActions
     {
         private @PlayerControls m_Wrapper;
-        public MovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Movement_Movement;
-        public InputAction @Look => m_Wrapper.m_Movement_Look;
-        public InputActionMap Get() { return m_Wrapper.m_Movement; }
+        public DefaultActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Default_Movement;
+        public InputAction @Look => m_Wrapper.m_Default_Look;
+        public InputAction @Sprint => m_Wrapper.m_Default_Sprint;
+        public InputAction @Jump => m_Wrapper.m_Default_Jump;
+        public InputAction @Aim => m_Wrapper.m_Default_Aim;
+        public InputAction @Swing => m_Wrapper.m_Default_Swing;
+        public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
-        public void AddCallbacks(IMovementActions instance)
+        public static implicit operator InputActionMap(DefaultActions set) { return set.Get(); }
+        public void AddCallbacks(IDefaultActions instance)
         {
-            if (instance == null || m_Wrapper.m_MovementActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_MovementActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_DefaultActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DefaultActionsCallbackInterfaces.Add(instance);
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-        }
-
-        private void UnregisterCallbacks(IMovementActions instance)
-        {
-            @Movement.started -= instance.OnMovement;
-            @Movement.performed -= instance.OnMovement;
-            @Movement.canceled -= instance.OnMovement;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
-        }
-
-        public void RemoveCallbacks(IMovementActions instance)
-        {
-            if (m_Wrapper.m_MovementActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IMovementActions instance)
-        {
-            foreach (var item in m_Wrapper.m_MovementActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_MovementActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public MovementActions @Movement => new MovementActions(this);
-
-    // Actions
-    private readonly InputActionMap m_Actions;
-    private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
-    private readonly InputAction m_Actions_Sprint;
-    private readonly InputAction m_Actions_Jump;
-    private readonly InputAction m_Actions_Aim;
-    public struct ActionsActions
-    {
-        private @PlayerControls m_Wrapper;
-        public ActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Sprint => m_Wrapper.m_Actions_Sprint;
-        public InputAction @Jump => m_Wrapper.m_Actions_Jump;
-        public InputAction @Aim => m_Wrapper.m_Actions_Aim;
-        public InputActionMap Get() { return m_Wrapper.m_Actions; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ActionsActions set) { return set.Get(); }
-        public void AddCallbacks(IActionsActions instance)
-        {
-            if (instance == null || m_Wrapper.m_ActionsActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_ActionsActionsCallbackInterfaces.Add(instance);
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -382,10 +373,19 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @Swing.started += instance.OnSwing;
+            @Swing.performed += instance.OnSwing;
+            @Swing.canceled += instance.OnSwing;
         }
 
-        private void UnregisterCallbacks(IActionsActions instance)
+        private void UnregisterCallbacks(IDefaultActions instance)
         {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -395,32 +395,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @Swing.started -= instance.OnSwing;
+            @Swing.performed -= instance.OnSwing;
+            @Swing.canceled -= instance.OnSwing;
         }
 
-        public void RemoveCallbacks(IActionsActions instance)
+        public void RemoveCallbacks(IDefaultActions instance)
         {
-            if (m_Wrapper.m_ActionsActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_DefaultActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IActionsActions instance)
+        public void SetCallbacks(IDefaultActions instance)
         {
-            foreach (var item in m_Wrapper.m_ActionsActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_DefaultActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_ActionsActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_DefaultActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public ActionsActions @Actions => new ActionsActions(this);
-    public interface IMovementActions
+    public DefaultActions @Default => new DefaultActions(this);
+    public interface IDefaultActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-    }
-    public interface IActionsActions
-    {
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnSwing(InputAction.CallbackContext context);
     }
 }

@@ -6,16 +6,21 @@ public class PlayerInputManager : MonoBehaviour
     private PlayerLocomotion playerLocomotion;
 
     private Vector2 movementInput;
+    private float moveAmount;
     private float verticalInput;
     private float horizontalInput;
-
-    private float moveAmount;
 
     private bool sprintInput;
     private bool jumpInput;
     private bool aimInput;
+    private bool swingInput;
 
     #region PROPERTIES
+    public float MoveAmount {
+        get {
+            return moveAmount;
+        }
+    }
     public float VerticalInput {
         get {
             return verticalInput;
@@ -26,14 +31,14 @@ public class PlayerInputManager : MonoBehaviour
             return horizontalInput;
         }
     }
-    public float MoveAmount {
-        get {
-            return moveAmount;
-        }
-    }
     public bool AimInput {
         get {
             return aimInput;
+        }
+    }
+    public bool SwingInput {
+        get {
+            return swingInput;
         }
     }
     #endregion
@@ -42,14 +47,18 @@ public class PlayerInputManager : MonoBehaviour
         if (playerControls == null) {
             playerControls = new PlayerControls();
 
-            playerControls.Movement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+            playerControls.Default.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             
-            playerControls.Actions.Sprint.performed += i => sprintInput = true;
-            playerControls.Actions.Sprint.canceled += i => sprintInput = false;
-            playerControls.Actions.Jump.performed += i => jumpInput = true;
+            playerControls.Default.Sprint.performed += i => sprintInput = true;
+            playerControls.Default.Sprint.canceled += i => sprintInput = false;
 
-            playerControls.Actions.Aim.performed += i => aimInput = true;
-            playerControls.Actions.Aim.canceled += i => aimInput = false;
+            playerControls.Default.Jump.performed += i => jumpInput = true;
+        
+            playerControls.Default.Aim.performed += i => aimInput = true;
+            playerControls.Default.Aim.canceled += i => aimInput = false;
+
+            playerControls.Default.Swing.started += i => swingInput = true;
+            playerControls.Default.Swing.canceled += i => swingInput = false;
         }
 
         playerControls.Enable();
@@ -74,21 +83,22 @@ public class PlayerInputManager : MonoBehaviour
         horizontalInput = movementInput.x;
 
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        // animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.IsSpriting);
     }
 
     private void HandleSprintingInput() {
         if (sprintInput && moveAmount > 0.5f) {
-            playerLocomotion.IsSprinting = true;
+            playerLocomotion.IsSpriting = true;
         }
         else {
-            playerLocomotion.IsSprinting = false;
+            playerLocomotion.IsSpriting = false;
         }
     }
 
     private void HandleJumpingInput() {
         if (jumpInput) {
-            jumpInput = false;
             playerLocomotion.HandleJumping();
+            jumpInput = false;
         }
     }
 }
