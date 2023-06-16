@@ -13,14 +13,16 @@ public enum EquipmentType
 {
     Armour,
     Shield,
-    Weapon
+    Weapon,
+    Ammo
 }
 public abstract class ItemObject : ScriptableObject
 {
+    public Sprite icon;
     public GameObject prefab;
+    public string itemName;
     public ItemType type;
     [TextArea(15, 20)] public string description;
-
     public bool stackable;
     public int maxStackSize;
 }

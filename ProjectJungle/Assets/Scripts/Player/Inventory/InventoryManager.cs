@@ -5,7 +5,19 @@ using UnityEditor.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+
+    public static InventoryManager Instance;
     [SerializeField] GameObject inventoryUI;
+
+    [SerializeField] List<GameObject> inventorySlotList = new List<GameObject>();
+    [SerializeField] int unoccupiedSlotIndex = 0;
+
+    [SerializeField] List<ItemObject> itemList = new List<ItemObject>();
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -14,12 +26,14 @@ public class InventoryManager : MonoBehaviour
         {
             inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (Transform child in inventoryUI.GetComponentsInChildren<Transform>())
+        {
+            if (child.gameObject.CompareTag("InventorySlot"))
+            {
+                inventorySlotList.Add(child.gameObject);
+            }    
+        }
     }
 
     public void OpenInventory()
@@ -48,5 +62,25 @@ public class InventoryManager : MonoBehaviour
         {
             return inventoryUI;
         }
+    }
+
+    public void AddToInventory(ItemObject item, bool addToNewSlot = false)
+    {
+        if (!addToNewSlot)
+        {
+            foreach (ItemObject savedItem in itemList)
+            {
+                if (savedItem == item)
+                {
+                    inventorySlotList[itemList.IndexOf(item)].GetComponent<SlotManager>().AddItem(item);
+
+                    return;
+                }
+            }
+        }
+
+        inventorySlotList[unoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item);
+        itemList.Add(item);
+        unoccupiedSlotIndex++;
     }
 }

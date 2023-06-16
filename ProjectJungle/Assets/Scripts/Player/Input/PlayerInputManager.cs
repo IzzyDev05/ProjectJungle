@@ -15,6 +15,7 @@ public class PlayerInputManager : MonoBehaviour
     private bool sprintInput;
     private bool jumpInput;
     private bool inventoryInput;
+    private bool interactInput;
 
     #region PROPERTIES
     public float MoveAmount {
@@ -44,6 +45,9 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Actions.Jump.performed += Jump => jumpInput = true;
             playerControls.Actions.OpenInventory.performed += OpenInventory => inventoryInput = true;
             playerControls.Inventory.CloseInventory.performed += CloseInventory => inventoryInput = false;
+            playerControls.Actions.Interact.performed += Interact => interactInput = true;
+            playerControls.Actions.Interact.canceled += Interact => interactInput = false;
+
         }
 
         playerControls.Enable();
@@ -63,6 +67,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleSprintingInput();
         HandleJumpingInput();
         HandleInventoryInput();
+        HandleInteractInput();
     }
 
     private void HandleMovementInput() {
@@ -98,11 +103,12 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Movement.Disable();
             playerControls.Actions.Disable();
 
-            GetComponent<InventoryManager>().OpenInventory();
+            InventoryManager.Instance.OpenInventory();
+            
         }
         else
         {
-            GetComponent<InventoryManager>().CloseInventory();
+            InventoryManager.Instance.CloseInventory();
 
             playerControls.Movement.Enable();
             playerControls.Actions.Enable();
@@ -117,5 +123,13 @@ public class PlayerInputManager : MonoBehaviour
         {
             inventoryInput = false;
         }      
+    }
+
+    private void HandleInteractInput()
+    {
+        if (interactInput)
+        {
+
+        }
     }
 }
