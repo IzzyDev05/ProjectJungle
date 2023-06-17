@@ -13,7 +13,7 @@ public class ItemPickup : MonoBehaviour
         Instance = this;
     }
 
-    ItemObject PickupItem()
+    public ItemObject PickupItem()
     {
         return itemObject;
     }

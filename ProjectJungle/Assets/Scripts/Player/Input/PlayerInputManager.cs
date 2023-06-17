@@ -67,7 +67,6 @@ public class PlayerInputManager : MonoBehaviour
         HandleSprintingInput();
         HandleJumpingInput();
         HandleInventoryInput();
-        HandleInteractInput();
     }
 
     private void HandleMovementInput() {
@@ -125,11 +124,37 @@ public class PlayerInputManager : MonoBehaviour
         }      
     }
 
-    private void HandleInteractInput()
+    private void HandleInteraction(Collider collider)
     {
-        if (interactInput)
+        switch (collider.tag)
         {
+            case "Interact_Pickup":
+                {
+                    InventoryManager.Instance.AddToInventory(collider.GetComponent<ItemPickup>().PickupItem());
 
+                    collider.gameObject.SetActive(false);
+
+                    // Destroy(collider.GetComponent<GameObject>());
+
+                    interactInput = false;
+
+                    break;
+                }
+            case "Interact_Interactable":
+                {
+                    // To Be Added
+                    break;
+                }
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        Debug.Log($"Press 'F' to pick up {other.gameObject.name}.");
+
+        if ((other.CompareTag("Interact_Pickup")|| other.CompareTag("Interact_Interactable")) && interactInput)
+        {
+            HandleInteraction(other);
         }
     }
 }

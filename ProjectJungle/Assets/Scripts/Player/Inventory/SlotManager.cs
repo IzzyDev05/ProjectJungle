@@ -57,17 +57,6 @@ public class SlotManager : MonoBehaviour
 
     public void AddItem(ItemObject item)
     {
-        if (item.stackable && currentCapacity != maxCapacity)
-        {
-            currentCapacity++;
-
-            return;
-        }
-        else if (currentCapacity == maxCapacity)
-        {
-            InventoryManager.Instance.AddToInventory(item, true);
-        }
-
         if (slotItem == null)
         {
             SetMaxCapacity = item.maxStackSize;
@@ -77,7 +66,20 @@ public class SlotManager : MonoBehaviour
 
             itemImage.sprite = item.icon;
             itemImage.color = Color.white;
+
+            return;
         }
+
+        if (item.stackable && currentCapacity != maxCapacity)
+        {
+            currentCapacity++;
+
+        }
+        else if (currentCapacity == maxCapacity)
+        {
+            InventoryManager.Instance.AddToInventory(item, true);
+        }
+
     }
 
     int SetMaxCapacity

@@ -34,6 +34,11 @@ public class InventoryManager : MonoBehaviour
                 inventorySlotList.Add(child.gameObject);
             }    
         }
+
+        if (inventoryUI.activeSelf == true)
+        {
+            inventoryUI.SetActive(false);
+        }
     }
 
     public void OpenInventory()
