@@ -70,30 +70,32 @@ public class SlotManager : MonoBehaviour
             return;
         }
 
-        if (item.stackable && currentCapacity != maxCapacity)
+        if (slotItem == item && item.stackable && IsSlotFull() == false)
         {
             currentCapacity++;
 
         }
-        else if (currentCapacity == maxCapacity)
+        else if (IsSlotFull() == true)
         {
             InventoryManager.Instance.AddToInventory(item, true);
         }
 
     }
 
-    int SetMaxCapacity
+    public int GetCurrentCapacity { get { return currentCapacity; } }
+
+    int SetMaxCapacity { set { maxCapacity = value; } }
+
+    public int GetMaxCapacity { get { return maxCapacity; } }
+
+    public bool IsSlotFull()
     {
-        set
+        if (GetCurrentCapacity == GetMaxCapacity)
         {
-            maxCapacity = value;
+            return true;
         }
+
+        return false;
     }
 
-    int GetMaxCapacity {
-        get
-        {
-            return maxCapacity;
-        }
-    }
 }

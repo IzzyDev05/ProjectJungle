@@ -17,6 +17,9 @@ public class InventoryManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        inventorySlotList.Clear();
+        itemList.Clear();
     }
 
     // Start is called before the first frame update
@@ -73,16 +76,17 @@ public class InventoryManager : MonoBehaviour
     {
         if (!addToNewSlot)
         {
-            foreach (ItemObject savedItem in itemList)
+            for (int i = 0; i < itemList.Count; i++)
             {
-                if (savedItem == item)
+                if (itemList[i] == item && !inventorySlotList[i].GetComponent<SlotManager>().IsSlotFull())
                 {
-                    inventorySlotList[itemList.IndexOf(item)].GetComponent<SlotManager>().AddItem(item);
+                    inventorySlotList[i].GetComponent<SlotManager>().AddItem(item);
 
                     return;
                 }
             }
         }
+
 
         inventorySlotList[unoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item);
         itemList.Add(item);
