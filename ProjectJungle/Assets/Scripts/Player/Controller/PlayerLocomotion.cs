@@ -6,6 +6,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float walkingSpeed = 1.5f;
     [SerializeField] private float runningSpeed = 5f;
     [SerializeField] private float sprintingSpeed = 7f;
+    [SerializeField] private float maxVelocity = 12.5f;
     [SerializeField] private float rotationSpeed = 15f;
 
     [Header("Air variables")]
@@ -20,11 +21,10 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     PlayerInputManager inputManager;
-    // PlayerManager playerManager;
-    // PlayerAnimatorManager playerAnimatorManager;
     private Vector3 moveDirection;
     private Transform cam;
     private Rigidbody rb;
+    private Swinging swinging;
     private float inAirTimer;
 
     private bool isSprinting;
@@ -33,6 +33,11 @@ public class PlayerLocomotion : MonoBehaviour
     private bool isSwinging;
 
     #region PROPERTIES
+    public float MaxVelocity {
+        get {
+            return maxVelocity;
+        }
+    }
     public bool IsSpriting {
         get {
             return isSprinting;
@@ -66,8 +71,6 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Start() {
         inputManager = GetComponent<PlayerInputManager>();
-        // playerManager = GetComponent<PlayerManager>();
-        // playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         cam = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
     }
@@ -77,29 +80,48 @@ public class PlayerLocomotion : MonoBehaviour
 
         HandleRotation();
         HandleMovement();
+        HandleSwingingMovement();
     }
 
     private void HandleMovement() {
         if (isJumping) return;
 
-        moveDirection = cam.forward * inputManager.VerticalInput + cam.right * inputManager.HorizontalInput;
-        moveDirection.Normalize();
-        moveDirection.y = 0f;
+        if (!isSwinging) {
+            moveDirection = cam.forward * inputManager.VerticalInput + cam.right * inputManager.HorizontalInput;
+            moveDirection.Normalize();
+            moveDirection.y = 0f;
 
-        // Checking if we are sprinting, running or walking
-        if (isSprinting) {
-            moveDirection *= sprintingSpeed;
-        }
-        else {
-            if (inputManager.MoveAmount >= 0.5f) {
-                moveDirection *= runningSpeed;
+            // Checking if we are sprinting, running or walking
+            if (isSprinting) {
+                moveDirection *= sprintingSpeed;
             }
             else {
-                moveDirection *= walkingSpeed;
+                if (inputManager.MoveAmount >= 0.5f) {
+                    moveDirection *= runningSpeed;
+                }
+                else {
+                    moveDirection *= walkingSpeed;
+                }
             }
+
+            Vector3 movementVelocity = moveDirection;
+            movementVelocity = Vector3.Lerp(movementVelocity, rb.velocity, Time.fixedDeltaTime);
+            rb.velocity = movementVelocity;
         }
-        Vector3 movementVelocity = moveDirection;
-        rb.velocity = movementVelocity;
+        else {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
+        }
+
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
+    }
+
+    private void HandleSwingingMovement() {
+        if (!isSwinging) return;
+
+        moveDirection = cam.forward * inputManager.VerticalInput + cam.right * inputManager.HorizontalInput;
+        moveDirection.Normalize();
+
+        rb.velocity += moveDirection;
     }
 
     private void HandleRotation() {
@@ -125,10 +147,13 @@ public class PlayerLocomotion : MonoBehaviour
 
         raycastOrigin.y += raycastHeightOffset;
 
-        if (!isGrounded && !isJumping && !isSwinging) {
-            // play falling animation
-
+        if (isSwinging) {
+            rb.AddForce(transform.forward * leapingVelocity);
+            rb.AddForce(Vector3.down * fallingVelocity * fallingSpeedMultiplier);
+        }
+        else if (!isGrounded && !isJumping) {
             inAirTimer += Time.deltaTime;
+
             rb.AddForce(transform.forward * leapingVelocity);
             rb.AddForce(Vector3.down * fallingVelocity * fallingSpeedMultiplier * inAirTimer);
         }

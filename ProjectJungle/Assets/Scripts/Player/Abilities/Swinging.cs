@@ -4,9 +4,11 @@ public class Swinging : MonoBehaviour
 {
     [Header("Swinging values")]
     [SerializeField] private float maxSwingDistance = 25f;
-    [SerializeField] private float jointSpring = 4.5f;
+    [SerializeField] private float swingForce = 4.5f;
     [SerializeField] private float jointDamper = 7f;
     [SerializeField] private float jointMassScale = 4.5f;
+    [Range(0,1f)] [SerializeField] private float maxDistanceMultipler = 0.75f;
+    [Range(0,1f)] [SerializeField] private float minDistanceMultipler = 0.1f;
 
     [Header("References")]
     [SerializeField] private Transform gunTip;
@@ -17,6 +19,7 @@ public class Swinging : MonoBehaviour
     private PlayerLocomotion playerLocomotion;
     private LineRenderer lr;
     private SpringJoint joint;
+    private Rigidbody playerRB;
     private Transform cam;
     
     private bool isSwinging;
@@ -26,6 +29,7 @@ public class Swinging : MonoBehaviour
         inputManager = GetComponentInParent<PlayerInputManager>();
         playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         lr = GetComponent<LineRenderer>();
+        playerRB = GetComponentInParent<Rigidbody>();
         cam = Camera.main.transform;
     }
 
@@ -39,9 +43,12 @@ public class Swinging : MonoBehaviour
             else {
                 EndSwing();
             }
-
-            playerLocomotion.IsSwinging = isSwinging;
         }
+        else {
+            EndSwing();
+        }
+
+        playerLocomotion.IsSwinging = isSwinging;
     }
 
     private void LateUpdate() {
@@ -65,12 +72,6 @@ public class Swinging : MonoBehaviour
 
                 if (!isSwinging) BeginSwing(hitPoint);
             }
-            else {
-                swingPoint = Vector3.zero;
-            }
-        }
-        else {
-            swingPoint = Vector3.zero;
         }
     }
 
@@ -85,12 +86,18 @@ public class Swinging : MonoBehaviour
 
         float distanceFromPoint = Vector3.Distance(gunTip.transform.position, swingPoint);
 
-        joint.maxDistance = distanceFromPoint * 0.6f;
-        joint.minDistance = distanceFromPoint * 0.25f;
+        joint.maxDistance = distanceFromPoint * maxDistanceMultipler;
+        joint.minDistance = distanceFromPoint * minDistanceMultipler;
 
-        joint.spring = jointSpring;
+        joint.spring = swingForce;
         joint.damper = jointDamper;
         joint.massScale = jointMassScale;
+
+        // Apply a force to simulate swinging motion
+        Vector3 swingDirection = (swingPoint - playerRB.position).normalized;
+        Vector3 perpendicularDirection = Vector3.Cross(swingDirection, Vector3.up);
+        Vector3 forceToAdd = Vector3.ClampMagnitude(perpendicularDirection * swingForce, playerLocomotion.MaxVelocity);
+        playerRB.AddForce(forceToAdd, ForceMode.Impulse);
     }
 
     private void EndSwing() {
@@ -106,9 +113,9 @@ public class Swinging : MonoBehaviour
     private void DrawRope() {
         if (swingPoint == Vector3.zero) return;
 
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 8f); 
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 8f);
         lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, currentGrapplePosition);
+        lr.SetPosition(1, swingPoint);
     }
 
     private void OnDrawGizmos() {
