@@ -25,4 +25,8 @@ public abstract class ItemObject : ScriptableObject
     [TextArea(15, 20)] public string description;
     public bool stackable;
     public int maxStackSize;
+
+    public string GetDescription { get { return description; } }
+
+    public ItemType GetItemType { get { return type; } }
 }
