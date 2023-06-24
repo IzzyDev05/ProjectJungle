@@ -56,6 +56,8 @@ public class InventoryManager : MonoBehaviour
 
     public void CloseInventory()
     {
+        ItemPanelManager.Instance.ClearDisplay();
+
         inventoryUI.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -72,7 +74,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddToInventory(ItemObject item, bool addToNewSlot = false)
+    public void AddToInventory(ItemObject item, GameObject itemObject, bool addToNewSlot = false)
     {
         if (!addToNewSlot)
         {
@@ -80,7 +82,7 @@ public class InventoryManager : MonoBehaviour
             {
                 if (itemList[i] == item && !inventorySlotList[i].GetComponent<SlotManager>().IsSlotFull())
                 {
-                    inventorySlotList[i].GetComponent<SlotManager>().AddItem(item);
+                    inventorySlotList[i].GetComponent<SlotManager>().AddItem(item, itemObject);
 
                     return;
                 }
@@ -88,8 +90,9 @@ public class InventoryManager : MonoBehaviour
         }
 
 
-        inventorySlotList[unoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item);
+        inventorySlotList[unoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item, itemObject);
         itemList.Add(item);
         unoccupiedSlotIndex++;
     }
+
 }

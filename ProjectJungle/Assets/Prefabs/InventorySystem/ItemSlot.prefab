@@ -123,7 +123,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2204871826051104296}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7114879034274362350}
+        m_TargetAssemblyTypeName: SlotManager, Assembly-CSharp
+        m_MethodName: SelectSlot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7114879034274362350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,8 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCountText: {fileID: 0}
   itemImage: {fileID: 0}
-  item: {fileID: 0}
   currentCapacity: 0
+  slotItem: {fileID: 0}
+  slotGameObject: {fileID: 0}
 --- !u!1 &2760548705940160872
 GameObject:
   m_ObjectHideFlags: 0

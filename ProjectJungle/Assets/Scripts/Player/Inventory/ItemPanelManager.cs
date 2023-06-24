@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class ItemPanelManager : MonoBehaviour
 {
-    public static ItemPanelManager itemPanelManager;
+    public static ItemPanelManager Instance;
 
-    [SerializeField] GameObject statsPanel;
+    [SerializeField] GameObject itemPanel;
+
+    [SerializeField] Image itemImage;
 
     [SerializeField] TMP_Text damageText;
     [SerializeField] TMP_Text defeseText;
@@ -20,15 +22,15 @@ public class ItemPanelManager : MonoBehaviour
 
     void Awake()
     {
-        itemPanelManager = this;
+        Instance = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (statsPanel.activeSelf == true)
+        if (itemPanel.activeSelf == true)
         {
-            statsPanel.SetActive(false);
+            itemPanel.SetActive(false);
         }
 
         damageText.text = "";
@@ -52,11 +54,60 @@ public class ItemPanelManager : MonoBehaviour
         }
     }
 
-    public void DisplaySelectedItem(ItemObject selectedItem)
+    public void DisplaySelectedItem(FoodObject selectedFood)
     {
-        if (currentItem != selectedItem)
+        if (currentItem != selectedFood)
         {
-            
+
+        }
+    }
+
+    public void DisplaySelectedItem(EquipmentObject selectedEqipment)
+    {
+        if (itemPanel.activeSelf == false)
+        {
+            itemPanel.SetActive(true);
+        }
+
+        if (currentItem == selectedEqipment)
+        {
+            return;   
+        }
+
+        itemImage.sprite = selectedEqipment.GetIcon;
+
+        currentItem = selectedEqipment;
+
+        if (selectedEqipment.GetDamage != 0)
+        {
+            damageText.text = selectedEqipment.GetDamage.ToString();
+        }
+        
+        if (selectedEqipment.GetDefense != 0)
+        {
+            defeseText.text = selectedEqipment.GetDefense.ToString();
+        }
+
+        if (selectedEqipment.GetAttackSpeed != 0f)
+        {
+            attackSpeedText.text = selectedEqipment.GetAttackSpeed.ToString();
+        }
+
+        if (selectedEqipment.GetRange != 0f)
+        {
+            rangeText.text = selectedEqipment.GetRange.ToString();
+        }
+
+        if (selectedEqipment.GetDescription == string.Empty)
+        {
+            descriptionText.text = selectedEqipment.GetDescription;
+        }
+    }
+
+    public void DisplaySelectedItem(MobDropObject selectedMobDrop)
+    {
+        if (currentItem != selectedMobDrop)
+        {
 
         }
     }

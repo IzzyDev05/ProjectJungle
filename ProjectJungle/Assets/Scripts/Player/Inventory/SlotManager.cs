@@ -10,8 +10,10 @@ public class SlotManager : MonoBehaviour
     [SerializeField] Image itemImage;
 
     int maxCapacity = 1;
-    [SerializeField] ItemObject slotItem;
     [SerializeField] int currentCapacity;
+
+    [SerializeField] ItemObject slotItem;
+    [SerializeField] GameObject slotGameObject;
 
     Color defaultColor;
 
@@ -55,29 +57,30 @@ public class SlotManager : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemObject item)
+    public void AddItem(ItemObject item, GameObject itemObject)
     {
         if (slotItem == null)
         {
-            SetMaxCapacity = item.maxStackSize;
+            SetMaxCapacity = item.GetMaxStackSize;
             currentCapacity = 1;
 
             slotItem = item;
+            slotGameObject = itemObject;
 
-            itemImage.sprite = item.icon;
+            itemImage.sprite = item.GetIcon;
             itemImage.color = Color.white;
 
             return;
         }
 
-        if (slotItem == item && item.stackable && IsSlotFull() == false)
+        if (slotItem == item && item.GetStackable && IsSlotFull() == false)
         {
             currentCapacity++;
 
         }
         else if (IsSlotFull() == true)
         {
-            InventoryManager.Instance.AddToInventory(item, true);
+            InventoryManager.Instance.AddToInventory(item, itemObject, true);
         }
 
     }
@@ -96,6 +99,20 @@ public class SlotManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SelectSlot()
+    {
+        switch (slotItem.Type)
+        {
+            case ItemType.Equipment:
+                {
+                    ItemPanelManager.Instance.DisplaySelectedItem(slotGameObject.GetComponent<ItemManager>().GetEquipment);
+
+                    break;
+                }
+        }
+
     }
 
 }

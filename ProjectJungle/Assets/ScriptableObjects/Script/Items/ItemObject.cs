@@ -18,15 +18,21 @@ public enum EquipmentType
 }
 public abstract class ItemObject : ScriptableObject
 {
-    public Sprite icon;
-    public GameObject prefab;
-    public string itemName;
-    public ItemType type;
-    [TextArea(15, 20)] public string description;
-    public bool stackable;
-    public int maxStackSize;
+    [SerializeField] Sprite icon;
+    [SerializeField] GameObject prefab;
+    [SerializeField] string itemName;
+    [SerializeField] ItemType type;
+    [TextArea(15, 20)] [SerializeField] string description;
+    [SerializeField] bool stackable;
+    [SerializeField] int maxStackSize;
 
+    public Sprite GetIcon { get { return icon; } }
+    public GameObject GetPrefab { get { return prefab; } }
+    public string GetItemName { get { return itemName; } }
+
+    public ItemType Type { get { return type; } set { type = value; } }
     public string GetDescription { get { return description; } }
+    public bool GetStackable { get { return stackable; } }
+    public int GetMaxStackSize { get { return maxStackSize; } }
 
-    public ItemType GetItemType { get { return type; } }
 }

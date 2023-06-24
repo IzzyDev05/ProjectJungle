@@ -6,6 +6,6 @@ public class MobDropObject : ItemObject
 {
     public void Awake()
     {
-        type = ItemType.MobDrop;
+        Type = ItemType.MobDrop;
     }
 }

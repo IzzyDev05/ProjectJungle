@@ -124,13 +124,13 @@ public class PlayerInputManager : MonoBehaviour
         }      
     }
 
-    private void HandleInteraction(Collider collider)
+    private void HandleInteraction(Collider collider, GameObject gameObject)
     {
         switch (collider.tag)
         {
             case "Interact_Pickup":
                 {
-                    InventoryManager.Instance.AddToInventory(collider.GetComponent<ItemPickup>().PickupItem());
+                    InventoryManager.Instance.AddToInventory(collider.GetComponent<ItemPickup>().PickupItem(), gameObject);
 
                     collider.gameObject.SetActive(false);
 
@@ -154,7 +154,7 @@ public class PlayerInputManager : MonoBehaviour
 
         if ((other.CompareTag("Interact_Pickup")|| other.CompareTag("Interact_Interactable")) && interactInput)
         {
-            HandleInteraction(other);
+            HandleInteraction(other, other.gameObject);
         }
     }
 }
