@@ -17,6 +17,8 @@ public class SlotManager : MonoBehaviour
 
     Color defaultColor;
 
+    [SerializeField] PanelPosition panelPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,8 @@ public class SlotManager : MonoBehaviour
         itemImage = GetComponent<Transform>().GetChild(0).GetComponentInChildren<Image>();
 
         defaultColor = itemImage.color;
+
+        panelPosition = PanelPosition.Center;
     }
 
     // Update is called once per frame
@@ -107,7 +111,7 @@ public class SlotManager : MonoBehaviour
         {
             case ItemType.Equipment:
                 {
-                    ItemPanelManager.Instance.DisplaySelectedItem(slotGameObject.GetComponent<ItemManager>().GetEquipment);
+                    ItemPanelManager.Instance.DisplaySelectedItem(slotGameObject.GetComponent<ItemManager>().GetEquipment, panelPosition);
 
                     break;
                 }

@@ -16,10 +16,10 @@ public class InventoryManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
-
         inventorySlotList.Clear();
         itemList.Clear();
+
+        Instance = this;
     }
 
     // Start is called before the first frame update

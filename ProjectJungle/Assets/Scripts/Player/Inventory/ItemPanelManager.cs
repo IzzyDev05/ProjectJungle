@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+public enum PanelPosition
+{
+    Left,
+    Center,
+    Right
+}
 
 public class ItemPanelManager : MonoBehaviour
 {
@@ -20,6 +26,8 @@ public class ItemPanelManager : MonoBehaviour
 
     [SerializeField] ItemObject currentItem;
 
+    [SerializeField] PanelPosition panelPosition;
+
     void Awake()
     {
         Instance = this;
@@ -28,17 +36,9 @@ public class ItemPanelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (itemPanel.activeSelf == true)
-        {
-            itemPanel.SetActive(false);
-        }
+        panelPosition = PanelPosition.Center;
 
-        damageText.text = "";
-        defeseText.text = "";
-        attackSpeedText.text = "";
-        rangeText.text = "";
-        descriptionText.text = "";
-
+        SetToDefault();
     }
 
     // Update is called once per frame
@@ -62,12 +62,15 @@ public class ItemPanelManager : MonoBehaviour
         }
     }
 
-    public void DisplaySelectedItem(EquipmentObject selectedEqipment)
+    public void DisplaySelectedItem(EquipmentObject selectedEqipment, PanelPosition displayPosition)
     {
         if (itemPanel.activeSelf == false)
         {
             itemPanel.SetActive(true);
         }
+
+        panelPosition = displayPosition;
+        ChangePanelPosition();
 
         if (currentItem == selectedEqipment)
         {
@@ -118,5 +121,57 @@ public class ItemPanelManager : MonoBehaviour
         {
             currentItem = null;
         }
+
+        SetToDefault();
+
+    }
+
+    void ChangePanelPosition()
+    {
+        switch (panelPosition)
+        {
+            case PanelPosition.Left:
+                {
+                    itemPanel.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
+                    itemPanel.GetComponent<RectTransform>().anchorMax = new Vector2(0,1);
+                    itemPanel.GetComponent<RectTransform>().pivot = new Vector2(1,0.5f);
+
+                    break;
+                }
+            case PanelPosition.Center:
+                {
+                    itemPanel.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
+                    itemPanel.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
+                    itemPanel.GetComponent<RectTransform>().pivot = new Vector2(1, 0.5f);
+                    break;
+                }
+            case PanelPosition.Right:
+                {
+                    itemPanel.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
+                    itemPanel.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+                    itemPanel.GetComponent<RectTransform>().pivot = new Vector2(1, 0.5f);
+                    break;
+                }
+        }
+
+    }
+
+    void SetToDefault()
+    {
+        if (itemPanel.activeSelf == true)
+        {
+            itemPanel.SetActive(false);
+        }
+
+        if (itemImage != null)
+        {
+            itemImage = null;
+        }
+
+        damageText.text = "";
+        defeseText.text = "";
+        attackSpeedText.text = "";
+        rangeText.text = "";
+        descriptionText.text = "";
     }
 }
