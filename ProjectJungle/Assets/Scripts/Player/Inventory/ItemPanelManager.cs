@@ -163,11 +163,6 @@ public class ItemPanelManager : MonoBehaviour
             itemPanel.SetActive(false);
         }
 
-        if (itemImage != null)
-        {
-            itemImage = null;
-        }
-
         damageText.text = "";
         defeseText.text = "";
         attackSpeedText.text = "";
