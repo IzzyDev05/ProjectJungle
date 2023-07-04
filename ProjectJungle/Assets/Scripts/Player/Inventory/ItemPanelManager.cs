@@ -128,28 +128,40 @@ public class ItemPanelManager : MonoBehaviour
 
     void ChangePanelPosition()
     {
+        RectTransform panelRect = itemPanel.GetComponent<RectTransform>();
+
         switch (panelPosition)
         {
             case PanelPosition.Left:
                 {
-                    itemPanel.GetComponent<RectTransform>().anchorMin = new Vector2(0,0);
-                    itemPanel.GetComponent<RectTransform>().anchorMax = new Vector2(0,1);
-                    itemPanel.GetComponent<RectTransform>().pivot = new Vector2(1,0.5f);
+                    panelRect.anchorMin = new Vector2(0,0);
+                    panelRect.anchorMax = new Vector2(0,1);
+                    panelRect.pivot = new Vector2(1,0.5f);
+
+                    panelRect.anchoredPosition3D = Vector3.right * 640f;
 
                     break;
                 }
             case PanelPosition.Center:
                 {
-                    itemPanel.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
-                    itemPanel.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-                    itemPanel.GetComponent<RectTransform>().pivot = new Vector2(1, 0.5f);
+                    // 320
+                    panelRect.anchorMin = new Vector2(0.5f, 0);
+                    panelRect.anchorMax = new Vector2(0.5f, 1);
+                    panelRect.pivot = new Vector2(1, 0.5f);
+
+                    panelRect.anchoredPosition3D = Vector3.right * 320f;
+
                     break;
                 }
             case PanelPosition.Right:
                 {
-                    itemPanel.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
-                    itemPanel.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
-                    itemPanel.GetComponent<RectTransform>().pivot = new Vector2(1, 0.5f);
+                    // 0
+                    panelRect.anchorMin = new Vector2(1, 0);
+                    panelRect.anchorMax = new Vector2(1, 1);
+                    panelRect.pivot = new Vector2(1, 0.5f);
+
+                    panelRect.anchoredPosition3D = Vector3.right * 0f;
+
                     break;
                 }
         }
@@ -158,15 +170,15 @@ public class ItemPanelManager : MonoBehaviour
 
     void SetToDefault()
     {
-        if (itemPanel.activeSelf == true)
-        {
-            itemPanel.SetActive(false);
-        }
-
         damageText.text = "";
         defeseText.text = "";
         attackSpeedText.text = "";
         rangeText.text = "";
         descriptionText.text = "";
+
+        if (itemPanel.activeSelf == true)
+        {
+            itemPanel.SetActive(false);
+        }
     }
 }
