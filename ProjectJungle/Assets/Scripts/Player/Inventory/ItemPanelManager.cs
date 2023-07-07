@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public enum PanelPosition
-{
-    Left,
-    Center,
-    Right
-}
 
 public class ItemPanelManager : MonoBehaviour
 {
@@ -26,8 +20,6 @@ public class ItemPanelManager : MonoBehaviour
 
     [SerializeField] ItemObject currentItem;
 
-    [SerializeField] PanelPosition panelPosition;
-
     void Awake()
     {
         Instance = this;
@@ -36,8 +28,6 @@ public class ItemPanelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        panelPosition = PanelPosition.Center;
-
         SetToDefault();
     }
 
@@ -62,15 +52,12 @@ public class ItemPanelManager : MonoBehaviour
         }
     }
 
-    public void DisplaySelectedItem(EquipmentObject selectedEqipment, PanelPosition displayPosition)
+    public void DisplaySelectedItem(EquipmentObject selectedEqipment)
     {
         if (itemPanel.activeSelf == false)
         {
             itemPanel.SetActive(true);
         }
-
-        panelPosition = displayPosition;
-        ChangePanelPosition();
 
         if (currentItem == selectedEqipment)
         {
@@ -123,48 +110,6 @@ public class ItemPanelManager : MonoBehaviour
         }
 
         SetToDefault();
-
-    }
-
-    void ChangePanelPosition()
-    {
-        RectTransform panelRect = itemPanel.GetComponent<RectTransform>();
-
-        switch (panelPosition)
-        {
-            case PanelPosition.Left:
-                {
-                    panelRect.anchorMin = new Vector2(0,0);
-                    panelRect.anchorMax = new Vector2(0,1);
-                    panelRect.pivot = new Vector2(1,0.5f);
-
-                    panelRect.anchoredPosition3D = Vector3.right * 640f;
-
-                    break;
-                }
-            case PanelPosition.Center:
-                {
-                    // 320
-                    panelRect.anchorMin = new Vector2(0.5f, 0);
-                    panelRect.anchorMax = new Vector2(0.5f, 1);
-                    panelRect.pivot = new Vector2(1, 0.5f);
-
-                    panelRect.anchoredPosition3D = Vector3.right * 320f;
-
-                    break;
-                }
-            case PanelPosition.Right:
-                {
-                    // 0
-                    panelRect.anchorMin = new Vector2(1, 0);
-                    panelRect.anchorMax = new Vector2(1, 1);
-                    panelRect.pivot = new Vector2(1, 0.5f);
-
-                    panelRect.anchoredPosition3D = Vector3.right * 0f;
-
-                    break;
-                }
-        }
 
     }
 
