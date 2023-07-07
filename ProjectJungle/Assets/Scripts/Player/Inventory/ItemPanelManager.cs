@@ -88,7 +88,7 @@ public class ItemPanelManager : MonoBehaviour
             rangeText.text = selectedEqipment.GetRange.ToString();
         }
 
-        if (selectedEqipment.GetDescription == string.Empty)
+        if (selectedEqipment.GetDescription != "")
         {
             descriptionText.text = selectedEqipment.GetDescription;
         }
