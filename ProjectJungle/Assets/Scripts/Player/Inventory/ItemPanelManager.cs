@@ -23,12 +23,14 @@ public class ItemPanelManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        SetToDefault();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        SetToDefault();
+        
     }
 
     // Update is called once per frame
