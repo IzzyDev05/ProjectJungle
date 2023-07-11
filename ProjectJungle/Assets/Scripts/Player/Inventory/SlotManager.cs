@@ -101,6 +101,8 @@ public class SlotManager : MonoBehaviour
 
     public int GetMaxCapacity { get { return maxCapacity; } }
 
+    public ItemObject GetItem { get { return slotItem; } }
+
     public bool MatchSlotItem(ItemObject item)
     {
         return item == slotItem ? true : false;

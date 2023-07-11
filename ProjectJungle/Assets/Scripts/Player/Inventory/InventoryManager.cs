@@ -97,10 +97,28 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        FindNextUnoccupiedSlot();
 
         inventorySlotList[unoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item, itemObject);
         itemList.Add(item);
         unoccupiedSlotIndex++;
+    }
+
+    void FindNextUnoccupiedSlot()
+    {
+        unoccupiedSlotIndex = 0;
+
+        foreach (GameObject slotObject in inventorySlotList)
+        {
+            if (slotObject.GetComponent<SlotManager>().GetItem == null)
+            {
+                Debug.Log(unoccupiedSlotIndex);
+
+                return;
+            }
+
+            unoccupiedSlotIndex++;
+        }
     }
 
     public void RemoveItemFromInventory(ItemObject item)
@@ -117,7 +135,7 @@ public class InventoryManager : MonoBehaviour
         itemList = updatedList;
     }
 
-    public void RemoveStackofItemsFromInventory(ItemObject item, GameObject itemObject, int amount)
+    public void RemoveMultipleItemsFromInventory(int amount)
     {
 
     }
