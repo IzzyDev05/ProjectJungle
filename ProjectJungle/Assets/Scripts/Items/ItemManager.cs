@@ -12,4 +12,5 @@ public class ItemManager : MonoBehaviour
     public EquipmentObject GetEquipment { get { return eqipmentObjectScript; } }
     public FoodObject GetFood { get { return foodObjectScript; } }
     public MobDropObject GetMobDrop { get { return mobDropObjectScript; } }
+
 }

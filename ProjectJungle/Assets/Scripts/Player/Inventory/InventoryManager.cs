@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.UI;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
 
     public static InventoryManager Instance;
     [SerializeField] GameObject inventoryUI;
+    [SerializeField] GameObject slotPrefab;
+    [SerializeField] Button dropItemButton;
 
     [SerializeField] List<GameObject> inventorySlotList = new List<GameObject>();
     [SerializeField] int unoccupiedSlotIndex = 0;
@@ -35,13 +37,19 @@ public class InventoryManager : MonoBehaviour
             if (child.gameObject.CompareTag("InventorySlot"))
             {
                 inventorySlotList.Add(child.gameObject);
-            }    
+            }
+        }
+
+        if (dropItemButton.IsActive())
+        {
+            dropItemButton.gameObject.SetActive(false);
         }
 
         if (inventoryUI.activeSelf == true)
         {
             inventoryUI.SetActive(false);
         }
+
     }
 
     public void OpenInventory()
@@ -95,4 +103,46 @@ public class InventoryManager : MonoBehaviour
         unoccupiedSlotIndex++;
     }
 
+    public void RemoveItemFromInventory(ItemObject item)
+    {
+        int positionInInventory = inventorySlotList.FindIndex(i => i.GetComponent<SlotManager>().MatchSlotItem(item));
+
+        List<ItemObject> updatedList = new List<ItemObject>();
+        updatedList = itemList;
+
+        //updatedList.RemoveAt(positionInInventory);
+
+        UpdateItemDisplayInSlot(positionInInventory);
+
+        //itemList = updatedList;
+    }
+
+    public void RemoveStackofItemsFromInventory(ItemObject item, GameObject itemObject, int amount)
+    {
+
+    }
+
+    void UpdateItemDisplayInSlot(int positionInInventory)
+    {
+        inventorySlotList[positionInInventory].GetComponent<SlotManager>().ClearSlot();
+
+        foreach (Transform child in inventoryUI.transform)
+        {
+            if (child.tag == "InventorySlotContainer")
+            {
+                Debug.Log(child.name);
+
+                /*Destroy(child.GetChild(positionInInventory));
+                inventorySlotList.RemoveAt(positionInInventory);
+
+                GameObject newSlot = Instantiate(slotPrefab, child);
+
+                inventorySlotList.Add(newSlot);*/
+
+                return;
+            }
+        }
+    }
+
+    public Button GetButton { get { return dropItemButton; } }
 }

@@ -47,14 +47,24 @@ public class SlotManager : MonoBehaviour
 
     public void RemoveItem()
     {
-        if (currentCapacity > 0)
+        if (currentCapacity > 1)
         {
             currentCapacity--;
+
+            return;
         }
-        else
-        {
-            currentCapacity = 0;
-        }
+
+        InventoryManager.Instance.RemoveItemFromInventory(slotItem);
+
+        currentCapacity = 0;
+        maxCapacity = 1;
+    }
+
+    public void ClearSlot()
+    {
+        slotItem = null;
+        slotGameObject = null;
+        itemImage.sprite = null;
     }
 
     public void AddItem(ItemObject item, GameObject itemObject)
@@ -91,6 +101,11 @@ public class SlotManager : MonoBehaviour
 
     public int GetMaxCapacity { get { return maxCapacity; } }
 
+    public bool MatchSlotItem(ItemObject item)
+    {
+        return item == slotItem ? true : false;
+    }
+
     public bool IsSlotFull()
     {
         if (GetCurrentCapacity == GetMaxCapacity)
@@ -103,6 +118,8 @@ public class SlotManager : MonoBehaviour
 
     public void SelectSlot()
     {
+        SetUpDropButton();
+
         switch (slotItem.Type)
         {
             case ItemType.Equipment:
@@ -112,6 +129,20 @@ public class SlotManager : MonoBehaviour
                     break;
                 }
         }
+
+    }
+
+    void SetUpDropButton()
+    {
+        Button dropButton = InventoryManager.Instance.GetButton;
+
+        if (dropButton.IsActive() == false)
+        {
+            dropButton.gameObject.SetActive(true);
+
+        }
+
+        dropButton.onClick.AddListener(delegate { this.RemoveItem(); });
 
     }
 
