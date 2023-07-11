@@ -110,11 +110,11 @@ public class InventoryManager : MonoBehaviour
         List<ItemObject> updatedList = new List<ItemObject>();
         updatedList = itemList;
 
-        //updatedList.RemoveAt(positionInInventory);
+        updatedList.RemoveAt(positionInInventory);
 
         UpdateItemDisplayInSlot(positionInInventory);
 
-        //itemList = updatedList;
+        itemList = updatedList;
     }
 
     public void RemoveStackofItemsFromInventory(ItemObject item, GameObject itemObject, int amount)
@@ -126,22 +126,14 @@ public class InventoryManager : MonoBehaviour
     {
         inventorySlotList[positionInInventory].GetComponent<SlotManager>().ClearSlot();
 
-        foreach (Transform child in inventoryUI.transform)
-        {
-            if (child.tag == "InventorySlotContainer")
-            {
-                Debug.Log(child.name);
+        GameObject slotContainer = GameObject.FindGameObjectWithTag("InventorySlotContainer");
 
-                /*Destroy(child.GetChild(positionInInventory));
-                inventorySlotList.RemoveAt(positionInInventory);
+        Destroy(slotContainer.transform.GetChild(positionInInventory).gameObject);
+        inventorySlotList.RemoveAt(positionInInventory);
 
-                GameObject newSlot = Instantiate(slotPrefab, child);
+        GameObject newSlot = Instantiate(slotPrefab, slotContainer.transform);
 
-                inventorySlotList.Add(newSlot);*/
-
-                return;
-            }
-        }
+        ItemPanelManager.Instance.ClearDisplay();
     }
 
     public Button GetButton { get { return dropItemButton; } }
