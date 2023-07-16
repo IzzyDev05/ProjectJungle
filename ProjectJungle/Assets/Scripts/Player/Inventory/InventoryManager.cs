@@ -135,11 +135,6 @@ public class InventoryManager : MonoBehaviour
         itemList = updatedList;
     }
 
-    public void RemoveMultipleItemsFromInventory(int amount)
-    {
-
-    }
-
     void UpdateItemDisplayInSlot(int positionInInventory)
     {
         inventorySlotList[positionInInventory].GetComponent<SlotManager>().ClearSlot();
@@ -155,4 +150,6 @@ public class InventoryManager : MonoBehaviour
     }
 
     public Button GetButton { get { return dropItemButton; } }
+
+    public List<ItemObject> GetInventoryItems { get { return itemList; } }
 }

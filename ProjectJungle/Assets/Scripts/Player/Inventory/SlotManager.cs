@@ -60,6 +60,18 @@ public class SlotManager : MonoBehaviour
         maxCapacity = 1;
     }
 
+    public void RemoveMultipleItem(int amount)
+    {
+        if (currentCapacity - amount > 1)
+        {
+            currentCapacity -= amount;
+
+            return;
+        }
+
+        RemoveItem();
+    }
+
     public void ClearSlot()
     {
         slotItem = null;
@@ -145,7 +157,7 @@ public class SlotManager : MonoBehaviour
         }
 
         dropButton.onClick.AddListener(delegate { this.RemoveItem(); });
-
+        //dropButton.onClick.AddListener(delegate { this.RemoveMultipleItem(Mathf.FloorToInt(currentCapacity/2)); });
     }
 
 }
