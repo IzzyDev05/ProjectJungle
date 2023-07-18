@@ -33,44 +33,13 @@ public class SlotManager : MonoBehaviour
         UpdateItemCount();
     }
 
-    void UpdateItemCount()
-    {
-        if (currentCapacity <= 1)
-        {
-            itemCountText.text = "";
-        }
-        else
-        {
-            itemCountText.text = currentCapacity.ToString();
-        }
-    }
+    public int GetCurrentCapacity { get { return currentCapacity; } }
 
-    public void RemoveItem()
-    {
-        if (currentCapacity > 1)
-        {
-            currentCapacity--;
+    int SetMaxCapacity { set { maxCapacity = value; } }
 
-            return;
-        }
+    public int GetMaxCapacity { get { return maxCapacity; } }
 
-        InventoryManager.Instance.RemoveItemFromInventory(slotItem);
-
-        currentCapacity = 0;
-        maxCapacity = 1;
-    }
-
-    public void RemoveMultipleItem(int amount)
-    {
-        if (currentCapacity - amount > 1)
-        {
-            currentCapacity -= amount;
-
-            return;
-        }
-
-        RemoveItem();
-    }
+    public ItemObject GetItem { get { return slotItem; } }
 
     public void ClearSlot()
     {
@@ -79,12 +48,12 @@ public class SlotManager : MonoBehaviour
         itemImage.sprite = null;
     }
 
-    public void AddItem(ItemObject item, GameObject itemObject)
+    public void AddItem(ItemObject item, GameObject itemObject, int amount = 1)
     {
         if (slotItem == null)
         {
             SetMaxCapacity = item.GetMaxStackSize;
-            currentCapacity = 1;
+            currentCapacity = amount;
 
             slotItem = item;
             slotGameObject = itemObject;
@@ -97,7 +66,15 @@ public class SlotManager : MonoBehaviour
 
         if (slotItem == item && item.GetStackable && IsSlotFull() == false)
         {
+            if (amount > 1)
+            {
+                currentCapacity = amount;
+
+                return;
+            }
+
             currentCapacity++;
+            
 
         }
         else if (IsSlotFull() == true)
@@ -107,13 +84,49 @@ public class SlotManager : MonoBehaviour
 
     }
 
-    public int GetCurrentCapacity { get { return currentCapacity; } }
+    void UpdateItemCount()
+    {
+        if (currentCapacity <= 1)
+        {
+            itemCountText.text = "";
+        }
+        else
+        {
+            itemCountText.text = currentCapacity.ToString();
+        }
+    }
 
-    int SetMaxCapacity { set { maxCapacity = value; } }
+    public void DropItem()
+    {
+        if (currentCapacity > 1)
+        {
+            currentCapacity--;
 
-    public int GetMaxCapacity { get { return maxCapacity; } }
+            return;
+        }
 
-    public ItemObject GetItem { get { return slotItem; } }
+        RemoveItem();
+    }
+
+    public void RemoveItem()
+    {
+        InventoryManager.Instance.RemoveItemFromInventory(gameObject);
+
+        currentCapacity = 0;
+        maxCapacity = 1;
+    }
+
+    public void RemoveMultipleItems(int amount = 1)
+    {
+        if (currentCapacity - amount >= 1)
+        {
+            currentCapacity -= amount;
+        }
+        else if (currentCapacity - amount >= 0)
+        {
+            RemoveItem();
+        }
+    }
 
     public bool MatchSlotItem(ItemObject item)
     {
@@ -156,8 +169,9 @@ public class SlotManager : MonoBehaviour
 
         }
 
-        dropButton.onClick.AddListener(delegate { this.RemoveItem(); });
-        //dropButton.onClick.AddListener(delegate { this.RemoveMultipleItem(Mathf.FloorToInt(currentCapacity/2)); });
+        dropButton.onClick.RemoveAllListeners();
+
+        dropButton.onClick.AddListener(DropItem); 
     }
 
 }

@@ -124,17 +124,19 @@ public class PlayerInputManager : MonoBehaviour
         }      
     }
 
-    private void HandleInteraction(Collider collider, GameObject gameObject)
+    private void HandleInteraction(Collider collider, GameObject colliderGameObject)
     {
         switch (collider.tag)
         {
             case "Interact_Pickup":
                 {
-                    InventoryManager.Instance.AddToInventory(collider.GetComponent<ItemPickup>().PickupItem(), gameObject);
+                    ItemPickup itemPickup = collider.GetComponent<ItemPickup>();
 
-                    collider.gameObject.SetActive(false);
+                    InventoryManager.Instance.AddToInventory(itemPickup.PickupItem(), colliderGameObject, false, itemPickup.GetAmountPickedUp);
 
-                    // Destroy(collider.GetComponent<GameObject>());
+                    colliderGameObject.SetActive(false);
+
+                    //Destroy(colliderGameObject);
 
                     interactInput = false;
 
@@ -150,11 +152,27 @@ public class PlayerInputManager : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log($"Press 'F' to pick up {other.gameObject.name}.");
 
-        if ((other.CompareTag("Interact_Pickup")|| other.CompareTag("Interact_Interactable")) && interactInput)
+        if (other.CompareTag("Interact_Pickup") || other.CompareTag("Interact_Interactable"))
         {
-            HandleInteraction(other, other.gameObject);
+            switch (other.tag)
+            {
+                case "Interact_Pickup":
+                    {
+                        Debug.Log($"Press 'F' to pick up {other.gameObject.name}.");
+                        break;
+                    }
+                case "Interact_Interactable":
+                    {
+                        Debug.Log($"Press 'F' to interact with {other.gameObject.name}.");
+                        break;
+                    }
+            }
+
+            if (interactInput)
+            {
+                HandleInteraction(other, other.gameObject);
+            }
         }
     }
 }

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5275322673842992082}
   - component: {fileID: 7985235410251499288}
   - component: {fileID: 7819958718981226569}
-  - component: {fileID: -9028123772839033010}
   - component: {fileID: 4889491969400104192}
+  - component: {fileID: -9028123772839033010}
   - component: {fileID: -1254129205333512449}
   m_Layer: 0
   m_Name: Test_Sword
@@ -101,19 +101,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2490357807671972370, guid: d00dec123be83b445adbe6c8f3f02f41, type: 3}
---- !u!114 &-9028123772839033010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8489774840067581645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb06336841e0bf41915e5b07c752546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemObject: {fileID: 11400000, guid: d1bb5b459a3b88b4ca96d8b067043e94, type: 2}
 --- !u!136 &4889491969400104192
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -128,6 +115,20 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0.45851684, z: 0.00000004656613}
+--- !u!114 &-9028123772839033010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8489774840067581645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb06336841e0bf41915e5b07c752546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemObject: {fileID: 11400000, guid: d1bb5b459a3b88b4ca96d8b067043e94, type: 2}
+  pickupAmount: 1
 --- !u!114 &-1254129205333512449
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,16 +5,9 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour
 {
     [SerializeField] ItemObject itemObject;
+    [SerializeField] int pickupAmount = 1;
 
-    public static ItemPickup Instance;
+    public ItemObject PickupItem() { return itemObject; }
 
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    public ItemObject PickupItem()
-    {
-        return itemObject;
-    }
+    public int GetAmountPickedUp { get { return pickupAmount; } }
 }

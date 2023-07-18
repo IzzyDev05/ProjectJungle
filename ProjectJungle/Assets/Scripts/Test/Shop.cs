@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
+    [SerializeField] ItemObject stealItem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +19,19 @@ public class Shop : MonoBehaviour
     }
 
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Robin hood stole 8 arrows");
-
         if (other.CompareTag("Player"))
         {
-            
+            foreach (GameObject slot in InventoryManager.Instance.GetInventorySlots)
+            {
+                if (slot.GetComponent<SlotManager>().MatchSlotItem(stealItem))
+                {
+                    slot.GetComponent<SlotManager>().RemoveMultipleItems(8);
+
+                    Debug.Log($"Robin hood stole 8 arrows");
+                }
+            }
         }
     }
 }

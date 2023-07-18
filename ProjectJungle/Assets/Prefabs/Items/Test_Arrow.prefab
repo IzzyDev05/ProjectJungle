@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 9178626096104075764}
   - component: {fileID: 6378768897947534654}
   - component: {fileID: 8401156109603033622}
-  - component: {fileID: 2336319743552846819}
   - component: {fileID: 796400521189086467}
+  - component: {fileID: 2336319743552846819}
   - component: {fileID: -4898177662192940208}
   m_Layer: 0
   m_Name: Test_Arrow
@@ -101,19 +101,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 568036627037906997, guid: 4fa68e0d267fb454bafd0a157c2526ce, type: 3}
---- !u!114 &2336319743552846819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4865309214770636011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb06336841e0bf41915e5b07c752546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemObject: {fileID: 11400000, guid: 6a4d74f17afaa4b408c89eaf29298365, type: 2}
 --- !u!136 &796400521189086467
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -128,6 +115,20 @@ CapsuleCollider:
   m_Height: 0.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &2336319743552846819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4865309214770636011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb06336841e0bf41915e5b07c752546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemObject: {fileID: 11400000, guid: 6a4d74f17afaa4b408c89eaf29298365, type: 2}
+  pickupAmount: 1
 --- !u!114 &-4898177662192940208
 MonoBehaviour:
   m_ObjectHideFlags: 0

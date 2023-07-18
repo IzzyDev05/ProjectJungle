@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5562826021315445741}
   - component: {fileID: 7698859045550978855}
   - component: {fileID: 6542218581709590649}
-  - component: {fileID: 449405974681566093}
   - component: {fileID: 2050510163871623510}
+  - component: {fileID: 449405974681566093}
   - component: {fileID: 5223270166356892432}
   m_Layer: 0
   m_Name: Test_Axe
@@ -101,19 +101,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2487380500608498712, guid: 6675c6557a13efc4aacb9db75446046f, type: 3}
---- !u!114 &449405974681566093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8203073568141072114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb06336841e0bf41915e5b07c752546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemObject: {fileID: 11400000, guid: d74ad7616bc2d9f4b86de08f40f72c3e, type: 2}
 --- !u!136 &2050510163871623510
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -128,6 +115,20 @@ CapsuleCollider:
   m_Height: 0.8473046
   m_Direction: 1
   m_Center: {x: -0.07051782, y: 0.16591479, z: -0.00000016018748}
+--- !u!114 &449405974681566093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203073568141072114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb06336841e0bf41915e5b07c752546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemObject: {fileID: 11400000, guid: d74ad7616bc2d9f4b86de08f40f72c3e, type: 2}
+  pickupAmount: 1
 --- !u!114 &5223270166356892432
 MonoBehaviour:
   m_ObjectHideFlags: 0

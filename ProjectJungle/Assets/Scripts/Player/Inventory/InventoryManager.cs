@@ -7,11 +7,14 @@ public class InventoryManager : MonoBehaviour
 {
 
     public static InventoryManager Instance;
+
     [SerializeField] GameObject inventoryUI;
+    [SerializeField] GameObject slotContainer;
     [SerializeField] GameObject slotPrefab;
     [SerializeField] Button dropItemButton;
 
     [SerializeField] List<GameObject> inventorySlotList = new List<GameObject>();
+    [SerializeField] int t_slotCount = 0;
     [SerializeField] int unoccupiedSlotIndex = 0;
 
     [SerializeField] List<ItemObject> itemList = new List<ItemObject>();
@@ -37,6 +40,7 @@ public class InventoryManager : MonoBehaviour
             if (child.gameObject.CompareTag("InventorySlot"))
             {
                 inventorySlotList.Add(child.gameObject);
+                t_slotCount++;
             }
         }
 
@@ -82,7 +86,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddToInventory(ItemObject item, GameObject itemObject, bool addToNewSlot = false)
+    public void AddToInventory(ItemObject item, GameObject itemObject, bool addToNewSlot = false, int amount = 1)
     {
         if (!addToNewSlot)
         {
@@ -90,7 +94,7 @@ public class InventoryManager : MonoBehaviour
             {
                 if (itemList[i] == item && !inventorySlotList[i].GetComponent<SlotManager>().IsSlotFull())
                 {
-                    inventorySlotList[i].GetComponent<SlotManager>().AddItem(item, itemObject);
+                    inventorySlotList[i].GetComponent<SlotManager>().AddItem(item, itemObject, amount);
 
                     return;
                 }
@@ -99,7 +103,7 @@ public class InventoryManager : MonoBehaviour
 
         FindNextUnoccupiedSlot();
 
-        inventorySlotList[unoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item, itemObject);
+        inventorySlotList[unoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item, itemObject, amount);
         itemList.Add(item);
         unoccupiedSlotIndex++;
     }
@@ -112,7 +116,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (slotObject.GetComponent<SlotManager>().GetItem == null)
             {
-                Debug.Log(unoccupiedSlotIndex);
+                //Debug.Log(unoccupiedSlotIndex);
 
                 return;
             }
@@ -121,16 +125,16 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void RemoveItemFromInventory(ItemObject item)
+    public void RemoveItemFromInventory(GameObject currentSlot)
     {
-        int positionInInventory = inventorySlotList.FindIndex(i => i.GetComponent<SlotManager>().MatchSlotItem(item));
+        int positionInInventory = inventorySlotList.FindIndex(slot => slot.name == currentSlot.name);
 
         List<ItemObject> updatedList = new List<ItemObject>();
         updatedList = itemList;
 
-        updatedList.RemoveAt(positionInInventory);
-
         UpdateItemDisplayInSlot(positionInInventory);
+
+        updatedList.RemoveAt(positionInInventory);
 
         itemList = updatedList;
     }
@@ -139,12 +143,11 @@ public class InventoryManager : MonoBehaviour
     {
         inventorySlotList[positionInInventory].GetComponent<SlotManager>().ClearSlot();
 
-        GameObject slotContainer = GameObject.FindGameObjectWithTag("InventorySlotContainer");
-
         Destroy(slotContainer.transform.GetChild(positionInInventory).gameObject);
         inventorySlotList.RemoveAt(positionInInventory);
 
         GameObject newSlot = Instantiate(slotPrefab, slotContainer.transform);
+        newSlot.name = $"ItemSlot ({t_slotCount})";
 
         ItemPanelManager.Instance.ClearDisplay();
     }
@@ -152,4 +155,6 @@ public class InventoryManager : MonoBehaviour
     public Button GetButton { get { return dropItemButton; } }
 
     public List<ItemObject> GetInventoryItems { get { return itemList; } }
+
+    public List<GameObject> GetInventorySlots { get { return inventorySlotList; } }
 }
