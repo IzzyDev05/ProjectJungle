@@ -18,8 +18,7 @@ public class Shop : MonoBehaviour
         
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -27,11 +26,13 @@ public class Shop : MonoBehaviour
             {
                 if (slot.GetComponent<SlotManager>().MatchSlotItem(stealItem))
                 {
-                    slot.GetComponent<SlotManager>().RemoveMultipleItems(8);
+                    slot.GetComponent<SlotManager>().RemoveMultipleItems(10);
 
-                    Debug.Log($"Robin hood stole 8 arrows");
+                    Debug.Log($"Robin hood stole 10 arrows");
+
+                    return;
                 }
             }
         }
-    }
+    }*/
 }

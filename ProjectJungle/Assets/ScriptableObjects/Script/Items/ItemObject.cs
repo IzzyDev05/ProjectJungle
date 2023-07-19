@@ -25,6 +25,7 @@ public abstract class ItemObject : ScriptableObject
     [TextArea(15, 20)] [SerializeField] string description;
     [SerializeField] bool stackable;
     [SerializeField] int maxStackSize;
+    [SerializeField] int worth;
 
     public Sprite GetIcon { get { return icon; } }
     public GameObject GetPrefab { get { return prefab; } }
@@ -34,5 +35,7 @@ public abstract class ItemObject : ScriptableObject
     public string GetDescription { get { return description; } }
     public bool GetStackable { get { return stackable; } }
     public int GetMaxStackSize { get { return maxStackSize; } }
+
+    public int GetWorth { get { return worth; } }
 
 }

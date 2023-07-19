@@ -12,6 +12,8 @@ public class ItemPanelManager : MonoBehaviour
 
     [SerializeField] Image itemImage;
 
+    [SerializeField] TMP_Text worthText;
+
     [SerializeField] TMP_Text damageText;
     [SerializeField] TMP_Text defeseText;
     [SerializeField] TMP_Text attackSpeedText;
@@ -38,6 +40,7 @@ public class ItemPanelManager : MonoBehaviour
     {
         if (currentItem == null)
         {
+            worthText.text = "";
             damageText.text = "";
             defeseText.text = "";
             attackSpeedText.text = "";
@@ -69,6 +72,8 @@ public class ItemPanelManager : MonoBehaviour
         itemImage.sprite = selectedEqipment.GetIcon;
 
         currentItem = selectedEqipment;
+
+        worthText.text = selectedEqipment.GetWorth.ToString();
 
         if (selectedEqipment.GetDamage != 0)
         {
@@ -117,6 +122,7 @@ public class ItemPanelManager : MonoBehaviour
 
     void SetToDefault()
     {
+        worthText.text = "";
         damageText.text = "";
         defeseText.text = "";
         attackSpeedText.text = "";
