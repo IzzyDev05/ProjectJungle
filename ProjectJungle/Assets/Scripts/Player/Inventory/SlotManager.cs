@@ -12,8 +12,7 @@ public class SlotManager : MonoBehaviour
     int maxCapacity = 1;
     [SerializeField] int currentCapacity;
 
-    [SerializeField] ItemObject slotItem;
-    [SerializeField] GameObject slotGameObject;
+    [SerializeField] ItemManager slotItem;
 
     Color defaultColor;
 
@@ -39,47 +38,56 @@ public class SlotManager : MonoBehaviour
 
     public int GetMaxCapacity { get { return maxCapacity; } }
 
-    public ItemObject GetItem { get { return slotItem; } }
+    public ItemManager GetItem { get { return slotItem; } }
 
     public void ClearSlot()
     {
         slotItem = null;
-        slotGameObject = null;
         itemImage.sprite = null;
     }
 
-    public void AddItem(ItemObject item, GameObject itemObject, int amount = 1)
+    public void AddItem(ItemManager item, int amount = 1)
     {
         if (slotItem == null)
         {
-            SetMaxCapacity = item.GetMaxStackSize;
+            SetMaxCapacity = item.GetItemObject.GetMaxStackSize;
             currentCapacity = amount;
 
             slotItem = item;
-            slotGameObject = itemObject;
 
-            itemImage.sprite = item.GetIcon;
+            itemImage.sprite = item.GetItemObject.GetIcon;
             itemImage.color = Color.white;
 
             return;
         }
 
-        if (slotItem == item && item.GetStackable && IsSlotFull() == false)
+        if (slotItem.GetItemObject == item.GetItemObject && item.GetItemObject.GetStackable && IsSlotFull() == false)
         {
-            if (amount > 1)
+            if (amount == 1)
             {
-                currentCapacity = amount;
+                currentCapacity++;
 
                 return;
             }
 
-            currentCapacity++;
+            if (maxCapacity - currentCapacity >= amount)
+            {
+                currentCapacity += amount;
+            }
+            else
+            {
+                int overflow = amount - (maxCapacity - currentCapacity);
+
+                currentCapacity = maxCapacity;
+
+                InventoryManager.Instance.AddToInventory(item, true, overflow);
+            }
             
 
         }
         else if (IsSlotFull() == true)
         {
-            InventoryManager.Instance.AddToInventory(item, itemObject, true);
+            InventoryManager.Instance.AddToInventory(item, true);
         }
 
     }
@@ -145,13 +153,18 @@ public class SlotManager : MonoBehaviour
 
     public void SelectSlot()
     {
+        if (slotItem == null)
+        {
+            return;
+        }
+
         SetUpDropButton();
 
-        switch (slotItem.Type)
+        switch (slotItem.GetItemObject.Type)
         {
             case ItemType.Equipment:
                 {
-                    ItemPanelManager.Instance.DisplaySelectedItem(slotGameObject.GetComponent<ItemManager>().GetEquipment);
+                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetEquipment);
 
                     break;
                 }

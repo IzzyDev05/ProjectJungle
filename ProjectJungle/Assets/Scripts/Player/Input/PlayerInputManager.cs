@@ -130,9 +130,9 @@ public class PlayerInputManager : MonoBehaviour
         {
             case "Interact_Pickup":
                 {
-                    ItemPickup itemPickup = collider.GetComponent<ItemPickup>();
+                    ItemManager itemManager = collider.GetComponent<ItemManager>();
 
-                    InventoryManager.Instance.AddToInventory(itemPickup.PickupItem(), colliderGameObject, false, itemPickup.GetAmountPickedUp);
+                    InventoryManager.Instance.AddToInventory(itemManager.PickupItem(), false, itemManager.GetAmountPickedUp);
 
                     colliderGameObject.SetActive(false);
 

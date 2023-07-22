@@ -38,4 +38,5 @@ public abstract class ItemObject : ScriptableObject
 
     public int GetWorth { get { return worth; } }
 
+    
 }

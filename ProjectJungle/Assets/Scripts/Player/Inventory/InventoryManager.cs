@@ -86,15 +86,15 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddToInventory(ItemObject item, GameObject itemObject, bool addToNewSlot = false, int amount = 1)
+    public void AddToInventory(ItemManager item, bool addToNewSlot = false, int amount = 1)
     {
         if (!addToNewSlot)
         {
             for (int i = 0; i < itemList.Count; i++)
             {
-                if (itemList[i] == item && !inventorySlotList[i].GetComponent<SlotManager>().IsSlotFull())
+                if (itemList[i] == item.GetItemObject && inventorySlotList[i].GetComponent<SlotManager>().IsSlotFull() == false)
                 {
-                    inventorySlotList[i].GetComponent<SlotManager>().AddItem(item, itemObject, amount);
+                    inventorySlotList[i].GetComponent<SlotManager>().AddItem(item, amount);
 
                     return;
                 }
@@ -103,8 +103,8 @@ public class InventoryManager : MonoBehaviour
 
         FindNextUnoccupiedSlot();
 
-        inventorySlotList[unoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item, itemObject, amount);
-        itemList.Add(item);
+        inventorySlotList[GetUnoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item, amount);
+        itemList.Add(item.GetItemObject);
         unoccupiedSlotIndex++;
     }
 
@@ -116,14 +116,14 @@ public class InventoryManager : MonoBehaviour
         {
             if (slotObject.GetComponent<SlotManager>().GetItem == null)
             {
-                //Debug.Log(unoccupiedSlotIndex);
-
                 return;
             }
 
             unoccupiedSlotIndex++;
         }
     }
+
+    public int GetUnoccupiedSlotIndex { get { return unoccupiedSlotIndex; } }
 
     public void RemoveItemFromInventory(GameObject currentSlot)
     {
@@ -157,4 +157,5 @@ public class InventoryManager : MonoBehaviour
     public List<ItemObject> GetInventoryItems { get { return itemList; } }
 
     public List<GameObject> GetInventorySlots { get { return inventorySlotList; } }
+
 }

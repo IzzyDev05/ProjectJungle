@@ -12,6 +12,7 @@ public class ItemPanelManager : MonoBehaviour
 
     [SerializeField] Image itemImage;
 
+    [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text worthText;
 
     [SerializeField] TMP_Text damageText;
@@ -29,17 +30,18 @@ public class ItemPanelManager : MonoBehaviour
         SetToDefault();
     }
 
-    // Start is called before the first frame update
+    /*/ Start is called before the first frame update
     void Start()
     {
         
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
     {
         if (currentItem == null)
         {
+            nameText.text = "";
             worthText.text = "";
             damageText.text = "";
             defeseText.text = "";
@@ -73,7 +75,9 @@ public class ItemPanelManager : MonoBehaviour
 
         currentItem = selectedEqipment;
 
-        worthText.text = selectedEqipment.GetWorth.ToString();
+        nameText.text = selectedEqipment.GetItemName;
+
+        worthText.text = selectedEqipment.GetWorth.ToString() + " g";
 
         if (selectedEqipment.GetDamage != 0)
         {
@@ -122,6 +126,7 @@ public class ItemPanelManager : MonoBehaviour
 
     void SetToDefault()
     {
+        nameText.text = "";
         worthText.text = "";
         damageText.text = "";
         defeseText.text = "";
