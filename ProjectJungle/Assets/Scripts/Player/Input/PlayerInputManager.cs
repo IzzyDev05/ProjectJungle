@@ -16,6 +16,7 @@ public class PlayerInputManager : MonoBehaviour
     private bool jumpInput;
     private bool inventoryInput;
     private bool interactInput;
+    private bool miscUIInput;
 
     #region PROPERTIES
     public float MoveAmount {
@@ -47,6 +48,8 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Inventory.CloseInventory.performed += CloseInventory => inventoryInput = false;
             playerControls.Actions.Interact.performed += Interact => interactInput = true;
             playerControls.Actions.Interact.canceled += Interact => interactInput = false;
+            playerControls.MiscUI.CloseCrafting.performed += CloseCrafting => miscUIInput = true;
+            playerControls.MiscUI.CloseShop.performed += CloseShop => miscUIInput = true;
 
         }
 
@@ -147,32 +150,50 @@ public class PlayerInputManager : MonoBehaviour
                     // To Be Added
                     break;
                 }
+            case "Crafting":
+                {
+                    CraftingSystemManager.Instance.ActivateMenu();
+                    break;
+                }
+            case "Merchant":
+                {
+                    // To Be Added
+                    break;
+                }
+            default:
+                {
+                    return;
+                }
         }
     }
 
     void OnTriggerStay(Collider other)
     {
-
-        if (other.CompareTag("Interact_Pickup") || other.CompareTag("Interact_Interactable"))
+        switch (other.tag)
         {
-            switch (other.tag)
-            {
-                case "Interact_Pickup":
-                    {
-                        Debug.Log($"Press 'F' to pick up {other.gameObject.name}.");
-                        break;
-                    }
-                case "Interact_Interactable":
-                    {
-                        Debug.Log($"Press 'F' to interact with {other.gameObject.name}.");
-                        break;
-                    }
-            }
-
-            if (interactInput)
-            {
-                HandleInteraction(other, other.gameObject);
-            }
+            case "Interact_Pickup":
+                {
+                    Debug.Log($"Press 'F' to pick up {other.gameObject.name}.");
+                    break;
+                }
+            case "Interact_Interactable":
+                {
+                    Debug.Log($"Press 'F' to interact with {other.gameObject.name}.");
+                    break;
+                }
+            case "Crafting":
+                {
+                    Debug.Log($"Press 'F' to open Crafting.");
+                    break;
+                }
         }
+
+        if (interactInput)
+        {
+            HandleInteraction(other, other.gameObject);
+        }
+
     }
+
+    public bool CloseUI { get { return miscUIInput; } set { miscUIInput = value; } }
 }
