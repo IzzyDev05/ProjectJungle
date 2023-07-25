@@ -26,11 +26,6 @@ public class CraftingSystemManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerInputManager.CloseUI == true)
-        {
-            DeactivateMenu();
-            playerInputManager.CloseUI = false;
-        }
         
     }
 
@@ -53,4 +48,6 @@ public class CraftingSystemManager : MonoBehaviour
 
         Time.timeScale = 1;
     }
+
+    public bool MenuActive { get { return UICanvas.activeSelf == true ? true : false; } }
 }

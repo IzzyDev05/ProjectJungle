@@ -250,6 +250,17 @@
                     "action": "CloseInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28104abf-3d8e-448c-9a61-749ca0f4bd18",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -258,18 +269,9 @@
             "id": "e425c887-bf84-42b3-bf94-ad6df3da542e",
             "actions": [
                 {
-                    "name": "CloseCrafting",
+                    "name": "CloseUI",
                     "type": "Button",
                     "id": "76fa543b-366a-4b2a-ae30-092551a62d0e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CloseShop",
-                    "type": "Button",
-                    "id": "4b7c24aa-4b59-4ec4-83ca-b8360a1e93a8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -284,7 +286,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseCrafting",
+                    "action": "CloseUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -295,29 +297,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseCrafting",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "23e61221-c822-4cdb-a7f6-37651f8a730c",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CloseShop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5a181434-ab78-4fa5-ae98-d167913171d7",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CloseShop",
+                    "action": "CloseUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

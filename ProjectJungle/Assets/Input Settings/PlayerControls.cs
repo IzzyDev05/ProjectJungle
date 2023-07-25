@@ -272,6 +272,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""CloseInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28104abf-3d8e-448c-9a61-749ca0f4bd18"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -280,18 +291,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""e425c887-bf84-42b3-bf94-ad6df3da542e"",
             ""actions"": [
                 {
-                    ""name"": ""CloseCrafting"",
+                    ""name"": ""CloseUI"",
                     ""type"": ""Button"",
                     ""id"": ""76fa543b-366a-4b2a-ae30-092551a62d0e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CloseShop"",
-                    ""type"": ""Button"",
-                    ""id"": ""4b7c24aa-4b59-4ec4-83ca-b8360a1e93a8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -306,7 +308,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CloseCrafting"",
+                    ""action"": ""CloseUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -317,29 +319,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CloseCrafting"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""23e61221-c822-4cdb-a7f6-37651f8a730c"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseShop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5a181434-ab78-4fa5-ae98-d167913171d7"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseShop"",
+                    ""action"": ""CloseUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -363,8 +343,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Inventory_CloseInventory = m_Inventory.FindAction("CloseInventory", throwIfNotFound: true);
         // MiscUI
         m_MiscUI = asset.FindActionMap("MiscUI", throwIfNotFound: true);
-        m_MiscUI_CloseCrafting = m_MiscUI.FindAction("CloseCrafting", throwIfNotFound: true);
-        m_MiscUI_CloseShop = m_MiscUI.FindAction("CloseShop", throwIfNotFound: true);
+        m_MiscUI_CloseUI = m_MiscUI.FindAction("CloseUI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -596,14 +575,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // MiscUI
     private readonly InputActionMap m_MiscUI;
     private List<IMiscUIActions> m_MiscUIActionsCallbackInterfaces = new List<IMiscUIActions>();
-    private readonly InputAction m_MiscUI_CloseCrafting;
-    private readonly InputAction m_MiscUI_CloseShop;
+    private readonly InputAction m_MiscUI_CloseUI;
     public struct MiscUIActions
     {
         private @PlayerControls m_Wrapper;
         public MiscUIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @CloseCrafting => m_Wrapper.m_MiscUI_CloseCrafting;
-        public InputAction @CloseShop => m_Wrapper.m_MiscUI_CloseShop;
+        public InputAction @CloseUI => m_Wrapper.m_MiscUI_CloseUI;
         public InputActionMap Get() { return m_Wrapper.m_MiscUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -613,22 +590,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MiscUIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MiscUIActionsCallbackInterfaces.Add(instance);
-            @CloseCrafting.started += instance.OnCloseCrafting;
-            @CloseCrafting.performed += instance.OnCloseCrafting;
-            @CloseCrafting.canceled += instance.OnCloseCrafting;
-            @CloseShop.started += instance.OnCloseShop;
-            @CloseShop.performed += instance.OnCloseShop;
-            @CloseShop.canceled += instance.OnCloseShop;
+            @CloseUI.started += instance.OnCloseUI;
+            @CloseUI.performed += instance.OnCloseUI;
+            @CloseUI.canceled += instance.OnCloseUI;
         }
 
         private void UnregisterCallbacks(IMiscUIActions instance)
         {
-            @CloseCrafting.started -= instance.OnCloseCrafting;
-            @CloseCrafting.performed -= instance.OnCloseCrafting;
-            @CloseCrafting.canceled -= instance.OnCloseCrafting;
-            @CloseShop.started -= instance.OnCloseShop;
-            @CloseShop.performed -= instance.OnCloseShop;
-            @CloseShop.canceled -= instance.OnCloseShop;
+            @CloseUI.started -= instance.OnCloseUI;
+            @CloseUI.performed -= instance.OnCloseUI;
+            @CloseUI.canceled -= instance.OnCloseUI;
         }
 
         public void RemoveCallbacks(IMiscUIActions instance)
@@ -664,7 +635,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public interface IMiscUIActions
     {
-        void OnCloseCrafting(InputAction.CallbackContext context);
-        void OnCloseShop(InputAction.CallbackContext context);
+        void OnCloseUI(InputAction.CallbackContext context);
     }
 }

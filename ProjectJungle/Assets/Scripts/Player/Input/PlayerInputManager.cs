@@ -48,8 +48,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Inventory.CloseInventory.performed += CloseInventory => inventoryInput = false;
             playerControls.Actions.Interact.performed += Interact => interactInput = true;
             playerControls.Actions.Interact.canceled += Interact => interactInput = false;
-            playerControls.MiscUI.CloseCrafting.performed += CloseCrafting => miscUIInput = true;
-            playerControls.MiscUI.CloseShop.performed += CloseShop => miscUIInput = true;
+            playerControls.MiscUI.CloseUI.performed += CloseUI => miscUIInput = true;
 
         }
 
@@ -127,7 +126,7 @@ public class PlayerInputManager : MonoBehaviour
         }      
     }
 
-    private void HandleInteraction(Collider collider, GameObject colliderGameObject)
+    private void HandleInteraction(Collider collider)
     {
         switch (collider.tag)
         {
@@ -137,9 +136,7 @@ public class PlayerInputManager : MonoBehaviour
 
                     InventoryManager.Instance.AddToInventory(itemManager.PickupItem(), false, itemManager.GetAmountPickedUp);
 
-                    colliderGameObject.SetActive(false);
-
-                    //Destroy(colliderGameObject);
+                    collider.gameObject.SetActive(false);
 
                     interactInput = false;
 
@@ -152,7 +149,8 @@ public class PlayerInputManager : MonoBehaviour
                 }
             case "Crafting":
                 {
-                    CraftingSystemManager.Instance.ActivateMenu();
+                    HandleUI();
+
                     break;
                 }
             case "Merchant":
@@ -190,10 +188,42 @@ public class PlayerInputManager : MonoBehaviour
 
         if (interactInput)
         {
-            HandleInteraction(other, other.gameObject);
+            HandleInteraction(other);
         }
 
     }
 
-    public bool CloseUI { get { return miscUIInput; } set { miscUIInput = value; } }
+    void HandleUI()
+    {
+        if (CraftingSystemManager.Instance.MenuActive == false)
+        {
+            OpenUI();
+        }
+        else
+        {
+            CloseUI();
+        }
+    }
+
+    void OpenUI()
+    {
+        playerControls.MiscUI.Enable();
+
+        playerControls.Movement.Disable();
+        playerControls.Actions.Disable();
+
+        CraftingSystemManager.Instance.ActivateMenu();
+
+        interactInput = false;
+    }
+
+    void CloseUI()
+    {
+        playerControls.Movement.Enable();
+        playerControls.Actions.Enable();
+
+        playerControls.MiscUI.Disable();
+
+        CraftingSystemManager.Instance.DeactivateMenu();
+    }
 }
