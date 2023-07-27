@@ -31,23 +31,17 @@ public class CraftingSystemManager : MonoBehaviour
 
     public void ActivateMenu()
     {
-        UICanvas.SetActive(true);
+        craftingMenuUI.SetActive(true);
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        Time.timeScale = 0;
+        GameManager.GM.PauseGame();
     }
 
     public void DeactivateMenu()
     {
-        UICanvas.SetActive(false);
+        craftingMenuUI.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        Time.timeScale = 1;
+        GameManager.GM.UnpauseGame();
     }
 
-    public bool MenuActive { get { return UICanvas.activeSelf == true ? true : false; } }
+    public bool MenuActive { get { return craftingMenuUI.activeSelf == true ? true : false; } }
 }

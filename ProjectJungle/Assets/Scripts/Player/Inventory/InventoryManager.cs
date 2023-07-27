@@ -60,10 +60,7 @@ public class InventoryManager : MonoBehaviour
     {
         inventoryUI.SetActive(true);
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        Time.timeScale = 0;
+        GameManager.GM.PauseGame();
     }
 
     public void CloseInventory()
@@ -72,10 +69,7 @@ public class InventoryManager : MonoBehaviour
 
         inventoryUI.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        Time.timeScale = 1;
+        GameManager.GM.UnpauseGame();
     }
 
     public GameObject GetInventoryUI

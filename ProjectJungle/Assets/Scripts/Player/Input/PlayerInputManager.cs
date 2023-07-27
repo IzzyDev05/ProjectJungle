@@ -69,6 +69,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleSprintingInput();
         HandleJumpingInput();
         HandleInventoryInput();
+        HandleUIInput();
     }
 
     private void HandleMovementInput() {
@@ -95,14 +96,25 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
+    private void EnablePlayerInput()
+    {
+        playerControls.Movement.Enable();
+        playerControls.Actions.Enable();
+    }
+
+    private void DisablePlayerInput()
+    {
+        playerControls.Movement.Disable();
+        playerControls.Actions.Disable();
+    }
+
     private void HandleInventoryInput()
     {
         if (inventoryInput)
         {
             playerControls.Inventory.Enable();
 
-            playerControls.Movement.Disable();
-            playerControls.Actions.Disable();
+            DisablePlayerInput();
 
             InventoryManager.Instance.OpenInventory();
             
@@ -111,8 +123,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             InventoryManager.Instance.CloseInventory();
 
-            playerControls.Movement.Enable();
-            playerControls.Actions.Enable();
+            EnablePlayerInput();
 
             playerControls.Inventory.Disable();
         }
@@ -193,7 +204,7 @@ public class PlayerInputManager : MonoBehaviour
 
     }
 
-    void HandleUI()
+    private void HandleUI()
     {
         if (CraftingSystemManager.Instance.MenuActive == false)
         {
@@ -205,25 +216,40 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    void OpenUI()
+    private void HandleUIInput()
+    {
+        if (miscUIInput == true && CraftingSystemManager.Instance.MenuActive == true)
+        {
+            CloseUI();
+        }
+
+        miscUIInput = false;
+    }
+
+    private void OpenUI()
     {
         playerControls.MiscUI.Enable();
 
-        playerControls.Movement.Disable();
-        playerControls.Actions.Disable();
+        DisablePlayerInput();
 
         CraftingSystemManager.Instance.ActivateMenu();
 
         interactInput = false;
     }
 
-    void CloseUI()
+    private void CloseUI()
     {
-        playerControls.Movement.Enable();
-        playerControls.Actions.Enable();
+        CraftingSystemManager.Instance.DeactivateMenu();
+
+        EnablePlayerInput();
 
         playerControls.MiscUI.Disable();
 
-        CraftingSystemManager.Instance.DeactivateMenu();
+        interactInput = false;
+    }
+
+    public void ClosUIByButton()
+    {
+        CloseUI();
     }
 }
