@@ -14,6 +14,9 @@ public class PlayerInputManager : MonoBehaviour
 
     private bool sprintInput;
     private bool jumpInput;
+
+    private bool isUIOpen = false;
+
     private bool inventoryInput;
     private bool interactInput;
     private bool miscUIInput;
@@ -110,7 +113,7 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandleInventoryInput()
     {
-        if (inventoryInput)
+        if (inventoryInput && !isUIOpen)
         {
             playerControls.Inventory.Enable();
 
@@ -119,7 +122,7 @@ public class PlayerInputManager : MonoBehaviour
             InventoryManager.Instance.OpenInventory();
             
         }
-        else
+        else if (!inventoryInput && !isUIOpen)
         {
             InventoryManager.Instance.CloseInventory();
 
@@ -206,11 +209,11 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandleUI()
     {
-        if (CraftingSystemManager.Instance.MenuActive == false)
+        if (!CraftingSystemManager.Instance.MenuActive && !isUIOpen)
         {
             OpenUI();
         }
-        else
+        else if (CraftingSystemManager.Instance.MenuActive && isUIOpen)
         {
             CloseUI();
         }
@@ -218,7 +221,7 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandleUIInput()
     {
-        if (miscUIInput == true && CraftingSystemManager.Instance.MenuActive == true)
+        if (miscUIInput && CraftingSystemManager.Instance.MenuActive)
         {
             CloseUI();
         }
@@ -228,6 +231,8 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OpenUI()
     {
+        isUIOpen = true;
+
         playerControls.MiscUI.Enable();
 
         DisablePlayerInput();
@@ -239,6 +244,8 @@ public class PlayerInputManager : MonoBehaviour
 
     private void CloseUI()
     {
+        isUIOpen = false;
+
         CraftingSystemManager.Instance.DeactivateMenu();
 
         EnablePlayerInput();

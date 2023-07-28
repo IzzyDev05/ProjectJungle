@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager GM;
+    public static GameManager Instance;
 
     private void Awake()
     {
-        GM = this;
+        Instance = this;
     }
 
     // Start is called before the first frame update

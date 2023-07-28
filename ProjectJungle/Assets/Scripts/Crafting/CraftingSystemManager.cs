@@ -33,14 +33,14 @@ public class CraftingSystemManager : MonoBehaviour
     {
         craftingMenuUI.SetActive(true);
 
-        GameManager.GM.PauseGame();
+        GameManager.Instance.PauseGame();
     }
 
     public void DeactivateMenu()
     {
         craftingMenuUI.SetActive(false);
 
-        GameManager.GM.UnpauseGame();
+        GameManager.Instance.UnpauseGame();
     }
 
     public bool MenuActive { get { return craftingMenuUI.activeSelf == true ? true : false; } }

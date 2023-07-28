@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5701352595653559824}
   - component: {fileID: 5701352595653559825}
   m_Layer: 5
-  m_Name: Viewport
+  m_Name: CraftingOptionViewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ RectTransform:
   m_Children:
   - {fileID: 5701352596363332806}
   m_Father: {fileID: 5701352596022808196}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -199,8 +199,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7424760905682621075}
-  - {fileID: 2679296758684175998}
   - {fileID: 5701352595653559826}
+  - {fileID: 2679296758684175998}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 5701352596363332806}
   - component: {fileID: 5701352596363332805}
   m_Layer: 5
-  m_Name: Content
+  m_Name: CraftingOptionContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ PrefabInstance:
     - target: {fileID: 2407858915120062547, guid: f6ec8f84bffdb6944b1a6542c8ba21b6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2407858915120062547, guid: f6ec8f84bffdb6944b1a6542c8ba21b6,
         type: 3}

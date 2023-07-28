@@ -60,7 +60,7 @@ public class InventoryManager : MonoBehaviour
     {
         inventoryUI.SetActive(true);
 
-        GameManager.GM.PauseGame();
+        GameManager.Instance.PauseGame();
     }
 
     public void CloseInventory()
@@ -69,7 +69,7 @@ public class InventoryManager : MonoBehaviour
 
         inventoryUI.SetActive(false);
 
-        GameManager.GM.UnpauseGame();
+        GameManager.Instance.UnpauseGame();
     }
 
     public GameObject GetInventoryUI
