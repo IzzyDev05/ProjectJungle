@@ -150,7 +150,9 @@ public class PlayerInputManager : MonoBehaviour
 
                     InventoryManager.Instance.AddToInventory(itemManager.PickupItem(), false, itemManager.GetAmountPickedUp);
 
-                    collider.gameObject.SetActive(false);
+                    //collider.gameObject.SetActive(false);
+
+                    Destroy(collider.gameObject);
 
                     interactInput = false;
 

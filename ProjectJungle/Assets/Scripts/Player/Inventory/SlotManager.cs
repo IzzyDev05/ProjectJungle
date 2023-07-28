@@ -168,6 +168,24 @@ public class SlotManager : MonoBehaviour
 
                     break;
                 }
+            case ItemType.Food:
+                {
+                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetFood);
+
+                    break;
+                }
+            case ItemType.MobDrop:
+                {
+                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetMobDrop);
+
+                    break;
+                }
+            case ItemType.Resource:
+                {
+                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetResource);
+
+                    break;
+                }
         }
 
     }

@@ -7,6 +7,7 @@ public enum ItemType
     Food,
     Equipment,
     MobDrop,
+    Resource,
     Default
 }
 public enum EquipmentType

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 379637103183074424}
   - component: {fileID: 379637103183074406}
   - component: {fileID: 379637103183074425}
-  - component: {fileID: 912725139432357494}
   - component: {fileID: 8588827537875313536}
+  - component: {fileID: 912725139432357494}
   m_Layer: 5
   m_Name: CraftingOption
   m_TagString: Untagged
@@ -80,20 +80,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &912725139432357494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379637103183074427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081c375f8f8c3b14b99c983f036320a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  craftingItemPrefab: {fileID: 379637104573613327}
-  itemListPanel: {fileID: 379637103422064364}
 --- !u!114 &8588827537875313536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +124,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &912725139432357494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379637103183074427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081c375f8f8c3b14b99c983f036320a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  craftingItemPrefab: {fileID: 379637104573613327}
+  itemListPanel: {fileID: 379637103422064364}
 --- !u!1 &379637103422064364
 GameObject:
   m_ObjectHideFlags: 0

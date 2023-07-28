@@ -7,6 +7,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField] EquipmentObject eqipmentObjectScript;
     [SerializeField] FoodObject foodObjectScript;
     [SerializeField] MobDropObject mobDropObjectScript;
+    [SerializeField] ResourceObject resourceObjectScript;
 
     [SerializeField] ItemObject itemObject;
     [SerializeField] int pickupAmount = 1;
@@ -27,6 +28,20 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    public void CreateFakeObject<T>(T item) where T : ItemObject
+    {
+        switch (item.Type)
+        {
+            case ItemType.Equipment:
+                {
+                    
+
+                    break;
+                }
+        }
+
+    }
+
     public ItemManager PickupItem() { return this; }
 
     public ItemObject GetItemObject { get { return itemObject; } }
@@ -36,6 +51,6 @@ public class ItemManager : MonoBehaviour
     public EquipmentObject GetEquipment { get { return eqipmentObjectScript != null ? eqipmentObjectScript : null; } }
     public FoodObject GetFood { get { return foodObjectScript != null ? foodObjectScript : null; } }
     public MobDropObject GetMobDrop { get { return mobDropObjectScript != null ? mobDropObjectScript : null; } }
-
+    public ResourceObject GetResource { get { return resourceObjectScript != null ? resourceObjectScript : null; } }
 
 }
