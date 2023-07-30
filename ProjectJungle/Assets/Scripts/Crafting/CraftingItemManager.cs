@@ -9,7 +9,7 @@ public class CraftingItemManager : MonoBehaviour
     [SerializeField] Image itemImage;
     [SerializeField] TMP_Text amountText;
 
-    [SerializeField] ItemObject itemScript;
+    [SerializeField] ItemManager item;
 
     [SerializeField] int amount = 1;
 
@@ -22,9 +22,9 @@ public class CraftingItemManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (itemScript != null)
+        if (item != null)
         {
-            itemImage.sprite = itemScript.GetIcon;
+            itemImage.sprite = item.GetItemObject.GetIcon;
         }
 
         if (amount > 1)
@@ -37,8 +37,5 @@ public class CraftingItemManager : MonoBehaviour
         }
     }
 
-    public Image ItemImage { get { return itemImage; } set { itemImage.sprite = value.sprite; } }
-    public TMP_Text AmountText { get { return amountText; } set { amountText.text = value.text; } }
-
-    public ItemObject Item { get { return itemScript; } set { itemScript = value; } }
+    public ItemManager Item { get { return item; } set { item = value; } }
 }

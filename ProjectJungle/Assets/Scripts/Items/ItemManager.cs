@@ -28,21 +28,36 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    public void CreateFakeObject<T>(T item) where T : ItemObject
-    {
-        switch (item.Type)
-        {
-            case ItemType.Equipment:
-                {
-                    
+    public ItemManager PickupItem() { return this; }
 
-                    break;
-                }
+    public ItemManager PickupImaginaryItem(EquipmentObject equipment = null, FoodObject food = null, MobDropObject mobDrop = null, ResourceObject resource = null)
+    {
+        if (equipment != null)
+        {
+            eqipmentObjectScript = equipment;
+            return this;
         }
 
-    }
+        if (food != null)
+        {
+            foodObjectScript = food;
+            return this;
+        }
 
-    public ItemManager PickupItem() { return this; }
+        if (mobDrop != null)
+        {
+            mobDropObjectScript = mobDrop;
+            return this;
+        }
+
+        if (resource != null)
+        {
+            resourceObjectScript = resource;
+            return this;
+        }
+
+        return null;
+    }
 
     public ItemObject GetItemObject { get { return itemObject; } }
 
