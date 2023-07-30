@@ -10,6 +10,8 @@ public class CraftingSystemManager : MonoBehaviour
     [SerializeField] GameObject UICanvas;
     [SerializeField] GameObject craftingMenuUI;
 
+    [SerializeField] GameObject itemStorage;
+
     private void Awake()
     {
         Instance = this;
@@ -42,6 +44,8 @@ public class CraftingSystemManager : MonoBehaviour
 
         GameManager.Instance.UnpauseGame();
     }
+
+    public GameObject ItemStorage { get { return itemStorage; } }
 
     public bool MenuActive { get { return craftingMenuUI.activeSelf == true ? true : false; } }
 }

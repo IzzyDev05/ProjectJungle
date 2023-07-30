@@ -38,4 +38,6 @@ public class CraftingItemManager : MonoBehaviour
     }
 
     public ItemManager Item { get { return item; } set { item = value; } }
+
+    public int AmountNeeded { get { return amount; } }
 }

@@ -30,35 +30,6 @@ public class ItemManager : MonoBehaviour
 
     public ItemManager PickupItem() { return this; }
 
-    public ItemManager PickupImaginaryItem(EquipmentObject equipment = null, FoodObject food = null, MobDropObject mobDrop = null, ResourceObject resource = null)
-    {
-        if (equipment != null)
-        {
-            eqipmentObjectScript = equipment;
-            return this;
-        }
-
-        if (food != null)
-        {
-            foodObjectScript = food;
-            return this;
-        }
-
-        if (mobDrop != null)
-        {
-            mobDropObjectScript = mobDrop;
-            return this;
-        }
-
-        if (resource != null)
-        {
-            resourceObjectScript = resource;
-            return this;
-        }
-
-        return null;
-    }
-
     public ItemObject GetItemObject { get { return itemObject; } }
 
     public int GetAmountPickedUp { get { return pickupAmount; } }

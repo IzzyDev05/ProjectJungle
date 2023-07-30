@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
+
     private void Awake()
     {
         Instance = this;
@@ -14,7 +16,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (startingItems.Count > 0)
+        {
+            foreach (ItemManager startingItem in startingItems)
+            {
+                InventoryManager.Instance.AddToInventory(startingItem);
+            }
+        }
     }
 
     // Update is called once per frame

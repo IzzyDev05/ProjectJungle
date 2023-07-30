@@ -16,6 +16,7 @@ public class PlayerInputManager : MonoBehaviour
     private bool jumpInput;
 
     private bool isUIOpen = false;
+    private bool correctTag = false;
 
     private bool inventoryInput;
     private bool interactInput;
@@ -181,32 +182,52 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
         {
             case "Interact_Pickup":
                 {
                     Debug.Log($"Press 'F' to pick up {other.gameObject.name}.");
+
+                    correctTag = true;
+
                     break;
                 }
             case "Interact_Interactable":
                 {
                     Debug.Log($"Press 'F' to interact with {other.gameObject.name}.");
+
+                    correctTag = true;
+
                     break;
                 }
             case "Crafting":
                 {
                     Debug.Log($"Press 'F' to open Crafting.");
+
+                    correctTag = true;
+
                     break;
                 }
         }
+    }
 
-        if (interactInput)
+    void OnTriggerStay(Collider other)
+    {
+        if (interactInput && correctTag)
         {
             HandleInteraction(other);
         }
 
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (correctTag)
+        {
+            correctTag = false;
+        }
     }
 
     private void HandleUI()
