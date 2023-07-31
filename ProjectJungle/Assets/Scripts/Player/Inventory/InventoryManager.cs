@@ -146,10 +146,40 @@ public class InventoryManager : MonoBehaviour
         ItemPanelManager.Instance.ClearDisplay();
     }
 
+    /// <summary>
+    /// Finds the first instance of the item in the inventory
+    /// </summary>
+    /// <param name="itemToFind"></param>
+    /// <returns></returns>
+    public SlotManager FindItem(ItemManager itemToFind)
+    {
+        foreach (GameObject slotObject in inventorySlotList)
+        {
+            SlotManager slot = slotObject.GetComponent<SlotManager>();
+
+            if (slot.GetItem == itemToFind)
+            {
+                return slot;
+            }
+        }
+
+        return null;
+    }
+
+
+    /// <summary>
+    /// Returns the button object for dropping items
+    /// </summary>
     public Button GetButton { get { return dropItemButton; } }
 
+    /// <summary>
+    /// Returns the list of items in the inventory
+    /// </summary>
     public List<ItemObject> GetInventoryItems { get { return itemList; } }
 
+    /// <summary>
+    /// Returns the list of slots in the inventory
+    /// </summary>
     public List<GameObject> GetInventorySlots { get { return inventorySlotList; } }
 
 }

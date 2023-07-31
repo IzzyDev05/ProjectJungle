@@ -37,7 +37,13 @@ public class CraftingItemManager : MonoBehaviour
         }
     }
 
-    public ItemManager Item { get { return item; } set { item = value; } }
+    /// <summary>
+    /// Returns the item that is part of the crafting
+    /// </summary>
+    public ItemManager Item { get { return item; } }
 
+    /// <summary>
+    /// Returns the amount of the item needed for the crafting
+    /// </summary>
     public int AmountNeeded { get { return amount; } }
 }

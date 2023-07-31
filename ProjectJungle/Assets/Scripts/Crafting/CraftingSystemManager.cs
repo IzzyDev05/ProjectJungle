@@ -45,7 +45,13 @@ public class CraftingSystemManager : MonoBehaviour
         GameManager.Instance.UnpauseGame();
     }
 
+    /// <summary>
+    /// Returns the parent that stores all the game objects required for crafting.
+    /// </summary>
     public GameObject ItemStorage { get { return itemStorage; } }
 
-    public bool MenuActive { get { return craftingMenuUI.activeSelf == true ? true : false; } }
+    /// <summary>
+    /// Returns true if the crafting Menu UI is active.
+    /// </summary>
+    public bool MenuActive { get { return craftingMenuUI.activeSelf; } }
 }

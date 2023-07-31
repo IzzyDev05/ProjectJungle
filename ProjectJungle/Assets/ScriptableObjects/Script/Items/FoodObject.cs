@@ -10,4 +10,9 @@ public class FoodObject : ItemObject
     {
         Type = ItemType.Food;
     }
+
+    /// <summary>
+    /// Returns the amount of health the food item restores
+    /// </summary>
+    public int HealthRestored { get { return restoreHealthValue; } }
 }

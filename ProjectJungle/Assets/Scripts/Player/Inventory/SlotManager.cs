@@ -124,16 +124,27 @@ public class SlotManager : MonoBehaviour
         maxCapacity = 1;
     }
 
-    public void RemoveMultipleItems(int amount = 1)
+    /// <summary>
+    /// Removes a certain amount of a single item. If the item has been removed returns true. By default it removes 1 item.
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <returns></returns>
+    public bool RemoveMultipleItems(int amount = 1)
     {
         if (currentCapacity - amount >= 1)
         {
             currentCapacity -= amount;
+
+            return true;
         }
         else if (currentCapacity - amount >= 0)
         {
             RemoveItem();
+
+            return true;
         }
+
+        return false;
     }
 
     public bool MatchSlotItem(ItemObject item)

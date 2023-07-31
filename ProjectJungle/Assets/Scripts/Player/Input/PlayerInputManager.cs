@@ -133,6 +133,9 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Closes inventory UI on a click of a UI button
+    /// </summary>
     public void CloseInventoryByButton()
     {
         if (inventoryInput)
@@ -278,6 +281,9 @@ public class PlayerInputManager : MonoBehaviour
         interactInput = false;
     }
 
+    /// <summary>
+    /// Closes UI on a click of a UI Button
+    /// </summary>
     public void ClosUIByButton()
     {
         CloseUI();

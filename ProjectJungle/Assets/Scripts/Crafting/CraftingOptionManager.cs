@@ -11,14 +11,14 @@ public class CraftingOptionManager : MonoBehaviour
 
     [SerializeField] Button optionButton;
 
-    [SerializeField] List<GameObject> itemsNeededList = new List<GameObject>();
- 
+    [SerializeField] List<CraftingItemManager> itemsNeededList = new List<CraftingItemManager>();
+
     // Start is called before the first frame update
     void Start()
     {
         foreach (Transform child in itemListPanel.transform)
         {
-            itemsNeededList.Add(child.GetComponent<CraftingItemManager>().gameObject);
+            itemsNeededList.Add(child.GetComponent<CraftingItemManager>());
         }
 
         AddOnClick();
@@ -40,35 +40,18 @@ public class CraftingOptionManager : MonoBehaviour
 
     void CraftItem()
     {
-        if (CheckForItemsNeeded())
-        {
-            
+        bool itemRemovedSuccessfully = false;
 
+        foreach (CraftingItemManager craftingItemNeeded in itemsNeededList)
+        {
+            itemRemovedSuccessfully = InventoryManager.Instance.FindItem(craftingItemNeeded.Item).RemoveMultipleItems(craftingItemNeeded.AmountNeeded);
+        }
+
+        if (itemRemovedSuccessfully == true)
+        {
             InventoryManager.Instance.AddToInventory(craftedItemPrefab.GetComponent<CraftingItemManager>().Item);
+
+            Debug.Log($"{craftedItemPrefab.name} crafted");
         }
-    }
-
-    bool CheckForItemsNeeded()
-    {
-        foreach (ItemObject item in InventoryManager.Instance.GetInventoryItems)
-        {
-            foreach (GameObject itemNeededObject in itemsNeededList)
-            {
-                CraftingItemManager craftingItemNeeded = itemNeededObject.GetComponent<CraftingItemManager>();
-
-                if (item == craftingItemNeeded.Item.GetItemObject)
-                {
-                    return true;
-                }
-            }
-        }
-       
-
-        return false;
-    }
-
-    void RemoveNeededItems()
-    {
-
     }
 }

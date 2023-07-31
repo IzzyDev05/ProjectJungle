@@ -16,8 +16,20 @@ public class EquipmentObject : ItemObject
 
     }
 
+    /// <summary>
+    /// Return the damage the equipment does
+    /// </summary>
     public int GetDamage { get { return damage; } }
+    /// <summary>
+    /// Returns the defense the equipment gives
+    /// </summary>
     public int GetDefense { get { return defense; } }
+    /// <summary>
+    /// Returns the speed the equipment attacks with
+    /// </summary>
     public float GetAttackSpeed { get { return attackSpeed; } }
+    /// <summary>
+    /// Returns the range the equipment can hit
+    /// </summary>
     public float GetRange { get { return range; } }
 }

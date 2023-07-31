@@ -136,8 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081c375f8f8c3b14b99c983f036320a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  craftingItemPrefab: {fileID: 379637104573613327}
+  craftedItemPrefab: {fileID: 379637104573613327}
   itemListPanel: {fileID: 379637103422064364}
+  optionButton: {fileID: 8588827537875313536}
+  itemsNeededList: []
 --- !u!1 &379637103422064364
 GameObject:
   m_ObjectHideFlags: 0
