@@ -137,7 +137,6 @@ public class InventoryManager : MonoBehaviour
     {
         inventorySlotList[positionInInventory].GetComponent<SlotManager>().ClearSlot();
 
-        Destroy(slotContainer.transform.GetChild(positionInInventory).gameObject);
         inventorySlotList.RemoveAt(positionInInventory);
 
         GameObject newSlot = Instantiate(slotPrefab, slotContainer.transform);
@@ -163,7 +162,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        return null;
+        return slotPrefab.GetComponent<SlotManager>();
     }
 
 

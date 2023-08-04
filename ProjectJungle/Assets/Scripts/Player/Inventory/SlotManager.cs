@@ -10,7 +10,7 @@ public class SlotManager : MonoBehaviour
     [SerializeField] Image itemImage;
 
     int maxCapacity = 1;
-    [SerializeField] int currentCapacity;
+    [SerializeField] int currentCapacity = 0;
 
     [SerializeField] ItemManager slotItem;
 
@@ -44,6 +44,8 @@ public class SlotManager : MonoBehaviour
     {
         slotItem = null;
         itemImage.sprite = null;
+
+        Destroy(gameObject);
     }
 
     public void AddItem(ItemManager item, int amount = 1)
@@ -170,6 +172,8 @@ public class SlotManager : MonoBehaviour
         }
 
         SetUpDropButton();
+
+        ItemPanelManager.Instance.ClearDisplay();
 
         switch (slotItem.GetItemObject.Type)
         {

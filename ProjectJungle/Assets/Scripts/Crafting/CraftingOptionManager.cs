@@ -53,5 +53,6 @@ public class CraftingOptionManager : MonoBehaviour
 
             Debug.Log($"{craftedItemPrefab.name} crafted");
         }
+
     }
 }

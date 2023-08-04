@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8732266717443630139}
   - component: {fileID: 7114879034274362350}
   m_Layer: 5
-  m_Name: ItemSlot
+  m_Name: ItemSlotPrefab
   m_TagString: InventorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   itemImage: {fileID: 0}
   currentCapacity: 0
   slotItem: {fileID: 0}
-  slotGameObject: {fileID: 0}
 --- !u!1 &2760548705940160872
 GameObject:
   m_ObjectHideFlags: 0
