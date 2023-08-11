@@ -51,7 +51,7 @@ public class CraftingOptionManager : MonoBehaviour
         {
             InventoryManager.Instance.AddToInventory(craftedItemPrefab.GetComponent<CraftingItemManager>().Item);
 
-            Debug.Log($"{craftedItemPrefab.name} crafted");
+            Debug.Log($"{craftedItemPrefab.GetComponent<CraftingItemManager>().Item.GetItemObject.GetItemName} crafted");
         }
 
     }
