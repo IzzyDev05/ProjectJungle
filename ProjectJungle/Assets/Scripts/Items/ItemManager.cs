@@ -28,7 +28,12 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    public ItemManager PickupItem() { return this; }
+    public ItemManager PickupItem()
+    {
+        AudioManager.instance.PlayOneShot(FModEvents.instance.pickupItem, this.transform.position);
+
+        return this;
+    }
 
     /// <summary>
     /// Returns the parent scriptable object for every item

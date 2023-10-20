@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public static GameObject Player;
 
     [SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
 
     private void Awake()
     {
         Instance = this;
+
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Start is called before the first frame update

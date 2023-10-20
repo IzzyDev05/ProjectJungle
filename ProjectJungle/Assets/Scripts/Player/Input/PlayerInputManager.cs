@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMOD.Studio;
 
 public class PlayerInputManager : MonoBehaviour
 {
@@ -15,12 +16,17 @@ public class PlayerInputManager : MonoBehaviour
     private bool sprintInput;
     private bool jumpInput;
 
+    // UI
     private bool isUIOpen = false;
     private bool correctTag = false;
 
     private bool inventoryInput;
     private bool interactInput;
     private bool miscUIInput;
+
+    //Audio
+    private EventInstance walkFootsteps;
+    private EventInstance sprintFootsteps;
 
     #region PROPERTIES
     public float MoveAmount {
@@ -66,6 +72,9 @@ public class PlayerInputManager : MonoBehaviour
     private void Start() {
         animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        
+        walkFootsteps = AudioManager.instance.CreateEventInstance(FModEvents.instance.walkingFootsteps, this.transform);
+        sprintFootsteps = AudioManager.instance.CreateEventInstance(FModEvents.instance.sprintingFootsteps, this.transform);
     }
 
     public void HandleAllInputs() {
@@ -82,6 +91,8 @@ public class PlayerInputManager : MonoBehaviour
 
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
         animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.IsSpriting);
+
+        UpdateSound();
     }
 
     private void HandleSprintingInput() {
@@ -112,6 +123,7 @@ public class PlayerInputManager : MonoBehaviour
         playerControls.Actions.Disable();
     }
 
+    // UI Inputs
     private void HandleInventoryInput()
     {
         if (inventoryInput && !isUIOpen)
@@ -247,7 +259,7 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandleUIInput()
     {
-        if (miscUIInput && CraftingSystemManager.Instance.MenuActive)
+        if (miscUIInput)
         {
             CloseUI();
         }
@@ -272,8 +284,6 @@ public class PlayerInputManager : MonoBehaviour
     {
         isUIOpen = false;
 
-        CraftingSystemManager.Instance.DeactivateMenu();
-
         EnablePlayerInput();
 
         playerControls.MiscUI.Disable();
@@ -287,5 +297,45 @@ public class PlayerInputManager : MonoBehaviour
     public void ClosUIByButton()
     {
         CloseUI();
+    }
+
+    // Audio
+    private void UpdateSound()
+    {
+        if ((verticalInput != 0 || horizontalInput != 0) && jumpInput == false)
+        {
+            
+            PLAYBACK_STATE sprintPlaybackState, walkPlaybackState;
+            walkFootsteps.getPlaybackState(out walkPlaybackState);
+            sprintFootsteps.getPlaybackState(out sprintPlaybackState);
+
+            switch (sprintInput)
+            {
+                case true:
+                    {
+                        if (sprintPlaybackState.Equals(PLAYBACK_STATE.STOPPED))
+                        {
+                            walkFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+                            sprintFootsteps.start();
+                        }
+
+                        break;
+                    }
+                case false:
+                    {
+                        if (walkPlaybackState.Equals(PLAYBACK_STATE.STOPPED))
+                        {
+                            sprintFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+                            walkFootsteps.start();
+                        }
+                        break;
+                    }
+            }
+        }
+        else
+        {
+            walkFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+            sprintFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+        }
     }
 }
