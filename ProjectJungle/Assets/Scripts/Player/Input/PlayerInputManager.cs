@@ -23,10 +23,13 @@ public class PlayerInputManager : MonoBehaviour
     private bool inventoryInput;
     private bool interactInput;
     private bool miscUIInput;
+    private bool menuInput;
 
     //Audio
     private EventInstance walkFootsteps;
     private EventInstance sprintFootsteps;
+
+    private bool playOneShot = false;
 
     #region PROPERTIES
     public float MoveAmount {
@@ -47,17 +50,19 @@ public class PlayerInputManager : MonoBehaviour
     #endregion
 
     private void OnEnable() {
-        if (playerControls == null) {
+        if (playerControls == null)
+        {
             playerControls = new PlayerControls();
 
             playerControls.Movement.Movement.performed += Move => movementInput = Move.ReadValue<Vector2>();
             playerControls.Actions.Sprint.performed += Sprint => sprintInput = true;
             playerControls.Actions.Sprint.canceled += Sprint => sprintInput = false;
             playerControls.Actions.Jump.performed += Jump => jumpInput = true;
-            playerControls.Actions.OpenInventory.performed += OpenInventory => inventoryInput = true;
-            playerControls.Inventory.CloseInventory.performed += CloseInventory => inventoryInput = false;
+            playerControls.Actions.OpenInventory.performed += OpenInventory => { inventoryInput = true; playOneShot = true; };
+            playerControls.Inventory.CloseInventory.performed += CloseInventory => { inventoryInput = false; playOneShot = true; };
             playerControls.Actions.Interact.performed += Interact => interactInput = true;
             playerControls.Actions.Interact.canceled += Interact => interactInput = false;
+            playerControls.Actions.Menu.performed += Menu => menuInput = true;
             playerControls.MiscUI.CloseUI.performed += CloseUI => miscUIInput = true;
 
         }
@@ -82,6 +87,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleSprintingInput();
         HandleJumpingInput();
         HandleInventoryInput();
+        HandleUI();
         HandleUIInput();
     }
 
@@ -126,6 +132,12 @@ public class PlayerInputManager : MonoBehaviour
     // UI Inputs
     private void HandleInventoryInput()
     {
+        if (playOneShot)
+        {
+            AudioManager.instance.PlayOneShot(FModEvents.instance.backpack, GameManager.Player.transform.position);
+            playOneShot = false;
+        }
+
         if (inventoryInput && !isUIOpen)
         {
             playerControls.Inventory.Enable();
@@ -133,7 +145,6 @@ public class PlayerInputManager : MonoBehaviour
             DisablePlayerInput();
 
             InventoryManager.Instance.OpenInventory();
-            
         }
         else if (!inventoryInput && !isUIOpen)
         {
@@ -247,11 +258,11 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandleUI()
     {
-        if (!CraftingSystemManager.Instance.MenuActive && !isUIOpen)
+        if (menuInput)
         {
             OpenUI();
         }
-        else if (CraftingSystemManager.Instance.MenuActive && isUIOpen)
+        else if (!menuInput)
         {
             CloseUI();
         }
@@ -259,7 +270,7 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandleUIInput()
     {
-        if (miscUIInput)
+        if (miscUIInput && isUIOpen)
         {
             CloseUI();
         }
@@ -275,20 +286,24 @@ public class PlayerInputManager : MonoBehaviour
 
         DisablePlayerInput();
 
-        CraftingSystemManager.Instance.ActivateMenu();
+        GameManager.Instance.PauseGame();
 
-        interactInput = false;
+        GameManager.Instance.MenuUI.SetActive(true);
     }
 
     private void CloseUI()
     {
+        GameManager.Instance.MenuUI.SetActive(false);
+
         isUIOpen = false;
+
+        menuInput = false;
 
         EnablePlayerInput();
 
         playerControls.MiscUI.Disable();
 
-        interactInput = false;
+        GameManager.Instance.UnpauseGame();
     }
 
     /// <summary>

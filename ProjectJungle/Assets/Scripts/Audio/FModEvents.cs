@@ -5,6 +5,9 @@ using FMODUnity;
 
 public class FModEvents : MonoBehaviour
 {
+    [field: Header("Backpack SFX")]
+    [field: SerializeField] public EventReference backpack { get; private set; }
+
     [field: Header("Pickup SFX")]
     [field: SerializeField] public EventReference pickupItem { get; private set; }
 

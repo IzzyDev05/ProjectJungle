@@ -8,6 +8,22 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance { get; private set; }
 
+    [Header("Volume")]
+    [Range(0,1)]
+
+    public float masterVolume = 1f;
+    [Range(0, 1)]
+
+    public float ambientVolume = 1f;
+    [Range(0, 1)]
+
+    public float sfxVolume = 1f;
+    [Range(0, 1)]
+
+    private Bus masterBus;
+    private Bus ambientBus;
+    private Bus sfxBus;
+
     EventInstance ambienceEventInstance;
 
     List<EventInstance> eventInstances;
@@ -22,6 +38,10 @@ public class AudioManager : MonoBehaviour
         instance = this;
 
         eventInstances = new List<EventInstance>();
+
+        masterBus = RuntimeManager.GetBus("bus:/");
+        ambientBus = RuntimeManager.GetBus("bus:/Ambient");
+        sfxBus = RuntimeManager.GetBus("bus:/SFX");
     }
 
     private void Start()
@@ -31,6 +51,10 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
+        masterBus.setVolume(masterVolume);
+        ambientBus.setVolume(ambientVolume);
+        sfxBus.setVolume(sfxVolume);
+
         foreach (EventInstance eventInstance in eventInstances)
         {
             Update3DAttributes(eventInstance, Camera.main.transform);

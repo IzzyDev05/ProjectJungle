@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public static GameObject Player;
 
+    [SerializeField] GameObject menuUI;
+
     [SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
 
     private void Awake()
@@ -16,6 +18,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         Player = GameObject.FindGameObjectWithTag("Player");
+
+        menuUI.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -35,6 +39,8 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public GameObject MenuUI { get { return menuUI; } }
 
     public void PauseGame()
     {
