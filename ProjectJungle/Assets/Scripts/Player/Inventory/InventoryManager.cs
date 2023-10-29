@@ -34,6 +34,7 @@ public class InventoryManager : MonoBehaviour
             inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
         }
 
+        // Gets the each inventory slot
         foreach (Transform child in inventoryUI.GetComponentsInChildren<Transform>())
         {
             if (child.gameObject.CompareTag("InventorySlot"))
@@ -75,15 +76,17 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddToInventory(ItemManager item, bool addToNewSlot = false, int amount = 1)
+    public void AddToInventory(ItemManager itemToAdd, int amount = 1)
     {
-        if (!addToNewSlot)
+        SlotManager foundSlot = FindIteminInventory(itemToAdd);
+        // If the item already exists in the inventory and the item is stackable
+        if (foundSlot.GetSlotItemManager != null && itemToAdd.GetItemObject.Stackable == true)
         {
-            for (int i = 0; i < itemList.Count; i++)
+            foreach (GameObject slotGameObject in inventorySlotList)
             {
-                if (itemList[i] == item.GetItemObject && inventorySlotList[i].GetComponent<SlotManager>().IsSlotFull() == false)
+                if (slotGameObject.GetComponent<SlotManager>() == foundSlot)
                 {
-                    inventorySlotList[i].GetComponent<SlotManager>().AddItem(item, amount);
+                    foundSlot.AddItemToSlot(itemToAdd, amount);
 
                     return;
                 }
@@ -92,18 +95,21 @@ public class InventoryManager : MonoBehaviour
 
         FindNextUnoccupiedSlot();
 
-        inventorySlotList[GetUnoccupiedSlotIndex].GetComponent<SlotManager>().AddItem(item, amount);
-        itemList.Add(item.GetItemObject);
+        inventorySlotList[GetUnoccupiedSlotIndex].GetComponent<SlotManager>().AddItemToSlot(itemToAdd, amount);
+        itemList.Add(itemToAdd.GetItemObject);
         unoccupiedSlotIndex++;
     }
 
+    /// <summary>
+    /// Find the first unoccuiped slot in the inventory
+    /// </summary>
     void FindNextUnoccupiedSlot()
     {
         unoccupiedSlotIndex = 0;
 
         foreach (GameObject slotObject in inventorySlotList)
         {
-            if (slotObject.GetComponent<SlotManager>().GetItem == null)
+            if (slotObject.GetComponent<SlotManager>().GetSlotItemManager == null)
             {
                 return;
             }
@@ -145,13 +151,13 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     /// <param name="itemToFind"></param>
     /// <returns></returns>
-    public SlotManager FindItem(ItemManager itemToFind)
+    public SlotManager FindIteminInventory(ItemManager itemToFind)
     {
-        foreach (GameObject slotObject in inventorySlotList)
+        foreach (GameObject slotGameObject in inventorySlotList)
         {
-            SlotManager slot = slotObject.GetComponent<SlotManager>();
+            SlotManager slot = slotGameObject.GetComponent<SlotManager>();
 
-            if (slot.GetItem == itemToFind)
+            if (slot.GetSlotItemManager == itemToFind)
             {
                 return slot;
             }
@@ -159,7 +165,6 @@ public class InventoryManager : MonoBehaviour
 
         return slotPrefab.GetComponent<SlotManager>();
     }
-
 
     /// <summary>
     /// Returns the button object for dropping items

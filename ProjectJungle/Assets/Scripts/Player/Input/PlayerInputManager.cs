@@ -19,6 +19,7 @@ public class PlayerInputManager : MonoBehaviour
     private bool inventoryInput;
     private bool menuInput;
     private bool closeAllUI;
+    private bool interactInput;
 
     //Audio
     private EventInstance walkFootsteps;
@@ -54,6 +55,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.Actions.Sprint.performed += Sprint => sprintInput = true;
             playerControls.Actions.Sprint.canceled += Sprint => sprintInput = false;
             playerControls.Actions.Jump.performed += Jump => jumpInput = true;
+            playerControls.Actions.Interact.performed += Interact => interactInput = true;
             playerControls.Actions.OpenInventory.performed += OpenInventory => { inventoryInput = true; playOneShot = true; };
             playerControls.Actions.Menu.performed += Menu => menuInput = true;
 
@@ -130,6 +132,7 @@ public class PlayerInputManager : MonoBehaviour
         playerControls.Movement.Disable();
         playerControls.Actions.Disable();
     }
+
 
     /// UI Inputs ///
     private void SwitchInputs(bool toUIInputs)
@@ -225,6 +228,8 @@ public class PlayerInputManager : MonoBehaviour
             inventoryInput = false;
         }
 
+        movementInput = Vector2.zero;
+
         SwitchInputs(false);
         GameManager.Instance.UnpauseGame();
     }
@@ -238,6 +243,14 @@ public class PlayerInputManager : MonoBehaviour
 
     private void UpdateSound()
     {
+        if (inventoryInput || menuInput)
+        {
+            walkFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sprintFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+            return;
+        }
+
         if ((verticalInput != 0 || horizontalInput != 0) && jumpInput == false)
         {
             
@@ -272,6 +285,30 @@ public class PlayerInputManager : MonoBehaviour
         {
             walkFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             sprintFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+
+    // Interactions
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interact_Pickup"))
+        {
+            Debug.Log($"Press 'F' to pickup {other.gameObject.name}");
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Interact_Pickup"))
+        {
+            return;
+        }
+
+        if (interactInput)
+        {
+            ItemManager itemPickedUp = other.gameObject.GetComponent<ItemManager>();
+            InventoryManager.Instance.AddToInventory(itemPickedUp.PickupItem(), itemPickedUp.GetAmountPickedUp);
+            interactInput = false;
         }
     }
 }

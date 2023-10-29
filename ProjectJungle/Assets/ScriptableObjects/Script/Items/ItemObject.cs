@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum ItemType 
 {
@@ -57,15 +58,14 @@ public abstract class ItemObject : ScriptableObject
     /// <summary>
     ///  Returns true if the item is stackable
     /// </summary>
-    public bool GetStackable { get { return stackable; } }
+    public bool Stackable { get { return stackable; } }
     /// <summary>
     ///  Returns the maximum size of the stack. If the item is not stackable, returns 1.
     /// </summary>
-    public int GetMaxStackSize { get { return stackable == true? maxStackSize : 1; } }
+    public int GetMaxStackSize { get { return stackable == true ? maxStackSize : 1; } }
     /// <summary>
     /// Returns the worth of the item
     /// </summary>
     public int GetWorth { get { return worth; } }
-
-    
 }
+

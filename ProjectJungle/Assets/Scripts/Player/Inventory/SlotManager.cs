@@ -36,7 +36,10 @@ public class SlotManager : MonoBehaviour
 
     public int GetMaxCapacity { get { return maxCapacity; } }
 
-    public ItemManager GetItem { get { return slotItem; } }
+    /// <summary>
+    /// Returns the Item Manager of the item in the slot
+    /// </summary>
+    public ItemManager GetSlotItemManager { get { return slotItem; } }
 
     public void ClearSlot()
     {
@@ -46,8 +49,9 @@ public class SlotManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void AddItem(ItemManager item, int amount = 1)
+    public void AddItemToSlot(ItemManager item, int amount = 1)
     {
+        // If the slot is empty
         if (slotItem == null)
         {
             SetMaxCapacity = item.GetItemObject.GetMaxStackSize;
@@ -61,7 +65,7 @@ public class SlotManager : MonoBehaviour
             return;
         }
 
-        if (slotItem.GetItemObject == item.GetItemObject && item.GetItemObject.GetStackable && IsSlotFull() == false)
+        if (slotItem.GetItemObject == item.GetItemObject && IsSlotFull() == false)
         {
             if (amount == 1)
             {
@@ -76,18 +80,18 @@ public class SlotManager : MonoBehaviour
             }
             else
             {
-                int overflow = amount - (maxCapacity - currentCapacity);
+                int overflowAmount = amount - (maxCapacity - currentCapacity);
 
                 currentCapacity = maxCapacity;
 
-                InventoryManager.Instance.AddToInventory(item, true, overflow);
+                InventoryManager.Instance.AddToInventory(item, overflowAmount);
             }
             
 
         }
         else if (IsSlotFull() == true)
         {
-            InventoryManager.Instance.AddToInventory(item, true);
+            InventoryManager.Instance.AddToInventory(item);
         }
 
     }
@@ -177,25 +181,7 @@ public class SlotManager : MonoBehaviour
         {
             case ItemType.Equipment:
                 {
-                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetEquipment);
-
-                    break;
-                }
-            case ItemType.Food:
-                {
-                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetFood);
-
-                    break;
-                }
-            case ItemType.MobDrop:
-                {
-                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetMobDrop);
-
-                    break;
-                }
-            case ItemType.Resource:
-                {
-                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetResource);
+                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetChildItem<EquipmentObject>());
 
                     break;
                 }
