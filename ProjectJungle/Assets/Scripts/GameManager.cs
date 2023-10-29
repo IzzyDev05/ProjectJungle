@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FMOD.Studio;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject Player;
 
-    [SerializeField] GameObject menuUI;
+    [SerializeField] GameObject settingsUI;
 
     [SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
 
@@ -19,7 +17,7 @@ public class GameManager : MonoBehaviour
 
         Player = GameObject.FindGameObjectWithTag("Player");
 
-        menuUI.SetActive(false);
+        settingsUI.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -34,13 +32,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public GameObject MenuUI { get { return menuUI; } }
+    public GameObject SettingsUI { get { return settingsUI; } }
 
     public void PauseGame()
     {

@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using FMODUnity;
 using FMOD.Studio;
 
 public class PlayerInputManager : MonoBehaviour
@@ -16,14 +16,9 @@ public class PlayerInputManager : MonoBehaviour
     private bool sprintInput;
     private bool jumpInput;
 
-    // UI
-    private bool isUIOpen = false;
-    private bool correctTag = false;
-
     private bool inventoryInput;
-    private bool interactInput;
-    private bool miscUIInput;
     private bool menuInput;
+    private bool closeAllUI;
 
     //Audio
     private EventInstance walkFootsteps;
@@ -55,15 +50,15 @@ public class PlayerInputManager : MonoBehaviour
             playerControls = new PlayerControls();
 
             playerControls.Movement.Movement.performed += Move => movementInput = Move.ReadValue<Vector2>();
+
             playerControls.Actions.Sprint.performed += Sprint => sprintInput = true;
             playerControls.Actions.Sprint.canceled += Sprint => sprintInput = false;
             playerControls.Actions.Jump.performed += Jump => jumpInput = true;
             playerControls.Actions.OpenInventory.performed += OpenInventory => { inventoryInput = true; playOneShot = true; };
-            playerControls.Inventory.CloseInventory.performed += CloseInventory => { inventoryInput = false; playOneShot = true; };
-            playerControls.Actions.Interact.performed += Interact => interactInput = true;
-            playerControls.Actions.Interact.canceled += Interact => interactInput = false;
             playerControls.Actions.Menu.performed += Menu => menuInput = true;
-            playerControls.MiscUI.CloseUI.performed += CloseUI => miscUIInput = true;
+
+            playerControls.UI.CloseInventory.performed += CloseInventory => { inventoryInput = false; playOneShot = true; };
+            playerControls.UI.ExitUI.performed += CloseUI => closeAllUI = true;
 
         }
 
@@ -78,17 +73,21 @@ public class PlayerInputManager : MonoBehaviour
         animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         
+        // Ensure sounds 
         walkFootsteps = AudioManager.instance.CreateEventInstance(FModEvents.instance.walkingFootsteps, this.transform);
         sprintFootsteps = AudioManager.instance.CreateEventInstance(FModEvents.instance.sprintingFootsteps, this.transform);
+
+        // Disable all UI inputs
+        playerControls.UI.Disable();
+
+        closeAllUI = false;
     }
 
     public void HandleAllInputs() {
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpingInput();
-        HandleInventoryInput();
-        HandleUI();
-        HandleUIInput();
+        HandleUIInputs();
     }
 
     private void HandleMovementInput() {
@@ -117,204 +116,126 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
+
+    // Enables player's movement and action input
     private void EnablePlayerInput()
     {
         playerControls.Movement.Enable();
         playerControls.Actions.Enable();
     }
 
+    // Disables player's movement and action input
     private void DisablePlayerInput()
     {
         playerControls.Movement.Disable();
         playerControls.Actions.Disable();
     }
 
-    // UI Inputs
-    private void HandleInventoryInput()
+    /// UI Inputs ///
+    private void SwitchInputs(bool toUIInputs)
     {
-        if (playOneShot)
+        if (toUIInputs)
         {
-            AudioManager.instance.PlayOneShot(FModEvents.instance.backpack, GameManager.Player.transform.position);
-            playOneShot = false;
-        }
-
-        if (inventoryInput && !isUIOpen)
-        {
-            playerControls.Inventory.Enable();
+            playerControls.UI.Enable();
 
             DisablePlayerInput();
-
-            InventoryManager.Instance.OpenInventory();
         }
-        else if (!inventoryInput && !isUIOpen)
+        else
         {
-            InventoryManager.Instance.CloseInventory();
-
             EnablePlayerInput();
 
-            playerControls.Inventory.Disable();
+            playerControls.UI.Disable();
         }
     }
 
     /// <summary>
-    /// Closes inventory UI on a click of a UI button
+    /// Closes inventory UI via other means like a button press
     /// </summary>
-    public void CloseInventoryByButton()
+    public void ManuallyCloseInventory()
     {
         if (inventoryInput)
         {
             inventoryInput = false;
+            PlayOneShotSound(FModEvents.instance.backpack, transform.position);
         }      
     }
 
-    private void HandleInteraction(Collider collider)
+    private void HandleUIInputs()
     {
-        switch (collider.tag)
-        {
-            case "Interact_Pickup":
-                {
-                    ItemManager itemManager = collider.GetComponent<ItemManager>();
+        CloseUI();
 
-                    InventoryManager.Instance.AddToInventory(itemManager.PickupItem(), false, itemManager.GetAmountPickedUp);
-
-                    collider.gameObject.SetActive(false);
-
-                    //Destroy(collider.gameObject);
-
-                    interactInput = false;
-
-                    break;
-                }
-            case "Interact_Interactable":
-                {
-                    // To Be Added
-                    break;
-                }
-            case "Crafting":
-                {
-                    HandleUI();
-
-                    break;
-                }
-            case "Merchant":
-                {
-                    // To Be Added
-                    break;
-                }
-            default:
-                {
-                    return;
-                }
-        }
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        switch (other.tag)
-        {
-            case "Interact_Pickup":
-                {
-                    Debug.Log($"Press 'F' to pick up {other.gameObject.name}.");
-
-                    correctTag = true;
-
-                    break;
-                }
-            case "Interact_Interactable":
-                {
-                    Debug.Log($"Press 'F' to interact with {other.gameObject.name}.");
-
-                    correctTag = true;
-
-                    break;
-                }
-            case "Crafting":
-                {
-                    Debug.Log($"Press 'F' to open Crafting.");
-
-                    correctTag = true;
-
-                    break;
-                }
-        }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (interactInput && correctTag)
-        {
-            HandleInteraction(other);
-        }
-
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (correctTag)
-        {
-            correctTag = false;
-        }
-    }
-
-    private void HandleUI()
-    {
         if (menuInput)
         {
-            OpenUI();
+            OpenSettings();
+
+            return;
         }
-        else if (!menuInput)
+
+        if (playOneShot)
         {
-            CloseUI();
+            PlayOneShotSound(FModEvents.instance.backpack, transform.position);
+        }
+
+        if (inventoryInput)
+        {
+            InventoryManager.Instance.OpenInventory();
+
+            SwitchInputs(true);
+
+            GameManager.Instance.PauseGame();
         }
     }
 
-    private void HandleUIInput()
+    private void OpenSettings()
     {
-        if (miscUIInput && isUIOpen)
-        {
-            CloseUI();
-        }
-
-        miscUIInput = false;
-    }
-
-    private void OpenUI()
-    {
-        isUIOpen = true;
-
-        playerControls.MiscUI.Enable();
-
-        DisablePlayerInput();
+        SwitchInputs(true);
 
         GameManager.Instance.PauseGame();
 
-        GameManager.Instance.MenuUI.SetActive(true);
+        GameManager.Instance.SettingsUI.SetActive(true);
+    }
+
+    private void CloseSettings()
+    {
+        GameManager.Instance.SettingsUI.SetActive(false);
+
+        menuInput = false;
     }
 
     private void CloseUI()
     {
-        GameManager.Instance.MenuUI.SetActive(false);
+        if (!playerControls.UI.enabled)
+        {
+            return;
+        }
 
-        isUIOpen = false;
+        if (closeAllUI)
+        {
+            ManuallyCloseInventory();
+            CloseSettings();
+            closeAllUI = false;
+        }
 
-        menuInput = false;
+        if (!inventoryInput)
+        {
+            InventoryManager.Instance.CloseInventory();
 
-        EnablePlayerInput();
+            SwitchInputs(false);
 
-        playerControls.MiscUI.Disable();
+            inventoryInput = false;
+        }
 
+        SwitchInputs(false);
         GameManager.Instance.UnpauseGame();
     }
 
-    /// <summary>
-    /// Closes UI on a click of a UI Button
-    /// </summary>
-    public void ClosUIByButton()
+    // Audio
+    private void PlayOneShotSound(EventReference oneshot, Vector3 position)
     {
-        CloseUI();
+        AudioManager.instance.PlayOneShot(oneshot, position);
+        playOneShot = false;
     }
 
-    // Audio
     private void UpdateSound()
     {
         if ((verticalInput != 0 || horizontalInput != 0) && jumpInput == false)
@@ -330,7 +251,7 @@ public class PlayerInputManager : MonoBehaviour
                     {
                         if (sprintPlaybackState.Equals(PLAYBACK_STATE.STOPPED))
                         {
-                            walkFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+                            walkFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                             sprintFootsteps.start();
                         }
 
@@ -340,7 +261,7 @@ public class PlayerInputManager : MonoBehaviour
                     {
                         if (walkPlaybackState.Equals(PLAYBACK_STATE.STOPPED))
                         {
-                            sprintFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+                            sprintFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                             walkFootsteps.start();
                         }
                         break;
@@ -349,8 +270,8 @@ public class PlayerInputManager : MonoBehaviour
         }
         else
         {
-            walkFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
-            sprintFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+            walkFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            sprintFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

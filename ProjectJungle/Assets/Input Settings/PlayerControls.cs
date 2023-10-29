@@ -268,13 +268,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Inventory"",
-            ""id"": ""72f8f46d-5fce-4e3e-96d9-ab3a63ece50b"",
+            ""name"": ""UI"",
+            ""id"": ""9cd84f1b-4748-4b5b-acd5-361758466566"",
             ""actions"": [
+                {
+                    ""name"": ""ExitUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c9228eb-fa1f-4a99-97e8-6c113cbd3c89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
                 {
                     ""name"": ""CloseInventory"",
                     ""type"": ""Button"",
-                    ""id"": ""4b9e1cad-1700-4126-a65f-8b16f5c6e39b"",
+                    ""id"": ""1a406078-9f93-494d-995c-097fb5d06406"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -284,62 +293,23 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""907504f4-6b01-416d-b00a-b2b589951064"",
+                    ""id"": ""10dfa1d9-9f84-4704-b58b-118eb3f9edf2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ExitUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30ecaacb-95f2-425c-81a3-251e40dc3852"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CloseInventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""28104abf-3d8e-448c-9a61-749ca0f4bd18"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseInventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""MiscUI"",
-            ""id"": ""e425c887-bf84-42b3-bf94-ad6df3da542e"",
-            ""actions"": [
-                {
-                    ""name"": ""CloseUI"",
-                    ""type"": ""Button"",
-                    ""id"": ""76fa543b-366a-4b2a-ae30-092551a62d0e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""f75cc8d8-ead7-475d-b8e0-f75952e28d09"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseUI"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a3f017a6-3c5f-4a2b-973a-bcd81e1330be"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -359,12 +329,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions_OpenInventory = m_Actions.FindAction("OpenInventory", throwIfNotFound: true);
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
         m_Actions_Menu = m_Actions.FindAction("Menu", throwIfNotFound: true);
-        // Inventory
-        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
-        m_Inventory_CloseInventory = m_Inventory.FindAction("CloseInventory", throwIfNotFound: true);
-        // MiscUI
-        m_MiscUI = asset.FindActionMap("MiscUI", throwIfNotFound: true);
-        m_MiscUI_CloseUI = m_MiscUI.FindAction("CloseUI", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_ExitUI = m_UI.FindAction("ExitUI", throwIfNotFound: true);
+        m_UI_CloseInventory = m_UI.FindAction("CloseInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -555,97 +523,59 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public ActionsActions @Actions => new ActionsActions(this);
 
-    // Inventory
-    private readonly InputActionMap m_Inventory;
-    private List<IInventoryActions> m_InventoryActionsCallbackInterfaces = new List<IInventoryActions>();
-    private readonly InputAction m_Inventory_CloseInventory;
-    public struct InventoryActions
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_ExitUI;
+    private readonly InputAction m_UI_CloseInventory;
+    public struct UIActions
     {
         private @PlayerControls m_Wrapper;
-        public InventoryActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @CloseInventory => m_Wrapper.m_Inventory_CloseInventory;
-        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
+        public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ExitUI => m_Wrapper.m_UI_ExitUI;
+        public InputAction @CloseInventory => m_Wrapper.m_UI_CloseInventory;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
-        public void AddCallbacks(IInventoryActions instance)
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
         {
-            if (instance == null || m_Wrapper.m_InventoryActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_InventoryActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @ExitUI.started += instance.OnExitUI;
+            @ExitUI.performed += instance.OnExitUI;
+            @ExitUI.canceled += instance.OnExitUI;
             @CloseInventory.started += instance.OnCloseInventory;
             @CloseInventory.performed += instance.OnCloseInventory;
             @CloseInventory.canceled += instance.OnCloseInventory;
         }
 
-        private void UnregisterCallbacks(IInventoryActions instance)
+        private void UnregisterCallbacks(IUIActions instance)
         {
+            @ExitUI.started -= instance.OnExitUI;
+            @ExitUI.performed -= instance.OnExitUI;
+            @ExitUI.canceled -= instance.OnExitUI;
             @CloseInventory.started -= instance.OnCloseInventory;
             @CloseInventory.performed -= instance.OnCloseInventory;
             @CloseInventory.canceled -= instance.OnCloseInventory;
         }
 
-        public void RemoveCallbacks(IInventoryActions instance)
+        public void RemoveCallbacks(IUIActions instance)
         {
-            if (m_Wrapper.m_InventoryActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IInventoryActions instance)
+        public void SetCallbacks(IUIActions instance)
         {
-            foreach (var item in m_Wrapper.m_InventoryActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_InventoryActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public InventoryActions @Inventory => new InventoryActions(this);
-
-    // MiscUI
-    private readonly InputActionMap m_MiscUI;
-    private List<IMiscUIActions> m_MiscUIActionsCallbackInterfaces = new List<IMiscUIActions>();
-    private readonly InputAction m_MiscUI_CloseUI;
-    public struct MiscUIActions
-    {
-        private @PlayerControls m_Wrapper;
-        public MiscUIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @CloseUI => m_Wrapper.m_MiscUI_CloseUI;
-        public InputActionMap Get() { return m_Wrapper.m_MiscUI; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MiscUIActions set) { return set.Get(); }
-        public void AddCallbacks(IMiscUIActions instance)
-        {
-            if (instance == null || m_Wrapper.m_MiscUIActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_MiscUIActionsCallbackInterfaces.Add(instance);
-            @CloseUI.started += instance.OnCloseUI;
-            @CloseUI.performed += instance.OnCloseUI;
-            @CloseUI.canceled += instance.OnCloseUI;
-        }
-
-        private void UnregisterCallbacks(IMiscUIActions instance)
-        {
-            @CloseUI.started -= instance.OnCloseUI;
-            @CloseUI.performed -= instance.OnCloseUI;
-            @CloseUI.canceled -= instance.OnCloseUI;
-        }
-
-        public void RemoveCallbacks(IMiscUIActions instance)
-        {
-            if (m_Wrapper.m_MiscUIActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IMiscUIActions instance)
-        {
-            foreach (var item in m_Wrapper.m_MiscUIActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_MiscUIActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public MiscUIActions @MiscUI => new MiscUIActions(this);
+    public UIActions @UI => new UIActions(this);
     public interface IMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -659,12 +589,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
     }
-    public interface IInventoryActions
+    public interface IUIActions
     {
+        void OnExitUI(InputAction.CallbackContext context);
         void OnCloseInventory(InputAction.CallbackContext context);
-    }
-    public interface IMiscUIActions
-    {
-        void OnCloseUI(InputAction.CallbackContext context);
     }
 }

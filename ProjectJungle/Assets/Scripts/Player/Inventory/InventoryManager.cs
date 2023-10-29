@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,8 +58,6 @@ public class InventoryManager : MonoBehaviour
     public void OpenInventory()
     {
         inventoryUI.SetActive(true);
-
-        GameManager.Instance.PauseGame();
     }
 
     public void CloseInventory()
@@ -68,8 +65,6 @@ public class InventoryManager : MonoBehaviour
         ItemPanelManager.Instance.ClearDisplay();
 
         inventoryUI.SetActive(false);
-
-        GameManager.Instance.UnpauseGame();
     }
 
     public GameObject GetInventoryUI

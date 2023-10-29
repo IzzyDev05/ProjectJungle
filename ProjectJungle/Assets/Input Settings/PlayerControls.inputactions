@@ -246,13 +246,22 @@
             ]
         },
         {
-            "name": "Inventory",
-            "id": "72f8f46d-5fce-4e3e-96d9-ab3a63ece50b",
+            "name": "UI",
+            "id": "9cd84f1b-4748-4b5b-acd5-361758466566",
             "actions": [
+                {
+                    "name": "ExitUI",
+                    "type": "Button",
+                    "id": "7c9228eb-fa1f-4a99-97e8-6c113cbd3c89",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
                 {
                     "name": "CloseInventory",
                     "type": "Button",
-                    "id": "4b9e1cad-1700-4126-a65f-8b16f5c6e39b",
+                    "id": "1a406078-9f93-494d-995c-097fb5d06406",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -262,62 +271,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "907504f4-6b01-416d-b00a-b2b589951064",
+                    "id": "10dfa1d9-9f84-4704-b58b-118eb3f9edf2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30ecaacb-95f2-425c-81a3-251e40dc3852",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "CloseInventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "28104abf-3d8e-448c-9a61-749ca0f4bd18",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CloseInventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "MiscUI",
-            "id": "e425c887-bf84-42b3-bf94-ad6df3da542e",
-            "actions": [
-                {
-                    "name": "CloseUI",
-                    "type": "Button",
-                    "id": "76fa543b-366a-4b2a-ae30-092551a62d0e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "f75cc8d8-ead7-475d-b8e0-f75952e28d09",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CloseUI",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a3f017a6-3c5f-4a2b-973a-bcd81e1330be",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CloseUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

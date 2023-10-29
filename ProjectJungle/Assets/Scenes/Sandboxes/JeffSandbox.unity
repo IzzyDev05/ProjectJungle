@@ -204,7 +204,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30146
+  m_Name: pb_Mesh29556
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9957,7 +9957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4ae54e5c5318144b3814a6d8178fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuUI: {fileID: 457554092}
+  settingsUI: {fileID: 457554092}
   startingItems: []
 --- !u!114 &1476489726
 MonoBehaviour:
@@ -12050,7 +12050,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632870649}
-  m_LocalRotation: {x: 0.20701738, y: 0.000000008416822, z: -0.0000000017810101, w: 0.9783373}
+  m_LocalRotation: {x: 0.20701738, y: 0.000000008416823, z: -0.0000000017810102, w: 0.9783373}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18711,9 +18711,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4739809872108323812, guid: 92f78b9f67438394ebbb0ad802775297,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739809872108323812, guid: 92f78b9f67438394ebbb0ad802775297,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1338092045}
+    - target: {fileID: 4739809872108323812, guid: 92f78b9f67438394ebbb0ad802775297,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1338092041}
+    - target: {fileID: 4739809872108323812, guid: 92f78b9f67438394ebbb0ad802775297,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ManuallyCloseInventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739809872108323812, guid: 92f78b9f67438394ebbb0ad802775297,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739809872108323812, guid: 92f78b9f67438394ebbb0ad802775297,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerInputManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4861303343066877099, guid: 92f78b9f67438394ebbb0ad802775297,
         type: 3}
       propertyPath: m_AnchorMax.y
