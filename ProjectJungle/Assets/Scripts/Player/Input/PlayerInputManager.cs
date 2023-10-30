@@ -306,8 +306,8 @@ public class PlayerInputManager : MonoBehaviour
 
         if (interactInput)
         {
-            ItemManager itemPickedUp = other.gameObject.GetComponent<ItemManager>();
-            InventoryManager.Instance.AddToInventory(itemPickedUp.PickupItem(), itemPickedUp.GetAmountPickedUp);
+            ItemManager newItem = other.gameObject.GetComponent<ItemManager>();
+            InventoryManager.Instance.AddToInventory(newItem.PickupItem(), newItem.AmountPickedUp);
             interactInput = false;
         }
     }

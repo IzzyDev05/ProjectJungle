@@ -46,11 +46,11 @@ public abstract class ItemObject : ScriptableObject
     /// <summary>
     /// Returns the name of the item
     /// </summary>
-    public string GetItemName { get { return itemName; } }
+    public string ItemName { get { return itemName; } }
     /// <summary>
     /// Returns the type the item is
     /// </summary>
-    public ItemType Type { get { return type; } set { type = value; } }
+    public ItemType ItemType { get { return type; } set { type = value; } }
     /// <summary>
     /// Returns the description of the item
     /// </summary>

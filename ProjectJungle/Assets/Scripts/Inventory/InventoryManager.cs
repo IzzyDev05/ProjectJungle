@@ -23,7 +23,14 @@ public class InventoryManager : MonoBehaviour
         inventorySlotList.Clear();
         itemList.Clear();
 
+        #region SIMPLETON
+        if (Instance != null)
+        {
+            Debug.LogError("Multiple Inventory Manager Instances found.");
+        }
+
         Instance = this;
+        #endregion
     }
 
     // Start is called before the first frame update
@@ -56,11 +63,17 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Opens inventory UI
+    /// </summary>
     public void OpenInventory()
     {
         inventoryUI.SetActive(true);
     }
 
+    /// <summary>
+    /// Close Inventory UI
+    /// </summary>
     public void CloseInventory()
     {
         ItemPanelManager.Instance.ClearDisplay();
@@ -68,6 +81,9 @@ public class InventoryManager : MonoBehaviour
         inventoryUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Returns the Inventory UI Game Object
+    /// </summary>
     public GameObject GetInventoryUI
     {
         get
@@ -76,9 +92,14 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds an Item into the inventory
+    /// </summary>
+    /// <param name="itemToAdd"></param>
+    /// <param name="amount"></param>
     public void AddToInventory(ItemManager itemToAdd, int amount = 1)
     {
-        SlotManager foundSlot = FindIteminInventory(itemToAdd);
+        SlotManager foundSlot = FindIteminInventory(itemToAdd, true);
         // If the item already exists in the inventory and the item is stackable
         if (foundSlot.GetSlotItemManager != null && itemToAdd.GetItemObject.Stackable == true)
         {
@@ -92,7 +113,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-
+        
         FindNextUnoccupiedSlot();
 
         inventorySlotList[GetUnoccupiedSlotIndex].GetComponent<SlotManager>().AddItemToSlot(itemToAdd, amount);
@@ -147,17 +168,27 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Finds the first instance of the item in the inventory
+    /// Returns the first slot with the item. If FindUnfilledStack is true, it will return the first slot with the item that is not full
     /// </summary>
     /// <param name="itemToFind"></param>
-    /// <returns></returns>
-    public SlotManager FindIteminInventory(ItemManager itemToFind)
+    /// <param name="FindUnfilledStack"></param>
+    public SlotManager FindIteminInventory(ItemManager itemToFind, bool FindUnfilledStack = false)
     {
         foreach (GameObject slotGameObject in inventorySlotList)
         {
             SlotManager slot = slotGameObject.GetComponent<SlotManager>();
+            ItemManager itemInSlot = slot.GetSlotItemManager;
 
-            if (slot.GetSlotItemManager == itemToFind)
+            if (itemToFind.CompareItem(itemInSlot) == false)
+            {
+                continue; // Skipp current iteration
+            }
+
+            if (FindUnfilledStack == true && slot.IsSlotFull() == false)
+            {
+                return slot;
+            }
+            else if (FindUnfilledStack == false)
             {
                 return slot;
             }

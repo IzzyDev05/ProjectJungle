@@ -49,51 +49,46 @@ public class SlotManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void AddItemToSlot(ItemManager item, int amount = 1)
+    /// <summary>
+    /// Adds the item to the current slot
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="amount"></param>
+    public void AddItemToSlot(ItemManager itemToAdd, int amount = 1)
     {
         // If the slot is empty
         if (slotItem == null)
         {
-            SetMaxCapacity = item.GetItemObject.GetMaxStackSize;
+            SetMaxCapacity = itemToAdd.GetItemObject.GetMaxStackSize;
             currentCapacity = amount;
 
-            slotItem = item;
+            slotItem = itemToAdd;
 
-            itemImage.sprite = item.GetItemObject.GetIcon;
+            itemImage.sprite = itemToAdd.GetItemObject.GetIcon;
             itemImage.color = Color.white;
 
             return;
         }
 
-        if (slotItem.GetItemObject == item.GetItemObject && IsSlotFull() == false)
+        if (amount == 1)
         {
-            if (amount == 1)
-            {
-                currentCapacity++;
+            currentCapacity++;
 
-                return;
-            }
-
-            if (maxCapacity - currentCapacity >= amount)
-            {
-                currentCapacity += amount;
-            }
-            else
-            {
-                int overflowAmount = amount - (maxCapacity - currentCapacity);
-
-                currentCapacity = maxCapacity;
-
-                InventoryManager.Instance.AddToInventory(item, overflowAmount);
-            }
-            
-
-        }
-        else if (IsSlotFull() == true)
-        {
-            InventoryManager.Instance.AddToInventory(item);
+            return;
         }
 
+        if (maxCapacity - currentCapacity >= amount)
+        {
+            currentCapacity += amount;
+        }
+        else
+        {
+            int overflowAmount = amount - (maxCapacity - currentCapacity);
+
+            currentCapacity = maxCapacity;
+
+            InventoryManager.Instance.AddToInventory(itemToAdd, overflowAmount);
+        }
     }
 
     void UpdateItemCount()
@@ -120,6 +115,9 @@ public class SlotManager : MonoBehaviour
         RemoveItem();
     }
 
+    /// <summary>
+    /// Removes a singel Itemd from the slot
+    /// </summary>
     public void RemoveItem()
     {
         InventoryManager.Instance.RemoveItemFromInventory(gameObject);
@@ -132,7 +130,6 @@ public class SlotManager : MonoBehaviour
     /// Removes a certain amount of a single item. If the item has been removed returns true. By default it removes 1 item.
     /// </summary>
     /// <param name="amount"></param>
-    /// <returns></returns>
     public bool RemoveMultipleItems(int amount = 1)
     {
         if (currentCapacity - amount >= 1)
@@ -151,11 +148,9 @@ public class SlotManager : MonoBehaviour
         return false;
     }
 
-    public bool MatchSlotItem(ItemObject item)
-    {
-        return item == slotItem ? true : false;
-    }
-
+    /// <summary>
+    /// Returns true if the current slot has reached its maximum stack size, otherwise return false
+    /// </summary>
     public bool IsSlotFull()
     {
         if (GetCurrentCapacity == GetMaxCapacity)
@@ -177,11 +172,11 @@ public class SlotManager : MonoBehaviour
 
         ItemPanelManager.Instance.ClearDisplay();
 
-        switch (slotItem.GetItemObject.Type)
+        switch (slotItem.GetItemObject.ItemType)
         {
             case ItemType.Equipment:
                 {
-                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetChildItem<EquipmentObject>());
+                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetEquipmentObject);
 
                     break;
                 }
@@ -189,6 +184,9 @@ public class SlotManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Gives the Drop button functionality during runtime
+    /// </summary>
     void SetUpDropButton()
     {
         Button dropButton = InventoryManager.Instance.GetButton;

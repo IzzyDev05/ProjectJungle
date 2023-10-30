@@ -26,24 +26,22 @@ public class ItemPanelManager : MonoBehaviour
 
     void Awake()
     {
+        #region SIMPLETON
+        if (Instance != null)
+        {
+            Debug.LogError("Multiple Item Panel Manager Instances found.");
+        }
+
         Instance = this;
+        #endregion
 
         SetToDefault();
     }
 
-    /*/ Start is called before the first frame update
-    void Start()
-    {
-        
-    }*/
-
-    /*/ Update is called once per frame
-    void Update()
-    {
-
-    }*/
-
-
+    /// <summary>
+    /// Display generic Item
+    /// </summary>
+    /// <param name="selectedItem"></param>
     public void DisplaySelectedItem(ItemObject selectedItem)
     {
         if (itemPanel.activeSelf == false)
@@ -63,25 +61,10 @@ public class ItemPanelManager : MonoBehaviour
         SetItemPanel(selectedItem);
     }
 
-    /*public void DisplaySelectedItem(FoodObject selectedFood)
-    {
-        if (itemPanel.activeSelf == false)
-        {
-            itemPanel.SetActive(true);
-        }
-
-        if (currentItem == selectedFood)
-        {
-            return;
-        }
-
-        currentItem = selectedFood;
-
-        GetPanelFields();
-
-        SetItemPanel(selectedFood);
-    }*/
-
+    /// <summary>
+    /// Overloaded DisplaySelectedItem for Equipment items
+    /// </summary>
+    /// <param name="selectedEqipment"></param>
     public void DisplaySelectedItem(EquipmentObject selectedEqipment)
     {
         if (equipmentPanel.activeSelf == false)
@@ -121,44 +104,9 @@ public class ItemPanelManager : MonoBehaviour
         }
     }
 
-    /*public void DisplaySelectedItem(MobDropObject selectedMobDrop)
-    {
-        if (itemPanel.activeSelf == false)
-        {
-            itemPanel.SetActive(true);
-        }
-
-        if (currentItem == selectedMobDrop)
-        {
-            return;
-        }
-
-        currentItem = selectedMobDrop;
-
-        GetPanelFields();
-
-        SetItemPanel(selectedMobDrop);
-    }*/
-
-    /*public void DisplaySelectedItem(ResourceObject selectedResource)
-    {
-        if (itemPanel.activeSelf == false)
-        {
-            itemPanel.SetActive(true);
-        }
-
-        if (currentItem == selectedResource)
-        {
-            return;
-        }
-
-        currentItem = selectedResource;
-
-        GetPanelFields();
-
-        SetItemPanel(selectedResource);
-    }*/
-
+    /// <summary>
+    /// Clears the infomation displayed in the panel
+    /// </summary>
     public void ClearDisplay()
     {
         if (currentItem != null)
@@ -170,6 +118,9 @@ public class ItemPanelManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Gets where the infomation needs to be in the panel display
+    /// </summary>
     void GetPanelFields()
     {
         if (currentItem == null)
@@ -177,7 +128,7 @@ public class ItemPanelManager : MonoBehaviour
             return;
         }
 
-        switch (currentItem.Type)
+        switch (currentItem.ItemType)
         {
             case ItemType.Equipment:
                 {
@@ -208,13 +159,17 @@ public class ItemPanelManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets the panel for any Item
+    /// </summary>
+    /// <param name="item"></param>
     void SetItemPanel(ItemObject item)
     {
         BlankText();
 
         itemImage.sprite = item.GetIcon;
 
-        nameText.text = item.GetItemName;
+        nameText.text = item.ItemName;
 
         worthText.text = item.GetWorth.ToString() + " g";
 
@@ -224,6 +179,9 @@ public class ItemPanelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets the panels to inactive
+    /// </summary>
     void SetToDefault()
     {
         if (itemPanel.activeSelf == true)
@@ -237,13 +195,16 @@ public class ItemPanelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Clears all text
+    /// </summary>
     void BlankText()
     {
         nameText.text = "";
         worthText.text = "";
         descriptionText.text = "";
 
-        if (currentItem.Type == ItemType.Equipment)
+        if (currentItem.ItemType == ItemType.Equipment)
         {
             damageText.text = "";
             defeseText.text = "";

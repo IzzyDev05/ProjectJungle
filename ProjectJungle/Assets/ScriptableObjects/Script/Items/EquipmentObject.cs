@@ -10,7 +10,7 @@ public class EquipmentObject : ItemObject
 
     public void Awake()
     {
-        Type = ItemType.Equipment;
+        ItemType = ItemType.Equipment;
 
     }
 
