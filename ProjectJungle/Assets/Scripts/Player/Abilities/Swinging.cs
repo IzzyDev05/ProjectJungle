@@ -56,6 +56,8 @@ public class Swinging : MonoBehaviour
     }
 
     private void InitializeSwing() {
+        playerLocomotion.ShouldHaveAirMomentum = true;
+
         Ray initialRay = new Ray(cam.position, cam.forward);
 
         if (Physics.Raycast(initialRay, out RaycastHit hit, maxSwingDistance, swingLayer)) {

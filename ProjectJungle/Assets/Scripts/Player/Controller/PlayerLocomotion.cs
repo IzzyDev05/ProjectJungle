@@ -14,7 +14,6 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private float leapingVelocity = 3f;
     [SerializeField] private float fallingVelocity = 33f;
-    [SerializeField] private float fallingSpeedMultiplier = 3f;
     [SerializeField] private float raycastHeightOffset = 0.5f;
 
     [Header("References")]
@@ -31,6 +30,7 @@ public class PlayerLocomotion : MonoBehaviour
     private bool isGrounded = true;
     private bool isJumping;
     private bool isSwinging;
+    private bool shouldHaveAirMomentum;
 
     #region PROPERTIES
     public float MaxVelocity {
@@ -67,6 +67,14 @@ public class PlayerLocomotion : MonoBehaviour
             isSwinging = value;
         }
     }
+    public bool ShouldHaveAirMomentum {
+        get {
+            return shouldHaveAirMomentum;
+        }
+        set {
+            shouldHaveAirMomentum = value;
+        }
+    }
     #endregion
 
     private void Start() {
@@ -86,7 +94,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleMovement() {
         if (isJumping) return;
 
-        if (!isSwinging) {
+        if (!shouldHaveAirMomentum) {
             moveDirection = cam.forward * inputManager.VerticalInput + cam.right * inputManager.HorizontalInput;
             moveDirection.Normalize();
             moveDirection.y = 0f;
@@ -107,9 +115,6 @@ public class PlayerLocomotion : MonoBehaviour
             Vector3 movementVelocity = moveDirection;
             movementVelocity = Vector3.Lerp(movementVelocity, rb.velocity, Time.fixedDeltaTime);
             rb.velocity = movementVelocity;
-        }
-        else {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
         }
 
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
@@ -143,19 +148,19 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleFallingAndLanding() {
         RaycastHit hit;
         Vector3 raycastOrigin = transform.position;
-        Vector3 targetPosition = transform.position; // Floating capsule
+        //Vector3 targetPosition = transform.position; // Floating capsule
 
         raycastOrigin.y += raycastHeightOffset;
 
-        if (isSwinging) {
-            rb.AddForce(transform.forward * leapingVelocity);
-            rb.AddForce(Vector3.down * fallingVelocity * fallingSpeedMultiplier);
+        if (isSwinging || shouldHaveAirMomentum) {
+            inAirTimer += Time.deltaTime;
+            rb.AddForce(Vector3.down * fallingVelocity * inAirTimer);
         }
         else if (!isGrounded && !isJumping) {
             inAirTimer += Time.deltaTime;
 
             rb.AddForce(transform.forward * leapingVelocity);
-            rb.AddForce(Vector3.down * fallingVelocity * fallingSpeedMultiplier * inAirTimer);
+            rb.AddForce(Vector3.down * fallingVelocity * inAirTimer);
         }
 
         if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out hit, 0.5f, groundLayer)) {
@@ -163,15 +168,17 @@ public class PlayerLocomotion : MonoBehaviour
                 // play landing animation
             }
 
-            targetPosition.y = hit.point.y; // Floating capsule
+            //targetPosition.y = hit.point.y; // Floating capsule
             inAirTimer = 0;
             isGrounded = true;
+            shouldHaveAirMomentum = false;
         }
         else {
             isGrounded = false;
         }
 
         // Floating capsule
+        /*
         if (isGrounded && !isJumping && !isSwinging) {
             if (inputManager.MoveAmount > 0) {
                 // Smoothly pushes us up if we're moving
@@ -181,6 +188,7 @@ public class PlayerLocomotion : MonoBehaviour
                 transform.position = targetPosition;
             }
         }
+        */
     }
 
     public void HandleJumping() {

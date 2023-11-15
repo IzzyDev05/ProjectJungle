@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27892
+  m_Name: pb_Mesh27890
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -520,7 +520,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59920401}
-  m_LocalRotation: {x: 0.12558943, y: -1e-45, z: -0, w: 0.9920823}
+  m_LocalRotation: {x: 0.12558943, y: -0, z: -0, w: 0.9920823}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -535,7 +535,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28006
+  m_Name: pb_Mesh28004
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1803,7 +1803,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27960
+  m_Name: pb_Mesh27958
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9450,13 +9450,12 @@ MonoBehaviour:
   walkingSpeed: 1.5
   runningSpeed: 5
   sprintingSpeed: 7
-  maxVelocity: 12.5
+  maxVelocity: 25
   rotationSpeed: 15
   gravityIntensity: -19.62
   jumpHeight: 30
   leapingVelocity: 3
   fallingVelocity: 50
-  fallingSpeedMultiplier: 3
   raycastHeightOffset: 0.5
   groundLayer:
     serializedVersion: 2
@@ -9496,9 +9495,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
-  m_Height: 1.5
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1.1, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1371835590
 GameObject:
   m_ObjectHideFlags: 0
@@ -15074,7 +15073,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28152
+  m_Name: pb_Mesh28150
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16963,7 +16962,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830836525}
-  m_LocalRotation: {x: 0.16018225, y: 0.000000023309845, z: -0.000000003782667, w: 0.9870875}
+  m_LocalRotation: {x: 0.16018224, y: 0.000000004252742, z: -6.9012535e-10, w: 0.9870875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17019,11 +17018,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSwingDistance: 100
-  swingForce: 4
+  swingForce: 4.5
   jointDamper: 7
   jointMassScale: 4.5
   maxDistanceMultipler: 0.75
-  minDistanceMultipler: 0.1
+  minDistanceMultipler: 0.2
   gunTip: {fileID: 305346481}
   player: {fileID: 1338092041}
   swingLayer:
