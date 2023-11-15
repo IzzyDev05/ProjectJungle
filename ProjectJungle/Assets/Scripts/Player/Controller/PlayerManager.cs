@@ -5,7 +5,8 @@ public class PlayerManager : MonoBehaviour
     private PlayerInputManager inputManager;
     private PlayerLocomotion playerLocomotion;
 
-    private void Start() {
+    private void Start()
+    {
         inputManager = GetComponent<PlayerInputManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
 
@@ -13,11 +14,13 @@ public class PlayerManager : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Update() {
+    private void Update()
+    {
         inputManager.HandleAllInputs();
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         playerLocomotion.HandleAllMovement();
     }
 }

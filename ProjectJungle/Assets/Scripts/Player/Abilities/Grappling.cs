@@ -2,64 +2,74 @@ using UnityEngine;
 
 public class Grappling : MonoBehaviour
 {
-    [Header("Grappling Values")]
     [SerializeField] private float grappleSpeed = 15f;
-    [SerializeField] private float grappleDistance = 25f;
-
-    [Header("References")]
-    [SerializeField] private Transform gunTip;
+    [SerializeField] private float grappleDistance = 35f;
     [SerializeField] private LayerMask grappleLayer;
-    
+    [SerializeField] private Transform freeLookCam;
+    [SerializeField] private Transform aimCam;
+
     private PlayerInputManager inputManager;
+    private PlayerLocomotion playerLocomotion;
     private Rigidbody playerRB;
-    private Transform cam;
-    private bool isGrappling;
     private Vector3 grappleTarget;
+    private LineRenderer lr;
+    private Transform mainCam;
 
-    private void Start() {
+    private void Start()
+    {
         inputManager = GetComponentInParent<PlayerInputManager>();
+        playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         playerRB = GetComponentInParent<Rigidbody>();
-        cam = Camera.main.transform;
+        lr = GetComponent<LineRenderer>();
+        mainCam = Camera.main.transform;
     }
 
-    private void Update() {
-        if (inputManager.AimInput && inputManager.SwingInput) {
-            InitializeGrapple();
-        }
-    }
-
-    private void FixedUpdate() {
-        if (isGrappling) {
-            MoveTowardsGrappleTarget();
-        }
-    }
-
-    private void InitializeGrapple() {
-        Ray initialRay = new Ray(cam.position, cam.forward);
-
-        if (Physics.Raycast(initialRay, out RaycastHit hit, grappleDistance, grappleLayer)) {
-            // Save the hit point
-            Vector3 hitPoint = hit.point;
-
-            // Create a ray from hit point to the player's forward
-            Vector3 playerForward = gunTip.forward;
-            Ray playerRay = new Ray(hitPoint, playerForward);
-
-            // Check if player can see the hit spot
-            if (Physics.Raycast(playerRay, out RaycastHit playerHit, grappleDistance)) {
-                grappleTarget = hit.point;
-                isGrappling = true;
-            }
-            else {
-                // swingPoint = Vector3.zero;
-            }
+    private void Update()
+    {
+        if (inputManager.AimInput) {
+            freeLookCam.gameObject.SetActive(false);
+            aimCam.gameObject.SetActive(true);
+            playerLocomotion.shouldMove = false;
         }
         else {
-            // swingPoint = Vector3.zero;
+            freeLookCam.gameObject.SetActive(true);
+            aimCam.gameObject.SetActive(false);
+            playerLocomotion.shouldMove = true;
+        }
+
+        if (inputManager.AimInput && inputManager.SwingInput) InitializeGrapple();
+        else EndGrapple();
+    }
+
+    private void FixedUpdate()
+    {
+        if (playerLocomotion.IsGrappling) MoveTowardsGrappleTarget();
+    }
+
+    private void LateUpdate()
+    {
+        DrawRope();
+    }
+
+    private void InitializeGrapple()
+    {
+        if (playerLocomotion.IsGrappling) return;
+
+        //Vector3 camAim = new Vector3(aimCam.forward.x + aimCam.rotation.x, aimCam.forward.y, aimCam.forward.z);
+        Vector3 camAim = new Vector3(mainCam.forward.x, mainCam.forward.y, mainCam.forward.z);
+
+        Ray ray = new Ray(aimCam.position, camAim);
+        bool didRayHitSomething = Physics.Raycast(ray, out RaycastHit hit, grappleDistance, grappleLayer);
+
+        if (didRayHitSomething) {
+            grappleTarget = hit.point;
+            lr.positionCount = 2;
+            playerLocomotion.IsGrappling = true;
         }
     }
 
-    private void MoveTowardsGrappleTarget() {
+    private void MoveTowardsGrappleTarget()
+    {
         Vector3 grappleDirection = (grappleTarget - transform.position).normalized;
         playerRB.velocity = grappleDirection * grappleSpeed;
 
@@ -69,8 +79,30 @@ public class Grappling : MonoBehaviour
         }
     }
 
-    private void EndGrapple() {
-        isGrappling = false;
-        playerRB.velocity = Vector3.zero;
+    private void EndGrapple()
+    {
+        playerLocomotion.IsGrappling = false;
+        lr.positionCount = 0;
+        grappleTarget = Vector3.zero;
     }
+
+    private Vector3 currentGrapplePosition = Vector3.zero;
+    private void DrawRope()
+    {
+        if (grappleTarget == Vector3.zero) return;
+
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grappleTarget, Time.deltaTime * 8f);
+        lr.SetPosition(0, playerRB.position);
+        lr.SetPosition(1, grappleTarget);
+    }
+
+    /*
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        var testPos = new Vector3(mainCam.forward.x, mainCam.forward.y, mainCam.forward.z);
+        Gizmos.DrawRay(aimCam.position, testPos * 40f);
+    }
+    */
 }
