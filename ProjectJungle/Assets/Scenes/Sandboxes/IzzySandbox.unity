@@ -520,7 +520,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59920401}
-  m_LocalRotation: {x: 0.11509393, y: -0, z: -0, w: 0.9933546}
+  m_LocalRotation: {x: 0.3073584, y: 0.000000016495898, z: -0.0000000053280638, w: 0.9515939}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1725,7 +1725,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475448235}
-  m_LocalRotation: {x: 0.080646865, y: -0, z: -0, w: 0.9967427}
+  m_LocalRotation: {x: 0.27424145, y: 1.32e-43, z: 1.1e-44, w: 0.9616609}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3893,7 +3893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 2
-  m_FollowOffset: {x: 0, y: 0.301174, z: -2.181837}
+  m_FollowOffset: {x: 0, y: 1.650995, z: -3.835822}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7538,7 +7538,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1962165083}
+  m_LookAt: {fileID: 1338092042}
   m_Follow: {fileID: 1338092042}
   m_CommonLens: 1
   m_Lens:
@@ -7720,7 +7720,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964119204}
-  m_LocalRotation: {x: 0.11509391, y: 0, z: 0, w: 0.9933546}
+  m_LocalRotation: {x: 0.30735844, y: 0.00000003280835, z: -0.000000010596879, w: 0.9515938}
   m_LocalPosition: {x: -40.48, y: 27.314, z: 0.70000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10026,7 +10026,6 @@ Transform:
   - {fileID: 596189624}
   - {fileID: 1470962261}
   - {fileID: 1199526922}
-  - {fileID: 1962165083}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10065,7 +10064,7 @@ MonoBehaviour:
   maxVelocity: 40
   swingingSpeed: 27.5
   airMomentumVelocity: 12.5
-  gravityIntensity: -9.8
+  gravityIntensity: -9.81
   jumpForce: 15
   fallingVelocity: 40
   maxSlopeAngle: 55
@@ -16072,7 +16071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 2
-  m_FollowOffset: {x: 0, y: 0.301174, z: -2.181837}
+  m_FollowOffset: {x: 0, y: 1.650995, z: -3.835822}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -17824,7 +17823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 2
-  m_FollowOffset: {x: 0, y: 0.301174, z: -2.181837}
+  m_FollowOffset: {x: 0, y: 1.650995, z: -3.835822}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -18061,7 +18060,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830836525}
-  m_LocalRotation: {x: 0.1497376, y: 1e-45, z: -0, w: 0.9887258}
+  m_LocalRotation: {x: 0.34042525, y: -0.000000039629484, z: 0.000000014347851, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18476,37 +18475,6 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
   m_PVRTiledBaking: 0
---- !u!1 &1962165082
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1962165083}
-  m_Layer: 0
-  m_Name: Head
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1962165083
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962165082}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1338092042}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1967026416
 GameObject:
   m_ObjectHideFlags: 0
