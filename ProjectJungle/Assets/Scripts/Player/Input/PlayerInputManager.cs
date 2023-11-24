@@ -15,6 +15,8 @@ public class PlayerInputManager : MonoBehaviour
 
     private bool sprintInput;
     private bool jumpInput;
+    private bool aimInput;
+    private bool swingInput;
 
     private bool inventoryInput;
     private bool menuInput;
@@ -43,6 +45,16 @@ public class PlayerInputManager : MonoBehaviour
             return horizontalInput;
         }
     }
+    public bool AimInput {
+        get {
+            return aimInput;
+        }
+    }
+    public bool SwingInput {
+        get {
+            return swingInput;
+        }
+    }
     #endregion
 
     private void OnEnable() {
@@ -54,7 +66,15 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.Actions.Sprint.performed += Sprint => sprintInput = true;
             playerControls.Actions.Sprint.canceled += Sprint => sprintInput = false;
+            
             playerControls.Actions.Jump.performed += Jump => jumpInput = true;
+            
+            playerControls.Actions.Aim.performed += i => aimInput = true;
+            playerControls.Actions.Aim.canceled += i => aimInput = false;
+
+            playerControls.Actions.Swing.started += i => swingInput = true;
+            playerControls.Actions.Swing.canceled += i => swingInput = false;
+            
             playerControls.Actions.Interact.performed += Interact => interactInput = true;
             playerControls.Actions.OpenInventory.performed += OpenInventory => { inventoryInput = true; playOneShot = true; };
             playerControls.Actions.Menu.performed += Menu => menuInput = true;
