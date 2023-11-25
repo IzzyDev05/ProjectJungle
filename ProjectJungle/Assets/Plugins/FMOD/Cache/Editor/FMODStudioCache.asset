@@ -62,11 +62,38 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638364507830810653
+  lastModified: 638364525189122216
   FileSizes:
   - Name: Desktop
     Value: 1340
   Exists: 1
+--- !u!114 &-779239322253046481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Pause
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Pause
+  Guid:
+    Data1: -126706798
+    Data2: 1179415660
+    Data3: -1823784781
+    Data4: 1069059480
+  Banks:
+  - {fileID: 7965227007703193557}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 580
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,13 +117,42 @@ MonoBehaviour:
   - {fileID: 4869673699988581496}
   - {fileID: 4947151342672668254}
   - {fileID: 4315745274044345583}
+  - {fileID: 1518672922584912786}
+  - {fileID: -779239322253046481}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1435372491640469679}
   StringsBanks:
   - {fileID: 5103938332709250910}
-  cacheTime: 638364507844127773
+  cacheTime: 638364525189753021
   cacheVersion: 131608
+--- !u!114 &1518672922584912786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Resume
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Resume
+  Guid:
+    Data1: -1269847478
+    Data2: 1132970523
+    Data3: 1162273163
+    Data4: -1679316224
+  Banks:
+  - {fileID: 7965227007703193557}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 499
 --- !u!114 &4315745274044345583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,10 +276,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638364507830835495
+  lastModified: 638364525189142083
   FileSizes:
   - Name: Desktop
-    Value: 1134
+    Value: 1218
   Exists: 1
 --- !u!114 &7965227007703193557
 MonoBehaviour:
@@ -240,8 +296,8 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638364507844127773
+  lastModified: 638364525189753021
   FileSizes:
   - Name: Desktop
-    Value: 55712
+    Value: 68448
   Exists: 1

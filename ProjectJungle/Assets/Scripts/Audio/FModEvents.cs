@@ -19,6 +19,13 @@ public class FModEvents : MonoBehaviour
 
     [field: Header("Ambience SFX")]
     [field: SerializeField] public EventReference forest { get; private set; }
+    
+    [field: Header("Pause SFX")]
+    [field: SerializeField] public EventReference pause { get; private set; }
+    
+    [field: Header("Resume SFX")]
+    [field: SerializeField] public EventReference resume { get; private set; }
+    
 
     public static FModEvents instance { get; private set; }
 

@@ -26,6 +26,7 @@ public class PlayerInputManager : MonoBehaviour
     //Audio
     private EventInstance walkFootsteps;
     private EventInstance sprintFootsteps;
+    private EventInstance pause;
 
     private bool playOneShot = false;
 
@@ -267,6 +268,11 @@ public class PlayerInputManager : MonoBehaviour
         {
             walkFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             sprintFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            
+            PLAYBACK_STATE playbackState;
+            pause.getPlaybackState(out playbackState);
+
+            pause.start();
 
             return;
         }
