@@ -24,6 +24,8 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     private PlayerInputManager inputManager;
+    private PlayerManager playerManager;
+    private PlayerAnimatorManager animatorManager;
     private Vector3 moveDirection;
     private Transform cam;
     private Rigidbody rb;
@@ -73,6 +75,14 @@ public class PlayerLocomotion : MonoBehaviour
             isSprinting = value;
         }
     }
+    public bool IsJumping {
+        get {
+            return isJumping;
+        }
+        set {
+            isJumping = value;
+        }
+    }
     public bool IsGrappling {
         get {
             return isGrappling;
@@ -110,6 +120,8 @@ public class PlayerLocomotion : MonoBehaviour
     private void Start()
     {
         inputManager = GetComponent<PlayerInputManager>();
+        playerManager = GetComponent<PlayerManager>();
+        animatorManager = GetComponent<PlayerAnimatorManager>();
         cam = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
     }
@@ -117,6 +129,8 @@ public class PlayerLocomotion : MonoBehaviour
     public void HandleAllMovement()
     {
         HandleFallingAndLanding();
+
+        if (playerManager.isInteracting) return;
 
         HandleRotation();
         HandleMovement();
@@ -212,13 +226,18 @@ public class PlayerLocomotion : MonoBehaviour
         else {
             if (!isGrounded && !isJumping && !isSwinging && !shouldHaveAirMomentum) {
                 inAirTimer += Time.deltaTime;
-                rb.AddForce(Vector3.down * fallingVelocity * inAirTimer * -gravityIntensity);
+                rb.AddForce(Vector3.down * fallingVelocity/4 * inAirTimer * -gravityIntensity);
+
+                if (!playerManager.isInteracting)
+                {
+                    animatorManager.PlayTargetAnimation("Falling", true);
+                }
             }
         }
 
         if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out hit, 0.5f, groundLayer)) {
             if (!isGrounded) {
-                print("Play landing animation");
+                animatorManager.PlayTargetAnimation("Landing", true);
             }
 
             inAirTimer = 1;
@@ -234,6 +253,8 @@ public class PlayerLocomotion : MonoBehaviour
             isGrounded = false;
             isOnSlope = false;
         }
+        
+        animatorManager.Animator.SetBool("isGrounded", isGrounded);
     }
 
     private void AdjustVelocityBasedOnSlope(RaycastHit hit)
@@ -259,8 +280,8 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (!isGrounded) return;
 
-        // set jumping true here
-        // jupming should be set to false at the end of the jump animation
+        animatorManager.Animator.SetBool("isJumping", true);
+        animatorManager.PlayTargetAnimation("Jump", false);
 
         float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpForce);
         rb.AddForce(Vector3.up * jumpingVelocity, ForceMode.Impulse);

@@ -6,7 +6,7 @@ public class PlayerInputManager : MonoBehaviour
 {
     private PlayerControls playerControls;
     private PlayerLocomotion playerLocomotion;
-    //private PlayerAnimatorManager animatorManager;
+    private PlayerAnimatorManager animatorManager;
 
     private Vector2 movementInput;
     private float moveAmount;
@@ -95,6 +95,7 @@ public class PlayerInputManager : MonoBehaviour
     private void Start() {
         //animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        animatorManager = GetComponent<PlayerAnimatorManager>();
         
         // Ensure sounds 
         walkFootsteps = AudioManager.instance.CreateEventInstance(FModEvents.instance.walkingFootsteps, this.transform);
@@ -118,7 +119,7 @@ public class PlayerInputManager : MonoBehaviour
         horizontalInput = movementInput.x;
 
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-        //animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.IsSpriting);
+        animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.IsSpriting);
 
         UpdateSound();
     }
