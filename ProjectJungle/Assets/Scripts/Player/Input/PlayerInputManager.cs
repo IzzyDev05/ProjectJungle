@@ -6,7 +6,7 @@ public class PlayerInputManager : MonoBehaviour
 {
     private PlayerControls playerControls;
     private PlayerLocomotion playerLocomotion;
-    private PlayerAnimatorManager animatorManager;
+    //private PlayerAnimatorManager animatorManager;
 
     private Vector2 movementInput;
     private float moveAmount;
@@ -15,6 +15,8 @@ public class PlayerInputManager : MonoBehaviour
 
     private bool sprintInput;
     private bool jumpInput;
+    private bool aimInput;
+    private bool swingInput;
 
     private bool inventoryInput;
     private bool menuInput;
@@ -24,6 +26,7 @@ public class PlayerInputManager : MonoBehaviour
     //Audio
     private EventInstance walkFootsteps;
     private EventInstance sprintFootsteps;
+    private EventInstance pause;
 
     private bool playOneShot = false;
 
@@ -43,6 +46,16 @@ public class PlayerInputManager : MonoBehaviour
             return horizontalInput;
         }
     }
+    public bool AimInput {
+        get {
+            return aimInput;
+        }
+    }
+    public bool SwingInput {
+        get {
+            return swingInput;
+        }
+    }
     #endregion
 
     private void OnEnable() {
@@ -54,7 +67,15 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.Actions.Sprint.performed += Sprint => sprintInput = true;
             playerControls.Actions.Sprint.canceled += Sprint => sprintInput = false;
+            
             playerControls.Actions.Jump.performed += Jump => jumpInput = true;
+            
+            playerControls.Actions.Aim.performed += i => aimInput = true;
+            playerControls.Actions.Aim.canceled += i => aimInput = false;
+
+            playerControls.Actions.Swing.started += i => swingInput = true;
+            playerControls.Actions.Swing.canceled += i => swingInput = false;
+            
             playerControls.Actions.Interact.performed += Interact => interactInput = true;
             playerControls.Actions.OpenInventory.performed += OpenInventory => { inventoryInput = true; playOneShot = true; };
             playerControls.Actions.Menu.performed += Menu => menuInput = true;
@@ -72,7 +93,7 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     private void Start() {
-        animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
+        //animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         
         // Ensure sounds 
@@ -97,7 +118,7 @@ public class PlayerInputManager : MonoBehaviour
         horizontalInput = movementInput.x;
 
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-        animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.IsSpriting);
+        //animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.IsSpriting);
 
         UpdateSound();
     }
@@ -247,6 +268,11 @@ public class PlayerInputManager : MonoBehaviour
         {
             walkFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             sprintFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            
+            PLAYBACK_STATE playbackState;
+            pause.getPlaybackState(out playbackState);
+
+            pause.start();
 
             return;
         }
