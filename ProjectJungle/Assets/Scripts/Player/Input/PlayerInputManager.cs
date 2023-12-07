@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 using FMODUnity;
 using FMOD.Studio;
 
@@ -319,7 +321,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interact_Pickup"))
         {
-            Debug.Log($"Press 'F' to pickup {other.gameObject.name}");
+            Debug.Log($"Press '{GetActionBinds("Interact")}' to pickup {other.gameObject.name}");
         }
     }
 
@@ -336,5 +338,11 @@ public class PlayerInputManager : MonoBehaviour
             InventoryManager.Instance.AddToInventory(newItem.PickupItem(), newItem.AmountPickedUp);
             interactInput = false;
         }
+    }
+
+    // Helpers
+    string GetActionBinds(string actionName)
+    {
+        return playerControls.FindAction(actionName).GetBindingDisplayString();
     }
 }
