@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject settingsUI;
 
     [SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
-    private EventInstance pause;
-    private EventInstance resume;
 
     private void Awake()
     {
@@ -43,11 +41,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         Time.timeScale = 0;
-        
-        PLAYBACK_STATE playbackState;
-        pause.getPlaybackState(out playbackState);
 
-        pause.start();
+        AudioManager.instance.PauseAmbience();
     }
 
     public void UnpauseGame()
@@ -56,10 +51,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
 
         Time.timeScale = 1;
-        
-        PLAYBACK_STATE playbackState;
-        resume.getPlaybackState(out playbackState);
 
-        resume.start();
+        AudioManager.instance.PauseAmbience(false);
     }
 }
