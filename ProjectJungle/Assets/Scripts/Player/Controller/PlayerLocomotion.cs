@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(PlayerAnimatorManager))]
 public class PlayerLocomotion : MonoBehaviour
 {
     [Header("Movement speeds")]
@@ -322,8 +323,8 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (!isGrounded) return;
 
-        //animatorManager.Animator.SetBool("isJumping", true);
-        //animatorManager.PlayTargetAnimation("Jump", false);
+        animatorManager.Animator.SetBool("isJumping", true);
+        animatorManager.PlayTargetAnimation("Jump", false);
 
         float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpForce);
         rb.AddForce(Vector3.up * jumpingVelocity, ForceMode.Impulse);

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using FMOD.Studio;
 
 public class GameManager : MonoBehaviour
 {

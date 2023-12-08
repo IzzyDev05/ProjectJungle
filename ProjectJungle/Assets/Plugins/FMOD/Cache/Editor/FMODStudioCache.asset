@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9183380356275868940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Abilities/GrappleRetract
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Abilities/GrappleRetract
+  Guid:
+    Data1: 1466290300
+    Data2: 1152971317
+    Data3: -1773681782
+    Data4: -151107379
+  Banks:
+  - {fileID: 7965227007703193557}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6058982731292482753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +42,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638375643562761284
+  lastModified: 638376477227629951
   FileSizes:
   - Name: Desktop
     Value: 832448
@@ -143,7 +170,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638375643548592160
+  lastModified: 638376488126646907
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -177,12 +204,14 @@ MonoBehaviour:
   - {fileID: 6615655129631058091}
   - {fileID: 4238706156112198448}
   - {fileID: -5592698046552485038}
+  - {fileID: 8857747849904874321}
+  - {fileID: -9183380356275868940}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1435372491640469679}
   StringsBanks:
   - {fileID: 5103938332709250910}
-  cacheTime: 638375645816345578
+  cacheTime: 638376524213272672
   cacheVersion: 131608
 --- !u!114 &4238706156112198448
 MonoBehaviour:
@@ -334,10 +363,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638375643548652182
+  lastModified: 638376488126696919
   FileSizes:
   - Name: Desktop
-    Value: 1468
+    Value: 1572
   Exists: 1
 --- !u!114 &6615655129631058091
 MonoBehaviour:
@@ -381,11 +410,38 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638375645816345578
+  lastModified: 638376524213272672
   FileSizes:
   - Name: Desktop
-    Value: 223008
+    Value: 245120
   Exists: 1
+--- !u!114 &8857747849904874321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/DropFromInventory
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/DropFromInventory
+  Guid:
+    Data1: 1682548698
+    Data2: 1328543846
+    Data3: -341602902
+    Data4: 1339724979
+  Banks:
+  - {fileID: 7965227007703193557}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8980225874561734848
 MonoBehaviour:
   m_ObjectHideFlags: 0

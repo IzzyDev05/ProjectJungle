@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMOD.Studio;
 
 public class Grappling : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Grappling : MonoBehaviour
     private LineRenderer lr;
     private Transform mainCam;
 
+    private EventInstance grapplingRetractingSound;
+
     private void Start()
     {
         inputManager = GetComponentInParent<PlayerInputManager>();
@@ -22,6 +25,8 @@ public class Grappling : MonoBehaviour
         playerRB = GetComponentInParent<Rigidbody>();
         lr = GetComponent<LineRenderer>();
         mainCam = Camera.main.transform;
+
+        grapplingRetractingSound = AudioManager.instance.CreateEventInstance(FModEvents.instance.grappleRetract, this.transform.parent);
     }
 
     private void Update()
@@ -73,6 +78,13 @@ public class Grappling : MonoBehaviour
         Vector3 grappleDirection = (grappleTarget - transform.position).normalized;
         playerRB.velocity = grappleDirection * grappleSpeed;
 
+        PLAYBACK_STATE grapplingRetractingPlaybackState;
+        grapplingRetractingSound.getPlaybackState(out grapplingRetractingPlaybackState);
+        if (grapplingRetractingPlaybackState.Equals(PLAYBACK_STATE.PLAYING) == false)
+        {
+            grapplingRetractingSound.start();
+        }
+
         float distanceToTarget = Vector3.Distance(transform.position, grappleTarget);
         if (distanceToTarget < 1f) {
             EndGrapple();
@@ -84,6 +96,13 @@ public class Grappling : MonoBehaviour
         playerLocomotion.IsGrappling = false;
         lr.positionCount = 0;
         grappleTarget = Vector3.zero;
+
+        PLAYBACK_STATE grapplingRetractingPlaybackState;
+        grapplingRetractingSound.getPlaybackState(out grapplingRetractingPlaybackState);
+        if (grapplingRetractingPlaybackState.Equals(PLAYBACK_STATE.PLAYING))
+        {
+            grapplingRetractingSound.stop(STOP_MODE.IMMEDIATE);
+        }
     }
 
     private Vector3 currentGrapplePosition = Vector3.zero;

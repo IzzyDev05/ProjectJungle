@@ -1,6 +1,7 @@
-using System;
 using UnityEngine;
 
+[RequireComponent (typeof(PlayerLocomotion))]
+[RequireComponent (typeof(PlayerInputManager))]
 public class PlayerManager : MonoBehaviour
 {
     private PlayerInputManager inputManager;
