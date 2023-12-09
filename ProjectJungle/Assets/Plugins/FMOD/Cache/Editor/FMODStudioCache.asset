@@ -224,7 +224,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638376596666298072
+  lastModified: 638376634628397919
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -262,12 +262,13 @@ MonoBehaviour:
   - {fileID: -9183380356275868940}
   - {fileID: -6664601037789022338}
   - {fileID: -4817107783912734194}
+  - {fileID: 4346300073698541552}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1435372491640469679}
   StringsBanks:
   - {fileID: 5103938332709250910}
-  cacheTime: 638376596668351673
+  cacheTime: 638376637886304689
   cacheVersion: 131608
 --- !u!114 &4238706156112198448
 MonoBehaviour:
@@ -314,6 +315,33 @@ MonoBehaviour:
     Data2: 1246944879
     Data3: -528484687
     Data4: 872133846
+  Banks:
+  - {fileID: 7965227007703193557}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4346300073698541552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Abilities/GrappleHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Abilities/GrappleHit
+  Guid:
+    Data1: -1707448786
+    Data2: 1105111774
+    Data3: 695051696
+    Data4: -745080255
   Banks:
   - {fileID: 7965227007703193557}
   IsStream: 0
@@ -419,10 +447,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638376596666358088
+  lastModified: 638376634628457940
   FileSizes:
   - Name: Desktop
-    Value: 1654
+    Value: 1700
   Exists: 1
 --- !u!114 &6615655129631058091
 MonoBehaviour:
@@ -466,10 +494,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638376596668351673
+  lastModified: 638376637886304689
   FileSizes:
   - Name: Desktop
-    Value: 260224
+    Value: 266208
   Exists: 1
 --- !u!114 &8857747849904874321
 MonoBehaviour:

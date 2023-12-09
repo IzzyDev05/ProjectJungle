@@ -70,6 +70,8 @@ public class Grappling : MonoBehaviour
             grappleTarget = hit.point;
             lr.positionCount = 2;
             playerLocomotion.IsGrappling = true;
+
+            AudioManager.instance.PlayOneShot(FModEvents.instance.grappleHit, grappleTarget);
         }
     }
 
@@ -87,7 +89,7 @@ public class Grappling : MonoBehaviour
 
         float distanceToTarget = Vector3.Distance(transform.position, grappleTarget);
         if (distanceToTarget < 1f) {
-            AudioManager.instance.PlayOneShot(FModEvents.instance.grappleRelease, this.transform.parent.position);
+            AudioManager.instance.PlayOneShot(FModEvents.instance.grappleRelease, grappleTarget);
             EndGrapple();
         }
     }

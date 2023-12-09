@@ -31,6 +31,9 @@ public class FModEvents : MonoBehaviour
     #endregion
 
     #region ABILITIES SFX
+    [field: Header("Grapple Hit SFX")]
+    [field: SerializeField] public EventReference grappleHit { get; private set; }
+
     [field: Header("Grapple Release SFX")]
     [field: SerializeField] public EventReference grappleRelease { get; private set; }
 
