@@ -26,13 +26,13 @@ public class FModEvents : MonoBehaviour
     [field: Header("Jumping SFX")]
     [field: SerializeField] public EventReference jumpingSound { get; private set; }
 
-    [field: Header("Landing SFX")]
-    [field: SerializeField] public EventReference landingSound { get; private set; }
+    /*[field: Header("Landing SFX")]
+    [field: SerializeField] public EventReference landingSound { get; private set; }*/
     #endregion
 
     #region ABILITIES SFX
-    [field: Header("Grapple SFX")]
-    [field: SerializeField] public EventReference grapple { get; private set; }
+    [field: Header("Grapple Release SFX")]
+    [field: SerializeField] public EventReference grappleRelease { get; private set; }
 
     [field: Header("Grapple Retract SFX")]
     [field: SerializeField] public EventReference grappleRetract { get; private set; }

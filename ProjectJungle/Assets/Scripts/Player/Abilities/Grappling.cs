@@ -87,6 +87,7 @@ public class Grappling : MonoBehaviour
 
         float distanceToTarget = Vector3.Distance(transform.position, grappleTarget);
         if (distanceToTarget < 1f) {
+            AudioManager.instance.PlayOneShot(FModEvents.instance.grappleRelease, this.transform.parent.position);
             EndGrapple();
         }
     }
@@ -102,6 +103,7 @@ public class Grappling : MonoBehaviour
         if (grapplingRetractingPlaybackState.Equals(PLAYBACK_STATE.PLAYING))
         {
             grapplingRetractingSound.stop(STOP_MODE.IMMEDIATE);
+            AudioManager.instance.PlayOneShot(FModEvents.instance.grappleRelease, this.transform.parent.position);
         }
     }
 

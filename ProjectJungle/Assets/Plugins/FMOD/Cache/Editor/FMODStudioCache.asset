@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6664601037789022338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Jump
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Jump
+  Guid:
+    Data1: -246377784
+    Data2: 1271820135
+    Data3: -1413408351
+    Data4: 1024863417
+  Banks:
+  - {fileID: 7965227007703193557}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6058982731292482753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +128,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-4817107783912734194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Abilities/GrappleRelease
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Abilities/GrappleRelease
+  Guid:
+    Data1: -943488261
+    Data2: 1082985649
+    Data3: -1553285982
+    Data4: -421210509
+  Banks:
+  - {fileID: 7965227007703193557}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4655033278106006732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +224,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638376488126646907
+  lastModified: 638376596666298072
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -206,12 +260,14 @@ MonoBehaviour:
   - {fileID: -5592698046552485038}
   - {fileID: 8857747849904874321}
   - {fileID: -9183380356275868940}
+  - {fileID: -6664601037789022338}
+  - {fileID: -4817107783912734194}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1435372491640469679}
   StringsBanks:
   - {fileID: 5103938332709250910}
-  cacheTime: 638376524213272672
+  cacheTime: 638376596668351673
   cacheVersion: 131608
 --- !u!114 &4238706156112198448
 MonoBehaviour:
@@ -363,10 +419,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638376488126696919
+  lastModified: 638376596666358088
   FileSizes:
   - Name: Desktop
-    Value: 1572
+    Value: 1654
   Exists: 1
 --- !u!114 &6615655129631058091
 MonoBehaviour:
@@ -410,10 +466,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638376524213272672
+  lastModified: 638376596668351673
   FileSizes:
   - Name: Desktop
-    Value: 245120
+    Value: 260224
   Exists: 1
 --- !u!114 &8857747849904874321
 MonoBehaviour:

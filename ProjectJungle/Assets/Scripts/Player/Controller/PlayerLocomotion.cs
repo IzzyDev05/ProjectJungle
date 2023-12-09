@@ -328,5 +328,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpForce);
         rb.AddForce(Vector3.up * jumpingVelocity, ForceMode.Impulse);
+
+        AudioManager.instance.PlayOneShot(FModEvents.instance.jumpingSound, this.transform.position);
     }
 }
