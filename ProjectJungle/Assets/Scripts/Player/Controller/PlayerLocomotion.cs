@@ -277,6 +277,9 @@ public class PlayerLocomotion : MonoBehaviour
             if (!isGrounded)
             {
                 animatorManager.PlayTargetAnimation("Landing", true);
+
+                if (isOnSlope == false)
+                    AudioManager.instance.PlayOneShot(FModEvents.instance.landingSound, this.transform.position);
             }
 
             inAirTimer = 1;

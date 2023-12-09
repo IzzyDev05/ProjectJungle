@@ -105,7 +105,7 @@ public class Grappling : MonoBehaviour
         if (grapplingRetractingPlaybackState.Equals(PLAYBACK_STATE.PLAYING))
         {
             grapplingRetractingSound.stop(STOP_MODE.IMMEDIATE);
-            AudioManager.instance.PlayOneShot(FModEvents.instance.grappleRelease, this.transform.parent.position);
+            AudioManager.instance.PlayOneShot(FModEvents.instance.grappleRelease, grappleTarget);
         }
     }
 

@@ -26,8 +26,8 @@ public class FModEvents : MonoBehaviour
     [field: Header("Jumping SFX")]
     [field: SerializeField] public EventReference jumpingSound { get; private set; }
 
-    /*[field: Header("Landing SFX")]
-    [field: SerializeField] public EventReference landingSound { get; private set; }*/
+    [field: Header("Landing SFX")]
+    [field: SerializeField] public EventReference landingSound { get; private set; }
     #endregion
 
     #region ABILITIES SFX
