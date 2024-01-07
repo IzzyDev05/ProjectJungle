@@ -2,9 +2,11 @@ using UnityEngine;
 
 [RequireComponent (typeof(PlayerLocomotion))]
 [RequireComponent (typeof(PlayerInputManager))]
+[RequireComponent (typeof(UIAndInteractionManager))]
 public class PlayerManager : MonoBehaviour
 {
     private PlayerInputManager inputManager;
+    private UIAndInteractionManager UIInteractionManager;
     private PlayerLocomotion playerLocomotion;
     private Animator anim;
 
@@ -14,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     {
         inputManager = GetComponent<PlayerInputManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        UIInteractionManager = GetComponent<UIAndInteractionManager>();
         anim = GetComponent<Animator>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -23,6 +26,7 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         inputManager.HandleAllInputs();
+        UIInteractionManager.HandleUIAndInteractionInputs();
     }
 
     private void FixedUpdate()

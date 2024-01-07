@@ -9,6 +9,7 @@ public class PlayerInputManager : MonoBehaviour
     private PlayerControls playerControls;
     private PlayerLocomotion playerLocomotion;
     //private PlayerAnimatorManager animatorManager;
+    private UIAndInteractionManager UIAndInteraction;
 
     private Vector2 movementInput;
     private float moveAmount;
@@ -20,16 +21,9 @@ public class PlayerInputManager : MonoBehaviour
     private bool aimInput;
     private bool swingInput;
 
-    private bool inventoryInput;
-    private bool menuInput;
-    private bool closeAllUI;
-    private bool interactInput;
-
     //Audio
     private EventInstance walkFootsteps;
     private EventInstance sprintFootsteps;
-
-    private bool playOneShot = false;
 
     #region PROPERTIES
     public float MoveAmount {
@@ -76,13 +70,6 @@ public class PlayerInputManager : MonoBehaviour
 
             playerControls.Actions.Swing.started += i => swingInput = true;
             playerControls.Actions.Swing.canceled += i => swingInput = false;
-            
-            playerControls.Actions.Interact.performed += Interact => interactInput = true;
-            playerControls.Actions.OpenInventory.performed += OpenInventory => { inventoryInput = true; playOneShot = true; };
-            playerControls.Actions.Menu.performed += Menu => menuInput = true;
-
-            playerControls.UI.CloseInventory.performed += CloseInventory => { inventoryInput = false; playOneShot = true; };
-            playerControls.UI.ExitUI.performed += CloseUI => closeAllUI = true;
 
         }
 
@@ -96,22 +83,17 @@ public class PlayerInputManager : MonoBehaviour
     private void Start() {
         //animatorManager = GetComponentInChildren<PlayerAnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        UIAndInteraction = GetComponent<UIAndInteractionManager>();
         
         // Ensure sounds 
         walkFootsteps = AudioManager.instance.CreateEventInstance(FModEvents.instance.walkingFootsteps, this.transform);
         sprintFootsteps = AudioManager.instance.CreateEventInstance(FModEvents.instance.sprintingFootsteps, this.transform);
-
-        // Disable all UI inputs
-        playerControls.UI.Disable();
-
-        closeAllUI = false;
     }
 
     public void HandleAllInputs() {
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpingInput();
-        HandleUIInputs();
     }
 
     private void HandleMovementInput() {
@@ -140,130 +122,10 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-
-    // Enables player's movement and action input
-    private void EnablePlayerInput()
-    {
-        playerControls.Movement.Enable();
-        playerControls.Actions.Enable();
-    }
-
-    // Disables player's movement and action input
-    private void DisablePlayerInput()
-    {
-        playerControls.Movement.Disable();
-        playerControls.Actions.Disable();
-    }
-
-
-    /// UI Inputs ///
-    private void SwitchInputs(bool toUIInputs)
-    {
-        if (toUIInputs)
-        {
-            playerControls.UI.Enable();
-
-            DisablePlayerInput();
-        }
-        else
-        {
-            EnablePlayerInput();
-
-            playerControls.UI.Disable();
-        }
-    }
-
-    /// <summary>
-    /// Closes inventory UI via other means like a button press
-    /// </summary>
-    public void ManuallyCloseInventory()
-    {
-        if (inventoryInput)
-        {
-            inventoryInput = false;
-            PlayOneShotSound(FModEvents.instance.backpack, transform.position);
-        }      
-    }
-
-    private void HandleUIInputs()
-    {
-        CloseUI();
-
-        if (menuInput)
-        {
-            OpenSettings();
-
-            return;
-        }
-
-        if (playOneShot)
-        {
-            PlayOneShotSound(FModEvents.instance.backpack, transform.position);
-        }
-
-        if (inventoryInput)
-        {
-            InventoryManager.Instance.OpenInventory();
-
-            SwitchInputs(true);
-
-            GameManager.Instance.PauseGame();
-        }
-    }
-
-    private void OpenSettings()
-    {
-        SwitchInputs(true);
-
-        GameManager.Instance.PauseGame();
-
-        GameManager.Instance.SettingsUI.SetActive(true);
-    }
-
-    private void CloseSettings()
-    {
-        GameManager.Instance.SettingsUI.SetActive(false);
-
-        menuInput = false;
-    }
-
-    private void CloseUI()
-    {
-        if (!playerControls.UI.enabled)
-        {
-            return;
-        }
-
-        if (closeAllUI)
-        {
-            ManuallyCloseInventory();
-            CloseSettings();
-            closeAllUI = false;
-        }
-
-        if (!inventoryInput)
-        {
-            InventoryManager.Instance.CloseInventory();
-
-            inventoryInput = false;
-        }
-
-        movementInput = Vector2.zero;
-
-        SwitchInputs(false);
-        GameManager.Instance.UnpauseGame();
-    }
-
     // Audio
-    private void PlayOneShotSound(EventReference oneshot, Vector3 position)
-    {
-        AudioManager.instance.PlayOneShot(oneshot, position);
-        playOneShot = false;
-    }
-
     private void UpdateSound()
     {
-        if (inventoryInput || menuInput)
+        if (UIAndInteraction.IsUIOpened())
         {
             walkFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             sprintFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -309,33 +171,27 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    // Interactions
-    private void OnTriggerEnter(Collider other)
+
+    // PlayerInputManager to UIAndInteractionManager Helpers
+    /// <summary>
+    /// Sets the movement input vector to (0,0).
+    /// </summary>
+    public void ResetMovementInput()
     {
-        if (other.gameObject.CompareTag("Interact_Pickup"))
-        {
-            Debug.Log($"Press '{GetActionBinds("Interact")}' to pickup {other.gameObject.name}");
-        }
+        movementInput = Vector2.zero;
     }
 
-    private void OnTriggerStay(Collider other)
+    // Enables player's movement and action input
+    public void EnablePlayerInput()
     {
-        if (!other.gameObject.CompareTag("Interact_Pickup"))
-        {
-            return;
-        }
-
-        if (interactInput)
-        {
-            ItemManager newItem = other.gameObject.GetComponent<ItemManager>();
-            InventoryManager.Instance.AddToInventory(newItem.PickupItem(), newItem.AmountPickedUp);
-            interactInput = false;
-        }
+        playerControls.Movement.Enable();
+        playerControls.Actions.Enable();
     }
 
-    // Helpers
-    string GetActionBinds(string actionName)
+    // Disables player's movement and action input
+    public void DisablePlayerInput()
     {
-        return playerControls.FindAction(actionName).GetBindingDisplayString();
+        playerControls.Movement.Disable();
+        playerControls.Actions.Disable();
     }
 }
