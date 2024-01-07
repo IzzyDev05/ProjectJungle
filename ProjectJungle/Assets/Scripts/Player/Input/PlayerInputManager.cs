@@ -88,7 +88,7 @@ public class PlayerInputManager : MonoBehaviour
         playerControls.Enable();
     }
 
-    private void OnDisable() {
+    public void OnDisable() {
         playerControls.Disable();
     }
 
@@ -141,17 +141,22 @@ public class PlayerInputManager : MonoBehaviour
 
 
     // Enables player's movement and action input
-    private void EnablePlayerInput()
+    public void EnablePlayerInput()
     {
         playerControls.Movement.Enable();
         playerControls.Actions.Enable();
     }
 
     // Disables player's movement and action input
-    private void DisablePlayerInput()
+    public void DisablePlayerInput()
     {
         playerControls.Movement.Disable();
         playerControls.Actions.Disable();
+    }
+    
+    public void ResetMovementInput()
+    {
+        movementInput = Vector2.zero;
     }
 
 

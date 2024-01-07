@@ -153,6 +153,8 @@ public class InventoryManager : MonoBehaviour
         updatedList.RemoveAt(positionInInventory);
 
         itemList = updatedList;
+
+        AudioManager.instance.PlayOneShot(FModEvents.instance.dropItem, GameManager.Player.transform.position);
     }
 
     void UpdateItemDisplayInSlot(int positionInInventory)

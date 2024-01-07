@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
@@ -100,6 +99,24 @@ public class AudioManager : MonoBehaviour
         ambienceEventInstance = CreateEventInstance(ambienceEventReference, Camera.main.transform);
 
         ambienceEventInstance.start();
+    }
+
+    public void PauseAmbience(bool pauseAmbientSound = true)
+    {
+        bool isAmbientSoundPaused;
+
+        ambienceEventInstance.getPaused(out isAmbientSoundPaused);
+
+        if (pauseAmbientSound && isAmbientSoundPaused == false)
+        {
+            ambienceEventInstance.setPaused(true);
+            
+        }
+        else if (pauseAmbientSound == false && isAmbientSoundPaused)
+        {
+            ambienceEventInstance.setPaused(false);
+            
+        }
     }
 
     void CleanUp()
