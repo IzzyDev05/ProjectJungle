@@ -1,18 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 using FMODUnity;
-using FMOD.Studio;
 
 public class UIAndInteractionManager : MonoBehaviour
 {
     private PlayerInteractionAndUIControls UIandInteractionControls;
     private PlayerInputManager playerInput;
 
-    private bool inventoryInput;
-    private bool menuInput;
-    private bool closeAllUI;
-    private bool interactInput;
+    private bool inventoryInput = false;
+    private bool menuInput = false;
+    private bool closeAllUI = false;
 
     private bool playOneShot = false;
 
@@ -22,13 +19,14 @@ public class UIAndInteractionManager : MonoBehaviour
         {
             UIandInteractionControls = new PlayerInteractionAndUIControls();
 
-            UIandInteractionControls.Player.Interact.performed += Interact => interactInput = true;
             UIandInteractionControls.Player.OpenInventory.performed += OpenInventory => { inventoryInput = true; playOneShot = true; };
             UIandInteractionControls.Player.OpenMenu.performed += Menu => menuInput = true;
 
             UIandInteractionControls.UI.CloseInventory.performed += CloseInventory => { inventoryInput = false; playOneShot = true; };
             UIandInteractionControls.UI.ExitUI.performed += CloseUI => closeAllUI = true;
         }
+
+        UIandInteractionControls.Enable();
     }
 
     private void OnDisable()
@@ -52,26 +50,13 @@ public class UIAndInteractionManager : MonoBehaviour
         HandleUIInputs();
     }
 
-    private void SwitchToUIInputs(bool switchToUI)
+    /// UI Inputs ///
+    private void SwitchInputControls(bool toUIInputs)
     {
-        if (switchToUI == true)
+        if (toUIInputs == true)
         {
             UIandInteractionControls.Player.Disable();
             UIandInteractionControls.UI.Enable();
-        }
-        else
-        {
-            UIandInteractionControls.UI.Disable();
-            UIandInteractionControls.Player.Enable();
-        }
-    }
-
-    /// UI Inputs ///
-    private void SwitchInputs(bool toUIInputs)
-    {
-        if (toUIInputs)
-        {
-            SwitchToUIInputs(true);
 
             playerInput.DisablePlayerInput();
         }
@@ -79,7 +64,8 @@ public class UIAndInteractionManager : MonoBehaviour
         {
             playerInput.EnablePlayerInput();
 
-            SwitchToUIInputs(false);
+            UIandInteractionControls.UI.Disable();
+            UIandInteractionControls.Player.Enable();
         }
     }
 
@@ -88,7 +74,7 @@ public class UIAndInteractionManager : MonoBehaviour
     /// </summary>
     public void ManuallyCloseInventory()
     {
-        if (inventoryInput)
+        if (inventoryInput == true)
         {
             inventoryInput = false;
             PlayOneShotSound(FModEvents.instance.backpack, transform.position);
@@ -115,7 +101,7 @@ public class UIAndInteractionManager : MonoBehaviour
         {
             InventoryManager.Instance.OpenInventory();
 
-            SwitchInputs(true);
+            SwitchInputControls(true);
 
             GameManager.Instance.PauseGame();
         }
@@ -123,7 +109,7 @@ public class UIAndInteractionManager : MonoBehaviour
 
     private void OpenSettings()
     {
-        SwitchInputs(true);
+        SwitchInputControls(true);
 
         GameManager.Instance.PauseGame();
 
@@ -139,19 +125,19 @@ public class UIAndInteractionManager : MonoBehaviour
 
     private void CloseUI()
     {
-        if (!UIandInteractionControls.UI.enabled)
+        if (UIandInteractionControls.UI.enabled == false)
         {
             return;
         }
 
-        if (closeAllUI)
+        if (closeAllUI == true)
         {
             ManuallyCloseInventory();
             CloseSettings();
             closeAllUI = false;
         }
 
-        if (!inventoryInput)
+        if (inventoryInput == false)
         {
             InventoryManager.Instance.CloseInventory();
 
@@ -160,7 +146,7 @@ public class UIAndInteractionManager : MonoBehaviour
 
         playerInput.ResetMovementInput();
 
-        SwitchInputs(false);
+        SwitchInputControls(false);
         GameManager.Instance.UnpauseGame();
     }
 
@@ -175,7 +161,7 @@ public class UIAndInteractionManager : MonoBehaviour
     // Interactions
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Interact_Pickup"))
+        if (other.gameObject.CompareTag("Interact_Pickup") == true)
         {
             Debug.Log($"Press '{GetActionBinds("Interact")}' to pickup {other.gameObject.name}");
         }
@@ -183,16 +169,15 @@ public class UIAndInteractionManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.gameObject.CompareTag("Interact_Pickup"))
+        if (!other.gameObject.CompareTag("Interact_Pickup") == true)
         {
             return;
         }
 
-        if (interactInput)
+        if (UIandInteractionControls.Player.Interact.phase == InputActionPhase.Performed)
         {
             ItemManager newItem = other.gameObject.GetComponent<ItemManager>();
             InventoryManager.Instance.AddToInventory(newItem.PickupItem(), newItem.AmountPickedUp);
-            interactInput = false;
         }
     }
 

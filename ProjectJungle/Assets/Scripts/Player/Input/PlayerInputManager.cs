@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-using FMODUnity;
 using FMOD.Studio;
 
 public class PlayerInputManager : MonoBehaviour
