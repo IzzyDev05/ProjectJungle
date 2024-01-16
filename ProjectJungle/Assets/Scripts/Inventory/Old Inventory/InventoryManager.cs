@@ -23,7 +23,7 @@ public class InventoryManager : MonoBehaviour
         inventorySlotList.Clear();
         itemList.Clear();
 
-        #region SIMPLETON
+        #region SINGLETON
         if (Instance != null)
         {
             Debug.LogError("Multiple Inventory Manager Instances found.");
