@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject settingsUI;
 
-    [SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
+    //[SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
 
     private void Awake()
     {
@@ -23,13 +23,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (startingItems.Count > 0)
+        /*if (startingItems.Count > 0)
         {
             foreach (ItemManager startingItem in startingItems)
             {
                 InventoryManager.Instance.AddToInventory(startingItem);
             }
-        }
+        }*/
     }
 
     public GameObject SettingsUI { get { return settingsUI; } }

@@ -8,25 +8,12 @@ public class NewSlotManager : MonoBehaviour
     [SerializeField] GameObject slotItem;
     [SerializeField] Image itemImage;
     [SerializeField] Image emptyImage;
-
-
     private void Awake()
     {
         if (itemImage.gameObject.activeSelf == true)
         {
             itemImage.gameObject.SetActive(false);
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /// <summary>
@@ -36,11 +23,20 @@ public class NewSlotManager : MonoBehaviour
     /// <returns>True if the item matched the slot item</returns>
     public bool MatchSlotItem(GameObject pickedUpItem)
     {
-        return slotItem == pickedUpItem ? true : false;
+        if (slotItem == null)
+        {
+            Debug.LogError("Slot Item is NULL");
+            return false;
+        }
+
+        return slotItem.name == pickedUpItem.name ? true : false;
     }
 
-    public void AddItem()
+    public void AddItem(GameObject item)
     {
+        AudioManager.instance.PlayOneShot(FModEvents.instance.pickupItem, GameManager.Player.transform.position);
+
         itemImage.gameObject.SetActive(true);
+        Destroy(item);
     }
 }

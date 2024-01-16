@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class NewInventoryManager : MonoBehaviour
 {
@@ -11,7 +11,6 @@ public class NewInventoryManager : MonoBehaviour
     [SerializeField] GameObject slotContainer;
 
     [SerializeField] List<GameObject> slotList;
-
 
     private void Awake()
     {
@@ -85,7 +84,7 @@ public class NewInventoryManager : MonoBehaviour
 
             if (slotManager.MatchSlotItem(item) == true)
             {
-                slotManager.AddItem();
+                slotManager.AddItem(item);
             }
         }
     }
