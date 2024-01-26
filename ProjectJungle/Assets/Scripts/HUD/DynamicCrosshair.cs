@@ -40,12 +40,20 @@ public class DynamicCrosshair : MonoBehaviour
     void Start()
     {
         mainCam = Camera.main.transform;
-        defaultColor = crosshair.color;
+        
+        if (aimCam == null)
+        {
+            aimCam = GameObject.Find("AimCam").transform;
+        }
 
         if(ignoredLayer.value == 0)
         {
             ignoredLayer = LayerMask.NameToLayer("Player");
         }
+
+        defaultColor = crosshair.color;
+
+        crosshair.color = Color.clear;
     }
 
     // Update is called once per frame
@@ -56,6 +64,15 @@ public class DynamicCrosshair : MonoBehaviour
 
     void DetectGrapplePoint()
     {
+        if (aimCam.gameObject.activeSelf == false)
+        {
+            if (crosshair.color != Color.clear)
+            {
+                crosshair.color = Color.clear;
+            }
+            return;
+        }
+
         Vector3 camAim = new Vector3(mainCam.forward.x, mainCam.forward.y, mainCam.forward.z);
         Ray ray = new Ray(aimCam.position, camAim);
 
@@ -71,14 +88,13 @@ public class DynamicCrosshair : MonoBehaviour
     }
 
     
-    public void SetupDynamicCrosshair(LayerMask layer, Transform aimCameraTransform, float distance)
+    public void SetupDynamicCrosshair(LayerMask layer, float distance)
     {
         if (grappleLayer.value == 0) 
         {
             grappleLayer = layer;
         }
 
-        aimCam = aimCameraTransform;
         grappleDistance = distance;
     }
 }

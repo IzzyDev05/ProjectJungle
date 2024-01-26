@@ -16,6 +16,13 @@ public class NewSlotManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        itemImage.sprite = slotItem.GetComponent<TrinketManager>().TrinketSprite;
+
+        this.name = slotItem.name + " Slot";
+    }
+
     /// <summary>
     /// Check if the item picked up matches the item for this slot
     /// </summary>

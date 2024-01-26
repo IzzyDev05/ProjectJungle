@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -53,15 +52,5 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         AudioManager.instance.PauseAmbience(false);
-    }
-
-    public void QuitGame()
-    {
-#if UNITY_EDITOR
-
-        EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 }

@@ -27,7 +27,7 @@ public class Grappling : MonoBehaviour
         mainCam = Camera.main.transform;
 
         grapplingRetractingSound = AudioManager.instance.CreateEventInstance(FModEvents.instance.grappleRetract, this.transform.parent);
-        DynamicCrosshair.Instance.SetupDynamicCrosshair(grappleLayer, aimCam, grappleDistance);
+        DynamicCrosshair.Instance.SetupDynamicCrosshair(grappleLayer, grappleDistance);
     }
 
     private void Update()

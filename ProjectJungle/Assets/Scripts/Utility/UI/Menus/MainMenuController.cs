@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] Scene newGameScene;
-    [SerializeField] Scene settingsScene;
+    [SerializeField] string newGameSceneName;
+    [SerializeField] string settingsSceneName;
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +23,36 @@ public class MainMenuController : MonoBehaviour
 
     public void NewGameButton()
     {
-
+        if (newGameSceneName == "")
+        {
+            Debug.LogError("Missing new game scene name");
+        }
+        else
+        {
+            SceneManager.LoadScene(newGameSceneName);
+        }
     }
 
     public void SettingButton()
     {
-
+        if (settingsSceneName == "")
+        {
+            Debug.Log("Settings stuff");
+        }
+        else
+        {
+            SceneManager.LoadScene(settingsSceneName);
+        }
     }
 
     public void QuitGameButton()
     {
-        GameManager.Instance.QuitGame();
+#if UNITY_EDITOR
+
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
-    
+
 }

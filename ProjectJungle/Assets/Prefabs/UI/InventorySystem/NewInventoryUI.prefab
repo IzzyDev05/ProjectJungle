@@ -705,14 +705,12 @@ PrefabInstance:
         type: 3}
       propertyPath: slotItem
       value: 
-      objectReference: {fileID: 1826543164433107775, guid: 28d307249959a494c954fee3c41b260f,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1894063990087410294, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b97c91e8b348f3f4ebdc11f5c82182cd,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2204871826051104297, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -821,7 +819,12 @@ PrefabInstance:
     - target: {fileID: 2204871826051104298, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Name
-      value: Shield
+      value: NewItemSlot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548320778715582174, guid: de384a63f76bbcc4682ec78522697cd1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de384a63f76bbcc4682ec78522697cd1, type: 3}
@@ -842,8 +845,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9977703091e29d44e85a884a1d7958b9,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2204871826051104297, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -952,7 +954,12 @@ PrefabInstance:
     - target: {fileID: 2204871826051104298, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Name
-      value: Sword
+      value: NewItemSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548320778715582174, guid: de384a63f76bbcc4682ec78522697cd1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de384a63f76bbcc4682ec78522697cd1, type: 3}
@@ -973,14 +980,12 @@ PrefabInstance:
         type: 3}
       propertyPath: slotItem
       value: 
-      objectReference: {fileID: 8203073568141072114, guid: 4c4141b2c17fa0442870702fdb8be886,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1894063990087410294, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2204871826051104297, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1089,7 +1094,12 @@ PrefabInstance:
     - target: {fileID: 2204871826051104298, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Name
-      value: Axe
+      value: NewItemSlot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548320778715582174, guid: de384a63f76bbcc4682ec78522697cd1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de384a63f76bbcc4682ec78522697cd1, type: 3}
@@ -1110,14 +1120,17 @@ PrefabInstance:
         type: 3}
       propertyPath: slotItem
       value: 
-      objectReference: {fileID: 4865309214770636011, guid: cbeef3c98f525724db0ed4845f322aa5,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1894063990087410294, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 98bdcbf4fc31e2340bc64a5db9ac98f8,
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894063990087410294, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2204871826051104297, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1226,7 +1239,12 @@ PrefabInstance:
     - target: {fileID: 2204871826051104298, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Name
-      value: Arrow
+      value: NewItemSlot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548320778715582174, guid: de384a63f76bbcc4682ec78522697cd1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de384a63f76bbcc4682ec78522697cd1, type: 3}
@@ -1247,14 +1265,12 @@ PrefabInstance:
         type: 3}
       propertyPath: slotItem
       value: 
-      objectReference: {fileID: 3317823749142253822, guid: 4fad167ba1bf7f34b845f25505d75b71,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1894063990087410294, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5d7061fc7da05ce44add317708ec7215,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2204871826051104297, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1363,7 +1379,12 @@ PrefabInstance:
     - target: {fileID: 2204871826051104298, guid: de384a63f76bbcc4682ec78522697cd1,
         type: 3}
       propertyPath: m_Name
-      value: Bow
+      value: NewItemSlot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548320778715582174, guid: de384a63f76bbcc4682ec78522697cd1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de384a63f76bbcc4682ec78522697cd1, type: 3}
