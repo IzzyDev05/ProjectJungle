@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8451155912020729325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Footsteps/WoodWalkingFootSteps
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Footsteps/WoodWalkingFootSteps
+  Guid:
+    Data1: -1547818232
+    Data2: 1086424736
+    Data3: 735995049
+    Data4: -254788915
+  Banks:
+  - {fileID: 3732120881456187572}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 510
 --- !u!114 &-7281648503170389747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +69,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638423005903837548
+  lastModified: 638376640085278903
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -116,7 +143,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638343537888569058
+  lastModified: 638376477227629951
   FileSizes:
   - Name: Desktop
     Value: 832448
@@ -202,33 +229,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-1225415739257645317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Ambient/AmbientForest
-  m_EditorClassIdentifier: 
-  Path: event:/Ambient/AmbientForest
-  Guid:
-    Data1: -1311130597
-    Data2: 1261065880
-    Data3: 1453410980
-    Data4: 455237195
-  Banks:
-  - {fileID: 117534892912118652}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 74616
 --- !u!114 &-1050486599336390292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,14 +273,10 @@ MonoBehaviour:
   - {fileID: -5977655128140700371}
   - {fileID: -4224755481116286122}
   - {fileID: 3732120881456187572}
-  - {fileID: 117534892912118652}
   EditorEvents:
   - {fileID: -2643257370534217103}
-  - {fileID: 3566926568573435468}
   - {fileID: -5337345448084633181}
   - {fileID: 7551139953601134356}
-  - {fileID: 5620293404418226501}
-  - {fileID: -1225415739257645317}
   - {fileID: 2092968921248827966}
   - {fileID: -1977148827041264958}
   - {fileID: -1050486599336390292}
@@ -293,33 +289,15 @@ MonoBehaviour:
   - {fileID: 1831741489283790697}
   - {fileID: 3203402788735416036}
   - {fileID: -2354860615597668093}
+  - {fileID: -8451155912020729325}
+  - {fileID: 6956858685127136808}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5977655128140700371}
   StringsBanks:
   - {fileID: 5902968966066797363}
-  cacheTime: 638423005905662252
+  cacheTime: 638376640087119320
   cacheVersion: 131608
---- !u!114 &117534892912118652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Ambient.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Ambient.bank
-  Name: Ambient
-  StudioPath: bank:/Ambient
-  lastModified: 638423005905662252
-  FileSizes:
-  - Name: Desktop
-    Value: 832448
-  Exists: 1
 --- !u!114 &1010604902061132227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,33 +433,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
---- !u!114 &3566926568573435468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/WalkingFootSteps
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/WalkingFootSteps
-  Guid:
-    Data1: -1547818232
-    Data2: 1086424736
-    Data3: 735995049
-    Data4: -254788915
-  Banks:
-  - {fileID: 3732120881456187572}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 510
 --- !u!114 &3732120881456187572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,38 +448,11 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638423005779386112
+  lastModified: 638376640087119320
   FileSizes:
   - Name: Desktop
-    Value: 268672
+    Value: 274688
   Exists: 1
---- !u!114 &5620293404418226501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SprintingFootSteps
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SprintingFootSteps
-  Guid:
-    Data1: -332324641
-    Data2: 1183347614
-    Data3: 1348947597
-    Data4: 153064855
-  Banks:
-  - {fileID: 3732120881456187572}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 510
 --- !u!114 &5902968966066797363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,10 +468,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638423005904057134
+  lastModified: 638376640085388920
   FileSizes:
   - Name: Desktop
-    Value: 1716
+    Value: 1738
   Exists: 1
 --- !u!114 &6110942777324095234
 MonoBehaviour:
@@ -576,6 +500,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6956858685127136808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Footsteps/WoodSprintingFootSteps
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Footsteps/WoodSprintingFootSteps
+  Guid:
+    Data1: -332324641
+    Data2: 1183347614
+    Data3: 1348947597
+    Data4: 153064855
+  Banks:
+  - {fileID: 3732120881456187572}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 510
 --- !u!114 &7551139953601134356
 MonoBehaviour:
   m_ObjectHideFlags: 0
