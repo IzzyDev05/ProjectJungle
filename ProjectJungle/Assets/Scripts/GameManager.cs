@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using FMOD.Studio;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,9 +9,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject settingsUI;
 
-    [SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
-    private EventInstance pause;
-    private EventInstance resume;
+    //[SerializeField] List<ItemManager> startingItems = new List<ItemManager>();
 
     private void Awake()
     {
@@ -26,13 +23,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (startingItems.Count > 0)
+        /*if (startingItems.Count > 0)
         {
             foreach (ItemManager startingItem in startingItems)
             {
                 InventoryManager.Instance.AddToInventory(startingItem);
             }
-        }
+        }*/
     }
 
     public GameObject SettingsUI { get { return settingsUI; } }
@@ -43,11 +40,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         Time.timeScale = 0;
-        
-        PLAYBACK_STATE playbackState;
-        pause.getPlaybackState(out playbackState);
 
-        pause.start();
+        AudioManager.instance.PauseAmbience();
     }
 
     public void UnpauseGame()
@@ -56,10 +50,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
 
         Time.timeScale = 1;
-        
-        PLAYBACK_STATE playbackState;
-        resume.getPlaybackState(out playbackState);
 
-        resume.start();
+        AudioManager.instance.PauseAmbience(false);
     }
 }

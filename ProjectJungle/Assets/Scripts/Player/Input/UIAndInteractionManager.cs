@@ -78,6 +78,8 @@ public class UIAndInteractionManager : MonoBehaviour
         {
             inventoryInput = false;
             PlayOneShotSound(FModEvents.instance.backpack, transform.position);
+
+            NewInventoryManager.Instance.CloseInventory();
         }
     }
 
@@ -99,7 +101,8 @@ public class UIAndInteractionManager : MonoBehaviour
 
         if (inventoryInput == true)
         {
-            InventoryManager.Instance.OpenInventory();
+            //InventoryManager.Instance.OpenInventory();
+            NewInventoryManager.Instance.OpenInventory();
 
             SwitchInputControls(true);
 
@@ -139,7 +142,8 @@ public class UIAndInteractionManager : MonoBehaviour
 
         if (inventoryInput == false)
         {
-            InventoryManager.Instance.CloseInventory();
+            //InventoryManager.Instance.CloseInventory();
+            NewInventoryManager.Instance.CloseInventory();
 
             inventoryInput = false;
         }
@@ -176,8 +180,9 @@ public class UIAndInteractionManager : MonoBehaviour
 
         if (UIandInteractionControls.Player.Interact.phase == InputActionPhase.Performed)
         {
-            ItemManager newItem = other.gameObject.GetComponent<ItemManager>();
-            InventoryManager.Instance.AddToInventory(newItem.PickupItem(), newItem.AmountPickedUp);
+            /*ItemManager newItem = other.gameObject.GetComponent<ItemManager>();
+            InventoryManager.Instance.AddToInventory(newItem.PickupItem(), newItem.AmountPickedUp);*/
+            NewInventoryManager.Instance.AddToInventory(other.gameObject);
         }
     }
 
