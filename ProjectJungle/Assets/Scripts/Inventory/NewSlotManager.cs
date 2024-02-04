@@ -8,11 +8,19 @@ public class NewSlotManager : MonoBehaviour
     [SerializeField] GameObject slotItem;
     [SerializeField] Image itemImage;
     [SerializeField] Image emptyImage;
+
+    bool isCollected = false; 
+
     private void Awake()
     {
         if (itemImage.gameObject.activeSelf == true)
         {
             itemImage.gameObject.SetActive(false);
+        }
+
+        if (isCollected == true)
+        {
+            isCollected = false;
         }
     }
 
@@ -21,6 +29,8 @@ public class NewSlotManager : MonoBehaviour
         itemImage.sprite = slotItem.GetComponent<TrinketManager>().TrinketSprite;
 
         this.name = slotItem.name + " Slot";
+
+        SetupButton();
     }
 
     /// <summary>
@@ -45,5 +55,28 @@ public class NewSlotManager : MonoBehaviour
 
         itemImage.gameObject.SetActive(true);
         Destroy(item);
+
+        isCollected = true;
+    }
+
+    public void OpenItemPanel()
+    {
+        if (isCollected == false)
+        {
+            return;
+        }
+
+        TrinketManager trinket = slotItem.GetComponent<TrinketManager>();
+
+        NewItemViewer.Instance.OpenItemViewer(trinket.TrinketSprite, slotItem.name, trinket.TricketLore);
+    }
+
+    void SetupButton()
+    {
+        Button button = GetComponent<Button>();
+
+        button.onClick.RemoveAllListeners();
+
+        button.onClick.AddListener(OpenItemPanel);
     }
 }

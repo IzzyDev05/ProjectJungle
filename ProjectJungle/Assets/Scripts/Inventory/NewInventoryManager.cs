@@ -58,6 +58,7 @@ public class NewInventoryManager : MonoBehaviour
     public void CloseInventory()
     {
         inventoryUI.SetActive(false);
+        NewItemViewer.Instance.HideItemViewer();
     }
 
     /// <summary>

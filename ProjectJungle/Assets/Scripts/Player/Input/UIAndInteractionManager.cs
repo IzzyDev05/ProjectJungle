@@ -80,6 +80,7 @@ public class UIAndInteractionManager : MonoBehaviour
             PlayOneShotSound(FModEvents.instance.backpack, transform.position);
 
             NewInventoryManager.Instance.CloseInventory();
+            
         }
     }
 
