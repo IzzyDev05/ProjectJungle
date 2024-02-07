@@ -176,33 +176,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""OpenInventory"",
-                    ""type"": ""Button"",
-                    ""id"": ""9795d0bb-6fe8-441e-afa9-5bb4c3aafd89"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""70c3d25d-9287-4057-af9b-c33490487791"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""3ca5c12d-169d-4c51-81db-8d766b784b7e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,142 +266,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Swing"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bd424e18-123f-4fa8-b4b8-77cfa99119eb"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenInventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cecfce72-921f-4c62-ad82-ebc5a04654fb"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenInventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ab9a91e6-f297-4178-b65d-46ed04893d97"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d03fc5fb-90d5-48a8-807c-2238bbfe6b48"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8aba985c-7141-459c-96ed-7edcc7058b35"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""23d923a0-d7b8-4e87-b112-a8b14323edb2"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""UI"",
-            ""id"": ""c3066f88-bb30-4806-b568-e1789fa6f6ae"",
-            ""actions"": [
-                {
-                    ""name"": ""ExitUI"",
-                    ""type"": ""Button"",
-                    ""id"": ""aac5e1cf-d64e-4dff-9a3f-1047dc09c027"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CloseInventory"",
-                    ""type"": ""Button"",
-                    ""id"": ""028413e5-da9e-46b5-b263-393ca0550ac0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""677dae80-24f2-4303-99d2-36f8dbc5e268"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ExitUI"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a79431a6-0d9a-4fc0-8e3a-a594edc2876e"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ExitUI"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4fa8e906-5c17-40c9-89fb-debeb3c447cc"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseInventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""15c39ef1-ed0e-4f32-bba1-1c7229066690"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseInventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -445,13 +282,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions_Aim = m_Actions.FindAction("Aim", throwIfNotFound: true);
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
         m_Actions_Swing = m_Actions.FindAction("Swing", throwIfNotFound: true);
-        m_Actions_OpenInventory = m_Actions.FindAction("OpenInventory", throwIfNotFound: true);
-        m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
-        m_Actions_Menu = m_Actions.FindAction("Menu", throwIfNotFound: true);
-        // UI
-        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_ExitUI = m_UI.FindAction("ExitUI", throwIfNotFound: true);
-        m_UI_CloseInventory = m_UI.FindAction("CloseInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -571,9 +401,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Aim;
     private readonly InputAction m_Actions_Jump;
     private readonly InputAction m_Actions_Swing;
-    private readonly InputAction m_Actions_OpenInventory;
-    private readonly InputAction m_Actions_Interact;
-    private readonly InputAction m_Actions_Menu;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -582,9 +409,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Actions_Aim;
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
         public InputAction @Swing => m_Wrapper.m_Actions_Swing;
-        public InputAction @OpenInventory => m_Wrapper.m_Actions_OpenInventory;
-        public InputAction @Interact => m_Wrapper.m_Actions_Interact;
-        public InputAction @Menu => m_Wrapper.m_Actions_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -606,15 +430,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Swing.started += instance.OnSwing;
             @Swing.performed += instance.OnSwing;
             @Swing.canceled += instance.OnSwing;
-            @OpenInventory.started += instance.OnOpenInventory;
-            @OpenInventory.performed += instance.OnOpenInventory;
-            @OpenInventory.canceled += instance.OnOpenInventory;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
-            @Menu.started += instance.OnMenu;
-            @Menu.performed += instance.OnMenu;
-            @Menu.canceled += instance.OnMenu;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -631,15 +446,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Swing.started -= instance.OnSwing;
             @Swing.performed -= instance.OnSwing;
             @Swing.canceled -= instance.OnSwing;
-            @OpenInventory.started -= instance.OnOpenInventory;
-            @OpenInventory.performed -= instance.OnOpenInventory;
-            @OpenInventory.canceled -= instance.OnOpenInventory;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
-            @Menu.started -= instance.OnMenu;
-            @Menu.performed -= instance.OnMenu;
-            @Menu.canceled -= instance.OnMenu;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -657,60 +463,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public ActionsActions @Actions => new ActionsActions(this);
-
-    // UI
-    private readonly InputActionMap m_UI;
-    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_ExitUI;
-    private readonly InputAction m_UI_CloseInventory;
-    public struct UIActions
-    {
-        private @PlayerControls m_Wrapper;
-        public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ExitUI => m_Wrapper.m_UI_ExitUI;
-        public InputAction @CloseInventory => m_Wrapper.m_UI_CloseInventory;
-        public InputActionMap Get() { return m_Wrapper.m_UI; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
-        public void AddCallbacks(IUIActions instance)
-        {
-            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @ExitUI.started += instance.OnExitUI;
-            @ExitUI.performed += instance.OnExitUI;
-            @ExitUI.canceled += instance.OnExitUI;
-            @CloseInventory.started += instance.OnCloseInventory;
-            @CloseInventory.performed += instance.OnCloseInventory;
-            @CloseInventory.canceled += instance.OnCloseInventory;
-        }
-
-        private void UnregisterCallbacks(IUIActions instance)
-        {
-            @ExitUI.started -= instance.OnExitUI;
-            @ExitUI.performed -= instance.OnExitUI;
-            @ExitUI.canceled -= instance.OnExitUI;
-            @CloseInventory.started -= instance.OnCloseInventory;
-            @CloseInventory.performed -= instance.OnCloseInventory;
-            @CloseInventory.canceled -= instance.OnCloseInventory;
-        }
-
-        public void RemoveCallbacks(IUIActions instance)
-        {
-            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IUIActions instance)
-        {
-            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public UIActions @UI => new UIActions(this);
     public interface IMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -722,13 +474,5 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSwing(InputAction.CallbackContext context);
-        void OnOpenInventory(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
-        void OnMenu(InputAction.CallbackContext context);
-    }
-    public interface IUIActions
-    {
-        void OnExitUI(InputAction.CallbackContext context);
-        void OnCloseInventory(InputAction.CallbackContext context);
     }
 }

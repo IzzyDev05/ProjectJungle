@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(PlayerAnimatorManager))]
 public class PlayerLocomotion : MonoBehaviour
 {
     [Header("Movement speeds")]
@@ -46,72 +47,98 @@ public class PlayerLocomotion : MonoBehaviour
     public bool shouldMove;
 
     #region PROPERTIES
-    public float MaxVelocity {
-        get {
+    public float MaxVelocity
+    {
+        get
+        {
             return maxVelocity;
         }
     }
-    public float InAirTimer {
-        get {
+    public float InAirTimer
+    {
+        get
+        {
             return inAirTimer;
         }
-        set {
+        set
+        {
             inAirTimer = value;
         }
     }
-    public Vector3 SwingDirection {
-        get {
+    public Vector3 SwingDirection
+    {
+        get
+        {
             return swingDirection;
         }
-        set {
+        set
+        {
             swingDirection = value;
         }
     }
-    public bool IsSpriting {
-        get {
+    public bool IsSpriting
+    {
+        get
+        {
             return isSprinting;
         }
-        set {
+        set
+        {
             isSprinting = value;
         }
     }
-    public bool IsJumping {
-        get {
+    public bool IsJumping
+    {
+        get
+        {
             return isJumping;
         }
-        set {
+        set
+        {
             isJumping = value;
         }
     }
-    public bool IsGrappling {
-        get {
+    public bool IsGrappling
+    {
+        get
+        {
             return isGrappling;
         }
-        set {
+        set
+        {
             isGrappling = value;
         }
     }
-    public bool IsSwinging {
-        get {
+    public bool IsSwinging
+    {
+        get
+        {
             return isSwinging;
         }
-        set {
+        set
+        {
             isSwinging = value;
         }
     }
-    public bool ShouldHaveAirMomentum {
-        get {
+    public bool ShouldHaveAirMomentum
+    {
+        get
+        {
             return shouldHaveAirMomentum;
         }
-        set {
+        set
+        {
             shouldHaveAirMomentum = value;
         }
     }
-    public bool HasAddedForwardMomentum {
-        get {
+    public bool HasAddedForwardMomentum
+    {
+        get
+        {
             return hasAddedForwardMomentum;
         }
-        set {
+        set
+        {
             hasAddedForwardMomentum = value;
         }
     }
@@ -141,18 +168,23 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (isJumping || isSwinging || isGrappling) return;
 
-        if (!shouldHaveAirMomentum) {
+        if (!shouldHaveAirMomentum)
+        {
             moveDirection = cam.forward * inputManager.VerticalInput + cam.right * inputManager.HorizontalInput;
             moveDirection.Normalize();
 
-            if (isSprinting) {
+            if (isSprinting)
+            {
                 moveDirection *= sprintingSpeed;
             }
-            else {
-                if (inputManager.MoveAmount >= 0.5f) {
+            else
+            {
+                if (inputManager.MoveAmount >= 0.5f)
+                {
                     moveDirection *= runningSpeed;
                 }
-                else {
+                else
+                {
                     moveDirection *= walkingSpeed;
                 }
             }
@@ -162,7 +194,8 @@ public class PlayerLocomotion : MonoBehaviour
             Vector3 movementVelocity = moveDirection;
             rb.velocity = movementVelocity;
         }
-        else {
+        else
+        {
             moveDirection = cam.forward * inputManager.VerticalInput + cam.right * inputManager.HorizontalInput;
             moveDirection.Normalize();
             moveDirection.y = 0f;
@@ -215,18 +248,22 @@ public class PlayerLocomotion : MonoBehaviour
         Vector3 raycastOrigin = transform.position;
         raycastOrigin.y += raycastHeightOffset;
 
-        if (shouldHaveAirMomentum) {
+        if (shouldHaveAirMomentum)
+        {
             inAirTimer += Time.deltaTime;
-            if (!hasAddedForwardMomentum) {
+            if (!hasAddedForwardMomentum)
+            {
                 rb.AddForce((transform.forward + swingDirection) * airMomentumVelocity, ForceMode.Impulse);
                 hasAddedForwardMomentum = true;
             }
             rb.AddForce(Vector3.down * fallingVelocity * inAirTimer, ForceMode.Force);
         }
-        else {
-            if (!isGrounded && !isJumping && !isSwinging && !shouldHaveAirMomentum) {
+        else
+        {
+            if (!isGrounded && !isJumping && !isSwinging && !shouldHaveAirMomentum)
+            {
                 inAirTimer += Time.deltaTime;
-                rb.AddForce(Vector3.down * fallingVelocity/4 * inAirTimer * -gravityIntensity);
+                rb.AddForce(Vector3.down * fallingVelocity / 4 * inAirTimer * -gravityIntensity);
 
                 if (!playerManager.isInteracting)
                 {
@@ -235,9 +272,14 @@ public class PlayerLocomotion : MonoBehaviour
             }
         }
 
-        if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out hit, 0.5f, groundLayer)) {
-            if (!isGrounded) {
+        if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out hit, 0.5f, groundLayer))
+        {
+            if (!isGrounded)
+            {
                 animatorManager.PlayTargetAnimation("Landing", true);
+
+                if (isOnSlope == false)
+                    AudioManager.instance.PlayOneShot(FModEvents.instance.landingSound, this.transform.position);
             }
 
             inAirTimer = 1;
@@ -249,11 +291,12 @@ public class PlayerLocomotion : MonoBehaviour
 
             AdjustVelocityBasedOnSlope(hit);
         }
-        else {
+        else
+        {
             isGrounded = false;
             isOnSlope = false;
         }
-        
+
         animatorManager.Animator.SetBool("isGrounded", isGrounded);
     }
 
@@ -261,16 +304,19 @@ public class PlayerLocomotion : MonoBehaviour
     {
         // Adjusting the player's velocity based on the surface normal (This fixes the jitter when going down slopes)
 
-        if (Vector3.Angle(hit.normal, Vector3.up) < maxSlopeAngle) {
+        if (Vector3.Angle(hit.normal, Vector3.up) < maxSlopeAngle)
+        {
             Vector3 slopeDirection = Vector3.Cross(Vector3.Cross(Vector3.up, hit.normal), hit.normal).normalized;
             Vector3 movementDirection = rb.velocity.normalized;
             float slopeDot = Vector3.Dot(movementDirection, slopeDirection);
 
-            if (slopeDot > 0f) {
+            if (slopeDot > 0f)
+            {
                 isOnSlope = true;
                 rb.velocity = slopeDirection * rb.velocity.magnitude;
             }
-            else {
+            else
+            {
                 isOnSlope = false;
             }
         }
@@ -285,5 +331,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpForce);
         rb.AddForce(Vector3.up * jumpingVelocity, ForceMode.Impulse);
+
+        AudioManager.instance.PlayOneShot(FModEvents.instance.jumpingSound, this.transform.position);
     }
 }
