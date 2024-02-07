@@ -88,6 +88,7 @@ public class Grappling : MonoBehaviour
     private void StartAiming()
     {
         playerLocomotion.isAiming = true;
+        if (rb.velocity != Vector3.zero) rb.velocity = Vector3.zero;
 
         freeLookCam.SetActive(false);
         aimCam.SetActive(true);
