@@ -18,7 +18,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float jumpCooldown = 0.5f;
     [SerializeField] private float gravityIntensity = -9.8f;
     [SerializeField] private float groundSlamForce = 20f;
-
+    
     [Header("Ground Check")] 
     [SerializeField] private float groundCheckDistance = 0.5f;
     [SerializeField] private float raycastHeightOffset = 0.5f; // We want our raycast to begin a bit above our feet

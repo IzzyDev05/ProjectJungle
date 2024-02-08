@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(PlayerLocomotion))]
 public class Grappling : MonoBehaviour
@@ -12,9 +13,9 @@ public class Grappling : MonoBehaviour
     [SerializeField] private float grapplingCD = 0.75f;
     
     [Header("Joint Variables")] 
-    [SerializeField] private float swingForce = 4.5f;
-    [SerializeField] private float springDamper = 7f;
-    [SerializeField] private float springMassScale = 4.5f;
+    [SerializeField] private float jointForce = 4.5f;
+    [SerializeField] private float jointDamper = 7f;
+    [SerializeField] private float jointMassScale = 4.5f;
     [SerializeField] private float minDistance = 0.25f;
     [SerializeField] private float maxDistance = 0.75f;
     
@@ -131,9 +132,9 @@ public class Grappling : MonoBehaviour
         spring.minDistance = minDistance;
         spring.maxDistance = maxDistance;
 
-        spring.spring = swingForce;
-        spring.damper = springDamper;
-        spring.massScale = springMassScale;   
+        spring.spring = jointForce;
+        spring.damper = jointDamper;
+        spring.massScale = jointMassScale;   
     }
 
     private void StopAimingAndGrappling()
