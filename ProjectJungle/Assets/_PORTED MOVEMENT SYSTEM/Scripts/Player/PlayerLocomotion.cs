@@ -52,6 +52,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     private Vector3 moveDirection;
     private bool canJump = true;
+    private int maxJumpCount = 2;
+    private int jumpCount;
     
     private void Start()
     {
@@ -151,15 +153,20 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleJumping()
     {
-        if (!isGrounded || !canJump) return;
+        if (!canJump) return;
 
-        animatorManager.Animator.SetBool("isJumping", true); // isJumping is set to false after animation is over
-        animatorManager.PlayTargetAnimation("Jump", false);
+        if (isGrounded || jumpCount < maxJumpCount)
+        {
+            jumpCount++;
+            
+            animatorManager.Animator.SetBool("isJumping", true); // isJumping is set to false after animation is over
+            animatorManager.PlayTargetAnimation("Jump", false);
 
-        float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-        Vector3 playerVelocity = moveDirection;
-        playerVelocity.y = jumpingVelocity;
-        rb.velocity = playerVelocity;
+            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+            Vector3 playerVelocity = moveDirection;
+            playerVelocity.y = jumpingVelocity;
+            rb.velocity = playerVelocity;
+        }
     }
 
     private void HandleFallingAndLanding()
@@ -227,6 +234,7 @@ public class PlayerLocomotion : MonoBehaviour
         canJump = false;
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
+        jumpCount = 0;
     }
 
     private void HandleGroundSlamming()
