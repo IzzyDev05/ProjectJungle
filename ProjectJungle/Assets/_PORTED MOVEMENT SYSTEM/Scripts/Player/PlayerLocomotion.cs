@@ -15,7 +15,6 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float leapingVelocity = 1.5f;
     [SerializeField] private float fallingVelocity = 33f;
     [SerializeField] private float jumpHeight = 5f;
-    [SerializeField] private float maxJumpDuration = 2f;
     [SerializeField] private float jumpCooldown = 0.5f;
     [SerializeField] private float gravityIntensity = -9.8f;
     [SerializeField] private float groundSlamForce = 20f;
@@ -52,7 +51,6 @@ public class PlayerLocomotion : MonoBehaviour
     private CinemachineFreeLook freeLook;
 
     private Vector3 moveDirection;
-    private float jumpTimer;
     private bool canJump = true;
     
     private void Start()
@@ -70,8 +68,6 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleAllMovement()
     {
-        HandleJumping();
-        
         switch (PlayerManager.State)
         {
             case (States.Grappling):
@@ -153,33 +149,11 @@ public class PlayerLocomotion : MonoBehaviour
         transform.rotation = playerRot;
     }
 
-    private void HandleJumping()
+    public void HandleJumping()
     {
-        if (inputManager.jumpInput)
-        {
-            if (jumpTimer < maxJumpDuration)
-            {
-                jumpTimer += Time.deltaTime;
+        if (!isGrounded || !canJump) return;
 
-                if (!isGrounded || !canJump) return;
-                JumpLogic();
-            }
-            else
-            {
-                animatorManager.Animator.SetBool("isJumping", false);
-                jumpTimer = 0;
-            }
-        }
-        else
-        {
-            animatorManager.Animator.SetBool("isJumping", false);
-            jumpTimer = 0;
-        }
-    }
-
-    private void JumpLogic()
-    {
-        animatorManager.Animator.SetBool("isJumping", true); 
+        animatorManager.Animator.SetBool("isJumping", true); // isJumping is set to false after animation is over
         animatorManager.PlayTargetAnimation("Jump", false);
 
         float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);

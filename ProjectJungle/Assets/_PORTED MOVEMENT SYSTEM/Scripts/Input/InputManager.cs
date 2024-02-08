@@ -9,10 +9,10 @@ public class InputManager : MonoBehaviour
 
     private Vector2 movementInput;
     private bool sprintInput;
+    private bool jumpInput;
     
     [HideInInspector] public bool leftMouse;
     [HideInInspector] public bool rightMouse;
-    [HideInInspector] public bool jumpInput;
     [HideInInspector] public bool groundSlamInput;
 
     public float moveAmount { get; private set; }
@@ -60,6 +60,7 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
+        HandleJumpingInput();
     }
 
     private void HandleMovementInput()
@@ -84,5 +85,13 @@ public class InputManager : MonoBehaviour
     {
         if (sprintInput && moveAmount > 0.55f) playerLocomotion.isSprinting = true;
         else playerLocomotion.isSprinting = false;
+    }
+
+    private void HandleJumpingInput()
+    {
+        if (!jumpInput) return;
+
+        jumpInput = false;
+        playerLocomotion.HandleJumping();
     }
 }
