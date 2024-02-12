@@ -2766,13 +2766,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 3
-  runningSpeed: 6
-  sprintingSpeed: 12
-  rotationSpeed: 17.5
+  runningSpeed: 7
+  sprintingSpeed: 12.5
+  rotationSpeed: 35
   leapingVelocity: 1.5
   fallingVelocity: 50
   jumpHeight: 7.5
   jumpCooldown: 0.1
+  totalJumps: 2
   gravityIntensity: -1
   groundSlamForce: 75
   groundCheckDistance: 1.25
