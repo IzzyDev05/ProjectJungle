@@ -16,6 +16,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float fallingVelocity = 33f;
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float jumpCooldown = 0.5f;
+    [SerializeField] private int totalJumps = 2;
     [SerializeField] private float gravityIntensity = -9.8f;
     [SerializeField] private float groundSlamForce = 20f;
     
@@ -52,7 +53,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private Vector3 moveDirection;
     private bool canJump = true;
-    private int maxJumpCount = 2;
+    private int maxJumpCount;
     private int jumpCount;
     
     private void Start()
@@ -66,6 +67,7 @@ public class PlayerLocomotion : MonoBehaviour
         freeLook = GameObject.FindWithTag("CinemachineCamera").GetComponent<CinemachineFreeLook>();
         
         freeLook.m_Lens.FieldOfView = regularFOV;
+        maxJumpCount = totalJumps;
     }
 
     public void HandleAllMovement()
@@ -81,6 +83,7 @@ public class PlayerLocomotion : MonoBehaviour
             case (States.Swinging):
                 rb.useGravity = true;
                 isSwinging = true;
+                maxJumpCount = 0;
                 
                 freeLook.m_Lens.FieldOfView =
                     Mathf.Lerp(freeLook.m_Lens.FieldOfView, swingingFOV, fovChangeTime * Time.deltaTime);
@@ -100,6 +103,7 @@ public class PlayerLocomotion : MonoBehaviour
             case (States.Grounded):
                 rb.useGravity = false;
                 isSwinging = false;
+                maxJumpCount = totalJumps;
                 
                 freeLook.m_Lens.FieldOfView =
                     Mathf.Lerp(freeLook.m_Lens.FieldOfView, regularFOV, fovChangeTime * Time.deltaTime);
@@ -137,6 +141,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleRotation()
     {
+        if (isAiming) return;
+        
         Vector3 targetDirection = Vector3.zero;
 
         targetDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
@@ -155,7 +161,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (!canJump) return;
 
-        if (isGrounded || jumpCount < maxJumpCount)
+        if (isGrounded || jumpCount < maxJumpCount - 1)
         {
             jumpCount++;
             
@@ -210,6 +216,7 @@ public class PlayerLocomotion : MonoBehaviour
             inAirTimer = 0f;
             isGrounded = true;
             StartCoroutine(JumpCooldown());
+            maxJumpCount = totalJumps;
             isGroundSlamming = false;
 
             PlayerManager.UpdateState(States.Grounded);
@@ -244,8 +251,9 @@ public class PlayerLocomotion : MonoBehaviour
 
         animatorManager.Animator.SetBool("isLockedInAnim", true);
         rb.velocity = Vector3.zero;
-        print("Ground slam");
         rb.AddForce(Vector3.down * groundSlamForce, ForceMode.Impulse);
+        
+        RumbleManager.Instance.StartRumble(0.5f, 1f, 0.75f);
 
         isGroundSlamming = true;
     }

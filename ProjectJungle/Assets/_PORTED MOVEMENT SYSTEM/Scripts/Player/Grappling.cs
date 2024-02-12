@@ -106,14 +106,13 @@ public class Grappling : MonoBehaviour
         if (!canGrapple) return;
         
         isGrappling = true;
-        
-        RumbleManager.Instance.StartRumble(playerLocomotion.lowRumbleFrequency, playerLocomotion.highRumbleFrequency,
-            0f, true);
-        
         PlayerManager.UpdateState(States.Grappling);
         
         // Grapple logic
         if (spring) return;
+        
+        RumbleManager.Instance.StartRumble(playerLocomotion.lowRumbleFrequency, playerLocomotion.highRumbleFrequency,
+            0f, true);
 
         spring = gameObject.AddComponent<SpringJoint>();
 

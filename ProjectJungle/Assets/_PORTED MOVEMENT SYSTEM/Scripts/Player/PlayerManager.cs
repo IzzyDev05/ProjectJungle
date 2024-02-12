@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public enum States
@@ -14,13 +15,16 @@ public class PlayerManager : MonoBehaviour
     public static States State = States.Grounded;
     public static States PreviousState = State;
 
-    public States currentState;
+    [SerializeField] private States currentState;
+    [SerializeField] private Transform characterMesh;
     
     public bool isLockedInAnim { get; private set; }
     
     private InputManager inputManager;
     private PlayerLocomotion playerLocomotion;
     private PlayerAnimatorManager animatorManager;
+
+    private Quaternion zero;
     
     private void Start()
     {
@@ -30,6 +34,8 @@ public class PlayerManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         animatorManager = GetComponent<PlayerAnimatorManager>();
+        
+        zero = quaternion.Euler(0,0,0);
     }
 
     private void Update()
@@ -40,6 +46,9 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (characterMesh.localPosition != Vector3.zero) characterMesh.localPosition = Vector3.zero;
+        if (characterMesh.localRotation != zero) characterMesh.localRotation = zero;
+        
         playerLocomotion.HandleAllMovement();
     }
 
