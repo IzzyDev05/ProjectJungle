@@ -10,7 +10,7 @@ public class SlotManager : MonoBehaviour
     int maxCapacity = 1;
     [SerializeField] int currentCapacity = 0;
 
-    [SerializeField] ItemManager slotItem;
+    //[SerializeField] ItemManager slotItem;
 
     Color defaultColor;
 
@@ -39,16 +39,18 @@ public class SlotManager : MonoBehaviour
     /// <summary>
     /// Returns the Item Manager of the item in the slot
     /// </summary>
-    public ItemManager GetSlotItemManager { get { return slotItem; } }
+    //public ItemManager GetSlotItemManager { get { return slotItem; } }
 
     public void ClearSlot()
     {
-        slotItem = null;
+        //slotItem = null;
         itemImage.sprite = null;
 
         Destroy(gameObject);
     }
 
+    // JEFF these too (ItemManager)
+    /*
     /// <summary>
     /// Adds the item to the current slot
     /// </summary>
@@ -90,6 +92,7 @@ public class SlotManager : MonoBehaviour
             InventoryManager.Instance.AddToInventory(itemToAdd, overflowAmount);
         }
     }
+    */
 
     void UpdateItemCount()
     {
@@ -163,25 +166,24 @@ public class SlotManager : MonoBehaviour
 
     public void SelectSlot()
     {
-        if (slotItem == null)
-        {
-            return;
-        }
+        //JEFF another one
+        // if (slotItem == null) return;
 
         SetUpDropButton();
 
         ItemPanelManager.Instance.ClearDisplay();
 
+        /*
         switch (slotItem.GetItemObject.ItemType)
         {
             case ItemType.Equipment:
                 {
-                    ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetEquipmentObject);
+                    //ItemPanelManager.Instance.DisplaySelectedItem(slotItem.GetEquipmentObject);
 
                     break;
                 }
         }
-
+        */
     }
 
     /// <summary>

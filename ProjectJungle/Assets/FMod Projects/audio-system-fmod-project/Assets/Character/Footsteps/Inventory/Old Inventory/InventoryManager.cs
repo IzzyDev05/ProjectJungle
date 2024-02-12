@@ -91,12 +91,15 @@ public class InventoryManager : MonoBehaviour
             return inventoryUI;
         }
     }
-
+    
+    // JEFF this is a problem (Everything to do with ItemManager)
+    /*
     /// <summary>
     /// Adds an Item into the inventory
     /// </summary>
     /// <param name="itemToAdd"></param>
     /// <param name="amount"></param>
+     
     public void AddToInventory(ItemManager itemToAdd, int amount = 1)
     {
         SlotManager foundSlot = FindIteminInventory(itemToAdd, true);
@@ -120,6 +123,7 @@ public class InventoryManager : MonoBehaviour
         itemList.Add(itemToAdd.GetItemObject);
         unoccupiedSlotIndex++;
     }
+    */
 
     /// <summary>
     /// Find the first unoccuiped slot in the inventory
@@ -130,11 +134,9 @@ public class InventoryManager : MonoBehaviour
 
         foreach (GameObject slotObject in inventorySlotList)
         {
-            if (slotObject.GetComponent<SlotManager>().GetSlotItemManager == null)
-            {
-                return;
-            }
-
+            // JEFF here too buddy
+            //if (slotObject.GetComponent<SlotManager>().GetSlotItemManager == null) return;
+ 
             unoccupiedSlotIndex++;
         }
     }
@@ -169,6 +171,7 @@ public class InventoryManager : MonoBehaviour
         ItemPanelManager.Instance.ClearDisplay();
     }
 
+    /*
     /// <summary>
     /// Returns the first slot with the item. If FindUnfilledStack is true, it will return the first slot with the item that is not full
     /// </summary>
@@ -198,6 +201,7 @@ public class InventoryManager : MonoBehaviour
 
         return slotPrefab.GetComponent<SlotManager>();
     }
+    */
 
     /// <summary>
     /// Returns the button object for dropping items
