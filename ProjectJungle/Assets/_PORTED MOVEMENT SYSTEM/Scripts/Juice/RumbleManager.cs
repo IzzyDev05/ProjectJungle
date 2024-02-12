@@ -16,7 +16,7 @@ public class RumbleManager : MonoBehaviour
         else Destroy(this);
     }
 
-    public void StartRumble(float lowFrequency, float highFrequency, float duration, bool rumbleWhileCalled)
+    public void StartRumble(float lowFrequency, float highFrequency, float duration, bool rumbleWhileCalled = false)
     {
         // Get reference to Gamepad
         pad = Gamepad.current;
