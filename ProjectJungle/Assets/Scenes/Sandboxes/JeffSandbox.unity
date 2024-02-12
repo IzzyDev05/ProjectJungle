@@ -5971,7 +5971,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850248994}
-  m_LocalRotation: {x: 0.22975291, y: -0.000000016746096, z: 0.0000000039532173, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: 0.000000016746089, z: -0.0000000039532155, w: 0.973249}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6113,7 +6113,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964119204}
-  m_LocalRotation: {x: 0.20701738, y: -0.00000003366729, z: 0.0000000071240405, w: 0.9783373}
+  m_LocalRotation: {x: 0.20701738, y: 0.000000033667288, z: -0.0000000071240396, w: 0.9783373}
   m_LocalPosition: {x: -5.822, y: 5.67, z: -0.9030001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7635,6 +7635,36 @@ PrefabInstance:
       propertyPath: m_enableWordWrapping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2333133825431580043, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333133825431580043, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333133825431580043, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333133825431580043, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333133825431580043, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333133825431580043, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -365
+      objectReference: {fileID: 0}
     - target: {fileID: 2538848355925515431, guid: f635d0b84a654a547b7b26feb642b5b1,
         type: 3}
       propertyPath: m_Name
@@ -7851,6 +7881,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UIAndInteractionManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082855172677304971, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082855172677304971, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082855172677304971, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082855172677304971, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082855172677304971, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082855172677304971, guid: f635d0b84a654a547b7b26feb642b5b1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -365
       objectReference: {fileID: 0}
     - target: {fileID: 7044088279095292758, guid: f635d0b84a654a547b7b26feb642b5b1,
         type: 3}
@@ -10765,7 +10825,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632870649}
-  m_LocalRotation: {x: 0.20701736, y: -0.000000016833647, z: 0.0000000035620205, w: 0.9783373}
+  m_LocalRotation: {x: 0.20701736, y: 0.000000016833642, z: -0.000000003562019, w: 0.9783373}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
