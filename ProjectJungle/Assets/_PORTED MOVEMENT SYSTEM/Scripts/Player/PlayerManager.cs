@@ -14,7 +14,8 @@ public class PlayerManager : MonoBehaviour
     public static States State = States.Grounded;
     public static States PreviousState = State;
 
-    public States currentState;
+    [SerializeField] private States currentState;
+    [SerializeField] private Transform characterMesh;
     
     public bool isLockedInAnim { get; private set; }
     
@@ -40,6 +41,8 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (characterMesh.localPosition != Vector3.zero) characterMesh.localPosition = Vector3.zero;
+        
         playerLocomotion.HandleAllMovement();
     }
 
