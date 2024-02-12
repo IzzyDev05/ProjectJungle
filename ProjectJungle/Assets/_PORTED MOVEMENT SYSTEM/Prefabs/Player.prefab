@@ -2697,7 +2697,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!136 &184053824801877425
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2705,7 +2705,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8304037180021580859}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 582587cd6c730eb4cbab3916a4c4f226, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.4
@@ -2771,13 +2771,13 @@ MonoBehaviour:
   rotationSpeed: 35
   leapingVelocity: 1.5
   fallingVelocity: 50
-  jumpHeight: 7.5
+  jumpHeight: 5
   jumpCooldown: 0.1
   totalJumps: 2
   gravityIntensity: -1
   groundSlamForce: 75
-  groundCheckDistance: 1.25
-  raycastHeightOffset: 1
+  groundCheckDistance: 0.87
+  raycastHeightOffset: 0.64
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2795,6 +2795,7 @@ MonoBehaviour:
   isGrappling: 0
   isGroundSlamming: 0
   inAirTimer: 0
+  canJump: 1
 --- !u!114 &5919309128364603883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2807,10 +2808,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37cd9c5325fec741bfc2689bab74647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSwingDistance: 150
+  maxSwingDistance: 15
   swingableLayer:
     serializedVersion: 2
-    m_Bits: 193
+    m_Bits: 128
   swingPointRef: {fileID: 7892714644089299513}
   swingingCD: 0.75
   swingingPointForwardOffset: 5
@@ -2819,9 +2820,9 @@ MonoBehaviour:
   springMassScale: 4.5
   minDistanceMultiplier: 0.35
   maxDistanceMultiplier: 0.1
-  initialForwardMomentum: 20
-  initialUpwardMomentum: 15
-  swingEndThrust: 20
+  initialForwardMomentum: 25
+  initialUpwardMomentum: 20
+  swingEndThrust: 18
 --- !u!114 &3432013882986489825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2839,7 +2840,7 @@ MonoBehaviour:
   grappleForce: 25
   grappleLayer:
     serializedVersion: 2
-    m_Bits: 193
+    m_Bits: 256
   grapplingCD: 0.75
   jointForce: 25
   jointDamper: 7

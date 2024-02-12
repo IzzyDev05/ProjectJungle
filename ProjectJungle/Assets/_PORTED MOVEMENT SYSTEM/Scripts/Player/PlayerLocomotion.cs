@@ -15,7 +15,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float leapingVelocity = 1.5f;
     [SerializeField] private float fallingVelocity = 33f;
     [SerializeField] private float jumpHeight = 5f;
-    [SerializeField] private float jumpCooldown = 0.5f;
+    [SerializeField] private float jumpCooldown = 0.1f;
     [SerializeField] private int totalJumps = 2;
     [SerializeField] private float gravityIntensity = -9.8f;
     [SerializeField] private float groundSlamForce = 20f;
@@ -42,7 +42,7 @@ public class PlayerLocomotion : MonoBehaviour
     [HideInInspector] public bool isAiming;
     [HideInInspector] public bool isGrappling;
     [HideInInspector] public bool isGroundSlamming;
-    [HideInInspector] public float inAirTimer;
+    [HideInInspector] public float inAirTimer = 0.5f;
 
     private InputManager inputManager;
     private PlayerManager playerManager;
@@ -52,7 +52,7 @@ public class PlayerLocomotion : MonoBehaviour
     private CinemachineFreeLook freeLook;
 
     private Vector3 moveDirection;
-    private bool canJump = true;
+    public bool canJump = true;
     private int maxJumpCount;
     private int jumpCount;
     
@@ -159,11 +159,12 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleJumping()
     {
-        if (!canJump) return;
-
-        if (isGrounded || jumpCount < maxJumpCount - 1)
+        if (isGrounded || jumpCount < maxJumpCount)
         {
+            if (!canJump) return;
+            
             jumpCount++;
+            inAirTimer = 0.5f;
             
             animatorManager.Animator.SetBool("isJumping", true); // isJumping is set to false after animation is over
             animatorManager.PlayTargetAnimation("Jump", false);
@@ -175,6 +176,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
+    private float hitDistance; // For visualization
     private void HandleFallingAndLanding()
     {
         bool isLockedInAnim = playerManager.isLockedInAnim;
@@ -200,6 +202,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out var hit, groundCheckDistance, groundLayer))
         {
             // If we're near the ground but not grounded AND are locked in an animation (Falling), play the landing animation
+            if (!isGrounded) StartCoroutine(JumpCooldown());
             if (!isGrounded && isLockedInAnim)
             {
                 float rumbleIntensity = Mathf.Clamp(inAirTimer / 5f, 0.1f, 1f);
@@ -212,10 +215,10 @@ public class PlayerLocomotion : MonoBehaviour
 
             Vector3 raycastHitPoint = hit.point;
             targetPos.y = raycastHitPoint.y; // Our target position is the position where the raycast hits the ground
-
-            inAirTimer = 0f;
+            hitDistance = hit.distance;
+            
+            inAirTimer = 0.5f;
             isGrounded = true;
-            StartCoroutine(JumpCooldown());
             maxJumpCount = totalJumps;
             isGroundSlamming = false;
 
@@ -256,5 +259,16 @@ public class PlayerLocomotion : MonoBehaviour
         RumbleManager.Instance.StartRumble(0.5f, 1f, 0.75f);
 
         isGroundSlamming = true;
+    }
+    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        
+        Vector3 raycastOrigin = transform.position;
+        raycastOrigin.y += raycastHeightOffset;
+        
+        Gizmos.DrawLine(raycastOrigin, raycastOrigin + Vector3.down * groundCheckDistance);
+        Gizmos.DrawWireSphere(raycastOrigin + Vector3.down * hitDistance, 0.2f);
     }
 }
