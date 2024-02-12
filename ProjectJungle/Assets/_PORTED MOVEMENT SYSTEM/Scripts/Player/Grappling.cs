@@ -103,7 +103,7 @@ public class Grappling : MonoBehaviour
 
     private void StartGrappling()
     {
-        if (!canGrapple) return;
+        if (!canGrapple || grapplePoint == Vector3.zero) return;
         
         isGrappling = true;
         PlayerManager.UpdateState(States.Grappling);
@@ -148,6 +148,7 @@ public class Grappling : MonoBehaviour
             RumbleManager.Instance.StopRumble();
 
             lr.positionCount = 0;
+            grapplePoint = Vector3.zero;
             StartCoroutine(GrappleCooldown());
             StartCoroutine(swinging.SwingCooldown());
             isGrappling = false;
