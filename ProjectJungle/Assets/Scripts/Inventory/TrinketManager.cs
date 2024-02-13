@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class TrinketManager : MonoBehaviour
 {
-    [SerializeField] Sprite trinketSprite;
+    [SerializeField] GameObject TrinketPrefab;
+
+    [SerializeField] float scale = 1.0f;
+
+    [SerializeField] Quaternion rotation;
 
     [TextArea (15,20)]
     [SerializeField] string lore;
 
-    public Sprite TrinketSprite { get { return trinketSprite; } }
+    public GameObject TrinketIcon { get { return TrinketPrefab; } }
 
     public string TricketLore { get { return lore; } }
+
+    public float ScaleMultiplier { get { return scale; } }
+
+    public Quaternion Rotation { get { return rotation; } }
 }

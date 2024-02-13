@@ -111,7 +111,7 @@ public class InteractionUIManager : MonoBehaviour
             GameManager.Instance.CloseMenuUI();
         }
 
-        UIOpen(openUI);
+        //UIOpen(openUI);
     }
 
     private void UIOpen(bool opened)

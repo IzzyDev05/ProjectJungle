@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class NewSlotManager : MonoBehaviour
 {
     [SerializeField] GameObject slotItem;
-    [SerializeField] Image itemImage;
+    [SerializeField] GameObject itemIconParent;
     [SerializeField] Image emptyImage;
 
     bool isCollected = false; 
 
     private void Awake()
     {
-        if (itemImage.gameObject.activeSelf == true)
+        if (itemIconParent.activeSelf == true)
         {
-            itemImage.gameObject.SetActive(false);
+            itemIconParent.SetActive(false);
         }
 
         if (isCollected == true)
@@ -26,7 +26,8 @@ public class NewSlotManager : MonoBehaviour
 
     private void Start()
     {
-        itemImage.sprite = slotItem.GetComponent<TrinketManager>().TrinketSprite;
+        GameObject item = Instantiate(slotItem.GetComponent<TrinketManager>().TrinketIcon, itemIconParent.transform);
+        item.transform.localScale = item.transform.localScale * slotItem.GetComponent<TrinketManager>().ScaleMultiplier;
 
         this.name = slotItem.name + " Slot";
 
@@ -53,7 +54,7 @@ public class NewSlotManager : MonoBehaviour
     {
         AudioManager.instance.PlayOneShot(FModEvents.instance.pickupItem, GameManager.Player.transform.position);
 
-        itemImage.gameObject.SetActive(true);
+        itemIconParent.SetActive(true);
         Destroy(item);
 
         isCollected = true;
@@ -68,7 +69,7 @@ public class NewSlotManager : MonoBehaviour
 
         TrinketManager trinket = slotItem.GetComponent<TrinketManager>();
 
-        NewItemViewer.Instance.OpenItemViewer(trinket.TrinketSprite, slotItem.name, trinket.TricketLore);
+        NewItemViewer.Instance.OpenItemViewer(trinket.TrinketIcon, slotItem.name, trinket.TricketLore, trinket.ScaleMultiplier, trinket.Rotation);
     }
 
     void SetupButton()
@@ -79,4 +80,6 @@ public class NewSlotManager : MonoBehaviour
 
         button.onClick.AddListener(OpenItemPanel);
     }
+
+    public GameObject SetSlotItem { set { slotItem = value; } }
 }

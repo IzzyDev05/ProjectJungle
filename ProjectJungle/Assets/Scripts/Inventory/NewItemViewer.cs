@@ -8,7 +8,7 @@ public class NewItemViewer : MonoBehaviour
 {
     public static NewItemViewer Instance;
 
-    [SerializeField] Image icon;
+    [SerializeField] GameObject itemIconParent;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text descriptionText;
 
@@ -34,14 +34,17 @@ public class NewItemViewer : MonoBehaviour
         }
     }
 
-    public void OpenItemViewer(Sprite image, string name, string lore)
+    public void OpenItemViewer(GameObject itemIcon, string name, string lore, float scale, Quaternion rotation)
     {
         if (gameObject.activeSelf == false)
         {
             gameObject.SetActive(true);
         }
 
-        icon.sprite = image;
+        GameObject item = Instantiate(itemIcon, itemIconParent.transform);
+        item.transform.localScale = item.transform.localScale * scale;
+        item.transform.rotation = rotation;
+
         nameText.text = name;
         descriptionText.text = lore;
     }

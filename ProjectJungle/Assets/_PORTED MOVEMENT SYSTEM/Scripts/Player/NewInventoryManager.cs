@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[RequireComponent(typeof(DynamicItemSlots))]
 public class NewInventoryManager : MonoBehaviour
 {
     public static NewInventoryManager Instance;
