@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -46,9 +47,12 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (characterMesh.localPosition != Vector3.zero) characterMesh.localPosition = Vector3.zero;
-        if (characterMesh.localRotation != zero) characterMesh.localRotation = zero;
-        
+        if (State != States.Aerial)
+        {
+            if (characterMesh.localPosition != Vector3.zero) characterMesh.localPosition = Vector3.zero;
+            if (characterMesh.localRotation != zero) characterMesh.localRotation = zero;
+        }
+
         playerLocomotion.HandleAllMovement();
     }
 
