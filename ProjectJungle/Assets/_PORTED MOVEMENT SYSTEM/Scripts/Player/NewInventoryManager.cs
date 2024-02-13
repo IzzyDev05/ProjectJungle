@@ -37,7 +37,6 @@ public class NewInventoryManager : MonoBehaviour
             slotList.Add(slot.gameObject);
         }
 
-
         if (inventoryUI.activeSelf == true)
         {
             inventoryUI.SetActive(false);
@@ -88,5 +87,7 @@ public class NewInventoryManager : MonoBehaviour
                 slotManager.AddItem(item);
             }
         }
+
+        AudioManager.instance.PlayOneShot(FModEvents.instance.pickupItem, GameManager.Player.transform.position);
     }
 }

@@ -94,4 +94,16 @@ public class InputManager : MonoBehaviour
         jumpInput = false;
         playerLocomotion.HandleJumping();
     }
+
+    public void DisablePlayerControls(bool reverse = false)
+    {
+        if (!reverse)
+        {
+            playerControls.Disable();
+        }
+        else
+        {
+            playerControls.Enable();
+        }
+    }
 }

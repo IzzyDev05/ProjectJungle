@@ -32,7 +32,17 @@ public class GameManager : MonoBehaviour
         }*/
     }
 
-    public GameObject SettingsUI { get { return settingsUI; } }
+    //public GameObject SettingsUI { get { return settingsUI; } }
+
+    public void OpenMenuUI()
+    {
+        settingsUI.SetActive(true);
+    }
+
+    public void CloseMenuUI()
+    {
+        settingsUI.SetActive(false);
+    }
 
     public void PauseGame()
     {

@@ -74,7 +74,7 @@ public class UIAndInteractionManager : MonoBehaviour
     /// </summary>
     public void ManuallyCloseInventory()
     {
-        if (inventoryInput == true)
+        if (inventoryInput)
         {
             inventoryInput = false;
             PlayOneShotSound(FModEvents.instance.backpack, transform.position);
@@ -117,12 +117,12 @@ public class UIAndInteractionManager : MonoBehaviour
 
         GameManager.Instance.PauseGame();
 
-        GameManager.Instance.SettingsUI.SetActive(true);
+        GameManager.Instance.OpenMenuUI();
     }
 
     private void CloseSettings()
     {
-        GameManager.Instance.SettingsUI.SetActive(false);
+        GameManager.Instance.CloseMenuUI();
 
         menuInput = false;
     }
