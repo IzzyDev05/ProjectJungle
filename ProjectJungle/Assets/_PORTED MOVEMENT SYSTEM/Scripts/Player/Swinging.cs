@@ -116,6 +116,7 @@ public class Swinging : MonoBehaviour
         else
         {
             currentlySwinging = false;
+            return;
 
             // Potential problem: newState flickering between Grounded and Aerial
             var newState = PlayerManager.PreviousState;
