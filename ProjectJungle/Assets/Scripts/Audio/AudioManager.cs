@@ -3,6 +3,10 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 
+/*
+ * Script made following Shaped by Rain Studios video: How to make an Audio System in Unity | Unity + FMOD Tutorial -> https://www.youtube.com/watch?v=rcBHIOjZDpk
+ */
+
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance { get; private set; }
@@ -39,7 +43,7 @@ public class AudioManager : MonoBehaviour
         eventInstances = new List<EventInstance>();
 
         masterBus = RuntimeManager.GetBus("bus:/");
-        ambientBus = RuntimeManager.GetBus("bus:/Ambient");
+        ambientBus = RuntimeManager.GetBus("bus:/Ambience");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
     }
 

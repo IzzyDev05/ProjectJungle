@@ -1,6 +1,10 @@
 using UnityEngine;
 using FMODUnity;
 
+/*
+ * Script made following Shaped by Rain Studios video: How to make an Audio System in Unity | Unity + FMOD Tutorial -> https://www.youtube.com/watch?v=rcBHIOjZDpk
+ */
+
 public class FModEvents : MonoBehaviour
 {
     public static FModEvents instance { get; private set; }
@@ -11,9 +15,6 @@ public class FModEvents : MonoBehaviour
 
     [field: Header("Pickup SFX")]
     [field: SerializeField] public EventReference pickupItem { get; private set; }
-    
-    [field: Header("Drop Item SFX")]
-    [field: SerializeField] public EventReference dropItem { get; private set; }
     #endregion
 
     #region PLAYER SFX
@@ -41,14 +42,15 @@ public class FModEvents : MonoBehaviour
     [field: SerializeField] public EventReference grappleRetract { get; private set; }
     #endregion
 
-    [field: Header("Ambience SFX")]
+    #region UI SFX
+
+    #endregion
+
+
+    #region OTHER SOUNDS
+    [field: Header("Ambience")]
     [field: SerializeField] public EventReference forest { get; private set; }
-    
-    [field: Header("Pause SFX")]
-    [field: SerializeField] public EventReference pause { get; private set; }
-    
-    [field: Header("Resume SFX")]
-    [field: SerializeField] public EventReference resume { get; private set; }
+    #endregion
 
     private void Awake()
     {

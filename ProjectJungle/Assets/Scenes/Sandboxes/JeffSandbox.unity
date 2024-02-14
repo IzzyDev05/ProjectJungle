@@ -271,7 +271,7 @@ MonoBehaviour:
   grappleColor: {r: 1, g: 0, b: 0, a: 1}
   grappleLayer:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 193
   ignoredLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -577,17 +577,17 @@ PrefabInstance:
     - target: {fileID: 1821340017621373162, guid: 72855ccdbd1fd48478bd36fe8ba45f9b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.21815284
+      value: 0.21815287
       objectReference: {fileID: 0}
     - target: {fileID: 1821340017621373162, guid: 72855ccdbd1fd48478bd36fe8ba45f9b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000002477748
+      value: -0.000000013430282
       objectReference: {fileID: 0}
     - target: {fileID: 1821340017621373162, guid: 72855ccdbd1fd48478bd36fe8ba45f9b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000005538678
+      value: 0.0000000030021625
       objectReference: {fileID: 0}
     - target: {fileID: 2382935556106250887, guid: 72855ccdbd1fd48478bd36fe8ba45f9b,
         type: 3}
@@ -684,7 +684,8 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.0000000034042866
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2313341977344735891, guid: 72855ccdbd1fd48478bd36fe8ba45f9b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 72855ccdbd1fd48478bd36fe8ba45f9b, type: 3}
 --- !u!1 &342544662
 GameObject:
@@ -6220,6 +6221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1476489723}
   - component: {fileID: 1476489725}
+  - component: {fileID: 1476489728}
   - component: {fileID: 1476489726}
   - component: {fileID: 1476489727}
   m_Layer: 0
@@ -6295,6 +6297,18 @@ MonoBehaviour:
   - {fileID: 8203073568141072114, guid: b15c099b9c8c1ca47b30d2446c0a0ff6, type: 3}
   - {fileID: 4865309214770636011, guid: a8e2e316014e10d4e9a1a535292a7286, type: 3}
   - {fileID: 3145527814565522414, guid: 13fe0acfc1fa15c49a8109739c7bc233, type: 3}
+--- !u!114 &1476489728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476489721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e385ad5f5e5789438ef49e0c1f58499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1488822889
 GameObject:
   m_ObjectHideFlags: 0
@@ -6341,95 +6355,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <backpack>k__BackingField:
     Guid:
-      Data1: -1897893537
-      Data2: 1246944879
-      Data3: -528484687
-      Data4: 872133846
-    Path: event:/SFX/Backpack
+      Data1: -618270063
+      Data2: 1150025915
+      Data3: 1404282776
+      Data4: 428702759
+    Path: event:/SFX/UI/Inventory/Backpack
   <pickupItem>k__BackingField:
     Guid:
-      Data1: 555939454
-      Data2: 1331225101
-      Data3: 492035726
-      Data4: -815460890
-    Path: event:/SFX/Pickup
-  <dropItem>k__BackingField:
-    Guid:
-      Data1: 1682548698
-      Data2: 1328543846
-      Data3: -341602902
-      Data4: 1339724979
-    Path: event:/SFX/DropFromInventory
+      Data1: -1638058154
+      Data2: 1307817589
+      Data3: 1447541414
+      Data4: 296193822
+    Path: event:/SFX/Character/Interaction/PickupItem
   <walkingFootsteps>k__BackingField:
     Guid:
-      Data1: -1261071688
-      Data2: 1250581276
-      Data3: 2057686440
-      Data4: -1093987888
-    Path: event:/SFX/Footsteps/ForestWalking
+      Data1: -1850141569
+      Data2: 1185266464
+      Data3: 296400566
+      Data4: -1384436488
+    Path: event:/SFX/Character/Footsteps/Walk/WoodWalking
   <sprintingFootsteps>k__BackingField:
     Guid:
-      Data1: -332324641
-      Data2: 1183347614
-      Data3: 1348947597
-      Data4: 153064855
-    Path: event:/SFX/Footsteps/WoodSprintingFootSteps
+      Data1: -1105704099
+      Data2: 1292068550
+      Data3: -301586288
+      Data4: -185525530
+    Path: event:/SFX/Character/Footsteps/Sprint/SprintingWood
   <jumpingSound>k__BackingField:
     Guid:
-      Data1: -246377784
-      Data2: 1271820135
-      Data3: -1413408351
-      Data4: 1024863417
-    Path: event:/SFX/Jump
+      Data1: -1357087264
+      Data2: 1150195571
+      Data3: 1925067694
+      Data4: 1448793503
+    Path: event:/SFX/Character/Footsteps/Jump
   <landingSound>k__BackingField:
     Guid:
-      Data1: -518069443
-      Data2: 1152510085
-      Data3: -1370588235
-      Data4: 279282334
-    Path: event:/SFX/Landing
+      Data1: 1002633936
+      Data2: 1172059644
+      Data3: -1128553284
+      Data4: -128602875
+    Path: event:/SFX/Character/Footsteps/Landing
   <grappleHit>k__BackingField:
     Guid:
-      Data1: -1707448786
-      Data2: 1105111774
-      Data3: 695051696
-      Data4: -745080255
-    Path: event:/SFX/Abilities/GrappleHit
+      Data1: 1244256765
+      Data2: 1241537846
+      Data3: 919629470
+      Data4: 508639434
+    Path: event:/SFX/Character/Abilities/GrappleHit
   <grappleRelease>k__BackingField:
     Guid:
-      Data1: -943488261
-      Data2: 1082985649
-      Data3: -1553285982
-      Data4: -421210509
-    Path: event:/SFX/Abilities/GrappleRelease
+      Data1: -1289157968
+      Data2: 1241016982
+      Data3: -669404010
+      Data4: -828199238
+    Path: event:/SFX/Character/Abilities/GrappleRelease
   <grappleRetract>k__BackingField:
     Guid:
-      Data1: 1466290300
-      Data2: 1152971317
-      Data3: -1773681782
-      Data4: -151107379
-    Path: event:/SFX/Abilities/GrappleRetract
+      Data1: -908372110
+      Data2: 1103896272
+      Data3: 1498858382
+      Data4: -1163308973
+    Path: event:/SFX/Character/Abilities/GrappleRetract
   <forest>k__BackingField:
     Guid:
-      Data1: -1311130597
-      Data2: 1261065880
-      Data3: 1453410980
-      Data4: 455237195
-    Path: event:/Music/AmbientForest
-  <pause>k__BackingField:
-    Guid:
-      Data1: -126706798
-      Data2: 1179415660
-      Data3: -1823784781
-      Data4: 1069059480
-    Path: event:/SFX/Pause
-  <resume>k__BackingField:
-    Guid:
-      Data1: -1269847478
-      Data2: 1132970523
-      Data3: 1162273163
-      Data4: -1679316224
-    Path: event:/SFX/Resume
+      Data1: 898049927
+      Data2: 1284655508
+      Data3: -333835856
+      Data4: -179043552
+    Path: event:/Ambient/PlaceholderAmbience
 --- !u!1 &1514675369 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2718118997159249721, guid: 72855ccdbd1fd48478bd36fe8ba45f9b,
@@ -8097,7 +8090,7 @@ GameObject:
   - component: {fileID: 1908184225}
   - component: {fileID: 1908184224}
   - component: {fileID: 1908184223}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ public class InteractionUIManager : MonoBehaviour
     private CinemachineInputProvider aimLookProvider;
 
     private bool openInventory = false;
-    private bool openUI = false;
+    private bool openMenu = false;
     private bool interactInput = false;
 
     private void Start()
@@ -36,7 +36,7 @@ public class InteractionUIManager : MonoBehaviour
             AudioManager.instance.PlayOneShot(FModEvents.instance.backpack, GameManager.Player.transform.position);
         };
 
-        IUIControls.Player.OpenMenu.performed += i => openUI = true;
+        IUIControls.Player.OpenMenu.performed += i => openMenu = true;
 
         IUIControls.Player.Interact.performed += i => interactInput = true;
         IUIControls.Player.Interact.canceled += i => interactInput = false;
@@ -47,7 +47,7 @@ public class InteractionUIManager : MonoBehaviour
             AudioManager.instance.PlayOneShot(FModEvents.instance.backpack, GameManager.Player.transform.position);
         };
 
-        IUIControls.UI.ExitUI.performed += i => openUI = false;
+        IUIControls.UI.ExitUI.performed += i => openMenu = false;
 
         IUIControls.Enable();
         IUIControls.UI.Disable();
@@ -62,6 +62,8 @@ public class InteractionUIManager : MonoBehaviour
     {
         HandleInventory();
         HandleMenu();
+
+        UIOpen(openInventory ^ openMenu); // openInventory XOR openMenu
     }
 
     private void SwitchPlayerToUI(bool reverse = false)
@@ -96,13 +98,11 @@ public class InteractionUIManager : MonoBehaviour
         {
             NewInventoryManager.Instance.CloseInventory();
         }
-
-        UIOpen(openInventory);
     }
 
     private void HandleMenu()
     {
-        if (openUI)
+        if (openMenu)
         {
             GameManager.Instance.OpenMenuUI();
         }
@@ -110,8 +110,6 @@ public class InteractionUIManager : MonoBehaviour
         {
             GameManager.Instance.CloseMenuUI();
         }
-
-        //UIOpen(openUI);
     }
 
     private void UIOpen(bool opened)
@@ -135,9 +133,9 @@ public class InteractionUIManager : MonoBehaviour
             openInventory = false;
         }
 
-        if (openUI)
+        if (openMenu)
         {
-            openUI = false;
+            openMenu = false;
         }
     }
 
