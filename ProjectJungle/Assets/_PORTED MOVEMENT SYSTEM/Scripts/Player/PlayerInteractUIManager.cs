@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InteractionUIManager))]
 public class PlayerInteractUIManager : MonoBehaviour
 {
     InteractionUIManager IUIManager;

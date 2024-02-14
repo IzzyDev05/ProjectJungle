@@ -95,6 +95,13 @@ public class InputManager : MonoBehaviour
         playerLocomotion.HandleJumping();
     }
 
+
+    // INPUT LINKERS
+
+    /// <summary>
+    /// Disables the player controls
+    /// </summary>
+    /// <param name="reverse">Enable the player control if true. Default is false.</param>
     public void DisablePlayerControls(bool reverse = false)
     {
         if (!reverse)

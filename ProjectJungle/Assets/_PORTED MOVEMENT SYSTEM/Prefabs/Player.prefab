@@ -2655,6 +2655,8 @@ GameObject:
   - component: {fileID: 5919309128364603883}
   - component: {fileID: 3432013882986489825}
   - component: {fileID: 9134211193920823152}
+  - component: {fileID: 5906352335570551416}
+  - component: {fileID: 5621571402938017384}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2776,6 +2778,7 @@ MonoBehaviour:
   totalJumps: 2
   gravityIntensity: -1
   groundSlamForce: 75
+  groundSlamWait: 0.5
   groundCheckDistance: 1.25
   raycastHeightOffset: 1
   groundLayer:
@@ -2784,6 +2787,7 @@ MonoBehaviour:
   lowRumbleFrequency: 0.25
   highRumbleFrequency: 1
   rumbleDuration: 0.5
+  fallingVelocityThreshold: 20
   regularFOV: 45
   swingingFOV: 70
   fovChangeTime: 12.5
@@ -2947,6 +2951,32 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &5906352335570551416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8304037180021580859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b948884b9ce754cab68e16333edc42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FreelookCam: {fileID: 0}
+  AimCam: {fileID: 0}
+--- !u!114 &5621571402938017384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8304037180021580859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba1352736eb66f44aeb73dcd5bde5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8384195032754211720
 GameObject:
   m_ObjectHideFlags: 0

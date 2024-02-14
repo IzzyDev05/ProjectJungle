@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(DynamicItemSlots))]
+[RequireComponent(typeof(DynamicInventorySlot))]
 public class NewInventoryManager : MonoBehaviour
 {
     public static NewInventoryManager Instance;
@@ -94,7 +94,7 @@ public class NewInventoryManager : MonoBehaviour
 
         if (pickedUp)
         {
-            AudioManager.instance.PlayOneShot(FModEvents.instance.pickupItem, GameManager.Player.transform.position);
+            AudioManager.Instance.PlayOneShot(FModEvents.Instance.pickupItem, GameManager.Player.transform.position);
         }
     }
 }
