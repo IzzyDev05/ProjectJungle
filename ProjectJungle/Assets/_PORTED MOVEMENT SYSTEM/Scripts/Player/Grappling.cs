@@ -103,17 +103,16 @@ public class Grappling : MonoBehaviour
 
     private void StartGrappling()
     {
-        if (!canGrapple) return;
+        if (!canGrapple || grapplePoint == Vector3.zero) return;
         
         isGrappling = true;
-        
-        RumbleManager.Instance.StartRumble(playerLocomotion.lowRumbleFrequency, playerLocomotion.highRumbleFrequency,
-            0f, true);
-        
         PlayerManager.UpdateState(States.Grappling);
         
         // Grapple logic
         if (spring) return;
+        
+        RumbleManager.Instance.StartRumble(playerLocomotion.lowRumbleFrequency, playerLocomotion.highRumbleFrequency,
+            0f, true);
 
         spring = gameObject.AddComponent<SpringJoint>();
 
@@ -149,6 +148,7 @@ public class Grappling : MonoBehaviour
             RumbleManager.Instance.StopRumble();
 
             lr.positionCount = 0;
+            grapplePoint = Vector3.zero;
             StartCoroutine(GrappleCooldown());
             StartCoroutine(swinging.SwingCooldown());
             isGrappling = false;

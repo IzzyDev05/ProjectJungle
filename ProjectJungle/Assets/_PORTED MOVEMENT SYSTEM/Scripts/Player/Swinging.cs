@@ -69,7 +69,7 @@ public class Swinging : MonoBehaviour
     {
         if (currentlySwinging || !canSwing) return;
 
-        float coneRadius = 7f;
+        float coneRadius = 5f;
         Vector3 forwardPos = transform.position + transform.forward * swingingPointForwardOffset;
 
         RaycastHit[] hits = Physics.SphereCastAll(forwardPos, coneRadius, transform.up, maxSwingDistance,
@@ -95,16 +95,15 @@ public class Swinging : MonoBehaviour
             float distanceToPoint = Vector3.Distance(transform.position, hit.point);
 
             // If this score is better than the previous AND is closer, select it as swingPoint
-            if (score >= maxScore)
+            if (distanceToPoint < minDistance)
             {
-                maxScore = score;
-                swingPoint = hit.point;
-
-                if (distanceToPoint < minDistance)
+                if (score >= maxScore)
                 {
-                    minDistance = distanceToPoint;
+                    maxScore = score;
                     swingPoint = hit.point;
                 }
+                
+                minDistance = distanceToPoint;
             }
         }
 
@@ -117,6 +116,7 @@ public class Swinging : MonoBehaviour
         else
         {
             currentlySwinging = false;
+            return;
 
             // Potential problem: newState flickering between Grounded and Aerial
             var newState = PlayerManager.PreviousState;
@@ -171,7 +171,8 @@ public class Swinging : MonoBehaviour
             
             RumbleManager.Instance.StopRumble();
             StopCoroutine(UpdateRumbleIntensity());
-            
+
+            swingPoint = Vector3.zero;
             Destroy(spring);
         }
 

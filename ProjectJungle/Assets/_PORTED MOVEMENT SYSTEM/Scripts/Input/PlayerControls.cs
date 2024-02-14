@@ -214,7 +214,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""621268fe-053c-4dd4-b013-5fa45c694f65"",
+                    ""id"": ""560fd90e-431b-4ec7-808c-3abf06871660"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -302,7 +302,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""560fd90e-431b-4ec7-808c-3abf06871660"",
+                    ""id"": ""621268fe-053c-4dd4-b013-5fa45c694f65"",
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
