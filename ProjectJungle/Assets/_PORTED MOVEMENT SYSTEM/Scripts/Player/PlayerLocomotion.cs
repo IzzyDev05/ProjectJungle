@@ -30,6 +30,7 @@ public class PlayerLocomotion : MonoBehaviour
     public float lowRumbleFrequency = 0.25f;
     public float highRumbleFrequency = 1f;
     public float rumbleDuration = 0.25f;
+    [SerializeField] private float fallingVelocityThreshold = 20f;
 
     [Header("Others")] 
     [SerializeField] private float regularFOV = 45f;
@@ -43,7 +44,7 @@ public class PlayerLocomotion : MonoBehaviour
     [HideInInspector] public bool isAiming;
     [HideInInspector] public bool isGrappling;
     [HideInInspector] public bool isGroundSlamming;
-    [HideInInspector] public float inAirTimer = 0.5f;
+    [HideInInspector] public float inAirTimer = 0.75f;
 
     private InputManager inputManager;
     private PlayerManager playerManager;
@@ -53,8 +54,8 @@ public class PlayerLocomotion : MonoBehaviour
     private CinemachineFreeLook freeLook;
 
     private Vector3 moveDirection;
-    public bool canJump = true;
-    public bool shouldHaveGravity = true;
+    private bool canJump = true;
+    private bool shouldHaveGravity = true;
     private int maxJumpCount;
     private int jumpCount;
     
@@ -79,6 +80,7 @@ public class PlayerLocomotion : MonoBehaviour
             case (States.Grappling):
                 rb.useGravity = false;
                 isSwinging = false;
+                maxJumpCount = 0;
                 
                 break;
             
@@ -128,6 +130,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         moveDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
             .normalized;
+
         moveDirection.y = 0;
 
         if (isSprinting) moveDirection *= sprintingSpeed;
@@ -187,6 +190,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         Vector3 targetPos = transform.position;
 
+        // Gravity
         if (!isGrounded && !isJumping && !isSwinging && !isGrappling && shouldHaveGravity)
         {
             if (!isLockedInAnim) animatorManager.PlayTargetAnimation("Falling", true);
@@ -200,15 +204,18 @@ public class PlayerLocomotion : MonoBehaviour
             PlayerManager.UpdateState(States.Aerial);
         }
 
+        // Grounding
         if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out var hit, groundCheckDistance, groundLayer))
         {
-            // If we're near the ground but not grounded AND are locked in an animation (Falling), play the landing animation
             if (!isGrounded) StartCoroutine(JumpCooldown());
+            
+            // If we're near the ground but not grounded AND are locked in an animation (Falling), play the landing animation
             if (!isGrounded && isLockedInAnim)
             {
-                float rumbleIntensity = Mathf.Clamp(inAirTimer / 5f, 0.1f, 1f);
+                float rumbleIntensity = Mathf.Clamp(inAirTimer / 2.5f, 0.1f, 1f);
 
-                RumbleManager.Instance.StartRumble(lowRumbleFrequency * rumbleIntensity,
+                if (rb.velocity.y < -fallingVelocityThreshold)
+                    RumbleManager.Instance.StartRumble(lowRumbleFrequency * rumbleIntensity,
                     highRumbleFrequency * rumbleIntensity, rumbleDuration, false);
                 
                 animatorManager.PlayTargetAnimation("Land", true);
@@ -218,7 +225,7 @@ public class PlayerLocomotion : MonoBehaviour
             targetPos.y = raycastHitPoint.y; // Our target position is the position where the raycast hits the ground
             hitDistance = hit.distance;
             
-            inAirTimer = 0.5f;
+            inAirTimer = 0.75f;
             isGrounded = true;
             maxJumpCount = totalJumps;
             isGroundSlamming = false;
@@ -230,12 +237,10 @@ public class PlayerLocomotion : MonoBehaviour
         else isGrounded = false;
 
         // Floating capsule
-        if (isGrounded && !isJumping)
+        if (isGrounded && !isJumping && !isSwinging && !isGrappling && shouldHaveGravity)
         {
             if (playerManager.isLockedInAnim || inputManager.moveAmount > 0f)
-            {
                 transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime / 0.1f);
-            }
             else transform.position = targetPos;
         }
     }
