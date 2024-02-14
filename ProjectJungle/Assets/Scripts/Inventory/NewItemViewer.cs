@@ -8,7 +8,7 @@ public class NewItemViewer : MonoBehaviour
 {
     public static NewItemViewer Instance;
 
-    [SerializeField] GameObject itemIconParent;
+    [SerializeField] Transform itemIconParent;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text descriptionText;
 
@@ -34,26 +34,50 @@ public class NewItemViewer : MonoBehaviour
         }
     }
 
-    public void OpenItemViewer(GameObject itemIcon, string name, string lore, float scale, Quaternion rotation)
+    /// <summary>
+    /// Opens the item viewer and gets relevant info of the item
+    /// </summary>
+    /// <param name="itemIcon">The 3D object to display.</param>
+    /// <param name="name">Name of the item.</param>
+    /// <param name="lore">Lore of the item.</param>
+    /// <param name="scale">Scale the item should have.</param>
+    /// <param name="rotation">The Rotation the item should have.</param>
+    public void OpenItemViewer(TrinketManager trinket)
     {
         if (gameObject.activeSelf == false)
         {
             gameObject.SetActive(true);
         }
 
-        GameObject item = Instantiate(itemIcon, itemIconParent.transform);
-        item.transform.localScale = item.transform.localScale * scale;
-        item.transform.rotation = rotation;
+        Transform item = Instantiate(trinket.TrinketIcon, itemIconParent.transform).transform;
+        item.localScale *= trinket.ScaleMultiplier;
+        //item.rotation *= trinket.RotationMultiplier;
 
-        nameText.text = name;
-        descriptionText.text = lore;
+        nameText.text = trinket.TrinketIcon.name;
+        descriptionText.text = trinket.TricketLore;
     }
 
+    /// <summary>
+    /// Hides the item viewer.
+    /// </summary>
     public void HideItemViewer()
     {
         if (gameObject.activeSelf == true)
         {
+            ClearItemIcon();
+
             gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Clears the 3D objects from the item icon
+    /// </summary>
+    private void ClearItemIcon()
+    {
+        foreach (Transform child in itemIconParent)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

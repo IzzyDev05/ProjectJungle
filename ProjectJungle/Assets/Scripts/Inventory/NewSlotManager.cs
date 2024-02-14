@@ -26,8 +26,9 @@ public class NewSlotManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject item = Instantiate(slotItem.GetComponent<TrinketManager>().TrinketIcon, itemIconParent.transform);
-        item.transform.localScale = item.transform.localScale * slotItem.GetComponent<TrinketManager>().ScaleMultiplier;
+        Transform item = Instantiate(slotItem.GetComponent<TrinketManager>().TrinketIcon, itemIconParent.transform).transform;
+        item.localScale *= slotItem.GetComponent<TrinketManager>().ScaleMultiplier;
+        item.rotation *= slotItem.GetComponent<TrinketManager>().RotationMultiplier;
 
         this.name = slotItem.name + " Slot";
 
@@ -47,9 +48,13 @@ public class NewSlotManager : MonoBehaviour
             return false;
         }
 
-        return slotItem.name == pickedUpItem.name ? true : false;
+        return slotItem.GetComponent<TrinketManager>().TrinketIcon.name == pickedUpItem.GetComponent<TrinketManager>().TrinketIcon.name ? true : false;
     }
 
+    /// <summary>
+    /// Add the item to the slot
+    /// </summary>
+    /// <param name="item"></param>
     public void AddItem(GameObject item)
     {
         AudioManager.instance.PlayOneShot(FModEvents.instance.pickupItem, GameManager.Player.transform.position);
@@ -57,9 +62,12 @@ public class NewSlotManager : MonoBehaviour
         itemIconParent.SetActive(true);
         Destroy(item);
 
-        isCollected = true;
+        isCollected = itemIconParent.activeSelf;
     }
 
+    /// <summary>
+    /// Display the information of the item when click on if the item is collected
+    /// </summary>
     public void OpenItemPanel()
     {
         if (isCollected == false)
@@ -67,11 +75,12 @@ public class NewSlotManager : MonoBehaviour
             return;
         }
 
-        TrinketManager trinket = slotItem.GetComponent<TrinketManager>();
-
-        NewItemViewer.Instance.OpenItemViewer(trinket.TrinketIcon, slotItem.name, trinket.TricketLore, trinket.ScaleMultiplier, trinket.Rotation);
+        NewItemViewer.Instance.OpenItemViewer(slotItem.GetComponent<TrinketManager>());
     }
 
+    /// <summary>
+    /// Set up the slots so the item can be displayed when clicked on
+    /// </summary>
     void SetupButton()
     {
         Button button = GetComponent<Button>();

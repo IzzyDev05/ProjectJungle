@@ -8,7 +8,7 @@ public class TrinketManager : MonoBehaviour
 
     [SerializeField] float scale = 1.0f;
 
-    [SerializeField] Quaternion rotation;
+    [SerializeField] Vector3 rotation;
 
     [TextArea (15,20)]
     [SerializeField] string lore;
@@ -19,5 +19,5 @@ public class TrinketManager : MonoBehaviour
 
     public float ScaleMultiplier { get { return scale; } }
 
-    public Quaternion Rotation { get { return rotation; } }
+    public Quaternion RotationMultiplier { get { return Quaternion.Euler(rotation); } }
 }

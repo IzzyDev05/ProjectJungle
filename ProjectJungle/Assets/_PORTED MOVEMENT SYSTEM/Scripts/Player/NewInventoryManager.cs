@@ -79,6 +79,8 @@ public class NewInventoryManager : MonoBehaviour
     /// <param name="amount"></param>
     public void AddToInventory(GameObject item)
     {
+        bool pickedUp = false;
+
         foreach(GameObject slot in slotList)
         {
             NewSlotManager slotManager = slot.GetComponent<NewSlotManager>();
@@ -86,9 +88,13 @@ public class NewInventoryManager : MonoBehaviour
             if (slotManager.MatchSlotItem(item) == true)
             {
                 slotManager.AddItem(item);
+                pickedUp = true;
             }
         }
 
-        AudioManager.instance.PlayOneShot(FModEvents.instance.pickupItem, GameManager.Player.transform.position);
+        if (pickedUp)
+        {
+            AudioManager.instance.PlayOneShot(FModEvents.instance.pickupItem, GameManager.Player.transform.position);
+        }
     }
 }
