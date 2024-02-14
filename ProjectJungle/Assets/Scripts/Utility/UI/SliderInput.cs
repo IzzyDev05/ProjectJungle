@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class VolumeSlider : MonoBehaviour
+public class SliderInput : MonoBehaviour
 {
-    enum VolumeType
+    enum TYPE
     {
         MASTER,
         AMBIENT,
@@ -14,15 +12,15 @@ public class VolumeSlider : MonoBehaviour
     }
 
     [Header("Type")]
-    [SerializeField] VolumeType volumeType;
+    [SerializeField] TYPE type;
 
-    [SerializeField] Slider volumeSlider;
-    [SerializeField] TMP_InputField volumeValueField;
+    [SerializeField] Slider slider;
+    [SerializeField] TMP_InputField inputField;
 
     private void Awake()
     {
-        volumeSlider = this.GetComponentInChildren<Slider>();
-        volumeValueField = this.GetComponentInChildren<TMP_InputField>();
+        slider = this.GetComponentInChildren<Slider>();
+        inputField = this.GetComponentInChildren<TMP_InputField>();
 
         SetUpSliderInput();
     }
@@ -33,98 +31,98 @@ public class VolumeSlider : MonoBehaviour
     }
 
     /// <summary>
-    /// Updated the value of the slider to match the volume level of the audio
+    /// Updated the value of the slider to match the corresponding type.
     /// </summary>
     void UpdateSliderValue()
     {
-        switch (volumeType)
+        switch (type)
         {
-            case VolumeType.MASTER:
+            case TYPE.MASTER:
                 {
-                    volumeSlider.value = AudioManager.instance.masterVolume * 100;
+                    slider.value = AudioManager.instance.masterVolume * 100;
                     break;
                 }
-            case VolumeType.AMBIENT:
+            case TYPE.AMBIENT:
                 {
-                    volumeSlider.value = AudioManager.instance.ambientVolume * 100;
+                    slider.value = AudioManager.instance.ambientVolume * 100;
                     break;
                 }
-            case VolumeType.SFX:
+            case TYPE.SFX:
                 {
-                    volumeSlider.value = AudioManager.instance.sfxVolume * 100;
+                    slider.value = AudioManager.instance.sfxVolume * 100;
                     break;
                 }
         }
     }
 
     /// <summary>
-    /// Update the FMod volume when the slider changes
+    /// Update the value of the type when the slider changes. The value of the type should be between 0 and 1.
     /// </summary>
     public void OnSliderValueChanged()
     {
-        // Ajust the value of the volume slider to be between 0 and 1.
-        float adjustedVolumeValue = volumeSlider.value / 100f;
-        switch (volumeType)
+        // Ajust the value of the slider to be between 0 and 1.
+        float adjustedValue = slider.value / 100f;
+        switch (type)
         {
-            case VolumeType.MASTER:
+            case TYPE.MASTER:
                 {
-                    AudioManager.instance.masterVolume = adjustedVolumeValue;
+                    AudioManager.instance.masterVolume = adjustedValue;
                     break;
                 }
-            case VolumeType.AMBIENT:
+            case TYPE.AMBIENT:
                 {
-                    AudioManager.instance.ambientVolume = adjustedVolumeValue;
+                    AudioManager.instance.ambientVolume = adjustedValue;
                     break;
                 }
-            case VolumeType.SFX:
+            case TYPE.SFX:
                 {
-                    AudioManager.instance.sfxVolume = adjustedVolumeValue;
+                    AudioManager.instance.sfxVolume = adjustedValue;
                     break;
                 }
         }
 
-        MatchInputFieldToSlider(volumeSlider.value);
+        MatchInputFieldToSlider(slider.value);
     }
 
     /// <summary>
-    /// Updates the FMod volume when the input field changes
+    /// Updates the value of the type when the input field changes. The value of the type should be between 0 and 1.
     /// </summary>
     public void OnInputFieldValueChanged()
     {
         // Exit if the string cannot be converted into a float.
-        if (isParsible(volumeValueField.text) == false)
+        if (isParsible(inputField.text) == false)
         {
             return;
         }
 
         // Converted string and adjust to be between 0 and 1.
-        float parsedVolumeValue = int.Parse(volumeValueField.text) / 100f;
+        float parsedVolumeValue = int.Parse(inputField.text) / 100f;
         
         if (parsedVolumeValue < 0)
         {
             parsedVolumeValue *= -1;
         }
 
-        switch (volumeType) 
+        switch (type) 
         {
-            case VolumeType.MASTER:
+            case TYPE.MASTER:
                 {
                     AudioManager.instance.masterVolume = parsedVolumeValue;
                     break;
                 }
-            case VolumeType.AMBIENT:
+            case TYPE.AMBIENT:
                 {
                     AudioManager.instance.ambientVolume = parsedVolumeValue;
                     break;
                 }
-            case VolumeType.SFX:
+            case TYPE.SFX:
                 {
                     AudioManager.instance.sfxVolume = parsedVolumeValue;
                     break;
                 }
         }
 
-        MatchSliderToInputField(volumeValueField.text);
+        MatchSliderToInputField(inputField.text);
     }
 
     // VALUE MATCHERS
@@ -135,14 +133,14 @@ public class VolumeSlider : MonoBehaviour
     /// <param name="sliderValue">A integer that represents the slider's value</param>
     void MatchInputFieldToSlider(float sliderValue)
     {
-        if (volumeValueField.contentType != TMP_InputField.ContentType.IntegerNumber)
+        if (inputField.contentType != TMP_InputField.ContentType.IntegerNumber)
         {
-            volumeValueField.contentType = TMP_InputField.ContentType.IntegerNumber;
+            inputField.contentType = TMP_InputField.ContentType.IntegerNumber;
 
             return;
         }
 
-        volumeValueField.text = string.Format("{0:F0}", Mathf.Abs(sliderValue));
+        inputField.text = string.Format("{0:F0}", Mathf.Abs(sliderValue));
 
     }
 
@@ -158,7 +156,7 @@ public class VolumeSlider : MonoBehaviour
            parsedValue = Mathf.Abs(float.Parse(inputFieldValue));
         }
 
-        volumeSlider.value = parsedValue;
+        slider.value = parsedValue;
     }
 
 
@@ -187,15 +185,15 @@ public class VolumeSlider : MonoBehaviour
     void SetUpSliderInput()
     {
         #region SLIDER
-        volumeSlider.onValueChanged.RemoveAllListeners();
+        slider.onValueChanged.RemoveAllListeners();
 
-        volumeSlider.onValueChanged.AddListener(delegate { OnSliderValueChanged(); });
+        slider.onValueChanged.AddListener(delegate { OnSliderValueChanged(); });
         #endregion
 
         #region INPUT_FIELD
-        volumeValueField.onValueChanged.RemoveAllListeners();
+        inputField.onValueChanged.RemoveAllListeners();
 
-        volumeValueField.onValueChanged.AddListener(delegate { OnInputFieldValueChanged(); });
+        inputField.onValueChanged.AddListener(delegate { OnInputFieldValueChanged(); });
         #endregion
     }
 }
