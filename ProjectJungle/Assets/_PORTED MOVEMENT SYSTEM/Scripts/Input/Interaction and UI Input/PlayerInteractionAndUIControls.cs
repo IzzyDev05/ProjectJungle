@@ -62,7 +62,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""OpenInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -73,7 +73,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""OpenInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -84,7 +84,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -95,7 +95,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -106,7 +106,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""OpenMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -117,7 +117,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""OpenMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -129,7 +129,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
             ""id"": ""59d5c7bf-05e2-4d3c-8455-cc36001c0539"",
             ""actions"": [
                 {
-                    ""name"": ""ExitUI"",
+                    ""name"": ""CloseMenu"",
                     ""type"": ""Button"",
                     ""id"": ""65294ce8-b0bd-4672-a9e2-46404fda4e1e"",
                     ""expectedControlType"": ""Button"",
@@ -154,8 +154,8 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ExitUI"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CloseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -165,8 +165,8 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ExitUI"",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CloseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -176,7 +176,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CloseInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -187,7 +187,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""CloseInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -195,7 +195,30 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Controller"",
+            ""bindingGroup"": ""Controller"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
@@ -204,7 +227,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
         m_Player_OpenMenu = m_Player.FindAction("OpenMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_ExitUI = m_UI.FindAction("ExitUI", throwIfNotFound: true);
+        m_UI_CloseMenu = m_UI.FindAction("CloseMenu", throwIfNotFound: true);
         m_UI_CloseInventory = m_UI.FindAction("CloseInventory", throwIfNotFound: true);
     }
 
@@ -329,13 +352,13 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_ExitUI;
+    private readonly InputAction m_UI_CloseMenu;
     private readonly InputAction m_UI_CloseInventory;
     public struct UIActions
     {
         private @PlayerInteractionAndUIControls m_Wrapper;
         public UIActions(@PlayerInteractionAndUIControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ExitUI => m_Wrapper.m_UI_ExitUI;
+        public InputAction @CloseMenu => m_Wrapper.m_UI_CloseMenu;
         public InputAction @CloseInventory => m_Wrapper.m_UI_CloseInventory;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
@@ -346,9 +369,9 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @ExitUI.started += instance.OnExitUI;
-            @ExitUI.performed += instance.OnExitUI;
-            @ExitUI.canceled += instance.OnExitUI;
+            @CloseMenu.started += instance.OnCloseMenu;
+            @CloseMenu.performed += instance.OnCloseMenu;
+            @CloseMenu.canceled += instance.OnCloseMenu;
             @CloseInventory.started += instance.OnCloseInventory;
             @CloseInventory.performed += instance.OnCloseInventory;
             @CloseInventory.canceled += instance.OnCloseInventory;
@@ -356,9 +379,9 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
 
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @ExitUI.started -= instance.OnExitUI;
-            @ExitUI.performed -= instance.OnExitUI;
-            @ExitUI.canceled -= instance.OnExitUI;
+            @CloseMenu.started -= instance.OnCloseMenu;
+            @CloseMenu.performed -= instance.OnCloseMenu;
+            @CloseMenu.canceled -= instance.OnCloseMenu;
             @CloseInventory.started -= instance.OnCloseInventory;
             @CloseInventory.performed -= instance.OnCloseInventory;
             @CloseInventory.canceled -= instance.OnCloseInventory;
@@ -379,6 +402,24 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
         }
     }
     public UIActions @UI => new UIActions(this);
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_ControllerSchemeIndex = -1;
+    public InputControlScheme ControllerScheme
+    {
+        get
+        {
+            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
+            return asset.controlSchemes[m_ControllerSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnOpenInventory(InputAction.CallbackContext context);
@@ -387,7 +428,7 @@ public partial class @PlayerInteractionAndUIControls: IInputActionCollection2, I
     }
     public interface IUIActions
     {
-        void OnExitUI(InputAction.CallbackContext context);
+        void OnCloseMenu(InputAction.CallbackContext context);
         void OnCloseInventory(InputAction.CallbackContext context);
     }
 }

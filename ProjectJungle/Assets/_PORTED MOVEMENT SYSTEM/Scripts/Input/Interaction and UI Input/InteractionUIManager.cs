@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 public class InteractionUIManager : MonoBehaviour
 {
@@ -15,6 +15,8 @@ public class InteractionUIManager : MonoBehaviour
     private bool openInventory = false;
     private bool openMenu = false;
     private bool interactInput = false;
+
+    private bool keyboardControls = true;
 
     private void Start()
     {
@@ -47,7 +49,7 @@ public class InteractionUIManager : MonoBehaviour
             AudioManager.Instance.PlayOneShot(FModEvents.Instance.backpack, GameManager.Player.transform.position);
         };
 
-        IUIControls.UI.ExitUI.performed += i => openMenu = false;
+        IUIControls.UI.CloseMenu.performed += i => openMenu = false;
 
         IUIControls.Enable();
         IUIControls.UI.Disable();
@@ -103,6 +105,7 @@ public class InteractionUIManager : MonoBehaviour
         }
     }
 
+    // INTERACTION
     private void OnTriggerEnter(Collider other)
     {
         string message = $"Press '{GetActionBinds("Interact")}' to ";
@@ -124,7 +127,7 @@ public class InteractionUIManager : MonoBehaviour
         }
     }
 
-    // Helpers
+    // HELPERS
     private void SwitchPlayerToUI(bool reverse = false)
     {
         if (!reverse)
@@ -163,10 +166,6 @@ public class InteractionUIManager : MonoBehaviour
 
     string GetActionBinds(string actionName)
     {
-        int controlScheme = 0;
-
-        // Find out control scheme here
-
-        return IUIControls.FindAction(actionName).bindings[controlScheme].ToDisplayString();
+        return IUIControls.FindAction(actionName).bindings[0].ToDisplayString();
     }
 }
