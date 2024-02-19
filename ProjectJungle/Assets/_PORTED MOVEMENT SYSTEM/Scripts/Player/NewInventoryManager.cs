@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[RequireComponent(typeof(DynamicInventorySlot))]
 public class NewInventoryManager : MonoBehaviour
 {
     public static NewInventoryManager Instance;
@@ -37,7 +38,6 @@ public class NewInventoryManager : MonoBehaviour
             slotList.Add(slot.gameObject);
         }
 
-
         if (inventoryUI.activeSelf == true)
         {
             inventoryUI.SetActive(false);
@@ -58,6 +58,7 @@ public class NewInventoryManager : MonoBehaviour
     public void CloseInventory()
     {
         inventoryUI.SetActive(false);
+        NewItemViewer.Instance.HideItemViewer();
     }
 
     /// <summary>
@@ -78,6 +79,8 @@ public class NewInventoryManager : MonoBehaviour
     /// <param name="amount"></param>
     public void AddToInventory(GameObject item)
     {
+        bool pickedUp = false;
+
         foreach(GameObject slot in slotList)
         {
             NewSlotManager slotManager = slot.GetComponent<NewSlotManager>();
@@ -85,7 +88,13 @@ public class NewInventoryManager : MonoBehaviour
             if (slotManager.MatchSlotItem(item) == true)
             {
                 slotManager.AddItem(item);
+                pickedUp = true;
             }
+        }
+
+        if (pickedUp)
+        {
+            AudioManager.Instance.PlayOneShot(FModEvents.Instance.pickupItem, GameManager.Player.transform.position);
         }
     }
 }

@@ -1,6 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6058982731292482753
+--- !u!114 &-5543567637056080723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Footsteps/Jump
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Footsteps/Jump
+  Guid:
+    Data1: -1357087264
+    Data2: 1150195571
+    Data3: 1925067694
+    Data4: 1448793503
+  Banks:
+  - {fileID: 3017527266539057922}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3621620920152467111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Abilities/GrappleHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Abilities/GrappleHit
+  Guid:
+    Data1: 1244256765
+    Data2: 1241537846
+    Data3: 919629470
+    Data4: 508639434
+  Banks:
+  - {fileID: 3017527266539057922}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3577619423368961370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,17 +64,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
+  m_Name: bank:/Ambient.bank
   m_EditorClassIdentifier: 
-  Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 638364507843283364
+  Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/Ambient.bank
+  Name: Ambient
+  StudioPath: bank:/Ambient
+  lastModified: 638435328583595599
   FileSizes:
   - Name: Desktop
     Value: 832448
   Exists: 1
---- !u!114 &-4655033278106006732
+--- !u!114 &-2634930355506674916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,24 +84,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Pause
+  m_Name: event:/SFX/Character/Footsteps/Landing
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Pause
+  Path: event:/SFX/Character/Footsteps/Landing
   Guid:
-    Data1: -126706798
-    Data2: 1179415660
-    Data3: -1823784781
-    Data4: 1069059480
+    Data1: 1002633936
+    Data2: 1172059644
+    Data3: -1128553284
+    Data4: -128602875
   Banks:
-  - {fileID: 7965227007703193557}
+  - {fileID: 3017527266539057922}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 580
---- !u!114 &-2077146412684281388
+  Length: 0
+--- !u!114 &-1765228610614279991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,24 +111,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/WalkingFootSteps
+  m_Name: event:/SFX/Character/Interaction/PickupItem
   m_EditorClassIdentifier: 
-  Path: event:/SFX/WalkingFootSteps
+  Path: event:/SFX/Character/Interaction/PickupItem
   Guid:
-    Data1: -1547818232
-    Data2: 1086424736
-    Data3: 735995049
-    Data4: -254788915
+    Data1: -1638058154
+    Data2: 1307817589
+    Data3: 1447541414
+    Data4: 296193822
   Banks:
-  - {fileID: 7965227007703193557}
+  - {fileID: 3017527266539057922}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-696232795156716344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Footsteps/Walk/CrunchyGrassWalking
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Footsteps/Walk/CrunchyGrassWalking
+  Guid:
+    Data1: 1528732929
+    Data2: 1169700471
+    Data3: 1895640454
+    Data4: -1391111007
+  Banks:
+  - {fileID: 3017527266539057922}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 510
---- !u!114 &-1435372491640469679
+  Length: 350
+--- !u!114 &-566650494578827593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,17 +164,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Abilities/GrappleRetract
   m_EditorClassIdentifier: 
-  Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638364525189122216
-  FileSizes:
-  - Name: Desktop
-    Value: 1340
-  Exists: 1
+  Path: event:/SFX/Character/Abilities/GrappleRetract
+  Guid:
+    Data1: -908372110
+    Data2: 1103896272
+    Data3: 1498858382
+    Data4: -1163308973
+  Banks:
+  - {fileID: 3017527266539057922}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,26 +195,31 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 5103938332709250910}
-  - {fileID: -1435372491640469679}
-  - {fileID: -6058982731292482753}
-  - {fileID: 7965227007703193557}
+  - {fileID: 760444785104651037}
+  - {fileID: -3577619423368961370}
+  - {fileID: 4890010317757656100}
+  - {fileID: 3017527266539057922}
   EditorEvents:
-  - {fileID: 4535188731563708545}
-  - {fileID: 4869673699988581496}
-  - {fileID: 4315745274044345583}
-  - {fileID: 8980225874561734848}
-  - {fileID: -4655033278106006732}
-  - {fileID: -2077146412684281388}
-  - {fileID: 4582942461165913005}
+  - {fileID: 2660787072957225477}
+  - {fileID: -696232795156716344}
+  - {fileID: -1765228610614279991}
+  - {fileID: 6155120653456667325}
+  - {fileID: 738284971465998994}
+  - {fileID: -566650494578827593}
+  - {fileID: 4266937742398033105}
+  - {fileID: 4987248210928799411}
+  - {fileID: 1543840011973614514}
+  - {fileID: -2634930355506674916}
+  - {fileID: -5543567637056080723}
+  - {fileID: -3621620920152467111}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1435372491640469679}
+  - {fileID: 4890010317757656100}
   StringsBanks:
-  - {fileID: 5103938332709250910}
-  cacheTime: 638364525189753021
+  - {fileID: 760444785104651037}
+  cacheTime: 638435328584210827
   cacheVersion: 131608
---- !u!114 &4315745274044345583
+--- !u!114 &738284971465998994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,105 +229,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Backpack
+  m_Name: event:/SFX/Character/Footsteps/Walk/StickCrunchWalking
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Backpack
+  Path: event:/SFX/Character/Footsteps/Walk/StickCrunchWalking
   Guid:
-    Data1: -1897893537
-    Data2: 1246944879
-    Data3: -528484687
-    Data4: 872133846
+    Data1: -2090349471
+    Data2: 1184722296
+    Data3: 1886320056
+    Data4: -411278964
   Banks:
-  - {fileID: 7965227007703193557}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &4535188731563708545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/AmbientForest
-  m_EditorClassIdentifier: 
-  Path: event:/Music/AmbientForest
-  Guid:
-    Data1: -1311130597
-    Data2: 1261065880
-    Data3: 1453410980
-    Data4: 455237195
-  Banks:
-  - {fileID: -6058982731292482753}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 74616
---- !u!114 &4582942461165913005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SprintingFootSteps
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SprintingFootSteps
-  Guid:
-    Data1: -332324641
-    Data2: 1183347614
-    Data3: 1348947597
-    Data4: 153064855
-  Banks:
-  - {fileID: 7965227007703193557}
+  - {fileID: 3017527266539057922}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 510
---- !u!114 &4869673699988581496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Pickup
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Pickup
-  Guid:
-    Data1: 555939454
-    Data2: 1331225101
-    Data3: 492035726
-    Data4: -815460890
-  Banks:
-  - {fileID: 7965227007703193557}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &5103938332709250910
+  Length: 500
+--- !u!114 &760444785104651037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,15 +258,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/Master.strings.bank
+  Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638364525189142083
+  lastModified: 638435328583950765
   FileSizes:
   - Name: Desktop
-    Value: 1218
+    Value: 1542
   Exists: 1
---- !u!114 &7965227007703193557
+--- !u!114 &1543840011973614514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Abilities/GrappleRelease
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Abilities/GrappleRelease
+  Guid:
+    Data1: -1289157968
+    Data2: 1241016982
+    Data3: -669404010
+    Data4: -828199238
+  Banks:
+  - {fileID: 3017527266539057922}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2660787072957225477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient/PlaceholderAmbience
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient/PlaceholderAmbience
+  Guid:
+    Data1: 898049927
+    Data2: 1284655508
+    Data3: -333835856
+    Data4: -179043552
+  Banks:
+  - {fileID: -3577619423368961370}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 74616
+--- !u!114 &3017527266539057922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,15 +332,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/SFX.bank
   m_EditorClassIdentifier: 
-  Path: Assets/FMod Projects/audio-system-fmod-project/Build/Desktop/SFX.bank
+  Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638364525189753021
+  lastModified: 638435328584210827
   FileSizes:
   - Name: Desktop
-    Value: 68448
+    Value: 164480
   Exists: 1
---- !u!114 &8980225874561734848
+--- !u!114 &4266937742398033105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -284,20 +350,94 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Resume
+  m_Name: event:/SFX/Character/Footsteps/Walk/WoodWalking
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Resume
+  Path: event:/SFX/Character/Footsteps/Walk/WoodWalking
   Guid:
-    Data1: -1269847478
-    Data2: 1132970523
-    Data3: 1162273163
-    Data4: -1679316224
+    Data1: -1850141569
+    Data2: 1185266464
+    Data3: 296400566
+    Data4: -1384436488
   Banks:
-  - {fileID: 7965227007703193557}
+  - {fileID: 3017527266539057922}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 537
+--- !u!114 &4890010317757656100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638435328583900746
+  FileSizes:
+  - Name: Desktop
+    Value: 1340
+  Exists: 1
+--- !u!114 &4987248210928799411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Inventory/Backpack
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Inventory/Backpack
+  Guid:
+    Data1: -618270063
+    Data2: 1150025915
+    Data3: 1404282776
+    Data4: 428702759
+  Banks:
+  - {fileID: 3017527266539057922}
+  IsStream: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 499
+  Length: 0
+--- !u!114 &6155120653456667325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Footsteps/Sprint/SprintingWood
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Footsteps/Sprint/SprintingWood
+  Guid:
+    Data1: -1105704099
+    Data2: 1292068550
+    Data3: -301586288
+    Data4: -185525530
+  Banks:
+  - {fileID: 3017527266539057922}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 537
