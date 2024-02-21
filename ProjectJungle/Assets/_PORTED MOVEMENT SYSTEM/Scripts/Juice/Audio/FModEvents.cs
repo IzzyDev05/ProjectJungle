@@ -18,11 +18,8 @@ public class FModEvents : MonoBehaviour
     #endregion
 
     #region PLAYER SFX
-    [field: Header("Walking Footstep SFX")]
-    [field: SerializeField] public EventReference walkingFootsteps { get; private set; }
-
-    [field: Header("Sprinting Footstep SFX")]
-    [field: SerializeField] public EventReference sprintingFootsteps { get; private set; }
+    [field: Header("Footstep SFX")]
+    [field: SerializeField] public EventReference footsteps { get; private set; }
 
     [field: Header("Jumping SFX")]
     [field: SerializeField] public EventReference jumpingSound { get; private set; }

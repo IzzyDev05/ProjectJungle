@@ -16,8 +16,6 @@ public class InteractionUIManager : MonoBehaviour
     private bool openMenu = false;
     private bool interactInput = false;
 
-    private bool keyboardControls = true;
-
     private void Start()
     {
         inputManager = GetComponent<InputManager>();
