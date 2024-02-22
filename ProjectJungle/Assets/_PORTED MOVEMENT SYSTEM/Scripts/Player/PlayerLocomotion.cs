@@ -287,4 +287,6 @@ public class PlayerLocomotion : MonoBehaviour
         Gizmos.DrawLine(raycastOrigin, raycastOrigin + Vector3.down * groundCheckDistance);
         Gizmos.DrawWireSphere(raycastOrigin + Vector3.down * hitDistance, 0.2f);
     }
+
+    public bool IsSprinting { get { return isSprinting; } }
 }

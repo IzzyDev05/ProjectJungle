@@ -29,6 +29,7 @@ public class PlayerSounds : MonoBehaviour
         if (footsteps.isValid())
         {
             GroundTypeChecker();
+            SpeedToIntensitiy();
 
             footsteps.start();
         }
@@ -77,6 +78,31 @@ public class PlayerSounds : MonoBehaviour
                     footsteps.setParameterByName("Footsteps", 0);
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Controls the intensity of the footsteps in relation to the speed of the movement
+    /// </summary>
+    private void SpeedToIntensitiy()
+    {
+        PlayerLocomotion playerLoco = GameManager.Player.GetComponentInChildren<PlayerLocomotion>();
+        InputManager inputManager = GameManager.Player.GetComponentInChildren<InputManager>();
+
+        if (playerLoco.IsSprinting)
+        {
+            //Debug.Log("Sprinting steps are louder");
+            footsteps.setParameterByName("GainBySpeed", 5f);
+        }
+        else if (inputManager.moveAmount >= 0.5f)
+        {
+            //Debug.Log("Running steps are loud");
+            footsteps.setParameterByName("GainBySpeed", 0f);
+        }
+        else
+        {
+            //Debug.Log("Walking steps are quite");
+            footsteps.setParameterByName("GainBySpeed", -5f);
         }
     }
 }
