@@ -600,12 +600,12 @@ PrefabInstance:
     - target: {fileID: 1294065410316747776, guid: 72855ccdbd1fd48478bd36fe8ba45f9b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017186336
+      value: 0.000000017186329
       objectReference: {fileID: 0}
     - target: {fileID: 1294065410316747776, guid: 72855ccdbd1fd48478bd36fe8ba45f9b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 8.3039087e-10
+      value: -8.3039053e-10
       objectReference: {fileID: 0}
     - target: {fileID: 1361040053760297303, guid: 72855ccdbd1fd48478bd36fe8ba45f9b,
         type: 3}
@@ -8731,6 +8731,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 6659259584196768930, guid: 0d775b3186f73c6408d8b95cb44dffc0,
+        type: 3}
+      propertyPath: trinketPrefabList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659259584196768930, guid: 0d775b3186f73c6408d8b95cb44dffc0,
+        type: 3}
+      propertyPath: trinketPrefabList.Array.data[0]
+      value: 
+      objectReference: {fileID: 3145527814565522414, guid: 13fe0acfc1fa15c49a8109739c7bc233,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d775b3186f73c6408d8b95cb44dffc0, type: 3}
 --- !u!1001 &6141048666278799778
