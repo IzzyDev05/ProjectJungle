@@ -64,7 +64,6 @@ public class PlayerSounds : MonoBehaviour
         {
             landing.setParameterByName("FallingIntensity", Mathf.Clamp(-10f + fallingVelocity, -10f, 5f));
         }
-        
 
         if (landing.isValid())
         {
