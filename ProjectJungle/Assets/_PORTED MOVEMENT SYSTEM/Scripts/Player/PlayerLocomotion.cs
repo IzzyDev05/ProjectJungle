@@ -227,6 +227,12 @@ public class PlayerLocomotion : MonoBehaviour
             
             inAirTimer = 0.75f;
             isGrounded = true;
+
+            if (isGrounded && isLockedInAnim)
+            {
+                GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayLanding();
+            }
+
             maxJumpCount = totalJumps;
             isGroundSlamming = false;
 
@@ -287,6 +293,4 @@ public class PlayerLocomotion : MonoBehaviour
         Gizmos.DrawLine(raycastOrigin, raycastOrigin + Vector3.down * groundCheckDistance);
         Gizmos.DrawWireSphere(raycastOrigin + Vector3.down * hitDistance, 0.2f);
     }
-
-    public bool IsSprinting { get { return isSprinting; } }
 }

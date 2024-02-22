@@ -1,5 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1050305192187335120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1358240823707395672}
+  - component: {fileID: 4202914849020888373}
+  - component: {fileID: 6659259584196768930}
+  - component: {fileID: 5420107790939122647}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1358240823707395672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050305192187335120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4840051853540727318}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4202914849020888373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050305192187335120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f346d250e93180945ab5aee0613add4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsUI: {fileID: 0}
+--- !u!114 &6659259584196768930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050305192187335120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ebdcddbeb90ee4c8e1920fefd5db6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotContainer: {fileID: 0}
+  slotPrefab: {fileID: 2204871826051104298, guid: de384a63f76bbcc4682ec78522697cd1,
+    type: 3}
+  trinketPrefabList: []
+--- !u!114 &5420107790939122647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050305192187335120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6620c7a6dc95849b1d9887d483c634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
+  slotContainer: {fileID: 0}
+  slotList: []
 --- !u!1 &4840051853540727321
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +108,8 @@ Transform:
   m_Children:
   - {fileID: 4840051853971998578}
   - {fileID: 8353747750427807434}
+  - {fileID: 1358240823707395672}
+  - {fileID: 6868623023548974147}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77,6 +157,129 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e385ad5f5e5789438ef49e0c1f58499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7928321710820257918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6868623023548974147}
+  - component: {fileID: 2292436858504527065}
+  - component: {fileID: 6193675946966683600}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6868623023548974147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7928321710820257918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4840051853540727318}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2292436858504527065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7928321710820257918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1823572d1f9b4db28062707f853c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: 1
+  ambientVolume: 1
+  sfxVolume: 1
+--- !u!114 &6193675946966683600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7928321710820257918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d92167745e3d4c4ba0a57fd59756f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <backpack>k__BackingField:
+    Guid:
+      Data1: -618270063
+      Data2: 1150025915
+      Data3: 1404282776
+      Data4: 428702759
+    Path: event:/SFX/UI/Inventory/Backpack
+  <pickupItem>k__BackingField:
+    Guid:
+      Data1: -1638058154
+      Data2: 1307817589
+      Data3: 1447541414
+      Data4: 296193822
+    Path: event:/SFX/Character/Interaction/PickupItem
+  <footsteps>k__BackingField:
+    Guid:
+      Data1: 159073632
+      Data2: 1154029890
+      Data3: -964342132
+      Data4: 1842490077
+    Path: event:/SFX/Character/Footsteps/Footsteps
+  <jumpingSound>k__BackingField:
+    Guid:
+      Data1: -1357087264
+      Data2: 1150195571
+      Data3: 1925067694
+      Data4: 1448793503
+    Path: event:/SFX/Character/Footsteps/Jump
+  <landingSound>k__BackingField:
+    Guid:
+      Data1: 1002633936
+      Data2: 1172059644
+      Data3: -1128553284
+      Data4: -128602875
+    Path: event:/SFX/Character/Footsteps/Landing
+  <grappleHit>k__BackingField:
+    Guid:
+      Data1: 1244256765
+      Data2: 1241537846
+      Data3: 919629470
+      Data4: 508639434
+    Path: event:/SFX/Character/Abilities/GrappleHit
+  <grappleRelease>k__BackingField:
+    Guid:
+      Data1: -1289157968
+      Data2: 1241016982
+      Data3: -669404010
+      Data4: -828199238
+    Path: event:/SFX/Character/Abilities/GrappleRelease
+  <grappleRetract>k__BackingField:
+    Guid:
+      Data1: -908372110
+      Data2: 1103896272
+      Data3: 1498858382
+      Data4: -1163308973
+    Path: event:/SFX/Character/Abilities/GrappleRetract
+  <forest>k__BackingField:
+    Guid:
+      Data1: 898049927
+      Data2: 1284655508
+      Data3: -333835856
+      Data4: -179043552
+    Path: event:/Ambient/PlaceholderAmbience
 --- !u!1001 &4840051853206421569
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,12 +10,19 @@ using Unity.VisualScripting;
 
 public class PlayerSounds : MonoBehaviour
 {
+    private PlayerLocomotion playerLoco;
+    private InputManager inputManager;
+
+
     private EventInstance footsteps;
     private EventInstance jumping;
     private EventInstance landing;
 
     public void Start()
     {
+        playerLoco = GameManager.Player.GetComponentInChildren<PlayerLocomotion>();
+        inputManager = GameManager.Player.GetComponentInChildren<InputManager>();
+
         footsteps = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.footsteps, GameManager.Player.transform);
         jumping = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.jumpingSound, GameManager.Player.transform);
         landing = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.landingSound, GameManager.Player.transform);
@@ -46,6 +53,15 @@ public class PlayerSounds : MonoBehaviour
 
     public void PlayLanding()
     {
+        if (playerLoco.isGroundSlamming)
+        {
+            landing.setParameterByName("GroundSlam", 5f);
+        }
+        else
+        {
+            landing.setParameterByName("GroundSlam", 0f);
+        }
+
         if (landing.isValid())
         {
             GroundTypeChecker();
@@ -85,11 +101,8 @@ public class PlayerSounds : MonoBehaviour
     /// Controls the intensity of the footsteps in relation to the speed of the movement
     /// </summary>
     private void SpeedToIntensitiy()
-    {
-        PlayerLocomotion playerLoco = GameManager.Player.GetComponentInChildren<PlayerLocomotion>();
-        InputManager inputManager = GameManager.Player.GetComponentInChildren<InputManager>();
-
-        if (playerLoco.IsSprinting)
+    {        
+        if (playerLoco.isSprinting)
         {
             //Debug.Log("Sprinting steps are louder");
             footsteps.setParameterByName("GainBySpeed", 5f);

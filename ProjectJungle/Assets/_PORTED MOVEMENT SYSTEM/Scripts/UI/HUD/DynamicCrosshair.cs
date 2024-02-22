@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,19 +34,23 @@ public class DynamicCrosshair : MonoBehaviour
         {
             crosshair = gameObject.GetComponent<Image>();
         }
+
+        mainCam = Camera.main.transform;
+
+        foreach (Transform cam in GameObject.Find("Cameras").transform)
+        {
+            if (cam.name == "Aim Camera")
+            {
+                aimCam = cam;
+                break;
+            }
+        }
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        mainCam = Camera.main.transform;
-        
-        if (aimCam == null)
-        {
-            aimCam = GameObject.Find("AimCam").transform;
-        }
-
         if(ignoredLayer.value == 0)
         {
             ignoredLayer = LayerMask.NameToLayer("Player");

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
         Player = GameObject.FindGameObjectWithTag("Player");
 
+        settingsUI = GameObject.FindGameObjectWithTag("Menu");
+
         settingsUI.SetActive(false);
     }
 

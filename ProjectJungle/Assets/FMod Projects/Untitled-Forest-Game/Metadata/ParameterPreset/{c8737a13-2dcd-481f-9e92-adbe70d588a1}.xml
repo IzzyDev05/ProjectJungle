@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{c8737a13-2dcd-481f-9e92-adbe70d588a1}">
+		<property name="name">
+			<value>Landing</value>
+		</property>
+		<relationship name="folder">
+			<destination>{7bdd0c25-4690-463b-b201-4e2c4591bfd5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{a756039e-e097-4264-bd39-16540d46a9ec}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{a756039e-e097-4264-bd39-16540d46a9ec}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Grass</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

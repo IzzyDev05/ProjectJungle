@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{d453195e-9ba5-45d8-9fd4-290e604027d3}">
+		<property name="name">
+			<value>GroundSlam</value>
+		</property>
+		<relationship name="folder">
+			<destination>{7bdd0c25-4690-463b-b201-4e2c4591bfd5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{64d40998-1b00-4c31-b68e-086a228f4a37}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{64d40998-1b00-4c31-b68e-086a228f4a37}">
+		<property name="maximum">
+			<value>10</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

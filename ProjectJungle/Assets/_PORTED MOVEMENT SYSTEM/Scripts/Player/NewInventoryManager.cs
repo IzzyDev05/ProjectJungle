@@ -23,16 +23,14 @@ public class NewInventoryManager : MonoBehaviour
 
         Instance = this;
         #endregion
+
+        inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
+        slotContainer = GameObject.FindGameObjectWithTag("InventorySlotContainer");
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (inventoryUI == null)
-        {
-            inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
-        }
-
         foreach (Transform slot in slotContainer.GetComponent<Transform>())
         {
             slotList.Add(slot.gameObject);
@@ -64,13 +62,9 @@ public class NewInventoryManager : MonoBehaviour
     /// <summary>
     /// Returns the Inventory UI Game Object
     /// </summary>
-    public GameObject GetInventoryUI
-    {
-        get
-        {
-            return inventoryUI;
-        }
-    }
+    public GameObject GetInventoryUI { get { return inventoryUI; } }
+
+    public GameObject GetSlotContainerUI { get { return slotContainer; } }
 
     /// <summary>
     /// Adds an Item into the inventory
