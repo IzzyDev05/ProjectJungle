@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
-using Unity.VisualScripting;
 
 /*
  *  Script Created using the help of Omnisepher Game & Sound's video: FMOD Time L02 - Switches & Footsteps | FMOD | Unity -> https://www.youtube.com/watch?v=naSl0DbqACA 
@@ -51,16 +50,21 @@ public class PlayerSounds : MonoBehaviour
         }
     }
 
-    public void PlayLanding()
+    /// <summary>
+    /// Plays the Landing SFX. The intensity of the SFX increases with the speed and distance from the ground the player is at.
+    /// </summary>
+    /// <param name="fallingVelocity">The speed in which the player falls at.</param>
+    public void PlayLanding(float fallingVelocity)
     {
         if (playerLoco.isGroundSlamming)
         {
-            landing.setParameterByName("GroundSlam", 5f);
+            landing.setParameterByName("FallingIntensity", 10f);
         }
         else
         {
-            landing.setParameterByName("GroundSlam", 0f);
+            landing.setParameterByName("FallingIntensity", Mathf.Clamp(-10f + fallingVelocity, -10f, 5f));
         }
+        
 
         if (landing.isValid())
         {

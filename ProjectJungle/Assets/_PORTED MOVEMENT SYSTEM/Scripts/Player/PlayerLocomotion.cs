@@ -219,6 +219,8 @@ public class PlayerLocomotion : MonoBehaviour
                     highRumbleFrequency * rumbleIntensity, rumbleDuration, false);
                 
                 animatorManager.PlayTargetAnimation("Land", true);
+
+                GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayLanding(isGroundSlamming ? groundSlamForce : -rb.velocity.y);
             }
 
             Vector3 raycastHitPoint = hit.point;
@@ -227,12 +229,6 @@ public class PlayerLocomotion : MonoBehaviour
             
             inAirTimer = 0.75f;
             isGrounded = true;
-
-            if (isGrounded && isLockedInAnim)
-            {
-                GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayLanding();
-            }
-
             maxJumpCount = totalJumps;
             isGroundSlamming = false;
 
