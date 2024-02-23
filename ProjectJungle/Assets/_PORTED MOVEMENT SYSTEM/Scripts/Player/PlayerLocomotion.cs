@@ -203,6 +203,8 @@ public class PlayerLocomotion : MonoBehaviour
                 float jumpForce = Mathf.Sqrt(-2 * gravityIntensity * (jumpHeight + 2f));
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
+
+            GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayJumping(jumpCount == 1 ? true : false);
         }
     }
 

@@ -41,8 +41,22 @@ public class PlayerSounds : MonoBehaviour
         }
     }
 
-    public void PlayJumping()
+    /// <summary>
+    /// Plays the jumping sound.
+    /// </summary>
+    public void PlayJumping(bool doubleJump = false)
     {
+        // TODO: Different sounds for jumping in air vs. on ground
+        if (doubleJump) 
+        {
+
+        }
+        else
+        {
+
+        }
+
+
         if (jumping.isValid())
         {
             GroundTypeChecker();

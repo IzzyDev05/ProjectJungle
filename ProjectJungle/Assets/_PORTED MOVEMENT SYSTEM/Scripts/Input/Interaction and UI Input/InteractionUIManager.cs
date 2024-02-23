@@ -16,6 +16,22 @@ public class InteractionUIManager : MonoBehaviour
     private bool openMenu = false;
     private bool interactInput = false;
 
+
+    private void Awake()
+    {
+        foreach (Transform camera in GameObject.Find("Cameras").transform)
+        {
+            if (camera.name == "FreeLook Camera")
+            {
+                FreelookCam = camera.gameObject;
+            } 
+            else if (camera.name == "Aim Camera")
+            {
+                AimCam = camera.gameObject;
+            }
+        }
+    }
+
     private void Start()
     {
         inputManager = GetComponent<InputManager>();
