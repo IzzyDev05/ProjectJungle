@@ -54,7 +54,7 @@ public class Grappling : MonoBehaviour
     {
         playerLocomotion.isGrappling = isGrappling;
      
-        if (playerManager.isLockedInAnim) return;
+        //if (playerManager.isLockedInAnim) return;
         HandleAimingAndGrappling();
     }
 
@@ -76,6 +76,7 @@ public class Grappling : MonoBehaviour
 
     private void HandleAimingAndGrappling()
     {
+        // TODO: Make camera movable while aiming
         if (playerLocomotion.isSwinging) return;
 
         if (inputManager.rightMouse)
@@ -89,10 +90,13 @@ public class Grappling : MonoBehaviour
     private void StartAiming()
     {
         playerLocomotion.isAiming = true;
-        if (rb.velocity != Vector3.zero) rb.velocity = Vector3.zero;
-
         freeLookCam.SetActive(false);
         aimCam.SetActive(true);
+
+        // TODO: Make this stuff better
+        if (PlayerManager.State == States.Aerial) Time.timeScale = 0.25f;
+        else
+            if (rb.velocity != Vector3.zero) rb.velocity = Vector3.zero;
         
         Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
         if (Physics.Raycast(rayOrigin, aimCam.transform.forward, out RaycastHit hit, maxGrappleDistance, grappleLayer))
@@ -139,6 +143,7 @@ public class Grappling : MonoBehaviour
     private void StopAimingAndGrappling()
     {
         if (spring) Destroy(spring);
+        if (Time.timeScale != 1f) Time.timeScale = 1f;
         
         if (isGrappling)
         {

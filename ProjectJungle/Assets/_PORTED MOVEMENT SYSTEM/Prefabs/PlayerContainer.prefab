@@ -32,6 +32,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5246294931029833441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2577021423089139583}
+  m_Layer: 0
+  m_Name: LedgeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2577021423089139583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5246294931029833441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.75, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6029089788488500369}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6029089788067096632
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6029089788144491428}
   - component: {fileID: 6029089788144491430}
+  - component: {fileID: 6029089788144491431}
   m_Layer: 0
   m_Name: ParentingTrigger
   m_TagString: Untagged
@@ -141,6 +173,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &6029089788144491431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029089788144491429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de1f414cb61e7344a387f3074b6ec81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6029089788201459231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,8 +1260,6 @@ GameObject:
   - component: {fileID: 6029089788488500397}
   - component: {fileID: 6029089788488500370}
   - component: {fileID: 6029089788488500371}
-  - component: {fileID: 2835880087457784706}
-  - component: {fileID: 8440243495448553758}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1242,6 +1284,7 @@ Transform:
   - {fileID: 6029089788488500368}
   - {fileID: 6029089790170142925}
   - {fileID: 6029089788144491428}
+  - {fileID: 2577021423089139583}
   m_Father: {fileID: 9131520698770810831}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1254,7 +1297,7 @@ Rigidbody:
   m_GameObject: {fileID: 6029089789831421868}
   serializedVersion: 2
   m_Mass: 2.5
-  m_Drag: 0.5
+  m_Drag: 1.5
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -1329,29 +1372,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 3
-  runningSpeed: 7
-  sprintingSpeed: 12.5
-  rotationSpeed: 35
-  leapingVelocity: 1.5
-  fallingVelocity: 50
-  jumpHeight: 6
+  runningSpeed: 10
+  sprintingSpeed: 16
+  rotationSpeed: 40
+  aerialMovementSpeed: 12
+  leapingVelocity: 2
+  fallingVelocity: 45
+  jumpHeight: 15
   jumpCooldown: 0.1
   totalJumps: 2
-  gravityIntensity: -1
-  groundSlamForce: 75
-  groundSlamWait: 0.5
-  groundCheckDistance: 0.87
-  raycastHeightOffset: 0.64
+  gravityIntensity: -6
+  groundSlamForce: 100
+  groundSlamWait: 0.15
+  groundCheckDistance: 1.1
+  raycastHeightOffset: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  lowRumbleFrequency: 0.25
-  highRumbleFrequency: 0.75
-  rumbleDuration: 0.5
+  lowRumbleFrequency: 0.2
+  highRumbleFrequency: 0.6
+  rumbleDuration: 0.3
   fallingVelocityThreshold: 20
   regularFOV: 45
-  swingingFOV: 70
-  fovChangeTime: 12.5
+  swingingFOV: 80
+  fovChangeTime: 15
+  ledgeCheckTransform: {fileID: 2577021423089139583}
+  ledgeCheckLength: 2
   isSprinting: 0
   isJumping: 0
   isGrounded: 1
@@ -1372,20 +1418,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37cd9c5325fec741bfc2689bab74647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSwingDistance: 15
+  maxSwingDistance: 50
   swingableLayer:
     serializedVersion: 2
     m_Bits: 128
   swingPointRef: {fileID: 6029089790170142925}
-  swingingCD: 0.75
+  swingingCD: 0.25
   swingingPointForwardOffset: 2
-  swingForce: 4.5
-  springDamper: 7
+  swingForce: 6
+  springDamper: 5
   springMassScale: 4.5
-  minDistanceMultiplier: 0.35
+  minDistanceMultiplier: 0.2
   maxDistanceMultiplier: 0.1
-  initialForwardMomentum: 25
-  initialUpwardMomentum: 20
+  initialForwardMomentum: 20
+  initialUpwardMomentum: 18
   swingEndThrust: 18
 --- !u!114 &6029089788488500370
 MonoBehaviour:
@@ -1401,16 +1447,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grapplePointRef: {fileID: 6029089790170142925}
   maxGrappleDistance: 100
-  grappleForce: 25
+  grappleForce: 27.5
   grappleLayer:
     serializedVersion: 2
     m_Bits: 256
   grapplingCD: 0.75
-  jointForce: 25
-  jointDamper: 7
-  jointMassScale: 4.5
-  minDistance: 0.25
-  maxDistance: 0.75
+  jointForce: 30
+  jointDamper: 7.5
+  jointMassScale: 4
+  minDistance: 0.2
+  maxDistance: 0.5
   freeLookCam: {fileID: 0}
   aimCam: {fileID: 0}
 --- !u!120 &6029089788488500371
@@ -1510,32 +1556,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &2835880087457784706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6029089789831421868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b948884b9ce754cab68e16333edc42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FreelookCam: {fileID: 0}
-  AimCam: {fileID: 0}
---- !u!114 &8440243495448553758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6029089789831421868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba1352736eb66f44aeb73dcd5bde5c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6029089789888946439
 GameObject:
   m_ObjectHideFlags: 0
