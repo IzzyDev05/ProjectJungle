@@ -142,6 +142,11 @@ public class InteractionUIManager : MonoBehaviour
     }
 
     // HELPERS
+
+    /// <summary>
+    /// Disables the player controls for the input system and switched the the UI controls.
+    /// </summary>
+    /// <param name="reverse"></param>
     private void SwitchPlayerToUI(bool reverse = false)
     {
         if (!reverse)
@@ -178,6 +183,11 @@ public class InteractionUIManager : MonoBehaviour
         SwitchPlayerToUI(!opened);
     }
 
+    /// <summary>
+    /// Gets the binding for an action
+    /// </summary>
+    /// <param name="actionName">The name of the action</param>
+    /// <returns>The binding of the action.</returns>
     string GetActionBinds(string actionName)
     {
         return IUIControls.FindAction(actionName).bindings[0].ToDisplayString();

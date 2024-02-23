@@ -107,6 +107,7 @@ public class InputManager : MonoBehaviour
         if (!reverse)
         {
             playerControls.Disable();
+            movementInput = Vector2.zero;
         }
         else
         {

@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
 
         AudioManager.Instance.PauseAmbience();
     }
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
 
         AudioManager.Instance.PauseAmbience(false);
     }
