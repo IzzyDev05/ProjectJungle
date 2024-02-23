@@ -11,7 +11,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        #region SINGLETON
+        if (Instance != null)
+        {
+            Debug.LogError("Multiple Game Manager Instances found.");
+        }
+
         Instance = this;
+        #endregion
 
         Player = GameObject.FindGameObjectWithTag("Player");
 

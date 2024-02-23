@@ -12,6 +12,8 @@ public class InteractionUIManager : MonoBehaviour
     private CinemachineInputProvider camLookProvider;
     private CinemachineInputProvider aimLookProvider;
 
+    ActionPrompt actionPrompter;
+
     private bool openInventory = false;
     private bool openMenu = false;
     private bool interactInput = false;
@@ -30,6 +32,8 @@ public class InteractionUIManager : MonoBehaviour
                 AimCam = camera.gameObject;
             }
         }
+
+        actionPrompter = GameObject.Find("ActionPrompt").GetComponent<ActionPrompt>();
     }
 
     private void Start()
@@ -126,7 +130,8 @@ public class InteractionUIManager : MonoBehaviour
 
         if (other.CompareTag("Interact_Pickup"))
         {
-            Debug.Log(message + "Pickup");
+            //Debug.Log(message + "Pickup");
+            actionPrompter.PromptPlayer(message + "Pickup");
         }
     }
 
@@ -137,8 +142,14 @@ public class InteractionUIManager : MonoBehaviour
             if (other.CompareTag("Interact_Pickup"))
             {
                 NewInventoryManager.Instance.AddToInventory(other.gameObject);
+                actionPrompter.ClearPrompt();
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        actionPrompter.ClearPrompt();
     }
 
     // HELPERS
@@ -190,6 +201,16 @@ public class InteractionUIManager : MonoBehaviour
     /// <returns>The binding of the action.</returns>
     string GetActionBinds(string actionName)
     {
-        return IUIControls.FindAction(actionName).bindings[0].ToDisplayString();
+        int deviceScheme = 0;
+        if (Keyboard.current != null)
+        {
+            deviceScheme = 0;
+        }
+        else if (Gamepad.current != null)
+        {
+            deviceScheme = 1;
+        }
+
+        return IUIControls.FindAction(actionName).bindings[deviceScheme].ToDisplayString();
     }
 }
