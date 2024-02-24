@@ -34,12 +34,25 @@ public class PlayerSounds : MonoBehaviour
     /// </summary>
     public void PlayFootsteps()
     {
-        if (footsteps.isValid())
+        if (footsteps.isValid() && playerLoco.isGrounded)
         {
             GroundTypeChecker();
             SpeedToIntensitiy();
 
             footsteps.start();
+        }
+    }
+
+    /// <summary>
+    /// Stops the footstep sounds.
+    /// </summary>
+    public void StopFootsteps()
+    {
+        PLAYBACK_STATE state;
+        footsteps.getPlaybackState(out state);
+        if (state.Equals(PLAYBACK_STATE.PLAYING))
+        {
+            footsteps.stop(STOP_MODE.IMMEDIATE);
         }
     }
 
@@ -50,14 +63,13 @@ public class PlayerSounds : MonoBehaviour
     {
         if (jumping.isValid())
         {
-            // TODO: Different sounds for jumping in air vs. on ground
             if (doubleJump)
             {
-
+                jumping.setParameterByName("Jumping", 0);
             }
             else
             {
-                GroundTypeChecker();
+                PlayFootsteps();
             }
 
             jumping.start();
@@ -73,6 +85,7 @@ public class PlayerSounds : MonoBehaviour
         if (playerLoco.isGroundSlamming)
         {
             landing.setParameterByName("FallingIntensity", 10f);
+            landing.setParameterByName("GainBySpeed", 10f);
         }
         else
         {
@@ -107,10 +120,12 @@ public class PlayerSounds : MonoBehaviour
                 if (groundRenderer.material.name.Contains("Grass"))
                 {
                     footsteps.setParameterByName("Footsteps", 1);
+                    landing.setParameterByName("Footsteps", 1);
                 }
                 else
                 {
                     footsteps.setParameterByName("Footsteps", 0);
+                    jumping.setParameterByName("Jumping", 1);
                 }
             }
         }
@@ -136,6 +151,13 @@ public class PlayerSounds : MonoBehaviour
             //Debug.Log("Walking steps are quite");
             footsteps.setParameterByName("GainBySpeed", -5f);
         }
+    }
+
+    private IEnumerator DelaySteps(float delay)
+    {
+        footsteps.start();
+
+        yield return new WaitForSeconds(delay);
     }
     #endregion
 }

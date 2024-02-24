@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="ParameterPreset" id="{ff173977-3b0b-4900-b9a6-d0215b7168a7}">
+	<object class="ParameterPreset" id="{cb210f12-5ff3-44ef-9f9d-48e8750bbe28}">
 		<property name="name">
-			<value>Footsteps</value>
+			<value>Jumping</value>
 		</property>
 		<relationship name="folder">
 			<destination>{739e234c-ac69-4d02-9c43-683834b005aa}</destination>
 		</relationship>
 		<relationship name="parameter">
-			<destination>{d7c29bfe-b9e6-4516-b399-104ee02f772d}</destination>
+			<destination>{60c53141-725f-4383-9c0f-27caf9b85e01}</destination>
 		</relationship>
 	</object>
-	<object class="GameParameter" id="{d7c29bfe-b9e6-4516-b399-104ee02f772d}">
+	<object class="GameParameter" id="{60c53141-725f-4383-9c0f-27caf9b85e01}">
 		<property name="parameterType">
 			<value>2</value>
 		</property>
@@ -19,8 +19,8 @@
 			<value>2</value>
 		</property>
 		<property name="enumerationLabels">
-			<value>Wood</value>
-			<value>Grass</value>
+			<value>DoubleJump</value>
+			<value>Dirt</value>
 		</property>
 		<property name="initialValue">
 			<value>0</value>

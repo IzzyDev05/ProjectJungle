@@ -62,7 +62,8 @@ MonoBehaviour:
   slotContainer: {fileID: 0}
   slotPrefab: {fileID: 2204871826051104298, guid: de384a63f76bbcc4682ec78522697cd1,
     type: 3}
-  trinketPrefabList: []
+  trinketPrefabList:
+  - {fileID: 3145527814565522414, guid: 13fe0acfc1fa15c49a8109739c7bc233, type: 3}
 --- !u!114 &5420107790939122647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,21 +238,21 @@ MonoBehaviour:
       Data2: 1154029890
       Data3: -964342132
       Data4: 1842490077
-    Path: event:/SFX/Character/Footsteps/Footsteps
+    Path: event:/SFX/Character/Movement/Footsteps
   <jumpingSound>k__BackingField:
     Guid:
-      Data1: -1357087264
-      Data2: 1150195571
-      Data3: 1925067694
-      Data4: 1448793503
-    Path: event:/SFX/Character/Footsteps/Jump
+      Data1: 646169252
+      Data2: 1331380495
+      Data3: -790088807
+      Data4: 70426626
+    Path: event:/SFX/Character/Movement/Jump
   <landingSound>k__BackingField:
     Guid:
       Data1: 1002633936
       Data2: 1172059644
       Data3: -1128553284
       Data4: -128602875
-    Path: event:/SFX/Character/Footsteps/Landing
+    Path: event:/SFX/Character/Movement/Landing
   <grappleHit>k__BackingField:
     Guid:
       Data1: 1244256765

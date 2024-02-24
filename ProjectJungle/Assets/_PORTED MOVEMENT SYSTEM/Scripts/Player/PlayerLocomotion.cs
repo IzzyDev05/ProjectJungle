@@ -204,7 +204,7 @@ public class PlayerLocomotion : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
 
-            GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayJumping(jumpCount == 1 ? true : false);
+            GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayJumping(jumpCount == totalJumps ? true : false);
         }
     }
 
