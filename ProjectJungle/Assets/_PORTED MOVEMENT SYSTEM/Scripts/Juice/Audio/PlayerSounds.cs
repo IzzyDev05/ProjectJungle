@@ -28,6 +28,7 @@ public class PlayerSounds : MonoBehaviour
         landing = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.landingSound, GameManager.Player.transform);
     }
 
+    #region PUBLIC_SFX_PLAYERS
     /// <summary>
     /// Plays the footstep sounds as a Animation event
     /// </summary>
@@ -84,6 +85,7 @@ public class PlayerSounds : MonoBehaviour
             landing.start();
         }
     }
+    #endregion
 
     #region DYNAMIC_AUDIO_HELPERS
     /// <summary>
