@@ -1,23 +1,29 @@
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
+using System;
 
 public class InteractionUIManager : MonoBehaviour
 {
     private PlayerInteractionAndUIControls IUIControls;
     private InputManager inputManager;
 
+    #region CAMERA
     [SerializeField] private GameObject FreelookCam;
     [SerializeField] private GameObject AimCam;
     private CinemachineInputProvider camLookProvider;
     private CinemachineInputProvider aimLookProvider;
+    #endregion
 
-    ActionPrompt actionPrompter;
-
+    #region INPUT_BOOLEANS
     private bool openInventory = false;
     private bool openMenu = false;
     private bool interactInput = false;
+    #endregion
 
+
+    private ActionPrompt actionPrompter;
+    private InputDevice currentDevice;
 
     private void Awake()
     {
@@ -43,13 +49,15 @@ public class InteractionUIManager : MonoBehaviour
         camLookProvider = FreelookCam.GetComponent<CinemachineInputProvider>();
         aimLookProvider = AimCam.GetComponent<CinemachineInputProvider>();
 
+        currentDevice = Keyboard.current.device ?? Gamepad.current.device;
+        //Debug.Log($"Current Device: {currentDevice.name}");
     }
 
     private void OnEnable()
     {
         IUIControls ??= new PlayerInteractionAndUIControls(); // Shorthand for: if (IUIControls == null { --- }
 
-
+        #region PLAYER_ACTION_INPUTS
         IUIControls.Player.OpenInventory.performed += i => 
         {
             openInventory = true;
@@ -60,7 +68,9 @@ public class InteractionUIManager : MonoBehaviour
 
         IUIControls.Player.Interact.performed += i => interactInput = true;
         IUIControls.Player.Interact.canceled += i => interactInput = false;
+        #endregion
 
+        #region UI_ACTION_INPUTS
         IUIControls.UI.CloseInventory.performed += i =>
         {
             openInventory = false;
@@ -68,6 +78,7 @@ public class InteractionUIManager : MonoBehaviour
         };
 
         IUIControls.UI.CloseMenu.performed += i => openMenu = false;
+        #endregion
 
         IUIControls.Enable();
         IUIControls.UI.Disable();
@@ -78,6 +89,7 @@ public class InteractionUIManager : MonoBehaviour
         IUIControls.Disable();
     }
 
+    #region HANDLE_UI_INPUT_FUNCTIONS
     public void HandleUIInputs()
     {
         HandleInventory();
@@ -109,29 +121,14 @@ public class InteractionUIManager : MonoBehaviour
             GameManager.Instance.CloseMenuUI();
         }
     }
+    #endregion
 
-    public void ButtonCloseUI()
-    {
-        if (openInventory)
-        {
-            openInventory = false;
-        }
-
-        if (openMenu)
-        {
-            openMenu = false;
-        }
-    }
-
-    // INTERACTION
+    #region INTERACTION
     private void OnTriggerEnter(Collider other)
     {
-        string message = $"Press '{GetActionBinds("Interact")}' to ";
-
         if (other.CompareTag("Interact_Pickup"))
         {
-            //Debug.Log(message + "Pickup");
-            actionPrompter.PromptPlayer(message + "Pickup");
+            PromptMessage("Action");
         }
     }
 
@@ -146,14 +143,15 @@ public class InteractionUIManager : MonoBehaviour
             }
         }
     }
+    
 
     private void OnTriggerExit(Collider other)
     {
         actionPrompter.ClearPrompt();
     }
+    #endregion
 
-    // HELPERS
-
+    #region HELPERS
     /// <summary>
     /// Disables the player controls for the input system and switched the the UI controls.
     /// </summary>
@@ -180,6 +178,10 @@ public class InteractionUIManager : MonoBehaviour
         inputManager.DisablePlayerControls(reverse);
     }
 
+    /// <summary>
+    /// Helper function that pauses and switches controls.
+    /// </summary>
+    /// <param name="opened">Boolean for determining whether the UI is open or close.</param>
     private void UIOpen(bool opened)
     {
         if (opened)
@@ -195,13 +197,23 @@ public class InteractionUIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Prompts the player depending on the action given.
+    /// </summary>
+    /// <param name="action">String which will be the action the player can perform. The action will also be prompted to the player as part of the message.</param>
+    private void PromptMessage(string action)
+    {
+        actionPrompter.PromptPlayer($"Press '{GetActionBinds("Interact")}' to {action}");
+    }
+
+    /// <summary>
     /// Gets the binding for an action
     /// </summary>
     /// <param name="actionName">The name of the action</param>
     /// <returns>The binding of the action.</returns>
-    string GetActionBinds(string actionName)
+    private string GetActionBinds(string actionName)
     {
-        int deviceScheme = 0;
+        int deviceScheme = -1;
+
         if (Keyboard.current != null)
         {
             deviceScheme = 0;
@@ -211,6 +223,30 @@ public class InteractionUIManager : MonoBehaviour
             deviceScheme = 1;
         }
 
+        if (deviceScheme == -1)
+        {
+            //Debug.LogError($"Current Device does not exist. deviceScheme returns {deviceScheme}.");
+            throw new Exception($"Current Device does not exist. deviceScheme returns {deviceScheme}.");
+        }
+
+        //Debug.Log($"Current Device: {currentDevice.name}");
+
         return IUIControls.FindAction(actionName).bindings[deviceScheme].ToDisplayString();
     }
+    #endregion
+
+    #region PUBLIC_EXTERNAL_FUNCTIONS
+    public void ButtonCloseUI()
+    {
+        if (openInventory)
+        {
+            openInventory = false;
+        }
+
+        if (openMenu)
+        {
+            openMenu = false;
+        }
+    }
+    #endregion
 }

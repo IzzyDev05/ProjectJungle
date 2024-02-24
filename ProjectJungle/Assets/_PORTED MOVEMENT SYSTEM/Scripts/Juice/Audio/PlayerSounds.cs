@@ -12,10 +12,11 @@ public class PlayerSounds : MonoBehaviour
     private PlayerLocomotion playerLoco;
     private InputManager inputManager;
 
-
+    #region EVENT_INSTANCES
     private EventInstance footsteps;
     private EventInstance jumping;
     private EventInstance landing;
+    #endregion
 
     public void Start()
     {
@@ -84,6 +85,7 @@ public class PlayerSounds : MonoBehaviour
         }
     }
 
+    #region DYNAMIC_AUDIO_HELPERS
     /// <summary>
     /// Checks the type of ground to change the footstep sounds
     /// </summary>
@@ -133,4 +135,5 @@ public class PlayerSounds : MonoBehaviour
             footsteps.setParameterByName("GainBySpeed", -5f);
         }
     }
+    #endregion
 }

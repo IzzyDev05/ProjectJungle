@@ -24,11 +24,18 @@ public class ActionPrompt : MonoBehaviour
         ClearPrompt();
     }
 
+    /// <summary>
+    /// Clear the text for the action prompt
+    /// </summary>
     public void ClearPrompt()
     {
         promptText.text = "";
     }
 
+    /// <summary>
+    /// Shows the prompt to the player.
+    /// </summary>
+    /// <param name="message">Message that will be displayed to the player.</param>
     public void PromptPlayer(string message)
     {
         promptText.text = message;

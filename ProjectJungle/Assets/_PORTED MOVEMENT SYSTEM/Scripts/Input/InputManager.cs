@@ -96,7 +96,7 @@ public class InputManager : MonoBehaviour
     }
 
 
-    // INPUT LINKERS
+    #region INPUT_LINKERS
 
     /// <summary>
     /// Disables the player controls
@@ -114,4 +114,5 @@ public class InputManager : MonoBehaviour
             playerControls.Enable();
         }
     }
+    #endregion
 }
