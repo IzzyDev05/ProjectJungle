@@ -12,6 +12,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float rotationSpeed = 15f;
 
     [Header("Aerial Speeds")] 
+    [SerializeField] private float aerialMovementSpeed = 10f;
     [SerializeField] private float leapingVelocity = 1.5f;
     [SerializeField] private float fallingVelocity = 33f;
     [SerializeField] private float jumpHeight = 5f;
@@ -36,6 +37,8 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float regularFOV = 45f;
     [SerializeField] private float swingingFOV = 75f;
     [SerializeField] private float fovChangeTime = 12.5f;
+    [SerializeField] private Transform ledgeCheckTransform;
+    [SerializeField] private float ledgeCheckLength;
 
     [HideInInspector] public bool isSprinting;
     [HideInInspector] public bool isJumping;
@@ -53,6 +56,7 @@ public class PlayerLocomotion : MonoBehaviour
     private Transform cam;
     private CinemachineFreeLook freeLook;
 
+    private float hitDistance; // For visualization
     private Vector3 moveDirection;
     private bool canJump = true;
     private bool shouldHaveGravity = true;
@@ -81,7 +85,6 @@ public class PlayerLocomotion : MonoBehaviour
                 rb.useGravity = false;
                 isSwinging = false;
                 maxJumpCount = 0;
-                
                 break;
             
             case (States.Swinging):
@@ -93,15 +96,18 @@ public class PlayerLocomotion : MonoBehaviour
                     Mathf.Lerp(freeLook.m_Lens.FieldOfView, swingingFOV, fovChangeTime * Time.deltaTime);
 
                 HandleRotation();
+                HandleAirMovement();
                 break;
             
             case (States.Aerial):
                 rb.useGravity = false;
                 isSwinging = false;
 
+                LedgeGrab();
                 HandleGroundSlamming();
                 HandleRotation();
                 HandleFallingAndLanding();
+                HandleAirMovement();
                 break;
             
             case (States.Grounded):
@@ -144,6 +150,16 @@ public class PlayerLocomotion : MonoBehaviour
         rb.velocity = movementVelocity;
     }
 
+    private void HandleAirMovement()
+    {
+        moveDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
+            .normalized;
+
+        if (inputManager.moveAmount > 0.5f)
+            rb.velocity = new Vector3(moveDirection.x * aerialMovementSpeed, rb.velocity.y,
+                moveDirection.z * aerialMovementSpeed);
+    }
+
     private void HandleRotation()
     {
         if (isAiming) return;
@@ -164,23 +180,33 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleJumping()
     {
+        // TODO: Fix jumping
         if (isGrounded || jumpCount < maxJumpCount)
         {
-            if (!canJump) return;
-            
+            if (!canJump || isSwinging) return;
             jumpCount++;
-            
-            animatorManager.Animator.SetBool("isJumping", true); // isJumping is set to false after animation is over
-            animatorManager.PlayTargetAnimation("Jump", false);
 
-            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-            Vector3 playerVelocity = moveDirection;
-            playerVelocity.y = jumpingVelocity;
-            rb.velocity = playerVelocity;
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            if (jumpCount == 1)
+            {
+                animatorManager.Animator.SetBool("isJumping", true);
+                animatorManager.PlayTargetAnimation("Jump", false);
+                
+                float jumpForce = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+            else
+            {
+                animatorManager.Animator.SetBool("isJumping", true);
+                animatorManager.PlayTargetAnimation("JumpFlip", false);
+                
+                float jumpForce = Mathf.Sqrt(-2 * gravityIntensity * (jumpHeight + 2f));
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
         }
     }
 
-    private float hitDistance; // For visualization
+    // Seems like this function doesn't need much changing
     private void HandleFallingAndLanding()
     {
         bool isLockedInAnim = playerManager.isLockedInAnim;
@@ -276,15 +302,32 @@ public class PlayerLocomotion : MonoBehaviour
 
         isGroundSlamming = true;
     }
+
+    private void LedgeGrab()
+    {
+        // TODO: Make this actually ledge grab instead of an instant change
+        bool foundLedge = Physics.Raycast(ledgeCheckTransform.position, Vector3.down, out RaycastHit hit,
+            ledgeCheckLength);
+        
+        if (!foundLedge) return;
+        
+        Vector3 hitPoint = hit.point;
+        transform.position = hitPoint;
+    }
     
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         
+        // Ground check
         Vector3 raycastOrigin = transform.position;
         raycastOrigin.y += raycastHeightOffset;
         
         Gizmos.DrawLine(raycastOrigin, raycastOrigin + Vector3.down * groundCheckDistance);
         Gizmos.DrawWireSphere(raycastOrigin + Vector3.down * hitDistance, 0.2f);
+        
+        // Ledge
+        Vector3 ledgeOrigin = ledgeCheckTransform.position;
+        Gizmos.DrawLine(ledgeOrigin, ledgeOrigin + Vector3.down * ledgeCheckLength);
     }
 }
