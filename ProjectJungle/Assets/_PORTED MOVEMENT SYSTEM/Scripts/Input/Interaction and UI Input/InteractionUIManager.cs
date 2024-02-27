@@ -2,6 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.InputSystem.LowLevel;
 
 public class InteractionUIManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class InteractionUIManager : MonoBehaviour
     #endregion
 
     private ActionPrompt actionPrompter;
+
+    int deviceScheme = -1;
 
     private void Awake()
     {
@@ -207,9 +210,7 @@ public class InteractionUIManager : MonoBehaviour
     /// <returns>The binding of the action.</returns>
     private string GetActionBinds(string actionName)
     {
-        int deviceScheme = 0;
-
-
+        deviceScheme = 0;
 
         if (deviceScheme == -1)
         {
@@ -217,7 +218,7 @@ public class InteractionUIManager : MonoBehaviour
             throw new Exception($"Current Device does not exist. deviceScheme returns {deviceScheme}.");
         }
 
-        return IUIControls.FindAction(actionName).bindings[deviceScheme].ToString();
+        return IUIControls.FindAction(actionName).GetBindingDisplayString(); //IUIControls.FindAction(actionName).bindings[deviceScheme].ToDisplayString();
     }
     #endregion
 

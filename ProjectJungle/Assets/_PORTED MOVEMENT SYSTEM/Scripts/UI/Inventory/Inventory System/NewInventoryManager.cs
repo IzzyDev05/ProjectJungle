@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 [RequireComponent(typeof(DynamicInventorySlot))]
@@ -39,6 +40,12 @@ public class NewInventoryManager : MonoBehaviour
         if (inventoryUI.activeSelf == true)
         {
             inventoryUI.SetActive(false);
+        }
+
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem.firstSelectedGameObject == null) 
+        {
+            eventSystem.firstSelectedGameObject = slotContainer.transform.GetChild(0).gameObject;
         }
     }
 
