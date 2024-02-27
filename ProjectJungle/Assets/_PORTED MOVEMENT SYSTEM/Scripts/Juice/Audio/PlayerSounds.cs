@@ -149,7 +149,7 @@ public class PlayerSounds : MonoBehaviour
         else
         {
             //Debug.Log("Walking steps are quite");
-            footsteps.setParameterByName("GainBySpeed", -5f);
+            footsteps.setParameterByName("GainBySpeed", -10f);
         }
     }
 

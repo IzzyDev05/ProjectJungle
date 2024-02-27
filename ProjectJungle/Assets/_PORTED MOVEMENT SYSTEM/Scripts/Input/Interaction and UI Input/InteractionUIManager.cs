@@ -21,9 +21,7 @@ public class InteractionUIManager : MonoBehaviour
     private bool interactInput = false;
     #endregion
 
-
     private ActionPrompt actionPrompter;
-    private InputDevice currentDevice;
 
     private void Awake()
     {
@@ -48,9 +46,6 @@ public class InteractionUIManager : MonoBehaviour
 
         camLookProvider = FreelookCam.GetComponent<CinemachineInputProvider>();
         aimLookProvider = AimCam.GetComponent<CinemachineInputProvider>();
-
-        currentDevice = Keyboard.current.device ?? Gamepad.current.device;
-        //Debug.Log($"Current Device: {currentDevice.name}");
     }
 
     private void OnEnable()
@@ -212,16 +207,9 @@ public class InteractionUIManager : MonoBehaviour
     /// <returns>The binding of the action.</returns>
     private string GetActionBinds(string actionName)
     {
-        int deviceScheme = -1;
+        int deviceScheme = 0;
 
-        if (Keyboard.current != null)
-        {
-            deviceScheme = 0;
-        }
-        else if (Gamepad.current != null)
-        {
-            deviceScheme = 1;
-        }
+        Debug.Log();
 
         if (deviceScheme == -1)
         {
