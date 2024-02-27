@@ -209,7 +209,7 @@ public class InteractionUIManager : MonoBehaviour
     {
         int deviceScheme = 0;
 
-        Debug.Log();
+
 
         if (deviceScheme == -1)
         {
@@ -217,9 +217,7 @@ public class InteractionUIManager : MonoBehaviour
             throw new Exception($"Current Device does not exist. deviceScheme returns {deviceScheme}.");
         }
 
-        //Debug.Log($"Current Device: {currentDevice.name}");
-
-        return IUIControls.FindAction(actionName).bindings[deviceScheme].ToDisplayString();
+        return IUIControls.FindAction(actionName).bindings[deviceScheme].ToString();
     }
     #endregion
 
