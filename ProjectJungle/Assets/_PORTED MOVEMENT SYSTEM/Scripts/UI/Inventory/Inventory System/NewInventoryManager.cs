@@ -49,6 +49,7 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
+    #region UI_Controls
     /// <summary>
     /// Opens inventory UI
     /// </summary>
@@ -65,13 +66,16 @@ public class NewInventoryManager : MonoBehaviour
         inventoryUI.SetActive(false);
         NewItemViewer.Instance.HideItemViewer();
     }
+    #endregion
 
+    #region Getters
     /// <summary>
     /// Returns the Inventory UI Game Object
     /// </summary>
     public GameObject GetInventoryUI { get { return inventoryUI; } }
 
     public GameObject GetSlotContainerUI { get { return slotContainer; } }
+    #endregion
 
     /// <summary>
     /// Adds an Item into the inventory

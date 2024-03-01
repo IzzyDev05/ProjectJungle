@@ -28,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6690675607485987140}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 122.88439}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6934986239895268443
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -127,6 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TrinketPrefab: {fileID: 6690675607485987140}
-  scale: 1
-  rotation: {x: 0, y: 0, z: 0}
+  scale: 0.25
+  s_rotation: {x: 0, y: 0, z: 0}
+  s_position: {x: 0.2, y: -0.75, z: -0.5}
+  d_rotation: {x: 0, y: 0, z: 0}
+  d_position: {x: -0.35, y: -0.75, z: -0.5}
   lore: If only it were a green shroom.

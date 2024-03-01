@@ -51,7 +51,8 @@ public class NewItemViewer : MonoBehaviour
 
         Transform item = Instantiate(trinket.TrinketIcon, itemIconParent.transform).transform;
         item.localScale *= trinket.ScaleMultiplier;
-        //item.rotation *= trinket.RotationMultiplier;
+        item.localRotation *= trinket.D_RotationMultipler;
+        item.localPosition += trinket.D_PositionModifier;
 
         nameText.text = trinket.TrinketIcon.name;
         descriptionText.text = trinket.TricketLore;

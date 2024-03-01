@@ -26,9 +26,12 @@ public class NewSlotManager : MonoBehaviour
 
     private void Start()
     {
-        Transform item = Instantiate(slotItem.GetComponent<TrinketManager>().TrinketIcon, itemIconParent.transform).transform;
-        item.localScale *= slotItem.GetComponent<TrinketManager>().ScaleMultiplier;
-        item.rotation *= slotItem.GetComponent<TrinketManager>().RotationMultiplier;
+        TrinketManager trinket = slotItem.GetComponent<TrinketManager>();
+
+        Transform item = Instantiate(trinket.TrinketIcon, itemIconParent.transform).transform;
+        item.localPosition += trinket.S_PositionModifier;
+        item.localScale *= trinket.ScaleMultiplier;
+        item.localRotation *= trinket.S_RotationMultiplier;
 
         this.name = slotItem.name + " Slot";
 
@@ -48,7 +51,7 @@ public class NewSlotManager : MonoBehaviour
             return false;
         }
 
-        return slotItem.GetComponent<TrinketManager>().TrinketIcon.name == pickedUpItem.GetComponent<TrinketManager>().TrinketIcon.name ? true : false;
+        return slotItem.GetComponent<TrinketManager>().TrinketIcon.name.Contains(pickedUpItem.GetComponent<TrinketManager>().TrinketIcon.name) ? true : false;
     }
 
     /// <summary>
@@ -65,6 +68,7 @@ public class NewSlotManager : MonoBehaviour
         isCollected = itemIconParent.activeSelf;
     }
 
+    #region UI
     /// <summary>
     /// Display the information of the item when click on if the item is collected
     /// </summary>
@@ -89,6 +93,7 @@ public class NewSlotManager : MonoBehaviour
 
         button.onClick.AddListener(OpenItemPanel);
     }
+    #endregion
 
     public GameObject SetSlotItem { set { slotItem = value; } }
 }
