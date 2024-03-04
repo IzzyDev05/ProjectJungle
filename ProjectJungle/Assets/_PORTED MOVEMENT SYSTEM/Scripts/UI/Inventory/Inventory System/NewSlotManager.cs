@@ -32,6 +32,7 @@ public class NewSlotManager : MonoBehaviour
         item.localPosition += trinket.S_PositionModifier;
         item.localScale *= trinket.ScaleMultiplier;
         item.localRotation *= trinket.S_RotationMultiplier;
+        item.gameObject.layer = LayerMask.NameToLayer("Trinket");
 
         this.name = slotItem.name + " Slot";
 

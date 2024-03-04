@@ -53,6 +53,7 @@ public class NewItemViewer : MonoBehaviour
         item.localScale *= trinket.ScaleMultiplier;
         item.localRotation *= trinket.D_RotationMultipler;
         item.localPosition += trinket.D_PositionModifier;
+        item.gameObject.layer = LayerMask.NameToLayer("Trinket");
 
         nameText.text = trinket.TrinketIcon.name;
         descriptionText.text = trinket.TricketLore;
