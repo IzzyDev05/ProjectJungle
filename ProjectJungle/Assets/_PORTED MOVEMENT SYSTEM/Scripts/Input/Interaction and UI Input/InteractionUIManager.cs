@@ -23,6 +23,7 @@ public class InteractionUIManager : MonoBehaviour
     #endregion
 
     private ActionPrompt actionPrompter;
+    private GameObject uiBlur;
 
     int deviceScheme = -1;
 
@@ -41,6 +42,7 @@ public class InteractionUIManager : MonoBehaviour
         }
 
         actionPrompter = GameObject.Find("ActionPrompt").GetComponent<ActionPrompt>();
+        uiBlur = GameObject.Find("UI Blur");
     }
 
     private void Start()
@@ -184,10 +186,12 @@ public class InteractionUIManager : MonoBehaviour
     {
         if (opened)
         {
+            uiBlur.gameObject.SetActive(true);
             GameManager.Instance.PauseGame();
         }
         else
         {
+            uiBlur.gameObject.SetActive(false);
             GameManager.Instance.UnpauseGame();
         }
 
