@@ -56,6 +56,8 @@ public class PlayerLocomotion : MonoBehaviour
     private Transform cam;
     private CinemachineFreeLook freeLook;
 
+    private PlayerVFX playerFX;
+
     private float hitDistance; // For visualization
     private Vector3 moveDirection;
     private bool canJump = true;
@@ -68,6 +70,8 @@ public class PlayerLocomotion : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerManager = GetComponent<PlayerManager>();
         animatorManager = GetComponent<PlayerAnimatorManager>();
+
+        playerFX = GetComponent<PlayerVFX>();
 
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
@@ -146,6 +150,7 @@ public class PlayerLocomotion : MonoBehaviour
             else moveDirection *= walkingSpeed;
         }
 
+        playerFX.SprintVFX(isSprinting);
         Vector3 movementVelocity = moveDirection;
         rb.velocity = movementVelocity;
     }
@@ -198,6 +203,7 @@ public class PlayerLocomotion : MonoBehaviour
             else
             {
                 animatorManager.Animator.SetBool("isJumping", true);
+                playerFX.DoubleJumpVFX();
                 animatorManager.PlayTargetAnimation("JumpFlip", false);
                 
                 float jumpForce = Mathf.Sqrt(-2 * gravityIntensity * (jumpHeight + 2f));
