@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +31,7 @@ public class NewSlotManager : MonoBehaviour
         item.localScale *= trinket.ScaleMultiplier;
         item.localRotation *= trinket.S_RotationMultiplier;
         item.gameObject.layer = LayerMask.NameToLayer("Trinket");
+        item.GetComponent<Animator>().enabled = false;
 
         this.name = slotItem.name + " Slot";
 

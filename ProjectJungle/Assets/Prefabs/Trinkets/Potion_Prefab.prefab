@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3881600220074163290
+--- !u!1 &5096764047236007446
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,12 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4509764010306528992}
-  - component: {fileID: 664911980844706117}
-  - component: {fileID: 3377359583062695311}
-  - component: {fileID: 5479240426860333934}
-  - component: {fileID: 6714612185206835498}
-  - component: {fileID: 4268371976801128022}
+  - component: {fileID: 5616137483768847532}
+  - component: {fileID: 8817868697386570505}
+  - component: {fileID: 6754180725258561475}
+  - component: {fileID: 1293788828128807664}
+  - component: {fileID: 3954438873768965606}
+  - component: {fileID: 8541120338906155161}
   m_Layer: 0
   m_Name: Potion_Prefab
   m_TagString: Interact_Pickup
@@ -21,36 +21,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4509764010306528992
+--- !u!4 &5616137483768847532
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3881600220074163290}
-  m_LocalRotation: {x: 0.7069834, y: 0, z: 0, w: 0.7072302}
+  m_GameObject: {fileID: 5096764047236007446}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 89.98, y: 0, z: 0}
---- !u!33 &664911980844706117
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!33 &8817868697386570505
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3881600220074163290}
-  m_Mesh: {fileID: -2124705421725058983, guid: 409150915baa2b242a9963d6006643c7, type: 3}
---- !u!23 &3377359583062695311
+  m_GameObject: {fileID: 5096764047236007446}
+  m_Mesh: {fileID: -2124705421725058983, guid: 6aafa684d12838c40ae69ecc5a3b3d17, type: 3}
+--- !u!23 &6754180725258561475
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3881600220074163290}
+  m_GameObject: {fileID: 5096764047236007446}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,9 +64,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 409150915baa2b242a9963d6006643c7, type: 3}
-  - {fileID: -6478536213147159724, guid: 409150915baa2b242a9963d6006643c7, type: 3}
-  - {fileID: -3846018093981099296, guid: 409150915baa2b242a9963d6006643c7, type: 3}
+  - {fileID: -6478536213147159724, guid: 6aafa684d12838c40ae69ecc5a3b3d17, type: 3}
+  - {fileID: -3846018093981099296, guid: 6aafa684d12838c40ae69ecc5a3b3d17, type: 3}
+  - {fileID: 4874126678125670354, guid: 6aafa684d12838c40ae69ecc5a3b3d17, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,50 +88,57 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5479240426860333934
+--- !u!64 &1293788828128807664
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3881600220074163290}
+  m_GameObject: {fileID: 5096764047236007446}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -2124705421725058983, guid: 409150915baa2b242a9963d6006643c7, type: 3}
---- !u!136 &6714612185206835498
-CapsuleCollider:
+  m_Mesh: {fileID: -2124705421725058983, guid: 6aafa684d12838c40ae69ecc5a3b3d17, type: 3}
+--- !u!95 &3954438873768965606
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3881600220074163290}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 5096764047236007446}
   m_Enabled: 1
-  m_Radius: 1.5
-  m_Height: 4
-  m_Direction: 2
-  m_Center: {x: 0.12, y: 0, z: -0.69936794}
---- !u!114 &4268371976801128022
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90ee3c510d398854794db9ebeac84959, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8541120338906155161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3881600220074163290}
+  m_GameObject: {fileID: 5096764047236007446}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cf9430955a4a9a43913c3d8f5127b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrinketPrefab: {fileID: 3881600220074163290}
-  scale: 0.25
+  TrinketPrefab: {fileID: 5096764047236007446}
+  scale: 0.5
   s_rotation: {x: 0, y: 0, z: 0}
-  s_position: {x: 0.15, y: -0.5, z: 0}
+  s_position: {x: 0.1, y: -0.5, z: 0}
   d_rotation: {x: 0, y: 0, z: 0}
-  d_position: {x: -0.15, y: -0.5, z: 0}
-  lore: JUST EAT THE BOTTLE!
+  d_position: {x: -0.1, y: -0.5, z: 0}
+  lore: Just eat the bottle~

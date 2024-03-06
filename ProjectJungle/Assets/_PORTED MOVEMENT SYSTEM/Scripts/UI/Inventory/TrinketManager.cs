@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class TrinketManager : MonoBehaviour
 {
     [SerializeField] GameObject TrinketPrefab;
@@ -40,4 +39,6 @@ public class TrinketManager : MonoBehaviour
 
     public Vector3 D_PositionModifier { get { return d_position; } }
     #endregion
+
+    public Animator TrinketAnimator { get {  return GetComponent<Animator>(); } }
 }

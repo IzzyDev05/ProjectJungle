@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2516574351186185571}
   - component: {fileID: 2516574351186185580}
   m_Layer: 10
-  m_Name: Cloud
+  m_Name: Double Jump VFX
   m_TagString: VFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,8 +222,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0, g: 0, b: 0, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      minColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0.5019608}
+      maxColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0.5019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
@@ -806,7 +806,7 @@ ParticleSystem:
           m_RotationOrder: 4
     arc:
       value: 360
-      mode: 3
+      mode: 0
       spread: 0
       speed:
         serializedVersion: 2
@@ -4819,7 +4819,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63ff2d51ce1b90c49b249a04005cab26, type: 2}
+  - {fileID: 2100000, guid: b15e8cce3eb7bde42b969f4cebb54e00, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4840,7 +4840,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 4
+  m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0

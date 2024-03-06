@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8131725180814328430}
   - component: {fileID: -3315315467733054893}
   - component: {fileID: 8678722669649604860}
+  - component: {fileID: 8880096380250786048}
   m_Layer: 0
   m_Name: Ring_Prefab
   m_TagString: Interact_Pickup
@@ -129,7 +130,28 @@ MonoBehaviour:
   TrinketPrefab: {fileID: 6956146973194986063}
   scale: 0.5
   s_rotation: {x: 0, y: 45, z: -60}
-  s_position: {x: 0, y: -0.1, z: -0.2}
+  s_position: {x: 0.25, y: -0.1, z: -0.2}
   d_rotation: {x: 0, y: -45, z: 60}
   d_position: {x: -0.2, y: -0.1, z: -0.2}
   lore: If you like it you should've put a ring on it
+--- !u!95 &8880096380250786048
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6956146973194986063}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90ee3c510d398854794db9ebeac84959, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
