@@ -81,6 +81,8 @@ public class Grappling : MonoBehaviour
 
         if (inputManager.rightMouse)
         {
+            Cursor.lockState = CursorLockMode.Confined;
+            
             StartAiming();
             if (inputManager.leftMouse) StartGrappling();
         }
@@ -94,9 +96,11 @@ public class Grappling : MonoBehaviour
         aimCam.SetActive(true);
 
         // TODO: Make this stuff better
+        /*
         if (PlayerManager.State == States.Aerial) Time.timeScale = 0.25f;
         else
             if (rb.velocity != Vector3.zero) rb.velocity = Vector3.zero;
+        */
         
         Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
         if (Physics.Raycast(rayOrigin, aimCam.transform.forward, out RaycastHit hit, maxGrappleDistance, grappleLayer))
@@ -156,6 +160,9 @@ public class Grappling : MonoBehaviour
             grapplePoint = Vector3.zero;
             StartCoroutine(GrappleCooldown());
             StartCoroutine(swinging.SwingCooldown());
+            
+            Cursor.lockState = CursorLockMode.Confined;
+            
             isGrappling = false;
         }
         
