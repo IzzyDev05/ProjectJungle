@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9131520698770810831}
+  - component: {fileID: 3629749669822674273}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -33,6 +34,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3629749669822674273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178710584978730207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ef9aa4315fe02459cc7b34fa89e003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 6029089788488500369}
 --- !u!1001 &5094561305499597935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,6 +68,26 @@ PrefabInstance:
         type: 3}
       propertyPath: ledgeCheckLength
       value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960003, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: groundShakeImpulseSource
+      value: 
+      objectReference: {fileID: 1790288283}
+    - target: {fileID: 1520006363571960061, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: jointForce
+      value: 22.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960061, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: jointDamper
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960061, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: grappleForce
+      value: 22.5
       objectReference: {fileID: 0}
     - target: {fileID: 1520006363571960062, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
         type: 3}
@@ -117,12 +151,97 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 846fdcb11614a824cb5c4f29a74e1bf6, type: 3}
+--- !u!4 &6029089788351768941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1520006363443664130, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5094561305499597935}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6029089788488500369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1520006363571960062, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
     type: 3}
   m_PrefabInstance: {fileID: 5094561305499597935}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6029089789325349061 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1520006362269805738, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5094561305499597935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1870785428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029089789325349061}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1674419ee50c37c4e82ed81703f40253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pivot: {fileID: 6029089788351768941}
+  rotationSpeed: 100
+--- !u!1 &6029089789831421868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1520006361693742019, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5094561305499597935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1790288283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029089789831421868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0.5, y: -1, z: 0.4}
 --- !u!1001 &6299369012709141279
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -32,6 +32,7 @@ public class PlayerLocomotion : MonoBehaviour
     public float highRumbleFrequency = 1f;
     public float rumbleDuration = 0.25f;
     [SerializeField] private float fallingVelocityThreshold = 20f;
+    [SerializeField] private CinemachineImpulseSource groundShakeImpulseSource;
 
     [Header("Others")] 
     [SerializeField] private float regularFOV = 45f;
@@ -52,6 +53,7 @@ public class PlayerLocomotion : MonoBehaviour
     private InputManager inputManager;
     private PlayerManager playerManager;
     private PlayerAnimatorManager animatorManager;
+    private ScreenShakeManager screenShakeManager;
     private Rigidbody rb;
     private Transform cam;
     private CinemachineFreeLook freeLook;
@@ -68,6 +70,7 @@ public class PlayerLocomotion : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerManager = GetComponent<PlayerManager>();
         animatorManager = GetComponent<PlayerAnimatorManager>();
+        screenShakeManager = FindObjectOfType<ScreenShakeManager>();
 
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
@@ -241,9 +244,12 @@ public class PlayerLocomotion : MonoBehaviour
                 float rumbleIntensity = Mathf.Clamp(inAirTimer / 2.5f, 0.1f, 1f);
 
                 if (rb.velocity.y < -fallingVelocityThreshold)
+                {
                     RumbleManager.Instance.StartRumble(lowRumbleFrequency * rumbleIntensity,
-                    highRumbleFrequency * rumbleIntensity, rumbleDuration, false);
-                
+                        highRumbleFrequency * rumbleIntensity, rumbleDuration, false);
+                    screenShakeManager.ScreenShake(groundShakeImpulseSource, -rb.velocity.y);
+                }
+
                 animatorManager.PlayTargetAnimation("Land", true);
             }
 

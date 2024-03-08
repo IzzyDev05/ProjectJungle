@@ -9,7 +9,7 @@ public class AimCamMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 100f;
     
     private PlayerLocomotion playerLocomotion;
-    
+
     private Vector2 rotation;
     private InputAction mouseDelta;
 
@@ -30,6 +30,9 @@ public class AimCamMovement : MonoBehaviour
         if (!playerLocomotion.isAiming) return;
         
         rotation = mouseDelta.ReadValue<Vector2>();
+        
+        float horizontalRotation = rotation.x * rotationSpeed * Time.deltaTime;
+        transform.RotateAround(pivot.position, Vector3.up, horizontalRotation);
 
         float verticalRotation = rotation.y * rotationSpeed * Time.deltaTime;
         transform.RotateAround(pivot.position, -Vector3.right, verticalRotation);
@@ -37,7 +40,9 @@ public class AimCamMovement : MonoBehaviour
         var angles = pivot.localEulerAngles;
         angles.x = ClampAngle(angles.x, -90f, 90f);
         
-        pivot.localEulerAngles = angles;
+        transform.rotation = quaternion.Euler(transform.rotation.x, transform.rotation.y, 0f);
+
+        //pivot.localEulerAngles = angles;
     }
     
     private float ClampAngle(float angle, float from, float to)

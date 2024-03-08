@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -22,6 +23,7 @@ public class Grappling : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject freeLookCam;
     [SerializeField] private GameObject aimCam;
+    [SerializeField] private GameObject reticle;
     
     private Camera cam;
     private PlayerLocomotion playerLocomotion;
@@ -40,6 +42,7 @@ public class Grappling : MonoBehaviour
     {
         freeLookCam.SetActive(true);
         aimCam.SetActive(false);
+        reticle.SetActive(false);
 
         cam = Camera.main;
         playerLocomotion = GetComponent<PlayerLocomotion>();
@@ -94,6 +97,7 @@ public class Grappling : MonoBehaviour
         playerLocomotion.isAiming = true;
         freeLookCam.SetActive(false);
         aimCam.SetActive(true);
+        reticle.SetActive(true);
 
         // TODO: Make this stuff better
         /*
@@ -103,7 +107,7 @@ public class Grappling : MonoBehaviour
         */
         
         Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
-        if (Physics.Raycast(rayOrigin, aimCam.transform.forward, out RaycastHit hit, maxGrappleDistance, grappleLayer))
+        if (Physics.Raycast(rayOrigin, cam.transform.forward, out RaycastHit hit, maxGrappleDistance, grappleLayer))
         {
             grapplePoint = hit.point;
         }
@@ -170,6 +174,7 @@ public class Grappling : MonoBehaviour
 
         freeLookCam.SetActive(true);
         aimCam.SetActive(false);
+        reticle.SetActive(false);
     }
 
     private IEnumerator GrappleCooldown()
