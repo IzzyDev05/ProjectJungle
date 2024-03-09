@@ -33,6 +33,7 @@ public class Grappling : MonoBehaviour
     private LineRenderer lr;
     private Rigidbody rb;
     private SpringJoint spring;
+    private RopeRenderer ropeRenderer;
 
     private bool isGrappling;
     private bool canGrapple = true;
@@ -49,6 +50,7 @@ public class Grappling : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
         swinging = GetComponent<Swinging>();
+        ropeRenderer = GetComponent<RopeRenderer>();
         lr = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody>();
     }
@@ -63,18 +65,7 @@ public class Grappling : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (isGrappling) DrawRope();
-    }
-    
-    private Vector3 currentGrapplePosition = Vector3.zero;
-    private void DrawRope()
-    {
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 4f);
-
-        if (lr.positionCount == 0) lr.positionCount = 2;
-        
-        lr.SetPosition(0, grapplePointRef.position);
-        lr.SetPosition(1, grapplePoint);
+        ropeRenderer.StartDrawingRope(grapplePoint, grapplePointRef);
     }
 
     private void HandleAimingAndGrappling()
@@ -106,6 +97,7 @@ public class Grappling : MonoBehaviour
             if (rb.velocity != Vector3.zero) rb.velocity = Vector3.zero;
         */
         
+        if (isGrappling || !canGrapple) return;
         Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
         if (Physics.Raycast(rayOrigin, cam.transform.forward, out RaycastHit hit, maxGrappleDistance, grappleLayer))
         {

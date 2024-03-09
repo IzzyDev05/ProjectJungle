@@ -10,9 +10,11 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float runningSpeed = 6f;
     [SerializeField] private float sprintingSpeed = 12f;
     [SerializeField] private float rotationSpeed = 15f;
+    [SerializeField] private float regularDrag = 1.5f;
 
     [Header("Aerial Speeds")] 
     [SerializeField] private float aerialMovementSpeed = 10f;
+    [SerializeField] private float aerialDrag = 3.5f;
     [SerializeField] private float leapingVelocity = 1.5f;
     [SerializeField] private float fallingVelocity = 33f;
     [SerializeField] private float jumpHeight = 5f;
@@ -137,6 +139,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleMovement()
     {
+        rb.drag = regularDrag;
+        
         moveDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
             .normalized;
 
@@ -155,6 +159,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleAirMovement()
     {
+        rb.drag = aerialDrag;
+        
         moveDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
             .normalized;
 
