@@ -10,9 +10,11 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float runningSpeed = 6f;
     [SerializeField] private float sprintingSpeed = 12f;
     [SerializeField] private float rotationSpeed = 15f;
+    [SerializeField] private float regularDrag = 1.5f;
 
     [Header("Aerial Speeds")] 
     [SerializeField] private float aerialMovementSpeed = 10f;
+    [SerializeField] private float aerialDrag = 3.5f;
     [SerializeField] private float leapingVelocity = 1.5f;
     [SerializeField] private float fallingVelocity = 33f;
     [SerializeField] private float jumpHeight = 5f;
@@ -32,6 +34,7 @@ public class PlayerLocomotion : MonoBehaviour
     public float highRumbleFrequency = 1f;
     public float rumbleDuration = 0.25f;
     [SerializeField] private float fallingVelocityThreshold = 20f;
+    [SerializeField] private CinemachineImpulseSource groundShakeImpulseSource;
 
     [Header("Others")] 
     [SerializeField] private float regularFOV = 45f;
@@ -52,6 +55,7 @@ public class PlayerLocomotion : MonoBehaviour
     private InputManager inputManager;
     private PlayerManager playerManager;
     private PlayerAnimatorManager animatorManager;
+    private ScreenShakeManager screenShakeManager;
     private Rigidbody rb;
     private Transform cam;
     private CinemachineFreeLook freeLook;
@@ -68,6 +72,7 @@ public class PlayerLocomotion : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerManager = GetComponent<PlayerManager>();
         animatorManager = GetComponent<PlayerAnimatorManager>();
+        screenShakeManager = FindObjectOfType<ScreenShakeManager>();
 
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
@@ -134,6 +139,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleMovement()
     {
+        rb.drag = regularDrag;
+        
         moveDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
             .normalized;
 
@@ -152,6 +159,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleAirMovement()
     {
+        rb.drag = aerialDrag;
+        
         moveDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
             .normalized;
 
@@ -241,9 +250,12 @@ public class PlayerLocomotion : MonoBehaviour
                 float rumbleIntensity = Mathf.Clamp(inAirTimer / 2.5f, 0.1f, 1f);
 
                 if (rb.velocity.y < -fallingVelocityThreshold)
+                {
                     RumbleManager.Instance.StartRumble(lowRumbleFrequency * rumbleIntensity,
-                    highRumbleFrequency * rumbleIntensity, rumbleDuration, false);
-                
+                        highRumbleFrequency * rumbleIntensity, rumbleDuration, false);
+                    screenShakeManager.ScreenShake(groundShakeImpulseSource, -rb.velocity.y);
+                }
+
                 animatorManager.PlayTargetAnimation("Land", true);
             }
 
