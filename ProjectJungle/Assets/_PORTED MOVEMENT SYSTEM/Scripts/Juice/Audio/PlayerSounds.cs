@@ -65,11 +65,12 @@ public class PlayerSounds : MonoBehaviour
         {
             if (doubleJump)
             {
-                jumping.setParameterByName("Jumping", 0);
+                jumping.setParameterByName("Jumping", 1);
             }
             else
             {
-                PlayFootsteps();
+                jumping.setParameterByName("Jumping", 0);
+                //PlayFootsteps();
             }
 
             jumping.start();
@@ -119,13 +120,13 @@ public class PlayerSounds : MonoBehaviour
                 // Debug.Log(groundRenderer.material.name);
                 if (groundRenderer.material.name.Contains("Grass"))
                 {
-                    footsteps.setParameterByName("Footsteps", 1);
-                    landing.setParameterByName("Footsteps", 1);
+                    footsteps.setParameterByName("Footsteps", 1); // Walk on grass
+                    landing.setParameterByName("Landing", 1); // Land on grass
                 }
                 else
                 {
-                    footsteps.setParameterByName("Footsteps", 0);
-                    jumping.setParameterByName("Jumping", 1);
+                    footsteps.setParameterByName("Footsteps", 0); // Walk on wood
+                    landing.setParameterByName("Landing", 0); // Land on wood
                 }
             }
         }

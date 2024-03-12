@@ -195,15 +195,15 @@ MonoBehaviour:
   StudioPath: 
   Min: 0
   Max: 1
-  Default: 0
+  Default: 1
   ID:
     data1: 611330165
     data2: 744988974
   Type: 2
   IsGlobal: 0
   Labels:
-  - DoubleJump
   - Dirt
+  - DoubleJump
   Exists: 1
 --- !u!114 &-566650494578827593
 MonoBehaviour:
@@ -293,7 +293,7 @@ MonoBehaviour:
   - {fileID: 4890010317757656100}
   StringsBanks:
   - {fileID: 760444785104651037}
-  cacheTime: 638456886231941427
+  cacheTime: 638457988058036324
   cacheVersion: 131608
 --- !u!114 &760444785104651037
 MonoBehaviour:
@@ -410,7 +410,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638456886231941427
+  lastModified: 638457988058036324
   FileSizes:
   - Name: Desktop
     Value: 128928
@@ -478,14 +478,14 @@ MonoBehaviour:
   StudioPath: 
   Min: 0
   Max: 2
-  Default: 0
+  Default: 1
   ID:
     data1: 2598513299
     data2: 4040508072
   Type: 2
   IsGlobal: 0
   Labels:
+  - Wood
   - Grass
   - Dirt
-  - Wood
   Exists: 1
