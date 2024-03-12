@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044010421615839886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0.75}
+  m_LocalPosition: {x: 0, y: 1.75, z: 0.484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -143,13 +143,15 @@ GameObject:
   - component: {fileID: 1520006363571960002}
   - component: {fileID: 1520006363571960061}
   - component: {fileID: 1520006363571960060}
+  - component: {fileID: 1790288283}
+  - component: {fileID: 8045896767410241923}
   m_Layer: 0
   m_Name: Player Old
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1520006363571960062
 Transform:
   m_ObjectHideFlags: 0
@@ -258,7 +260,9 @@ MonoBehaviour:
   runningSpeed: 10
   sprintingSpeed: 16
   rotationSpeed: 40
+  regularDrag: 1.5
   aerialMovementSpeed: 12
+  aerialDrag: 3.5
   leapingVelocity: 2
   fallingVelocity: 45
   jumpHeight: 15
@@ -276,11 +280,12 @@ MonoBehaviour:
   highRumbleFrequency: 0.6
   rumbleDuration: 0.3
   fallingVelocityThreshold: 20
+  groundShakeImpulseSource: {fileID: 1790288283}
   regularFOV: 45
   swingingFOV: 80
   fovChangeTime: 15
   ledgeCheckTransform: {fileID: 7309605903010644752}
-  ledgeCheckLength: 2
+  ledgeCheckLength: 0.45
   isSprinting: 0
   isJumping: 0
   isGrounded: 1
@@ -330,18 +335,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grapplePointRef: {fileID: 1520006361923347618}
   maxGrappleDistance: 100
-  grappleForce: 27.5
+  grappleForce: 22.5
   grappleLayer:
     serializedVersion: 2
     m_Bits: 256
   grapplingCD: 0.75
-  jointForce: 30
-  jointDamper: 7.5
+  jointForce: 22.5
+  jointDamper: 12.5
   jointMassScale: 4
   minDistance: 0.2
   maxDistance: 0.5
   freeLookCam: {fileID: 0}
   aimCam: {fileID: 0}
+  reticle: {fileID: 0}
 --- !u!120 &1520006363571960060
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -439,6 +445,71 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &1790288283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520006361693742019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0.5, y: -1, z: 0.4}
+--- !u!114 &8045896767410241923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520006361693742019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c6f76ccc731444db04f4960f876e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1520006361748605796
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +964,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1520006363571960057}
+  - component: {fileID: 1870785428}
   m_Layer: 0
   m_Name: Aim
   m_TagString: Untagged
@@ -915,6 +987,20 @@ Transform:
   m_Father: {fileID: 1520006363571960062}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1870785428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520006362269805738}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1674419ee50c37c4e82ed81703f40253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pivot: {fileID: 1520006363443664130}
+  rotationSpeed: 100
 --- !u!1 &1520006362489128199
 GameObject:
   m_ObjectHideFlags: 0
