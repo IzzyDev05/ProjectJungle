@@ -29,11 +29,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3212577745600975752}
-  - {fileID: 2588676949517317954}
+  - {fileID: 4448179997595989586}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3960060742726750140
+--- !u!1001 &2928247507999706796
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -44,6 +44,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player Old
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960003, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 1520006363571960062, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
         type: 3}
@@ -102,11 +107,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 846fdcb11614a824cb5c4f29a74e1bf6, type: 3}
---- !u!4 &2588676949517317954 stripped
+--- !u!4 &4448179997595989586 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1520006363571960062, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
     type: 3}
-  m_PrefabInstance: {fileID: 3960060742726750140}
+  m_PrefabInstance: {fileID: 2928247507999706796}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6299369012709141279
 PrefabInstance:
