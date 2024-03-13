@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ public class Swinging : MonoBehaviour
     private PlayerLocomotion playerLocomotion;
     private PlayerManager playerManager;
     private InputManager inputManager;
+    private RopeRenderer ropeRenderer;
     private Rigidbody rb;
     private SpringJoint spring;
     private LineRenderer lr;
@@ -34,13 +36,14 @@ public class Swinging : MonoBehaviour
     private bool currentlySwinging;
     private bool canSwing = true;
     private float swingTime;
-    private Vector3 currentGrapplePosition = Vector3.zero;
+    //private Vector3 currentGrapplePosition = Vector3.zero;
 
     private void Start()
     {
         playerLocomotion = GetComponent<PlayerLocomotion>();
         playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
+        ropeRenderer = GetComponent<RopeRenderer>();
         rb = GetComponent<Rigidbody>();
         lr = GetComponent<LineRenderer>();
     }
@@ -53,16 +56,7 @@ public class Swinging : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (PlayerManager.State == States.Swinging) DrawRope();
-    }
-    
-    private void DrawRope()
-    {
-        if (swingPoint == Vector3.zero) return;
-
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 4f);
-        lr.SetPosition(0, swingPointRef.position);
-        lr.SetPosition(1, swingPoint);
+        ropeRenderer.StartDrawingRope(swingPoint, swingPointRef);
     }
 
     private void FindSwingPoint()
