@@ -135,12 +135,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf9430955a4a9a43913c3d8f5127b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Old Bell
   TrinketPrefab: {fileID: 6178387821575113855}
   scale: 0.35
-  s_rotation: {x: 0, y: 0, z: 0}
-  s_position: {x: -0.1, y: -0.85, z: -0.5}
-  d_rotation: {x: 0, y: 0, z: 0}
-  d_position: {x: -0.35, y: -0.9, z: -0.5}
+  s_rotation: {x: 0, y: 0, z: -45}
+  s_position: {x: -0.45, y: -0.5, z: -0.5}
+  d_rotation: {x: 0, y: 0, z: -45}
+  d_position: {x: -0.75, y: -0.5, z: -0.5}
   lore: I could probably use this to wake half the forest up. Maybe even to annoy
     the witch.. no, that's a bad idea. Better bundle it up nice and tight, I'm not
     trying to get turned into a frog.

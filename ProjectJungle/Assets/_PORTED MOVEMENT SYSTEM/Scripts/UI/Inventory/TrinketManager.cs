@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class TrinketManager : MonoBehaviour
 {
+    [SerializeField] string Name;
     [SerializeField] GameObject TrinketPrefab;
 
     #region Inventory_Transform
@@ -22,6 +23,7 @@ public class TrinketManager : MonoBehaviour
     [TextArea (15,20)]
     [SerializeField] string lore;
 
+    public string TrinketName { get { return Name; } }
     public GameObject TrinketIcon { get { return TrinketPrefab; } }
 
     public string TricketLore { get { return lore; } }

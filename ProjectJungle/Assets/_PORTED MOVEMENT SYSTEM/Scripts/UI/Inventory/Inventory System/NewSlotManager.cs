@@ -33,7 +33,7 @@ public class NewSlotManager : MonoBehaviour
         item.gameObject.layer = LayerMask.NameToLayer("Trinket");
         item.GetComponent<Animator>().enabled = false;
 
-        this.name = slotItem.name + " Slot";
+        this.name = trinket.TrinketName + " Slot";
 
         SetupButton();
     }
@@ -47,11 +47,11 @@ public class NewSlotManager : MonoBehaviour
     {
         if (slotItem == null)
         {
-            Debug.LogError("Slot Item is NULL");
+            //Debug.LogError("Slot Item is NULL");
             return false;
         }
 
-        return slotItem.GetComponent<TrinketManager>().TrinketIcon.name.Contains(pickedUpItem.GetComponent<TrinketManager>().TrinketIcon.name) ? true : false;
+        return slotItem.GetComponent<TrinketManager>().TrinketName.Contains(pickedUpItem.GetComponent<TrinketManager>().TrinketName) ? true : false;
     }
 
     /// <summary>
