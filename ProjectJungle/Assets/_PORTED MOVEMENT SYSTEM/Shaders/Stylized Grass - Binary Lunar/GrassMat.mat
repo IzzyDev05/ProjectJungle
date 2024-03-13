@@ -10,7 +10,8 @@ Material:
   m_Name: GrassMat
   m_Shader: {fileID: -6465566751694194690, guid: 7ae439da5533c2c4b8ba8fe0b6cce695,
     type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _BLENDWITHTERRAIN
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -89,7 +90,7 @@ Material:
     m_Floats:
     - _AlphaClip: 1
     - _AlphaClipThreshold: 0.5
-    - _BLENDWITHTERRAIN: 0
+    - _BLENDWITHTERRAIN: 1
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -118,8 +119,8 @@ Material:
     - _TerrainOffset: 0
     - _TerrainSize: 80
     - _WindHeight: 0.4
-    - _WindIntensity: 0.3
-    - _WindNoiseSpeed: 2.4
+    - _WindIntensity: 0.2
+    - _WindNoiseSpeed: 0.4
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
