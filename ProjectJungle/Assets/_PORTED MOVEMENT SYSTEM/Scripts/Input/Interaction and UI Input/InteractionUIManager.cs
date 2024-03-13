@@ -35,7 +35,7 @@ public class InteractionUIManager : MonoBehaviour
             {
                 FreelookCam = camera.gameObject;
             } 
-            else if (camera.name == "Aim Camera")
+            else if (camera.name.Contains("Aim"))
             {
                 AimCam = camera.gameObject;
             }
@@ -164,7 +164,7 @@ public class InteractionUIManager : MonoBehaviour
             IUIControls.Player.Disable();
 
             camLookProvider.enabled = false;
-            aimLookProvider.enabled = false;
+            //aimLookProvider.enabled = false;
         }
         else
         {
@@ -172,7 +172,7 @@ public class InteractionUIManager : MonoBehaviour
             IUIControls.UI.Disable();
 
             camLookProvider.enabled = true;
-            aimLookProvider.enabled = true;
+            //aimLookProvider.enabled = true;
         }
 
         inputManager.DisablePlayerControls(reverse);
