@@ -103,33 +103,26 @@ public class PlayerSounds : MonoBehaviour
 
     #region DYNAMIC_AUDIO_HELPERS
     /// <summary>
-    /// Checks the type of ground to change the footstep sounds
+    /// Checks the type of ground to change the footstep and landing sounds
     /// </summary>
     private void GroundTypeChecker()
     {
-        RaycastHit hit;
-
-        Ray ray = new Ray(GetComponentInParent<Transform>().position + Vector3.up * 0.5f, Vector3.down);
-
-        if (Physics.Raycast(ray,out hit, 1.0f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) 
+        switch (TerrainChecker.Instance.TerrainType(this.transform.parent)) 
         {
-            Renderer groundRenderer = hit.collider.GetComponentInChildren<Renderer>();
-
-            if (groundRenderer)
-            {
-                // Debug.Log(groundRenderer.material.name);
-                if (groundRenderer.material.name.Contains("Grass"))
+            case Terrain.Other:
                 {
-                    footsteps.setParameterByName("Footsteps", 1); // Walk on grass
-                    landing.setParameterByName("Landing", 1); // Land on grass
+                    footsteps.setParameterByName("Footsteps", 0);
+                    landing.setParameterByName("Landing", 0);
+                    break;
                 }
-                else
+            case Terrain.Grass:
                 {
-                    footsteps.setParameterByName("Footsteps", 0); // Walk on wood
-                    landing.setParameterByName("Landing", 0); // Land on wood
+                    footsteps.setParameterByName("Footsteps", 1);
+                    landing.setParameterByName("Landing", 1);
+                    break;
                 }
-            }
         }
+
     }
 
     /// <summary>
@@ -154,11 +147,5 @@ public class PlayerSounds : MonoBehaviour
         }
     }
 
-    private IEnumerator DelaySteps(float delay)
-    {
-        footsteps.start();
-
-        yield return new WaitForSeconds(delay);
-    }
     #endregion
 }

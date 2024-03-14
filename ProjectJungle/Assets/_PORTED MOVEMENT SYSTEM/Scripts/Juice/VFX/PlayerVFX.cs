@@ -32,4 +32,24 @@ public class PlayerVFX : MonoBehaviour
             sprintVFX.Stop();
         }
     }
+
+    #region Dynamic_VFX_Helper
+    private void DynamicTerrainChange()
+    {
+        switch (TerrainChecker.Instance.TerrainType(this.transform.parent)) 
+        {
+            case Terrain.Other:
+                {
+                    
+                    break;
+                }
+            case Terrain.Grass:
+                {
+
+                    break;
+                }
+        }
+
+    }
+    #endregion
 }
