@@ -51,7 +51,8 @@ public class NewSlotManager : MonoBehaviour
             return false;
         }
 
-        return slotItem.GetComponent<TrinketManager>().TrinketName.Contains(pickedUpItem.GetComponent<TrinketManager>().TrinketName) ? true : false;
+        Debug.Log(slotItem.name.Contains(pickedUpItem.name) ? true : false);
+        return slotItem.name.Contains(pickedUpItem.name) ? true : false;
     }
 
     /// <summary>

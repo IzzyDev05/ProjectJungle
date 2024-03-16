@@ -6,6 +6,7 @@ public class TrinketManager : MonoBehaviour
     [SerializeField] string Name;
     [SerializeField] GameObject TrinketPrefab;
 
+
     #region Inventory_Transform
     [SerializeField] float scale = 1.0f;
 
