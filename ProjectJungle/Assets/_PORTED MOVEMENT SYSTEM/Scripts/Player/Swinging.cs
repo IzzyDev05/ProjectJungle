@@ -28,6 +28,7 @@ public class Swinging : MonoBehaviour
     private PlayerManager playerManager;
     private InputManager inputManager;
     private RopeRenderer ropeRenderer;
+    private PlayerHandIK rightHandIK;
     private Rigidbody rb;
     private SpringJoint spring;
     private LineRenderer lr;
@@ -44,6 +45,7 @@ public class Swinging : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
         ropeRenderer = GetComponent<RopeRenderer>();
+        rightHandIK = GetComponent<PlayerHandIK>();
         rb = GetComponent<Rigidbody>();
         lr = GetComponent<LineRenderer>();
     }
@@ -56,7 +58,10 @@ public class Swinging : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!currentlySwinging) return;
+        
         ropeRenderer.StartDrawingRope(swingPoint, swingPointRef);
+        rightHandIK.StartHandIK(swingPoint);
     }
 
     private void FindSwingPoint()
@@ -157,6 +162,7 @@ public class Swinging : MonoBehaviour
     {
         if (spring)
         {
+            rightHandIK.StopHandIK();
             float swingSpeed = rb.velocity.magnitude;
             float dynamicThrust = Mathf.Clamp(swingSpeed / 10f, 1f, 3f);
             Vector3 swingDirection = rb.velocity.normalized;
