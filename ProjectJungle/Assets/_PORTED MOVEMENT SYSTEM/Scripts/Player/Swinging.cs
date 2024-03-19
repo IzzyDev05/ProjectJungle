@@ -25,7 +25,6 @@ public class Swinging : MonoBehaviour
     [SerializeField] private float swingEndThrust = 2.5f;
 
     private PlayerLocomotion playerLocomotion;
-    private PlayerManager playerManager;
     private InputManager inputManager;
     private RopeRenderer ropeRenderer;
     private PlayerHandIK rightHandIK;
@@ -42,7 +41,6 @@ public class Swinging : MonoBehaviour
     private void Start()
     {
         playerLocomotion = GetComponent<PlayerLocomotion>();
-        playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
         ropeRenderer = GetComponent<RopeRenderer>();
         rightHandIK = GetComponent<PlayerHandIK>();

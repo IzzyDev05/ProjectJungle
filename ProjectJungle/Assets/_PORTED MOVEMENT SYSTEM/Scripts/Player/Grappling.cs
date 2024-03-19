@@ -27,7 +27,9 @@ public class Grappling : MonoBehaviour
     
     private Camera cam;
     private PlayerLocomotion playerLocomotion;
-    private PlayerManager playerManager;
+    private PlayerHandIK rightHandIK;
+    private PlayerHeadIK headIK;
+    private PlayerBodyIK bodyIK;
     private InputManager inputManager;
     private Swinging swinging;
     private LineRenderer lr;
@@ -47,7 +49,9 @@ public class Grappling : MonoBehaviour
 
         cam = Camera.main;
         playerLocomotion = GetComponent<PlayerLocomotion>();
-        playerManager = GetComponent<PlayerManager>();
+        rightHandIK = GetComponent<PlayerHandIK>();
+        headIK = GetComponent<PlayerHeadIK>();
+        bodyIK = GetComponent<PlayerBodyIK>();
         inputManager = GetComponent<InputManager>();
         swinging = GetComponent<Swinging>();
         ropeRenderer = GetComponent<RopeRenderer>();
@@ -65,7 +69,12 @@ public class Grappling : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!isGrappling) return;
+        
         ropeRenderer.StartDrawingRope(grapplePoint, grapplePointRef);
+        rightHandIK.StartHandIK(grapplePoint);
+        headIK.StartHeadIK(grapplePoint);
+        bodyIK.StartBodyIK(grapplePoint);
     }
 
     private void HandleAimingAndGrappling()
@@ -158,6 +167,10 @@ public class Grappling : MonoBehaviour
             StartCoroutine(swinging.SwingCooldown());
             
             Cursor.lockState = CursorLockMode.Confined;
+            
+            rightHandIK.StopHandIK();
+            headIK.StopHeadIK();
+            bodyIK.StopBodyIK();
             
             isGrappling = false;
         }
