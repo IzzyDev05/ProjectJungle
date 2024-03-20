@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2505896138392135812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1452649879982689210}
+  - component: {fileID: 1795368072250327278}
+  - component: {fileID: 702509764025972350}
+  - component: {fileID: 4886112388495250867}
+  m_Layer: 0
+  m_Name: Potion_Prefab
+  m_TagString: Interact_Pickup
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1452649879982689210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505896138392135812}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7768463730110541272}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1795368072250327278
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505896138392135812}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.45
+  m_Height: 4.15
+  m_Direction: 1
+  m_Center: {x: 0.2, y: 0.6, z: 0}
+--- !u!95 &702509764025972350
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505896138392135812}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90ee3c510d398854794db9ebeac84959, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4886112388495250867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505896138392135812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf9430955a4a9a43913c3d8f5127b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Potion
+  TrinketPrefab: {fileID: 2505896138392135812}
+  scale: 0.5
+  s_rotation: {x: 0, y: 0, z: 0}
+  s_position: {x: 0.1, y: -0.4, z: 0}
+  d_rotation: {x: 0, y: 0, z: 0}
+  d_position: {x: -0.1, y: -0.4, z: 0}
+  lore: Just eat the bottle~
+--- !u!1001 &424059078567394598
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1452649879982689210}
+    m_Modifications:
+    - target: {fileID: 7306667404829329988, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_Name
+      value: potion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7306667404829329988, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interact_Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ec56e271b1af05d43a7b42fcfbade243, type: 3}
+--- !u!1 &6954947843061643106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7306667404829329988, guid: ec56e271b1af05d43a7b42fcfbade243,
+    type: 3}
+  m_PrefabInstance: {fileID: 424059078567394598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2721140575594480922
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954947843061643106}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2124705421725058983, guid: 6aafa684d12838c40ae69ecc5a3b3d17, type: 3}
+--- !u!4 &7768463730110541272 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7939195121817833726, guid: ec56e271b1af05d43a7b42fcfbade243,
+    type: 3}
+  m_PrefabInstance: {fileID: 424059078567394598}
+  m_PrefabAsset: {fileID: 0}
