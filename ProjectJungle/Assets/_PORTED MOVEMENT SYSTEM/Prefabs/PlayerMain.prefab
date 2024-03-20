@@ -208,6 +208,7 @@ MonoBehaviour:
   jumpCooldown: 0.1
   totalJumps: 2
   gravityIntensity: -6
+  groundSlamInitialForce: 5
   groundSlamForce: 100
   groundSlamWait: 0.15
   groundCheckDistance: 1.1
@@ -464,6 +465,7 @@ MonoBehaviour:
   rightHandRig: {fileID: 2938291302754457042}
   rightHandTarget: {fileID: 7328665041468590230}
   animationTransitionSpeed: 3
+  maxWeight: 1
 --- !u!114 &1730262281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +481,7 @@ MonoBehaviour:
   headAimRig: {fileID: 5421870169977122751}
   headTarget: {fileID: 7596565045702770766}
   animationTransitionSpeed: 2.5
+  maxWeight: 0.8
 --- !u!114 &9096052244177481322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +497,7 @@ MonoBehaviour:
   bodyAimRig: {fileID: 4027440178329758853}
   bodyTarget: {fileID: 2226406536738534766}
   animationTransitionSpeed: 2
+  maxWeight: 0.5
 --- !u!1 &1520006362269805738
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +554,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1520006363110533067}
   - component: {fileID: 1520006363110533065}
-  - component: {fileID: 1520006363110533064}
   m_Layer: 0
   m_Name: ParentingTrigger
   m_TagString: Untagged
@@ -586,18 +589,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &1520006363110533064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520006363110533066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1de1f414cb61e7344a387f3074b6ec81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &926123475746589074
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -61,6 +61,8 @@ public class PlayerLocomotion : MonoBehaviour
     private Transform cam;
     private CinemachineFreeLook freeLook;
 
+    private PlayerVFX playerFX;
+
     private float hitDistance; // For visualization
     private Vector3 moveDirection;
     private bool canJump = true;
@@ -74,6 +76,8 @@ public class PlayerLocomotion : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         animatorManager = GetComponent<PlayerAnimatorManager>();
         screenShakeManager = FindObjectOfType<ScreenShakeManager>();
+
+        playerFX = GetComponent<PlayerVFX>();
 
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
@@ -154,6 +158,7 @@ public class PlayerLocomotion : MonoBehaviour
             else moveDirection *= walkingSpeed;
         }
 
+        playerFX.SprintVFX(isSprinting);
         Vector3 movementVelocity = moveDirection;
         rb.velocity = movementVelocity;
     }
@@ -208,11 +213,14 @@ public class PlayerLocomotion : MonoBehaviour
             else
             {
                 animatorManager.Animator.SetBool("isJumping", true);
+                playerFX.DoubleJumpVFX();
                 animatorManager.PlayTargetAnimation("JumpFlip", false);
                 
                 float jumpForce = Mathf.Sqrt(-2 * gravityIntensity * (jumpHeight + 2f));
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
+
+            GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayJumping(jumpCount == totalJumps ? true : false);
         }
     }
 
@@ -258,6 +266,8 @@ public class PlayerLocomotion : MonoBehaviour
                 }
 
                 animatorManager.PlayTargetAnimation("Land", true);
+
+                GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayLanding(isGroundSlamming ? groundSlamForce : -rb.velocity.y);
             }
 
             Vector3 raycastHitPoint = hit.point;

@@ -94,4 +94,25 @@ public class InputManager : MonoBehaviour
         jumpInput = false;
         playerLocomotion.HandleJumping();
     }
+
+
+    #region INPUT_LINKERS
+
+    /// <summary>
+    /// Disables the player controls
+    /// </summary>
+    /// <param name="reverse">Enable the player control if true. Default is false.</param>
+    public void DisablePlayerControls(bool reverse = false)
+    {
+        if (!reverse)
+        {
+            playerControls.Disable();
+            movementInput = Vector2.zero;
+        }
+        else
+        {
+            playerControls.Enable();
+        }
+    }
+    #endregion
 }

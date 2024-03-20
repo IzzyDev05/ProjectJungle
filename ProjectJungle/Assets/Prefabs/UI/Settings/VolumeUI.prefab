@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 4564055926132603001}
   m_Layer: 5
   m_Name: VolumeUI
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,6 +386,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2828407405435620491, guid: 8a6d8447fee00d442915fa2caac24f1b,
         type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828407405435620491, guid: 8a6d8447fee00d442915fa2caac24f1b,
+        type: 3}
       propertyPath: volumeType
       value: 2
       objectReference: {fileID: 0}
@@ -423,6 +428,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SFXInputField
+      objectReference: {fileID: 0}
+    - target: {fileID: 7675676649779277214, guid: 8a6d8447fee00d442915fa2caac24f1b,
+        type: 3}
+      propertyPath: type
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a6d8447fee00d442915fa2caac24f1b, type: 3}
@@ -614,6 +624,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4564055924936406808}
     m_Modifications:
+    - target: {fileID: 1007859597181924530, guid: 8a6d8447fee00d442915fa2caac24f1b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 455
+      objectReference: {fileID: 0}
     - target: {fileID: 2828407404482108005, guid: 8a6d8447fee00d442915fa2caac24f1b,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -628,6 +643,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmbientSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828407404933258358, guid: 8a6d8447fee00d442915fa2caac24f1b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 184
       objectReference: {fileID: 0}
     - target: {fileID: 2828407405435620489, guid: 8a6d8447fee00d442915fa2caac24f1b,
         type: 3}
@@ -741,6 +761,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2828407405435620491, guid: 8a6d8447fee00d442915fa2caac24f1b,
         type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828407405435620491, guid: 8a6d8447fee00d442915fa2caac24f1b,
+        type: 3}
       propertyPath: volumeType
       value: 1
       objectReference: {fileID: 0}
@@ -748,6 +773,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmbientLabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828407405481157027, guid: 8a6d8447fee00d442915fa2caac24f1b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -251
       objectReference: {fileID: 0}
     - target: {fileID: 2828407405481157028, guid: 8a6d8447fee00d442915fa2caac24f1b,
         type: 3}
@@ -773,6 +803,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmbientInputField
+      objectReference: {fileID: 0}
+    - target: {fileID: 7675676649779277214, guid: 8a6d8447fee00d442915fa2caac24f1b,
+        type: 3}
+      propertyPath: type
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a6d8447fee00d442915fa2caac24f1b, type: 3}
