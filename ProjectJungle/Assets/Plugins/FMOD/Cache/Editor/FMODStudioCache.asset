@@ -1,6 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5543567637056080723
+--- !u!114 &-7927465658980342144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Landing/Landing
+  m_EditorClassIdentifier: 
+  Name: Landing
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 1
+  ID:
+    data1: 2598513299
+    data2: 4040508072
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Wood
+  - Grass
+  - Dirt
+  Exists: 1
+--- !u!114 &-5388285322301758513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Jumping
+  m_EditorClassIdentifier: 
+  Name: Jumping
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 611330165
+    data2: 744988974
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Dirt
+  - DoubleJump
+  Exists: 1
+--- !u!114 &-4031801563851063610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,20 +63,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Footsteps/Jump
+  m_Name: event:/SFX/Character/Movement/Footsteps
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Footsteps/Jump
+  Path: event:/SFX/Character/Movement/Footsteps
   Guid:
-    Data1: -1357087264
-    Data2: 1150195571
-    Data3: 1925067694
-    Data4: 1448793503
+    Data1: 159073632
+    Data2: 1154029890
+    Data3: -964342132
+    Data4: 1842490077
   Banks:
   - {fileID: 3017527266539057922}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 4517320553629587403}
+  - {fileID: 5769521473175604433}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -69,38 +124,11 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638464803300632213
+  lastModified: 638464805691535365
   FileSizes:
   - Name: Desktop
     Value: 832448
   Exists: 1
---- !u!114 &-2634930355506674916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Footsteps/Landing
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Footsteps/Landing
-  Guid:
-    Data1: 1002633936
-    Data2: 1172059644
-    Data3: -1128553284
-    Data4: -128602875
-  Banks:
-  - {fileID: 3017527266539057922}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-1765228610614279991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +156,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-696232795156716344
+--- !u!114 &-1626812765201712768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,23 +166,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Footsteps/Walk/CrunchyGrassWalking
+  m_Name: event:/SFX/Character/Movement/Jump
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Footsteps/Walk/CrunchyGrassWalking
+  Path: event:/SFX/Character/Movement/Jump
   Guid:
-    Data1: 1528732929
-    Data2: 1169700471
-    Data3: 1895640454
-    Data4: -1391111007
+    Data1: 646169252
+    Data2: 1331380495
+    Data3: -790088807
+    Data4: 70426626
   Banks:
   - {fileID: 3017527266539057922}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
-  Parameters: []
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -5388285322301758513}
   MinDistance: 1
   MaxDistance: 20
-  Length: 350
+  Length: 0
 --- !u!114 &-566650494578827593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,51 +230,21 @@ MonoBehaviour:
   - {fileID: 3017527266539057922}
   EditorEvents:
   - {fileID: 2660787072957225477}
-  - {fileID: -696232795156716344}
   - {fileID: -1765228610614279991}
-  - {fileID: 6155120653456667325}
-  - {fileID: 738284971465998994}
   - {fileID: -566650494578827593}
-  - {fileID: 4266937742398033105}
   - {fileID: 4987248210928799411}
   - {fileID: 1543840011973614514}
-  - {fileID: -2634930355506674916}
-  - {fileID: -5543567637056080723}
   - {fileID: -3621620920152467111}
+  - {fileID: -4031801563851063610}
+  - {fileID: -1626812765201712768}
+  - {fileID: 6121963480331081233}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4890010317757656100}
   StringsBanks:
   - {fileID: 760444785104651037}
-  cacheTime: 638464803300662169
+  cacheTime: 638464805691545362
   cacheVersion: 131608
---- !u!114 &738284971465998994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Footsteps/Walk/StickCrunchWalking
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Footsteps/Walk/StickCrunchWalking
-  Guid:
-    Data1: -2090349471
-    Data2: 1184722296
-    Data3: 1886320056
-    Data4: -411278964
-  Banks:
-  - {fileID: 3017527266539057922}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 500
 --- !u!114 &760444785104651037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,10 +260,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638464803300642215
+  lastModified: 638464805691535365
   FileSizes:
   - Name: Desktop
-    Value: 1542
+    Value: 1652
   Exists: 1
 --- !u!114 &1543840011973614514
 MonoBehaviour:
@@ -293,6 +292,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2312588654619360139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Landing/FallingIntensity
+  m_EditorClassIdentifier: 
+  Name: FallingIntensity
+  StudioPath: 
+  Min: -10
+  Max: 10
+  Default: -10
+  ID:
+    data1: 3526192393
+    data2: 2803492293
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &2660787072957225477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,12 +358,12 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638464803300662169
+  lastModified: 638464805691545362
   FileSizes:
   - Name: Desktop
-    Value: 164480
+    Value: 128928
   Exists: 1
---- !u!114 &4266937742398033105
+--- !u!114 &4517320553629587403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -349,24 +372,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Footsteps/Walk/WoodWalking
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/GainBySpeed
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Footsteps/Walk/WoodWalking
-  Guid:
-    Data1: -1850141569
-    Data2: 1185266464
-    Data3: 296400566
-    Data4: -1384436488
-  Banks:
-  - {fileID: 3017527266539057922}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 537
+  Name: GainBySpeed
+  StudioPath: 
+  Min: -10
+  Max: 10
+  Default: 0
+  ID:
+    data1: 242092253
+    data2: 403303352
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &4890010317757656100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,7 +434,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &6155120653456667325
+--- !u!114 &5769521473175604433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Footsteps
+  m_EditorClassIdentifier: 
+  Name: Footsteps
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1746887920
+    data2: 4047317047
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Wood
+  - Grass
+  Exists: 1
+--- !u!114 &6121963480331081233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -424,20 +470,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Footsteps/Sprint/SprintingWood
+  m_Name: event:/SFX/Character/Movement/Landing
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Footsteps/Sprint/SprintingWood
+  Path: event:/SFX/Character/Movement/Landing
   Guid:
-    Data1: -1105704099
-    Data2: 1292068550
-    Data3: -301586288
-    Data4: -185525530
+    Data1: 1002633936
+    Data2: 1172059644
+    Data3: -1128553284
+    Data4: -128602875
   Banks:
   - {fileID: 3017527266539057922}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
-  Parameters: []
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 2312588654619360139}
+  - {fileID: -7927465658980342144}
   MinDistance: 1
   MaxDistance: 20
-  Length: 537
+  Length: 0

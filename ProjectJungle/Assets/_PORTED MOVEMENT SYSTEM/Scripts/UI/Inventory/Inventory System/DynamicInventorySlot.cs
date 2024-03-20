@@ -12,9 +12,15 @@ public class DynamicInventorySlot : MonoBehaviour
 
     private void Awake()
     {
+        slotContainer = NewInventoryManager.Instance.GetSlotContainerUI.transform;
+
         AddSlots(trinketPrefabList.Count);
     }
 
+    /// <summary>
+    /// Dynamically adds slots to the inventory UI.
+    /// </summary>
+    /// <param name="amount">The number of slots to add to the inventory.</param>
     void AddSlots(int amount)
     {
        for (int i = 0; i < amount; i++)

@@ -7,6 +7,9 @@ public class CanvasManager : MonoBehaviour
     {
         canvas = GetComponent<Canvas>();
 
-        canvas.worldCamera = Camera.main;
+        if (canvas.worldCamera == null)
+        {
+            canvas.worldCamera = GameObject.Find("UI Camera").GetComponent<Camera>();
+        }
     }
 }

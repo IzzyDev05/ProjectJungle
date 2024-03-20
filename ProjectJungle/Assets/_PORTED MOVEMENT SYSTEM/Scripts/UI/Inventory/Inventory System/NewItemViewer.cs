@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class NewItemViewer : MonoBehaviour
 {
@@ -51,9 +48,12 @@ public class NewItemViewer : MonoBehaviour
 
         Transform item = Instantiate(trinket.TrinketIcon, itemIconParent.transform).transform;
         item.localScale *= trinket.ScaleMultiplier;
-        //item.rotation *= trinket.RotationMultiplier;
+        item.localRotation *= trinket.D_RotationMultipler;
+        item.localPosition += trinket.D_PositionModifier;
+        item.gameObject.layer = LayerMask.NameToLayer("Trinket");
+        item.GetComponent<Animator>().enabled = false;
 
-        nameText.text = trinket.TrinketIcon.name;
+        nameText.text = trinket.TrinketName;
         descriptionText.text = trinket.TricketLore;
     }
 

@@ -8,10 +8,10 @@ public enum Tags
 
 public class TagManager : MonoBehaviour
 {
-    [SerializeField] private Tags tag;
+    [SerializeField] private Tags _tag;
 
     public Tags ReturnTags()
     {
-        return tag;
+        return _tag;
     }
 }

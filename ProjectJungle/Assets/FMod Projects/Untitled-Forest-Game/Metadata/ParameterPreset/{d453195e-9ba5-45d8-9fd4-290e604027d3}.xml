@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{d453195e-9ba5-45d8-9fd4-290e604027d3}">
+		<property name="name">
+			<value>FallingIntensity</value>
+		</property>
+		<relationship name="folder">
+			<destination>{cb8e6f6b-7e0e-444b-b794-d87461688bd6}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{64d40998-1b00-4c31-b68e-086a228f4a37}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{64d40998-1b00-4c31-b68e-086a228f4a37}">
+		<property name="minimum">
+			<value>-10</value>
+		</property>
+		<property name="maximum">
+			<value>10</value>
+		</property>
+		<property name="initialValue">
+			<value>-10</value>
+		</property>
+	</object>
+</objects>

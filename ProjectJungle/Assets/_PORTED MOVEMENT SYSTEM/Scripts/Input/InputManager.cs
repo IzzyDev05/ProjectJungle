@@ -96,7 +96,7 @@ public class InputManager : MonoBehaviour
     }
 
 
-    // INPUT LINKERS
+    #region INPUT_LINKERS
 
     /// <summary>
     /// Disables the player controls
@@ -107,10 +107,12 @@ public class InputManager : MonoBehaviour
         if (!reverse)
         {
             playerControls.Disable();
+            movementInput = Vector2.zero;
         }
         else
         {
             playerControls.Enable();
         }
     }
+    #endregion
 }

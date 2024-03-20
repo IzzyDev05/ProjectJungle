@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    #region VOLUME_CONTROL
     [Header("Volume")]
     [Range(0,1)]
 
@@ -22,10 +23,14 @@ public class AudioManager : MonoBehaviour
 
     public float sfxVolume = 1f;
     [Range(0, 1)]
+    #endregion
 
+    #region AUDIO_BUS
     private Bus masterBus;
     private Bus ambientBus;
     private Bus sfxBus;
+    #endregion
+
 
     EventInstance ambienceEventInstance;
 
@@ -33,18 +38,22 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        #region SINGLETON
         if (Instance != null)
         {
             Debug.LogError("More than one Audio Manager in the Scene");
         }
 
         Instance = this;
+        #endregion
 
         eventInstances = new List<EventInstance>();
 
+        #region GET_AUDIO_BUS
         masterBus = RuntimeManager.GetBus("bus:/");
         ambientBus = RuntimeManager.GetBus("bus:/Ambience");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
+        #endregion
     }
 
     private void Start()
