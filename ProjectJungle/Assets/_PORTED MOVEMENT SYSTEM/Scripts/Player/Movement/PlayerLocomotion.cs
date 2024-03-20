@@ -21,6 +21,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float jumpCooldown = 0.1f;
     [SerializeField] private int totalJumps = 2;
     [SerializeField] private float gravityIntensity = -9.8f;
+    [SerializeField] private float groundSlamInitialForce = 5f;
     [SerializeField] private float groundSlamForce = 20f;
     [SerializeField] private float groundSlamWait = 0.5f;
     
@@ -304,6 +305,7 @@ public class PlayerLocomotion : MonoBehaviour
         shouldHaveGravity = false;
         rb.velocity = Vector3.zero;
         yield return new WaitForSeconds(groundSlamWait);
+        rb.AddForce(Vector3.down * groundSlamInitialForce, ForceMode.Impulse);
         shouldHaveGravity = true;
 
         animatorManager.Animator.SetBool("isLockedInAnim", true);

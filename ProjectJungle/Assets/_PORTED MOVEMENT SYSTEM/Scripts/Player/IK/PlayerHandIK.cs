@@ -7,6 +7,7 @@ public class PlayerHandIK : MonoBehaviour
     [SerializeField] private TwoBoneIKConstraint rightHandRig;
     [SerializeField] private Transform rightHandTarget;
     [SerializeField] private float animationTransitionSpeed = 0.1f;
+    [SerializeField] private float maxWeight = 1f;
 
     private float targetWeight = 0f;
 
@@ -23,12 +24,11 @@ public class PlayerHandIK : MonoBehaviour
     public void StartHandIK(Vector3 rightTargetPoint)
     {
         rightHandTarget.position = rightTargetPoint;
-        targetWeight = 1f;
+        targetWeight = maxWeight;
     }
 
     public void StopHandIK()
     {
         targetWeight = 0f;
-        rightHandTarget.position = Vector3.zero;
     }
 }

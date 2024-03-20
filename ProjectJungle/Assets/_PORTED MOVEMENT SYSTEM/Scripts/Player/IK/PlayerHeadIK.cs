@@ -8,6 +8,7 @@ public class PlayerHeadIK : MonoBehaviour
     [SerializeField] private MultiAimConstraint headAimRig;
     [SerializeField] private Transform headTarget;
     [SerializeField] private float animationTransitionSpeed = 0.1f;
+    [SerializeField] private float maxWeight = 0.8f;
 
     private float targetWeight = 0f;
 
@@ -24,12 +25,11 @@ public class PlayerHeadIK : MonoBehaviour
     public void StartHeadIK(Vector3 rightTargetPoint)
     {
         headTarget.position = rightTargetPoint;
-        targetWeight = 1f;
+        targetWeight = maxWeight;
     }
 
     public void StopHeadIK()
     {
         targetWeight = 0f;
-        headTarget.position = Vector3.zero;
     }
 }
