@@ -1,6 +1,6 @@
 /* ======================================================================================== */
 /* FMOD Core API - C# wrapper.                                                              */
-/* Copyright (c), Firelight Technologies Pty, Ltd. 2004-2024.                               */
+/* Copyright (c), Firelight Technologies Pty, Ltd. 2004-2023.                               */
 /*                                                                                          */
 /* For more detail visit:                                                                   */
 /* https://fmod.com/docs/2.02/api/core-api.html                                             */
@@ -19,7 +19,7 @@ namespace FMOD
     */
     public partial class VERSION
     {
-        public const int    number = 0x00020221;
+        public const int    number = 0x00020218;
 #if !UNITY_2019_4_OR_NEWER
         public const string dll    = "fmod";
 #endif
@@ -194,7 +194,6 @@ namespace FMOD
         AAUDIO,
         AUDIOWORKLET,
         PHASE,
-        OHAUDIO,
 
         MAX,
     }
@@ -838,7 +837,6 @@ namespace FMOD
         public uint                randomSeed;
         public int                 maxConvolutionThreads;
         public int                 maxOpusCodecs;
-        public int                 maxSpatialObjects;
     }
 
     [Flags]

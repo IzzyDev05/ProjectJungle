@@ -53,8 +53,7 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
-  - {fileID: 3309876985713277446}
-  m_RendererFeatureMap: adc0de57c6d2eee5063aaeff940bef2d
+  m_RendererFeatureMap: adc0de57c6d2eee5
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -97,23 +96,6 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 0
---- !u!114 &3309876985713277446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
-  m_Name: FSOutline
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  passMaterial: {fileID: 2100000, guid: 7f30fd98a83332a4e98e8517e5017380, type: 2}
-  injectionPoint: 550
-  requirements: 5
-  passIndex: 0
 --- !u!114 &5018087406524350029
 MonoBehaviour:
   m_ObjectHideFlags: 0
