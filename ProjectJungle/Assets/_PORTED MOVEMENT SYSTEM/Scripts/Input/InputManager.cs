@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
     private PlayerControls playerControls;
     private PlayerAnimatorManager animatorManager;
     private PlayerLocomotion playerLocomotion;
+    private RagdollEnabler ragdollEnabler;
 
     private Vector2 movementInput;
     private bool sprintInput;
@@ -14,6 +15,7 @@ public class InputManager : MonoBehaviour
     [HideInInspector] public bool leftMouse;
     [HideInInspector] public bool rightMouse;
     [HideInInspector] public bool groundSlamInput;
+    [HideInInspector] public bool performDebugAction;
 
     public float moveAmount { get; private set; }
     public float verticalInput { get; private set; }
@@ -23,6 +25,7 @@ public class InputManager : MonoBehaviour
     {
         animatorManager = GetComponent<PlayerAnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        ragdollEnabler = FindObjectOfType<RagdollEnabler>();
     }
 
     private void OnEnable()
@@ -48,6 +51,8 @@ public class InputManager : MonoBehaviour
         playerControls.Actions.GroundSlam.performed += i => groundSlamInput = true;
         playerControls.Actions.GroundSlam.canceled += i => groundSlamInput = false;
 
+        playerControls.Actions.Debug.performed += i => performDebugAction = true;
+
         playerControls.Enable();
     }
 
@@ -61,6 +66,7 @@ public class InputManager : MonoBehaviour
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpingInput();
+        DebugOperation();
     }
 
     private void HandleMovementInput()
@@ -93,6 +99,16 @@ public class InputManager : MonoBehaviour
 
         jumpInput = false;
         playerLocomotion.HandleJumping();
+    }
+
+    private void DebugOperation()
+    {
+        if (performDebugAction)
+        {
+            print("Debug action");
+            ragdollEnabler.ToggleRagdoll();
+            performDebugAction = false;
+        }
     }
 
 

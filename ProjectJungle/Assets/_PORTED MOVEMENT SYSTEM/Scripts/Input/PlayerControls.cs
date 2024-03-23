@@ -198,6 +198,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Debug"",
+                    ""type"": ""Button"",
+                    ""id"": ""00eb9f3e-53de-4c08-bd89-d5d0a077ce42"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -310,6 +319,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""GroundSlam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d2b1543-9e02-4fb8-a222-6702585cd7df"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -326,6 +346,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions_LeftMouse = m_Actions.FindAction("LeftMouse", throwIfNotFound: true);
         m_Actions_RightMouse = m_Actions.FindAction("RightMouse", throwIfNotFound: true);
         m_Actions_GroundSlam = m_Actions.FindAction("GroundSlam", throwIfNotFound: true);
+        m_Actions_Debug = m_Actions.FindAction("Debug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -438,6 +459,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_LeftMouse;
     private readonly InputAction m_Actions_RightMouse;
     private readonly InputAction m_Actions_GroundSlam;
+    private readonly InputAction m_Actions_Debug;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -447,6 +469,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LeftMouse => m_Wrapper.m_Actions_LeftMouse;
         public InputAction @RightMouse => m_Wrapper.m_Actions_RightMouse;
         public InputAction @GroundSlam => m_Wrapper.m_Actions_GroundSlam;
+        public InputAction @Debug => m_Wrapper.m_Actions_Debug;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -471,6 +494,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @GroundSlam.started += instance.OnGroundSlam;
             @GroundSlam.performed += instance.OnGroundSlam;
             @GroundSlam.canceled += instance.OnGroundSlam;
+            @Debug.started += instance.OnDebug;
+            @Debug.performed += instance.OnDebug;
+            @Debug.canceled += instance.OnDebug;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -490,6 +516,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @GroundSlam.started -= instance.OnGroundSlam;
             @GroundSlam.performed -= instance.OnGroundSlam;
             @GroundSlam.canceled -= instance.OnGroundSlam;
+            @Debug.started -= instance.OnDebug;
+            @Debug.performed -= instance.OnDebug;
+            @Debug.canceled -= instance.OnDebug;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -518,5 +547,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLeftMouse(InputAction.CallbackContext context);
         void OnRightMouse(InputAction.CallbackContext context);
         void OnGroundSlam(InputAction.CallbackContext context);
+        void OnDebug(InputAction.CallbackContext context);
     }
 }
