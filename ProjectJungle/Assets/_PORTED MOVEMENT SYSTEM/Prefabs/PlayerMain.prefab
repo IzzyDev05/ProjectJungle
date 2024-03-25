@@ -45,10 +45,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1494119825920917344}
   - {fileID: 4257719154333595780}
   - {fileID: 5287959004255287528}
   - {fileID: 5310919230909136000}
-  - {fileID: 1494119825920917344}
   - {fileID: 1520006363110533067}
   - {fileID: 695727568444822010}
   m_Father: {fileID: 0}
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 076c7d56f8aa1e24c8c9a50a13ab63fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisablePlayerLocomotion: 0
   walkingSpeed: 3
   runningSpeed: 10
   sprintingSpeed: 18
