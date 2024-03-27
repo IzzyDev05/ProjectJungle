@@ -29,9 +29,6 @@ public class PlayerManager : MonoBehaviour
     
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        
         inputManager = GetComponent<InputManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         animatorManager = GetComponent<PlayerAnimatorManager>();
