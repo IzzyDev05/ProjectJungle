@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4840051853971998578}
   - component: {fileID: 4840051853971998581}
+  - component: {fileID: 716026622853361679}
   m_Layer: 0
   m_Name: Rumble
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e385ad5f5e5789438ef49e0c1f58499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &716026622853361679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840051853971998580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61aa239ff9b39a4bbed1baf28f3e9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4840051853206421569

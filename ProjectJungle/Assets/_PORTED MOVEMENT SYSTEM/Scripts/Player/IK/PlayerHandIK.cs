@@ -21,8 +21,10 @@ public class PlayerHandIK : MonoBehaviour
         rightHandRig.weight = Mathf.MoveTowards(rightHandRig.weight, targetWeight, animationTransitionSpeed * Time.deltaTime);
     }
 
-    public void StartHandIK(Vector3 rightTargetPoint)
+    public void StartHandIK(bool point, Vector3 rightTargetPoint)
     {
+        if (!point) return;
+        
         rightHandTarget.position = rightTargetPoint;
         targetWeight = maxWeight;
     }

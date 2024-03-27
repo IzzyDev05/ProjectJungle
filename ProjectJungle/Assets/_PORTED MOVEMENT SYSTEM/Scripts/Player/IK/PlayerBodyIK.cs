@@ -22,8 +22,10 @@ public class PlayerBodyIK : MonoBehaviour
         bodyAimRig.weight = Mathf.MoveTowards(bodyAimRig.weight, targetWeight, animationTransitionSpeed * Time.deltaTime);
     }
 
-    public void StartBodyIK(Vector3 rightTargetPoint)
+    public void StartBodyIK(bool point, Vector3 rightTargetPoint)
     {
+        if (!point) return;
+        
         bodyTarget.position = rightTargetPoint;
         targetWeight = maxWeight;
     }

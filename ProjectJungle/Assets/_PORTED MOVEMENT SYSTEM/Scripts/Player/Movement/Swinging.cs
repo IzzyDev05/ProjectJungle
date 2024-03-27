@@ -11,6 +11,7 @@ public class Swinging : MonoBehaviour
     [SerializeField] private Transform swingPointRef;
     [SerializeField] private float swingingCD = 0.75f;
     [SerializeField] private float swingingPointForwardOffset = 5f;
+    [SerializeField] private float swingStartDelay = 0.4f;
     
     [Header("Joint Variables")] 
     [SerializeField] private float swingForce = 4.5f;
@@ -30,13 +31,11 @@ public class Swinging : MonoBehaviour
     private PlayerHandIK rightHandIK;
     private Rigidbody rb;
     private SpringJoint spring;
-    private LineRenderer lr;
 
     private Vector3 swingPoint;
     private bool currentlySwinging;
     private bool canSwing = true;
     private float swingTime;
-    //private Vector3 currentGrapplePosition = Vector3.zero;
 
     private void Start()
     {
@@ -45,7 +44,6 @@ public class Swinging : MonoBehaviour
         ropeRenderer = GetComponent<RopeRenderer>();
         rightHandIK = GetComponent<PlayerHandIK>();
         rb = GetComponent<Rigidbody>();
-        lr = GetComponent<LineRenderer>();
     }
 
     private void Update()
@@ -56,10 +54,8 @@ public class Swinging : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!currentlySwinging) return;
-        
-        ropeRenderer.StartDrawingRope(swingPoint, swingPointRef);
-        rightHandIK.StartHandIK(swingPoint);
+        ropeRenderer.StartDrawingRope(swingPoint);
+        rightHandIK.StartHandIK(currentlySwinging, swingPoint);
     }
 
     private void FindSwingPoint()
@@ -99,7 +95,7 @@ public class Swinging : MonoBehaviour
                     maxScore = score;
                     swingPoint = hit.point;
                 }
-                
+
                 minDistance = distanceToPoint;
             }
         }
@@ -108,7 +104,7 @@ public class Swinging : MonoBehaviour
         {
             currentlySwinging = true;
             PlayerManager.UpdateState(States.Swinging);
-            StartSwing();
+            StartCoroutine(DelayStartSwing(swingStartDelay));
         }
         else
         {
@@ -120,6 +116,13 @@ public class Swinging : MonoBehaviour
             PlayerManager.UpdateState(newState);
         }
     }
+    
+    private IEnumerator DelayStartSwing(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (currentlySwinging && canSwing) StartSwing();
+    }
 
     private void StartSwing()
     {
@@ -129,7 +132,6 @@ public class Swinging : MonoBehaviour
             0f, true);
         
         spring = gameObject.AddComponent<SpringJoint>();
-        lr.positionCount = 2;
 
         ApplySpringJointValues();
         rb.AddForce(transform.forward * initialForwardMomentum, ForceMode.Impulse);
@@ -177,7 +179,6 @@ public class Swinging : MonoBehaviour
         if (PlayerManager.State == States.Grounded || PlayerManager.State == States.Aerial) return;
 
         currentlySwinging = false;
-        lr.positionCount = 0;
 
         StartCoroutine(SwingCooldown());
         PlayerManager.UpdateState(States.Aerial);

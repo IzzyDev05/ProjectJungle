@@ -207,6 +207,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Climb"",
+                    ""type"": ""Button"",
+                    ""id"": ""65aead4e-02d2-45e7-88ee-52d4df61d29d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -330,6 +339,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Debug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""747c3547-d98b-4417-ae3a-83ad3092eb9e"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Climb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -347,6 +367,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions_RightMouse = m_Actions.FindAction("RightMouse", throwIfNotFound: true);
         m_Actions_GroundSlam = m_Actions.FindAction("GroundSlam", throwIfNotFound: true);
         m_Actions_Debug = m_Actions.FindAction("Debug", throwIfNotFound: true);
+        m_Actions_Climb = m_Actions.FindAction("Climb", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -460,6 +481,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_RightMouse;
     private readonly InputAction m_Actions_GroundSlam;
     private readonly InputAction m_Actions_Debug;
+    private readonly InputAction m_Actions_Climb;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -470,6 +492,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @RightMouse => m_Wrapper.m_Actions_RightMouse;
         public InputAction @GroundSlam => m_Wrapper.m_Actions_GroundSlam;
         public InputAction @Debug => m_Wrapper.m_Actions_Debug;
+        public InputAction @Climb => m_Wrapper.m_Actions_Climb;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -497,6 +520,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Debug.started += instance.OnDebug;
             @Debug.performed += instance.OnDebug;
             @Debug.canceled += instance.OnDebug;
+            @Climb.started += instance.OnClimb;
+            @Climb.performed += instance.OnClimb;
+            @Climb.canceled += instance.OnClimb;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -519,6 +545,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Debug.started -= instance.OnDebug;
             @Debug.performed -= instance.OnDebug;
             @Debug.canceled -= instance.OnDebug;
+            @Climb.started -= instance.OnClimb;
+            @Climb.performed -= instance.OnClimb;
+            @Climb.canceled -= instance.OnClimb;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -548,5 +577,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRightMouse(InputAction.CallbackContext context);
         void OnGroundSlam(InputAction.CallbackContext context);
         void OnDebug(InputAction.CallbackContext context);
+        void OnClimb(InputAction.CallbackContext context);
     }
 }

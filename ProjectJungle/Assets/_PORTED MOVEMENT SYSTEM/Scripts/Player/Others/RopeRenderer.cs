@@ -1,32 +1,50 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 public class RopeRenderer : MonoBehaviour
 {
-    private Vector3 currentGrapplePosition = Vector3.zero;
+    [SerializeField] private Transform endPoint;
+    [SerializeField] private LineRenderer rope;
+    [SerializeField] private GameObject ball;
+    [SerializeField] private float transitionDuration = 1.0f;
 
     private PlayerLocomotion playerLocomotion;
-    private LineRenderer lr;
 
     private void Start()
     {
         playerLocomotion = GetComponent<PlayerLocomotion>();
-        lr = GetComponent<LineRenderer>();
+        rope.enabled = false;
+        ball.SetActive(false);
     }
 
-    public void StartDrawingRope(Vector3 swingPoint, Transform swingPointRef)
+    public void StartDrawingRope(Vector3 swingPoint)
     {
-        if (PlayerManager.State == States.Swinging || playerLocomotion.isGrappling) DrawRope(swingPoint, swingPointRef);
-    }
-    
-    private void DrawRope(Vector3 swingPoint, Transform swingPointRef)
-    {
-        if (swingPoint == Vector3.zero) return;
-        if (lr.positionCount == 0) lr.positionCount = 2;
+        if (PlayerManager.State == States.Swinging || playerLocomotion.isGrappling)
+        {
+            ball.SetActive(true);
 
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 25f);
-        lr.SetPosition(0, swingPointRef.position);
-        lr.SetPosition(1, swingPoint);
-        //lr.SetPosition(1, currentGrapplePosition);
+            StartCoroutine(MoveEndPointOverTime(endPoint.position, swingPoint, transitionDuration));
+            rope.enabled = true;
+        }
+        else
+        {
+            ball.SetActive(false);
+            rope.enabled = false;
+            endPoint.position = ball.transform.position;
+        }
+    }
+
+    private IEnumerator MoveEndPointOverTime(Vector3 startPosition, Vector3 targetPosition, float duration)
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            endPoint.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        endPoint.position = targetPosition;
     }
 }

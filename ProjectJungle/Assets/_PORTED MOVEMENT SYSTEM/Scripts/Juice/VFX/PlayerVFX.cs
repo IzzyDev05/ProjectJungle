@@ -38,12 +38,12 @@ public class PlayerVFX : MonoBehaviour
     {
         switch (TerrainChecker.Instance.TerrainType(this.transform.parent)) 
         {
-            case Terrain.Other:
+            case TerrainTypes.Other:
                 {
                     
                     break;
                 }
-            case Terrain.Grass:
+            case TerrainTypes.Grass:
                 {
 
                     break;

@@ -6,25 +6,29 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(PlayerLocomotion))]
 public class Grappling : MonoBehaviour
 {
-    [Header("Grappling Variables")]
-    [SerializeField] private Transform grapplePointRef;
+    [Header("Grappling Variables")] [SerializeField]
+    private Transform grapplePointRef;
+
     [SerializeField] private float maxGrappleDistance = 100f;
     [SerializeField] private float grappleForce = 20f;
     [SerializeField] private LayerMask grappleLayer;
     [SerializeField] private float grapplingCD = 0.75f;
-    
-    [Header("Joint Variables")] 
-    [SerializeField] private float jointForce = 4.5f;
+    [SerializeField] private float grappleStartDelay = 0.25f;
+
+    [Header("Joint Variables")] [SerializeField]
+    private float jointForce = 4.5f;
+
     [SerializeField] private float jointDamper = 7f;
     [SerializeField] private float jointMassScale = 4.5f;
     [SerializeField] private float minDistance = 0.25f;
     [SerializeField] private float maxDistance = 0.75f;
-    
-    [Header("References")]
-    [SerializeField] private GameObject freeLookCam;
+
+    [Header("References")] [SerializeField]
+    private GameObject freeLookCam;
+
     [SerializeField] private GameObject aimCam;
     [SerializeField] private GameObject reticle;
-    
+
     private Camera cam;
     private PlayerLocomotion playerLocomotion;
     private PlayerHandIK rightHandIK;
@@ -32,7 +36,6 @@ public class Grappling : MonoBehaviour
     private PlayerBodyIK bodyIK;
     private InputManager inputManager;
     private Swinging swinging;
-    private LineRenderer lr;
     private Rigidbody rb;
     private SpringJoint spring;
     private RopeRenderer ropeRenderer;
@@ -55,26 +58,22 @@ public class Grappling : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         swinging = GetComponent<Swinging>();
         ropeRenderer = GetComponent<RopeRenderer>();
-        lr = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         playerLocomotion.isGrappling = isGrappling;
-     
-        //if (playerManager.isLockedInAnim) return;
+
         HandleAimingAndGrappling();
     }
 
     private void LateUpdate()
     {
-        if (!isGrappling) return;
-        
-        ropeRenderer.StartDrawingRope(grapplePoint, grapplePointRef);
-        rightHandIK.StartHandIK(grapplePoint);
-        headIK.StartHeadIK(grapplePoint);
-        bodyIK.StartBodyIK(grapplePoint);
+        ropeRenderer.StartDrawingRope(grapplePoint);
+        rightHandIK.StartHandIK(isGrappling, grapplePoint);
+        headIK.StartHeadIK(isGrappling, grapplePoint);
+        bodyIK.StartBodyIK(isGrappling, grapplePoint);
     }
 
     private void HandleAimingAndGrappling()
@@ -85,9 +84,9 @@ public class Grappling : MonoBehaviour
         if (inputManager.rightMouse)
         {
             Cursor.lockState = CursorLockMode.Confined;
-            
+
             StartAiming();
-            if (inputManager.leftMouse) StartGrappling();
+            if (inputManager.leftMouse) StartCoroutine(DelayStartGrappling(grappleStartDelay));
         }
         else StopAimingAndGrappling();
     }
@@ -105,25 +104,34 @@ public class Grappling : MonoBehaviour
         else
             if (rb.velocity != Vector3.zero) rb.velocity = Vector3.zero;
         */
-        
+
         if (isGrappling || !canGrapple) return;
+
         Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+
         if (Physics.Raycast(rayOrigin, cam.transform.forward, out RaycastHit hit, maxGrappleDistance, grappleLayer))
         {
             grapplePoint = hit.point;
         }
     }
 
-    private void StartGrappling()
+    private IEnumerator DelayStartGrappling(float delay)
     {
-        if (!canGrapple || grapplePoint == Vector3.zero) return;
-        
+        yield return new WaitForSeconds(delay);
+
         isGrappling = true;
         PlayerManager.UpdateState(States.Grappling);
         
+        StartGrappling();
+    }
+
+    private void StartGrappling()
+    {
+        if (!canGrapple || grapplePoint == Vector3.zero) return;
+
         // Grapple logic
         if (spring) return;
-        
+
         RumbleManager.Instance.StartRumble(playerLocomotion.lowRumbleFrequency, playerLocomotion.highRumbleFrequency,
             0f, true);
 
@@ -146,35 +154,34 @@ public class Grappling : MonoBehaviour
 
         spring.spring = jointForce;
         spring.damper = jointDamper;
-        spring.massScale = jointMassScale;   
+        spring.massScale = jointMassScale;
     }
 
     private void StopAimingAndGrappling()
     {
         if (spring) Destroy(spring);
         if (Time.timeScale != 1f) Time.timeScale = 1f;
-        
+
         if (isGrappling)
         {
             var previousState = PlayerManager.PreviousState;
             PlayerManager.UpdateState(previousState);
-            
+
             RumbleManager.Instance.StopRumble();
 
-            lr.positionCount = 0;
             grapplePoint = Vector3.zero;
             StartCoroutine(GrappleCooldown());
             StartCoroutine(swinging.SwingCooldown());
-            
+
             Cursor.lockState = CursorLockMode.Confined;
-            
+
             rightHandIK.StopHandIK();
             headIK.StopHeadIK();
             bodyIK.StopBodyIK();
-            
+
             isGrappling = false;
         }
-        
+
         playerLocomotion.isAiming = false;
 
         freeLookCam.SetActive(true);
@@ -186,6 +193,7 @@ public class Grappling : MonoBehaviour
     {
         canGrapple = false;
         yield return new WaitForSeconds(grapplingCD);
+
         canGrapple = true;
     }
 }

@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
     [HideInInspector] public bool rightMouse;
     [HideInInspector] public bool groundSlamInput;
     [HideInInspector] public bool performDebugAction;
+    [HideInInspector] public bool climb;
 
     public float moveAmount { get; private set; }
     public float verticalInput { get; private set; }
@@ -52,6 +53,7 @@ public class InputManager : MonoBehaviour
         playerControls.Actions.GroundSlam.canceled += i => groundSlamInput = false;
 
         playerControls.Actions.Debug.performed += i => performDebugAction = true;
+        playerControls.Actions.Climb.performed += i => climb = true;
 
         playerControls.Enable();
     }
@@ -66,7 +68,8 @@ public class InputManager : MonoBehaviour
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpingInput();
-        DebugOperation();
+        //HandleOtherInputs();
+        HandleDebugOperation();
     }
 
     private void HandleMovementInput()
@@ -101,7 +104,16 @@ public class InputManager : MonoBehaviour
         playerLocomotion.HandleJumping();
     }
 
-    private void DebugOperation()
+    private void HandleOtherInputs()
+    {
+        if (climb)
+        {
+            if (playerLocomotion.isHanging) playerLocomotion.ClimbLedge();
+            climb = false;
+        }
+    }
+
+    private void HandleDebugOperation()
     {
         if (performDebugAction)
         {

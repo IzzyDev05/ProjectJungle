@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8886677658604628897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e97b4fd8b8db04daeb3490d04fc003, type: 3}
+  m_Name: GuideOutlines
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  renderPassEvent: 350
+  outlinesLayerMask:
+    serializedVersion: 2
+    m_Bits: 40960
+  outlineSettings:
+    outlineColor: {r: 0.5079791, g: 1, b: 0.3443396, a: 1}
+    outlineScale: 0.5
+    depthThreshold: 100
+    robertsCrossMultiplier: 0
+    normalThreshold: 0.424
+    steepAngleThreshold: 2
+    steepAngleMultiplier: 360
+    colorFormat: 0
+    depthBufferBits: 0
+    filterMode: 0
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    perObjectData: 0
+    enableDynamicBatching: 0
+    enableInstancing: 0
+--- !u!114 &-4133565884111195586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e97b4fd8b8db04daeb3490d04fc003, type: 3}
+  m_Name: Objective Outlines
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  renderPassEvent: 350
+  outlinesLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  outlineSettings:
+    outlineColor: {r: 0.19339621, g: 0.45324188, b: 1, a: 1}
+    outlineScale: 1
+    depthThreshold: 1.5
+    robertsCrossMultiplier: 100
+    normalThreshold: 0.4
+    steepAngleThreshold: 0.2
+    steepAngleMultiplier: 25
+    colorFormat: 0
+    depthBufferBits: 0
+    filterMode: 0
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    perObjectData: 0
+    enableDynamicBatching: 0
+    enableInstancing: 0
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,7 +118,11 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
   - {fileID: 3309876985713277446}
-  m_RendererFeatureMap: adc0de57c6d2eee5063aaeff940bef2d
+  - {fileID: 3869924352422222831}
+  - {fileID: 6303405013511793304}
+  - {fileID: -8886677658604628897}
+  - {fileID: -4133565884111195586}
+  m_RendererFeatureMap: adc0de57c6d2eee5063aaeff940bef2def9bc2ddb1bbb435986ac98176317a575f9478cdc02dac843ef2e09dba9fa2c6
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -109,9 +177,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
   m_Name: FSOutline
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   passMaterial: {fileID: 2100000, guid: 7f30fd98a83332a4e98e8517e5017380, type: 2}
-  injectionPoint: 600
+  injectionPoint: 550
+  requirements: 5
+  passIndex: 1
+--- !u!114 &3869924352422222831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
+  m_Name: FS Outlines  Ned
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  passMaterial: {fileID: 2100000, guid: 6d308cb52edd14849bddf31a338ee22d, type: 2}
+  injectionPoint: 550
   requirements: 5
   passIndex: 0
 --- !u!114 &5018087406524350029
@@ -129,3 +214,35 @@ MonoBehaviour:
   m_Active: 1
   settings: {material: {fileID: 2100000, guid: af4b242b8722dea47bf68eb17ed1a9b2, type: 2},
     materialPassIndex: 0, renderEvent: 500}
+--- !u!114 &6303405013511793304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e97b4fd8b8db04daeb3490d04fc003, type: 3}
+  m_Name: MainOutlines
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  renderPassEvent: 350
+  outlinesLayerMask:
+    serializedVersion: 2
+    m_Bits: 16392
+  outlineSettings:
+    outlineColor: {r: 0.6320754, g: 0.08837144, b: 0, a: 1}
+    outlineScale: 1
+    depthThreshold: 4
+    robertsCrossMultiplier: 150
+    normalThreshold: 0.25
+    steepAngleThreshold: 0.2
+    steepAngleMultiplier: 25
+    colorFormat: 0
+    depthBufferBits: 0
+    filterMode: 0
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    perObjectData: 0
+    enableDynamicBatching: 0
+    enableInstancing: 0

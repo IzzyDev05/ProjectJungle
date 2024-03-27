@@ -1,12 +1,13 @@
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[RequireComponent(typeof(PlayerManager))]
+[RequireComponent(typeof(PlayerManager)), SelectionBase]
 public class PlayerLocomotion : MonoBehaviour
 {
-    [HideInInspector] public bool DisablePlayerLocomotion;
-    
+    //[HideInInspector] public bool DisablePlayerLocomotion;
+
     [Header("Movement Speeds")] 
     [SerializeField] private float walkingSpeed = 3f;
     [SerializeField] private float runningSpeed = 6f;
@@ -14,33 +15,32 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] private float rotationSpeed = 15f;
     [SerializeField] private float regularDrag = 1.5f;
 
-    [Header("Aerial Speeds")] 
+    [Header("Aerial Speeds")]
     [SerializeField] private float aerialMovementSpeed = 10f;
     [SerializeField] private float aerialDrag = 3.5f;
     [SerializeField] private float leapingVelocity = 1.5f;
     [SerializeField] private float fallingVelocity = 33f;
-    [SerializeField] private float jumpHeight = 5f;
+    [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float jumpCooldown = 0.1f;
     [SerializeField] private int totalJumps = 2;
-    [SerializeField] private float gravityIntensity = -9.8f;
+    //[SerializeField] private float gravityIntensity = -9.8f;
     [SerializeField] private float groundSlamInitialForce = 5f;
     [SerializeField] private float groundSlamForce = 20f;
     [SerializeField] private float groundSlamWait = 0.5f;
-    
-    [Header("Ground Check")] 
-    [SerializeField] private float groundCheckDistance = 0.5f;
+
+    [Header("Ground Check")] [SerializeField]
+    private float groundCheckDistance = 0.5f;
+
     [SerializeField] private float raycastHeightOffset = 0.5f; // We want our raycast to begin a bit above our feet
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("Juice")] 
-    public float lowRumbleFrequency = 0.25f;
+    [Header("Juice")] public float lowRumbleFrequency = 0.25f;
     public float highRumbleFrequency = 1f;
     public float rumbleDuration = 0.25f;
     [SerializeField] private float fallingVelocityThreshold = 20f;
     [SerializeField] private CinemachineImpulseSource groundShakeImpulseSource;
 
-    [Header("Others")] 
-    [SerializeField] private float regularFOV = 45f;
+    [Header("Others")] [SerializeField] private float regularFOV = 45f;
     [SerializeField] private float swingingFOV = 75f;
     [SerializeField] private float fovChangeTime = 12.5f;
     [SerializeField] private Transform ledgeCheckTransform;
@@ -53,6 +53,7 @@ public class PlayerLocomotion : MonoBehaviour
     [HideInInspector] public bool isAiming;
     [HideInInspector] public bool isGrappling;
     [HideInInspector] public bool isGroundSlamming;
+    [HideInInspector] public bool isHanging;
     [HideInInspector] public float inAirTimer = 0.75f;
 
     private InputManager inputManager;
@@ -71,7 +72,11 @@ public class PlayerLocomotion : MonoBehaviour
     private bool shouldHaveGravity = true;
     private int maxJumpCount;
     private int jumpCount;
-    
+
+    private bool isLedgeDetected;
+    private Vector3 ledgePos;
+    //private Quaternion ledgeRot;
+
     private void Start()
     {
         inputManager = GetComponent<InputManager>();
@@ -84,15 +89,13 @@ public class PlayerLocomotion : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
         freeLook = GameObject.FindWithTag("CinemachineCamera").GetComponent<CinemachineFreeLook>();
-        
+
         freeLook.m_Lens.FieldOfView = regularFOV;
         maxJumpCount = totalJumps;
     }
 
     public void HandleAllMovement()
     {
-        if (DisablePlayerLocomotion) return;
-        
         switch (PlayerManager.State)
         {
             case (States.Grappling):
@@ -100,44 +103,47 @@ public class PlayerLocomotion : MonoBehaviour
                 isSwinging = false;
                 maxJumpCount = 0;
                 break;
-            
+
             case (States.Swinging):
                 rb.useGravity = true;
                 isSwinging = true;
                 maxJumpCount = 0;
-                
+
                 freeLook.m_Lens.FieldOfView =
                     Mathf.Lerp(freeLook.m_Lens.FieldOfView, swingingFOV, fovChangeTime * Time.deltaTime);
 
                 HandleRotation();
-                HandleAirMovement();
+                //HandleAirMovement();
                 break;
-            
+
             case (States.Aerial):
                 rb.useGravity = false;
                 isSwinging = false;
 
-                LedgeGrab();
+                //LedgeGrab();
                 HandleGroundSlamming();
                 HandleRotation();
                 HandleFallingAndLanding();
                 HandleAirMovement();
                 break;
-            
+
             case (States.Grounded):
+                //if (DisablePlayerLocomotion) return;
+
                 rb.useGravity = false;
                 isSwinging = false;
                 maxJumpCount = totalJumps;
-                
+
                 freeLook.m_Lens.FieldOfView =
                     Mathf.Lerp(freeLook.m_Lens.FieldOfView, regularFOV, fovChangeTime * Time.deltaTime);
 
                 HandleFallingAndLanding();
-                
-                if (playerManager.isLockedInAnim || isJumping || isAiming) return;
-                
+
+                if (isJumping || isAiming) return;
+
                 HandleRotation();
-                HandleMovement();
+                if (isGrounded) HandleMovement();
+                else HandleAirMovement();
                 break;
 
             default:
@@ -149,11 +155,11 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleMovement()
     {
         rb.drag = regularDrag;
-        
+
         moveDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
             .normalized;
 
-        moveDirection.y = 0;
+        if (isGrounded) moveDirection.y = 0;
 
         if (isSprinting) moveDirection *= sprintingSpeed;
         else
@@ -170,7 +176,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleAirMovement()
     {
         rb.drag = aerialDrag;
-        
+
         moveDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
             .normalized;
 
@@ -182,7 +188,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleRotation()
     {
         if (isAiming) return;
-        
+
         Vector3 targetDirection = Vector3.zero;
 
         targetDirection = (cam.forward * inputManager.verticalInput + cam.right * inputManager.horizontalInput)
@@ -204,26 +210,20 @@ public class PlayerLocomotion : MonoBehaviour
         {
             if (!canJump || isSwinging) return;
             jumpCount++;
-
+            
+            animatorManager.Animator.SetBool("isJumping", true);
+            
+            inAirTimer = 0f;
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-            if (jumpCount == 1)
-            {
-                animatorManager.Animator.SetBool("isJumping", true);
-                animatorManager.PlayTargetAnimation("Jump", false);
-                
-                float jumpForce = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            
+            if (jumpCount == 1) animatorManager.PlayTargetAnimation("Jump", true);
             else
             {
-                animatorManager.Animator.SetBool("isJumping", true);
+                animatorManager.PlayTargetAnimation("JumpFlip", true);
                 playerFX.DoubleJumpVFX();
-                animatorManager.PlayTargetAnimation("JumpFlip", false);
-                
-                float jumpForce = Mathf.Sqrt(-2 * gravityIntensity * (jumpHeight + 2f));
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
-
+            
             GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayJumping(jumpCount == totalJumps ? true : false);
         }
     }
@@ -239,7 +239,7 @@ public class PlayerLocomotion : MonoBehaviour
         Vector3 targetPos = transform.position;
 
         // Gravity
-        if (!isGrounded && !isJumping && !isSwinging && !isGrappling && shouldHaveGravity)
+        if (!isGrounded && !isJumping && !isSwinging && !isGrappling && shouldHaveGravity && !isHanging)
         {
             if (!isLockedInAnim) animatorManager.PlayTargetAnimation("Falling", true);
 
@@ -247,37 +247,38 @@ public class PlayerLocomotion : MonoBehaviour
 
             rb.AddForce(transform.forward * leapingVelocity);
             rb.AddForce(Vector3.down * (fallingVelocity * inAirTimer));
-            
+
             // This might potentially cause issues
-            PlayerManager.UpdateState(States.Aerial);
+            //PlayerManager.UpdateState(States.Aerial);
         }
 
         // Grounding
         if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out var hit, groundCheckDistance, groundLayer))
         {
             if (!isGrounded) StartCoroutine(JumpCooldown());
-            
+
             // If we're near the ground but not grounded AND are locked in an animation (Falling), play the landing animation
             if (!isGrounded && isLockedInAnim)
             {
                 float rumbleIntensity = Mathf.Clamp(inAirTimer / 2.5f, 0.1f, 1f);
 
-                if (rb.velocity.y < -fallingVelocityThreshold)
+                if (rb.velocity.y < -fallingVelocityThreshold || isGroundSlamming)
                 {
                     RumbleManager.Instance.StartRumble(lowRumbleFrequency * rumbleIntensity,
                         highRumbleFrequency * rumbleIntensity, rumbleDuration, false);
                     screenShakeManager.ScreenShake(groundShakeImpulseSource, -rb.velocity.y);
                 }
 
-                animatorManager.PlayTargetAnimation("Land", true);
+                animatorManager.PlayTargetAnimation(!isGroundSlamming ? "Land" : "GroundSlam", true);
 
-                GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayLanding(isGroundSlamming ? groundSlamForce : -rb.velocity.y);
+                GameManager.Player.GetComponentInChildren<PlayerSounds>()
+                    .PlayLanding(isGroundSlamming ? groundSlamForce : -rb.velocity.y);
             }
 
             Vector3 raycastHitPoint = hit.point;
             targetPos.y = raycastHitPoint.y; // Our target position is the position where the raycast hits the ground
             hitDistance = hit.distance;
-            
+
             inAirTimer = 0.75f;
             isGrounded = true;
             maxJumpCount = totalJumps;
@@ -290,7 +291,7 @@ public class PlayerLocomotion : MonoBehaviour
         else isGrounded = false;
 
         // Floating capsule
-        if (isGrounded && !isJumping && !isSwinging && !isGrappling && shouldHaveGravity)
+        if (isGrounded && !isJumping && !isSwinging && !isGrappling && shouldHaveGravity && !isHanging)
         {
             if (playerManager.isLockedInAnim || inputManager.moveAmount > 0f)
                 transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime / 0.1f);
@@ -302,6 +303,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         canJump = false;
         yield return new WaitForSeconds(jumpCooldown);
+
         canJump = true;
         jumpCount = 0;
     }
@@ -319,13 +321,14 @@ public class PlayerLocomotion : MonoBehaviour
         shouldHaveGravity = false;
         rb.velocity = Vector3.zero;
         yield return new WaitForSeconds(groundSlamWait);
+
         rb.AddForce(Vector3.down * groundSlamInitialForce, ForceMode.Impulse);
         shouldHaveGravity = true;
 
         animatorManager.Animator.SetBool("isLockedInAnim", true);
         rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.down * groundSlamForce, ForceMode.Impulse);
-        
+
         RumbleManager.Instance.StartRumble(0.5f, 1f, 0.75f);
 
         isGroundSlamming = true;
@@ -333,27 +336,71 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void LedgeGrab()
     {
-        // TODO: Make this actually ledge grab instead of an instant change
-        bool foundLedge = Physics.Raycast(ledgeCheckTransform.position, Vector3.down, out RaycastHit hit,
-            ledgeCheckLength);
-        
-        if (!foundLedge) return;
-        
-        Vector3 hitPoint = hit.point;
-        transform.position = hitPoint;
+        // Find if there is a ledge, if so, find place to put hands and switch to "Hanging" animation
+        // Keep hanging until player gives input, then play "Climb" animation and climb up
+
+        if (!isLedgeDetected && Physics.Raycast(ledgeCheckTransform.position, Vector3.down, out RaycastHit hit,
+                ledgeCheckLength, groundLayer))
+        {
+            isLedgeDetected = true;
+            ledgePos = hit.point /*+ (Vector3.up * 1.5f)*/; // Adjust this offset based on your character's height and hanging position
+            //ledgeRot = Quaternion.LookRotation(-hit.normal); // This assumes you want the player to face the ledge
+
+            //StartCoroutine(TransitionToHanging(ledgePos, ledgeRot));
+            StartCoroutine(TransitionToHanging(ledgePos));
+        }
     }
     
+    //private IEnumerator TransitionToHanging(Vector3 targetPosition, Quaternion targetRotation)
+    private IEnumerator TransitionToHanging(Vector3 targetPosition)
+    {
+        float elapsedTime = 0f;
+        float duration = 0.5f; // Transition duration
+        Vector3 startPosition = transform.position;
+        Quaternion startRotation = transform.rotation;
+
+        animatorManager.PlayTargetAnimation("Hanging", true);
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            //transform.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPosition;
+        //transform.rotation = targetRotation;
+        isHanging = true;
+    }
+    
+    public void ClimbLedge()
+    {
+        animatorManager.PlayTargetAnimation("Climb", true);
+        Vector3 endPosition = ledgePos + (transform.forward * 0.5f) + (Vector3.up * 1.5f); // Adjust based on animation and ledge height
+        StartCoroutine(EndHanging(endPosition));
+    }
+    
+    private IEnumerator EndHanging(Vector3 targetPosition)
+    {
+        yield return new WaitForSeconds(1.0f); // Adjust this timing to match your animation
+
+        transform.position = targetPosition;
+        isHanging = false;
+        isLedgeDetected = false;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        
+
         // Ground check
         Vector3 raycastOrigin = transform.position;
         raycastOrigin.y += raycastHeightOffset;
-        
+
         Gizmos.DrawLine(raycastOrigin, raycastOrigin + Vector3.down * groundCheckDistance);
         Gizmos.DrawWireSphere(raycastOrigin + Vector3.down * hitDistance, 0.2f);
-        
+
         // Ledge
         Vector3 ledgeOrigin = ledgeCheckTransform.position;
         Gizmos.DrawLine(ledgeOrigin, ledgeOrigin + Vector3.down * ledgeCheckLength);

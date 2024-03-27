@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Terrain 
+public enum TerrainTypes 
 {
     None,
     Other,
@@ -33,7 +33,7 @@ public class TerrainChecker : MonoBehaviour
     /// </summary>
     /// <param name="rayOriginTransform"></param>
     /// <returns></returns>
-    public Terrain TerrainType(Transform rayOriginTransform)
+    public TerrainTypes TerrainType(Transform rayOriginTransform)
     {
         RaycastHit hit;
 
@@ -48,15 +48,15 @@ public class TerrainChecker : MonoBehaviour
                 // Debug.Log(groundRenderer.material.name);
                 if (groundRenderer.material.name.Contains("Grass"))
                 {
-                    return Terrain.Grass;
+                    return TerrainTypes.Grass;
                 }
                 else
                 {
-                    return Terrain.Other;
+                    return TerrainTypes.Other;
                 }
             }
         }
 
-        return Terrain.None;
+        return TerrainTypes.None;
     }
 }

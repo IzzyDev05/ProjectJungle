@@ -22,8 +22,10 @@ public class PlayerHeadIK : MonoBehaviour
         headAimRig.weight = Mathf.MoveTowards(headAimRig.weight, targetWeight, animationTransitionSpeed * Time.deltaTime);
     }
 
-    public void StartHeadIK(Vector3 rightTargetPoint)
+    public void StartHeadIK(bool point, Vector3 rightTargetPoint)
     {
+        if (!point) return;
+        
         headTarget.position = rightTargetPoint;
         targetWeight = maxWeight;
     }
