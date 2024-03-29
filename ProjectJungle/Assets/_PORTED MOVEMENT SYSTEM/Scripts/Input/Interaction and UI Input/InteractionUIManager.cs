@@ -31,7 +31,7 @@ public class InteractionUIManager : MonoBehaviour
     {
         foreach (Transform camera in GameObject.Find("Cameras").transform)
         {
-            if (camera.name == "FreeLook Camera")
+            if (camera.name.Contains("FreeLook"))
             {
                 FreelookCam = camera.gameObject;
             } 
@@ -186,12 +186,12 @@ public class InteractionUIManager : MonoBehaviour
     {
         if (opened)
         {
-            uiBlur.gameObject.SetActive(true);
+            //uiBlur.gameObject.SetActive(true);
             GameManager.Instance.PauseGame();
         }
         else
         {
-            uiBlur.gameObject.SetActive(false);
+            //uiBlur.gameObject.SetActive(false);
             GameManager.Instance.UnpauseGame();
         }
 
