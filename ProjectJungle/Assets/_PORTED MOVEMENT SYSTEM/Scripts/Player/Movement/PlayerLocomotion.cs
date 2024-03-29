@@ -95,13 +95,15 @@ public class PlayerLocomotion : MonoBehaviour
                 rb.useGravity = false;
                 isSwinging = false;
                 maxJumpCount = 0;
+                playerFX.SprintVFX(false);
                 break;
             
             case (States.Swinging):
                 rb.useGravity = true;
                 isSwinging = true;
                 maxJumpCount = 0;
-                
+                playerFX.SprintVFX(false);
+
                 freeLook.m_Lens.FieldOfView =
                     Mathf.Lerp(freeLook.m_Lens.FieldOfView, swingingFOV, fovChangeTime * Time.deltaTime);
 
@@ -157,10 +159,11 @@ public class PlayerLocomotion : MonoBehaviour
             if (inputManager.moveAmount >= 0.5f) moveDirection *= runningSpeed;
             else moveDirection *= walkingSpeed;
         }
-
-        playerFX.SprintVFX(isSprinting);
+      
         Vector3 movementVelocity = moveDirection;
         rb.velocity = movementVelocity;
+
+        playerFX.SprintVFX(isSprinting && isGrounded);
     }
 
     private void HandleAirMovement()
@@ -200,6 +203,8 @@ public class PlayerLocomotion : MonoBehaviour
         {
             if (!canJump || isSwinging) return;
             jumpCount++;
+
+            playerFX.SprintVFX(false);
 
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             if (jumpCount == 1)
