@@ -109,7 +109,7 @@ public class PlayerSounds : MonoBehaviour
     {
         switch (TerrainChecker.Instance.TerrainType(this.transform.parent)) 
         {
-            case Terrain.Other:
+            case Terrain.Wood:
                 {
                     footsteps.setParameterByName("Footsteps", 0);
                     landing.setParameterByName("Landing", 0);

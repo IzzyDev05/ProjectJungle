@@ -46,13 +46,13 @@ public class TerrainChecker : MonoBehaviour
             if (groundRenderer)
             {
                 // Debug.Log(groundRenderer.material.name);
-                if (groundRenderer.material.name.Contains("Grass"))
+                if (groundRenderer.material.name.Contains("Wood"))
                 {
-                    return Terrain.Grass;
+                    return Terrain.Wood;
                 }
                 else
                 {
-                    return Terrain.Other;
+                     return Terrain.Grass;
                 }
             }
         }
