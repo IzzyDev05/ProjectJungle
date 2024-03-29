@@ -51,7 +51,7 @@ public class NewSlotManager : MonoBehaviour
             return false;
         }
 
-        Debug.Log(slotItem.name.Contains(pickedUpItem.name) ? true : false);
+        //Debug.Log(slotItem.name.Contains(pickedUpItem.name) ? true : false);
         return slotItem.name.Contains(pickedUpItem.name) ? true : false;
     }
 
