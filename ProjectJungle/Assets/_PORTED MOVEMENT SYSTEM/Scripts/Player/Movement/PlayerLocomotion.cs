@@ -62,6 +62,7 @@ public class PlayerLocomotion : MonoBehaviour
     private CinemachineFreeLook freeLook;
 
     private PlayerVFX playerFX;
+    private PlayerSounds playerSX;
 
     private float hitDistance; // For visualization
     private Vector3 moveDirection;
@@ -78,6 +79,7 @@ public class PlayerLocomotion : MonoBehaviour
         screenShakeManager = FindObjectOfType<ScreenShakeManager>();
 
         playerFX = GetComponent<PlayerVFX>();
+        playerSX = GameManager.Player.GetComponentInChildren<PlayerSounds>();
 
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
@@ -126,7 +128,7 @@ public class PlayerLocomotion : MonoBehaviour
                 rb.useGravity = false;
                 isSwinging = false;
                 maxJumpCount = totalJumps;
-                
+
                 freeLook.m_Lens.FieldOfView =
                     Mathf.Lerp(freeLook.m_Lens.FieldOfView, regularFOV, fovChangeTime * Time.deltaTime);
 
@@ -225,7 +227,7 @@ public class PlayerLocomotion : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
 
-            GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayJumping(jumpCount == totalJumps ? true : false);
+            playerSX.PlayJumping(jumpCount == totalJumps ? true : false);
         }
     }
 
@@ -257,7 +259,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (Physics.SphereCast(raycastOrigin, 0.2f, Vector3.down, out var hit, groundCheckDistance, groundLayer))
         {
             if (!isGrounded) StartCoroutine(JumpCooldown());
-            
+
             // If we're near the ground but not grounded AND are locked in an animation (Falling), play the landing animation
             if (!isGrounded && isLockedInAnim)
             {
@@ -272,7 +274,7 @@ public class PlayerLocomotion : MonoBehaviour
 
                 animatorManager.PlayTargetAnimation("Land", true);
 
-                GameManager.Player.GetComponentInChildren<PlayerSounds>().PlayLanding(isGroundSlamming ? groundSlamForce : -rb.velocity.y);
+                playerSX.PlayLanding(isGroundSlamming ? groundSlamForce : -rb.velocity.y);
             }
 
             Vector3 raycastHitPoint = hit.point;

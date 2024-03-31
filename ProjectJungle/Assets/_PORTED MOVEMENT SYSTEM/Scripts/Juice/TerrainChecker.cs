@@ -8,7 +8,8 @@ public enum Terrain
     Other,
     Grass,
     Wood,
-    Plantation
+    Plantation,
+    Dirt
 }
 
 
@@ -50,9 +51,13 @@ public class TerrainChecker : MonoBehaviour
                 {
                     return Terrain.Wood;
                 }
-                else
+                else if (groundRenderer.material.name.Contains("Grass"))
                 {
                      return Terrain.Grass;
+                }
+                else
+                {
+                    return Terrain.Dirt;
                 }
             }
         }
