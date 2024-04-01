@@ -7,6 +7,7 @@ public class Swinging : MonoBehaviour
 {
     [Header("Swinging Variables")] 
     [SerializeField] private float maxSwingDistance = 75f;
+    [SerializeField] private float raycastConeRadius = 5f; 
     [SerializeField] private LayerMask swingableLayer;
     [SerializeField] private Transform swingPointRef;
     [SerializeField] private float swingingCD = 0.75f;
@@ -61,11 +62,10 @@ public class Swinging : MonoBehaviour
     private void FindSwingPoint()
     {
         if (currentlySwinging || !canSwing) return;
-
-        float coneRadius = 5f;
+        
         Vector3 forwardPos = transform.position + transform.forward * swingingPointForwardOffset;
 
-        RaycastHit[] hits = Physics.SphereCastAll(forwardPos, coneRadius, transform.up, maxSwingDistance,
+        RaycastHit[] hits = Physics.SphereCastAll(forwardPos, raycastConeRadius, transform.up, maxSwingDistance,
             swingableLayer);
 
         PerformSphereCast(hits);

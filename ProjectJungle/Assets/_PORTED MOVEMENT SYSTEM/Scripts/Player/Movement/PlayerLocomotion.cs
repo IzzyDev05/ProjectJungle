@@ -113,7 +113,7 @@ public class PlayerLocomotion : MonoBehaviour
                     Mathf.Lerp(freeLook.m_Lens.FieldOfView, swingingFOV, fovChangeTime * Time.deltaTime);
 
                 HandleRotation();
-                //HandleAirMovement();
+                HandleAirMovement();
                 break;
 
             case (States.Aerial):

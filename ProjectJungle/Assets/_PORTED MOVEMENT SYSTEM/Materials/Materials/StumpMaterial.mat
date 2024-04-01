@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: StumpMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: dbb98f3de2c7c5c45bb9d9b075c1af62,
+  m_Shader: {fileID: -6465566751694194690, guid: 2f55194ea291a1444b3c77d011c03b21,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -131,7 +131,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LitThreshold: 1.63
+    - _LitThreshold: 2.76
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Matte: 1
@@ -143,7 +143,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimLightBrightness: 1
-    - _Rotation: 0
+    - _Rotation: 45
     - _SHADOWS_SOFT: 1
     - _ShadingMultiplier: 0.05
     - _Smoothness: 0
@@ -163,6 +163,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DotColor: {r: 0, g: 0, b: 0, a: 1}
+    - _DotsColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}

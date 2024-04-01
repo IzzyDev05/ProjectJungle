@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterMat
+  m_Name: m_Lake
   m_Shader: {fileID: -6465566751694194690, guid: cffd38166c1e78743a52c569e0690785,
     type: 3}
   m_Parent: {fileID: 0}
@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FoamAmount: 4.56
+    - _FoamAmount: 30
     - _FoamCutoff: 1.3
     - _FoamScale: 100
     - _FoamSpeed: 1.24
@@ -60,9 +60,9 @@ Material:
     - _RefractionScale: 0.88
     - _RefractionSpeed: 0.02
     - _RefractionStrength: 1.46
-    - _WaterDepth: 45
+    - _WaterDepth: 125
     m_Colors:
-    - _DeepWater: {r: 0.4179139, g: 0.9150943, b: 0.13381095, a: 0.5803922}
+    - _DeepWater: {r: 0, g: 0.30110875, b: 0.4056604, a: 0.85882354}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.78431374}
-    - _ShallowWater: {r: 0.30196083, g: 0.81308335, b: 0.9843137, a: 0.14901961}
+    - _ShallowWater: {r: 0.11792451, g: 0.7815043, b: 1, a: 0.25490198}
   m_BuildTextureStacks: []
