@@ -123,21 +123,21 @@ public class PlayerSounds : MonoBehaviour
     /// </summary>
     private void GroundTypeChecker()
     {
-        switch (TerrainChecker.Instance.TerrainType(this.transform.parent)) 
+        switch (TerrainChecker.Instance.CheckTerrainType(this.transform.parent)) 
         {
-            case Terrain.Wood:
+            case TerrainType.Wood:
                 {
                     footsteps.setParameterByName("Footsteps", 0);
                     landing.setParameterByName("Landing", 0);
                     break;
                 }
-            case Terrain.Grass:
+            case TerrainType.Grass:
                 {
                     footsteps.setParameterByName("Footsteps", 1);
                     landing.setParameterByName("Landing", 1);
                     break;
                 }
-            case Terrain.Dirt:
+            case TerrainType.Dirt:
                 {
                     footsteps.setParameterByName("Footsteps", 2);
                     landing.setParameterByName("Landing", 2);

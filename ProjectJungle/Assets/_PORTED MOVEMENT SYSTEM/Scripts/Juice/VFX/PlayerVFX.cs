@@ -8,8 +8,6 @@ public class PlayerVFX : MonoBehaviour
     [SerializeField] ParticleSystem doubleJumpVFX;
     [SerializeField] List<ParticleSystem> sprintVFX;
 
-    [SerializeField] Terrain currentTerrain;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +18,6 @@ public class PlayerVFX : MonoBehaviour
             sprintVFX.Add(child.GetComponent<ParticleSystem>());
         }
     }
-
-    private void Update()
-    {
-        currentTerrain = TerrainChecker.Instance.TerrainType(this.transform.parent);
-    }
-
     public void DoubleJumpVFX()
     {
         if (doubleJumpVFX.isStopped)
@@ -38,9 +30,9 @@ public class PlayerVFX : MonoBehaviour
     {
         if (isSprinting)
         {
-            switch (currentTerrain)
+            switch (TerrainChecker.Instance.CheckTerrainType(this.transform.parent))
             {
-                case Terrain.Dirt:
+                case TerrainType.Dirt:
                     {                        
                         foreach (ParticleSystem other in sprintVFX)
                         {
@@ -55,7 +47,7 @@ public class PlayerVFX : MonoBehaviour
                         }
                         break;
                     }
-                case Terrain.Grass:
+                case TerrainType.Grass:
                     {
                         foreach (ParticleSystem other in sprintVFX)
                         {
@@ -98,24 +90,4 @@ public class PlayerVFX : MonoBehaviour
             }
         }
     }
-
-    #region Dynamic_VFX_Helper
-    private void DynamicTerrainChange()
-    {
-        switch (TerrainChecker.Instance.TerrainType(this.transform.parent)) 
-        {
-            case Terrain.Other:
-                {
-                    
-                    break;
-                }
-            case Terrain.Grass:
-                {
-
-                    break;
-                }
-        }
-
-    }
-    #endregion
 }
