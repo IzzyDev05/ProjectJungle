@@ -27,33 +27,6 @@ MonoBehaviour:
   - Grass
   - Dirt
   Exists: 1
---- !u!114 &-7844972835301575900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/LevelChange
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/LevelChange
-  Guid:
-    Data1: 1871644267
-    Data2: 1212296317
-    Data3: -1944655719
-    Data4: 1434580725
-  Banks:
-  - {fileID: 3017527266539057922}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-5388285322301758513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +124,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638474481295289039
+  lastModified: 638464815614294775
   FileSizes:
   - Name: Desktop
     Value: 832448
@@ -265,14 +238,12 @@ MonoBehaviour:
   - {fileID: -4031801563851063610}
   - {fileID: -1626812765201712768}
   - {fileID: 6121963480331081233}
-  - {fileID: 8206467247782398839}
-  - {fileID: -7844972835301575900}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4890010317757656100}
   StringsBanks:
   - {fileID: 760444785104651037}
-  cacheTime: 638475282906914386
+  cacheTime: 638464815614334804
   cacheVersion: 131608
 --- !u!114 &760444785104651037
 MonoBehaviour:
@@ -289,10 +260,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638475282904674252
+  lastModified: 638464815614314803
   FileSizes:
   - Name: Desktop
-    Value: 1732
+    Value: 1652
   Exists: 1
 --- !u!114 &1543840011973614514
 MonoBehaviour:
@@ -387,10 +358,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638475282906914386
+  lastModified: 638464815614334804
   FileSizes:
   - Name: Desktop
-    Value: 246400
+    Value: 128928
   Exists: 1
 --- !u!114 &4517320553629587403
 MonoBehaviour:
@@ -431,7 +402,7 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638475282904624144
+  lastModified: 638464815614304803
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -478,7 +449,7 @@ MonoBehaviour:
   Name: Footsteps
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 1
   Default: 0
   ID:
     data1: 1746887920
@@ -488,7 +459,6 @@ MonoBehaviour:
   Labels:
   - Wood
   - Grass
-  - Dirt
   Exists: 1
 --- !u!114 &6121963480331081233
 MonoBehaviour:
@@ -516,33 +486,6 @@ MonoBehaviour:
   Parameters:
   - {fileID: 2312588654619360139}
   - {fileID: -7927465658980342144}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &8206467247782398839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Movement/Diving
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Movement/Diving
-  Guid:
-    Data1: 388307655
-    Data2: 1124975548
-    Data3: -1212553037
-    Data4: -842056846
-  Banks:
-  - {fileID: 3017527266539057922}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0

@@ -16,7 +16,6 @@ public class PlayerSounds : MonoBehaviour
     private EventInstance footsteps;
     private EventInstance jumping;
     private EventInstance landing;
-    private EventInstance diving;
     #endregion
 
     public void Start()
@@ -27,7 +26,6 @@ public class PlayerSounds : MonoBehaviour
         footsteps = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.footsteps, GameManager.Player.transform);
         jumping = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.jumpingSound, GameManager.Player.transform);
         landing = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.landingSound, GameManager.Player.transform);
-        diving = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.divingSound, GameManager.Player.transform);
     }
 
     #region PUBLIC_SFX_PLAYERS
@@ -99,21 +97,7 @@ public class PlayerSounds : MonoBehaviour
         {
             GroundTypeChecker();
             landing.start();
-            StopGroundSlamFalling();
         }
-    }
-
-    public void PlayGroundSlamFalling()
-    {
-        if (playerLoco.isGroundSlamming)
-        {
-            diving.start();
-        }
-    }
-
-    public void StopGroundSlamFalling()
-    {
-        diving.stop(STOP_MODE.IMMEDIATE);
     }
     #endregion
 
@@ -125,25 +109,13 @@ public class PlayerSounds : MonoBehaviour
     {
         switch (TerrainChecker.Instance.TerrainType(this.transform.parent)) 
         {
-            case Terrain.Wood:
+            case Terrain.Other:
                 {
                     footsteps.setParameterByName("Footsteps", 0);
                     landing.setParameterByName("Landing", 0);
                     break;
                 }
             case Terrain.Grass:
-                {
-                    footsteps.setParameterByName("Footsteps", 1);
-                    landing.setParameterByName("Landing", 1);
-                    break;
-                }
-            case Terrain.Dirt:
-                {
-                    footsteps.setParameterByName("Footsteps", 2);
-                    landing.setParameterByName("Landing", 2);
-                    break;
-                }
-            default:
                 {
                     footsteps.setParameterByName("Footsteps", 1);
                     landing.setParameterByName("Landing", 1);

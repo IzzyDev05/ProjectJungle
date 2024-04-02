@@ -43,7 +43,7 @@ public class NewInventoryManager : MonoBehaviour
         }
 
         EventSystem eventSystem = EventSystem.current;
-        if (eventSystem.firstSelectedGameObject == null && slotList.Count > 0) 
+        if (eventSystem.firstSelectedGameObject == null) 
         {
             eventSystem.firstSelectedGameObject = slotContainer.transform.GetChild(0).gameObject;
         }

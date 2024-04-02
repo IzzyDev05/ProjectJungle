@@ -10,10 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1761137817}
   - component: {fileID: 1761137818}
-  - component: {fileID: 2118460043727588357}
-  - component: {fileID: 5577941210246797965}
-  - component: {fileID: 1282903890042778002}
-  - component: {fileID: 9010449090819532587}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -28,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761137816}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4840051853540727318}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1761137818
 MonoBehaviour:
@@ -49,126 +45,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsUI: {fileID: 0}
---- !u!114 &2118460043727588357
+--- !u!1 &3290451208739704095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8600562462902786522}
+  - component: {fileID: 8685485525444028074}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8600562462902786522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290451208739704095}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4840051853540727318}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8685485525444028074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761137816}
+  m_GameObject: {fileID: 3290451208739704095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ebdcddbeb90ee4c8e1920fefd5db6c, type: 3}
+  m_Script: {fileID: 11500000, guid: f346d250e93180945ab5aee0613add4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotContainer: {fileID: 0}
-  slotPrefab: {fileID: 0}
-  trinketPrefabList: []
---- !u!114 &5577941210246797965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761137816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc6620c7a6dc95849b1d9887d483c634, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  slotContainer: {fileID: 0}
-  slotList: []
---- !u!114 &1282903890042778002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761137816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b1823572d1f9b4db28062707f853c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterVolume: 1
-  ambientVolume: 1
-  sfxVolume: 1
---- !u!114 &9010449090819532587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761137816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d92167745e3d4c4ba0a57fd59756f6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <backpack>k__BackingField:
-    Guid:
-      Data1: -618270063
-      Data2: 1150025915
-      Data3: 1404282776
-      Data4: 428702759
-    Path: event:/SFX/UI/Inventory/Backpack
-  <pickupItem>k__BackingField:
-    Guid:
-      Data1: -1638058154
-      Data2: 1307817589
-      Data3: 1447541414
-      Data4: 296193822
-    Path: event:/SFX/Character/Interaction/PickupItem
-  <footsteps>k__BackingField:
-    Guid:
-      Data1: 159073632
-      Data2: 1154029890
-      Data3: -964342132
-      Data4: 1842490077
-    Path: event:/SFX/Character/Movement/Footsteps
-  <jumpingSound>k__BackingField:
-    Guid:
-      Data1: 646169252
-      Data2: 1331380495
-      Data3: -790088807
-      Data4: 70426626
-    Path: event:/SFX/Character/Movement/Jump
-  <landingSound>k__BackingField:
-    Guid:
-      Data1: 1002633936
-      Data2: 1172059644
-      Data3: -1128553284
-      Data4: -128602875
-    Path: event:/SFX/Character/Movement/Landing
-  <grappleHit>k__BackingField:
-    Guid:
-      Data1: 1244256765
-      Data2: 1241537846
-      Data3: 919629470
-      Data4: 508639434
-    Path: event:/SFX/Character/Abilities/GrappleHit
-  <grappleRelease>k__BackingField:
-    Guid:
-      Data1: -1289157968
-      Data2: 1241016982
-      Data3: -669404010
-      Data4: -828199238
-    Path: event:/SFX/Character/Abilities/GrappleRelease
-  <grappleRetract>k__BackingField:
-    Guid:
-      Data1: -908372110
-      Data2: 1103896272
-      Data3: 1498858382
-      Data4: -1163308973
-    Path: event:/SFX/Character/Abilities/GrappleRetract
-  <forest>k__BackingField:
-    Guid:
-      Data1: 898049927
-      Data2: 1284655508
-      Data3: -333835856
-      Data4: -179043552
-    Path: event:/Ambient/PlaceholderAmbience
+  settingsUI: {fileID: 0}
 --- !u!1 &4840051853540727321
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +113,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4840051853540727321}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -201,7 +121,9 @@ Transform:
   - {fileID: 4840051853971998578}
   - {fileID: 8353747750427807434}
   - {fileID: 1761137817}
+  - {fileID: 8600562462902786522}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4840051853971998580
 GameObject:
@@ -230,13 +152,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4840051853971998580}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4840051853540727318}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4840051853971998581
 MonoBehaviour:
@@ -291,7 +213,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
     m_TransformParent: {fileID: 4840051853540727318}
     m_Modifications:
     - target: {fileID: 3514259983478869643, guid: 1886643af87175a4da99ca5f58fdc941,
@@ -355,9 +276,6 @@ PrefabInstance:
       value: LevelLoader
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1886643af87175a4da99ca5f58fdc941, type: 3}
 --- !u!4 &8353747750427807434 stripped
 Transform:

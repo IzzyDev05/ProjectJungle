@@ -31,7 +31,7 @@ public class InteractionUIManager : MonoBehaviour
     {
         foreach (Transform camera in GameObject.Find("Cameras").transform)
         {
-            if (camera.name.Contains("FreeLook"))
+            if (camera.name == "FreeLook Camera")
             {
                 FreelookCam = camera.gameObject;
             } 
@@ -42,7 +42,7 @@ public class InteractionUIManager : MonoBehaviour
         }
 
         actionPrompter = GameObject.Find("ActionPrompt").GetComponent<ActionPrompt>();
-        uiBlur = GameObject.Find("UI Blur");
+        //uiBlur = GameObject.Find("UI Blur");
     }
 
     private void Start()

@@ -9798,13 +9798,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113754305}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.54726315, y: -0.2356051, z: 0.09522972, w: 0.7974489}
+  m_LocalRotation: {x: 0.4691627, y: -0.52284056, z: 0.29740912, w: 0.64658487}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 66.592, y: -43.118, z: -15.474}
+  m_LocalEulerAnglesHint: {x: 66.592, y: -88.118, z: -15.474}
 --- !u!114 &113754308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100166,133 +100166,13 @@ PrefabInstance:
       objectReference: {fileID: 1573141879}
     - target: {fileID: 4448179997595989585, guid: d859a23f7ca4b974b9339f5a4456c8ef,
         type: 3}
-      propertyPath: jointForce
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989585, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
       propertyPath: freeLookCam
       value: 
       objectReference: {fileID: 1080047176}
-    - target: {fileID: 4448179997595989585, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: jointDamper
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989585, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: grappleForce
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989585, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: jointMassScale
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989585, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: maxGrappleDistance
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989614, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: swingForce
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989614, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: springDamper
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989614, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: swingEndThrust
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989614, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: springMassScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989614, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: maxSwingDistance
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989614, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: initialUpwardMomentum
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989614, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: initialForwardMomentum
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: aerialDrag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: jumpHeight
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: regularDrag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: sprintingSpeed
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: fallingVelocity
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: groundSlamForce
-      value: 125
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: leapingVelocity
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: gravityIntensity
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: aerialMovementSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: groundSlamInitialForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448179997595989615, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: fallingVelocityThreshold
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 5178710584978730207, guid: d859a23f7ca4b974b9339f5a4456c8ef,
         type: 3}
       propertyPath: m_Name
       value: PlayerContainer
-      objectReference: {fileID: 0}
-    - target: {fileID: 9131520698770810831, guid: d859a23f7ca4b974b9339f5a4456c8ef,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9131520698770810831, guid: d859a23f7ca4b974b9339f5a4456c8ef,
         type: 3}
