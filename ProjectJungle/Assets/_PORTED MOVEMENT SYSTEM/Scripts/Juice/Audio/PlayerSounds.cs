@@ -143,6 +143,12 @@ public class PlayerSounds : MonoBehaviour
                     landing.setParameterByName("Landing", 2);
                     break;
                 }
+            default:
+                {
+                    footsteps.setParameterByName("Footsteps", 1);
+                    landing.setParameterByName("Landing", 1);
+                    break;
+                }
         }
 
     }

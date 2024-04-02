@@ -42,9 +42,29 @@ public class TerrainChecker : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1.0f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
         {
-            Renderer groundRenderer = hit.collider.GetComponentInChildren<Renderer>();
+            //Renderer groundRenderer = hit.collider.GetComponentInChildren<Renderer>();
 
-            if (groundRenderer)
+            switch (hit.collider.tag)
+            {
+                case "Wood":
+                    {
+                        return Terrain.Wood;
+                    }
+                case "Dirt":
+                    {
+                        return Terrain.Dirt;     
+                    }
+                case "Grass":
+                    {
+                        return Terrain.Grass;
+                    }
+                default:
+                    {
+                        return Terrain.Other;
+                    }
+            }
+
+            /*if (groundRenderer)
             {
                 // Debug.Log(groundRenderer.material.name);
                 if (groundRenderer.material.name.Contains("Wood"))
@@ -59,7 +79,7 @@ public class TerrainChecker : MonoBehaviour
                 {
                     return Terrain.Dirt;
                 }
-            }
+            }*/
         }
 
         return Terrain.None;
