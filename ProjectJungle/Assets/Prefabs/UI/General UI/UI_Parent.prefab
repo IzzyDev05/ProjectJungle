@@ -221,6 +221,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7952198583498910223}
     m_Modifications:
+    - target: {fileID: 1881272239116894997, guid: 3542d1afb92ec584dbf8a471e9096222,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114164369605716300, guid: 3542d1afb92ec584dbf8a471e9096222,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2523517193879063199, guid: 3542d1afb92ec584dbf8a471e9096222,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -351,6 +361,26 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4180693367993017704, guid: 3542d1afb92ec584dbf8a471e9096222,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180693367993017704, guid: 3542d1afb92ec584dbf8a471e9096222,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180693367993017704, guid: 3542d1afb92ec584dbf8a471e9096222,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180693367993017704, guid: 3542d1afb92ec584dbf8a471e9096222,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6049000251794622196, guid: 3542d1afb92ec584dbf8a471e9096222,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -400,9 +430,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745253024681174550, guid: 3542d1afb92ec584dbf8a471e9096222,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1881272239116894997, guid: 3542d1afb92ec584dbf8a471e9096222, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2523517195487899723, guid: 3542d1afb92ec584dbf8a471e9096222,
         type: 3}
