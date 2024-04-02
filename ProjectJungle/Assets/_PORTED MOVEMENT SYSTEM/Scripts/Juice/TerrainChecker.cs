@@ -8,7 +8,8 @@ public enum Terrain
     Other,
     Grass,
     Wood,
-    Plantation
+    Plantation,
+    Dirt
 }
 
 
@@ -41,20 +42,44 @@ public class TerrainChecker : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1.0f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
         {
-            Renderer groundRenderer = hit.collider.GetComponentInChildren<Renderer>();
+            //Renderer groundRenderer = hit.collider.GetComponentInChildren<Renderer>();
 
-            if (groundRenderer)
+            switch (hit.collider.tag)
+            {
+                case "Wood":
+                    {
+                        return Terrain.Wood;
+                    }
+                case "Dirt":
+                    {
+                        return Terrain.Dirt;     
+                    }
+                case "Grass":
+                    {
+                        return Terrain.Grass;
+                    }
+                default:
+                    {
+                        return Terrain.Other;
+                    }
+            }
+
+            /*if (groundRenderer)
             {
                 // Debug.Log(groundRenderer.material.name);
-                if (groundRenderer.material.name.Contains("Grass"))
+                if (groundRenderer.material.name.Contains("Wood"))
                 {
-                    return Terrain.Grass;
+                    return Terrain.Wood;
+                }
+                else if (groundRenderer.material.name.Contains("Grass"))
+                {
+                     return Terrain.Grass;
                 }
                 else
                 {
-                    return Terrain.Other;
+                    return Terrain.Dirt;
                 }
-            }
+            }*/
         }
 
         return Terrain.None;

@@ -1,16 +1,29 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerVFX : MonoBehaviour
 {
     [SerializeField] Transform vfxParent;
     [SerializeField] ParticleSystem doubleJumpVFX;
-    [SerializeField] ParticleSystem sprintVFX;
+    [SerializeField] List<ParticleSystem> sprintVFX;
+
+    [SerializeField] Terrain currentTerrain;
 
     // Start is called before the first frame update
     void Start()
     {
         doubleJumpVFX = GameObject.Find("Double Jump VFX").GetComponent<ParticleSystem>();
-        sprintVFX = GameObject.Find("Sprint VFX").GetComponent<ParticleSystem>();
+        
+        foreach (Transform child in GameObject.Find("Sprint VFX").transform)
+        {
+            sprintVFX.Add(child.GetComponent<ParticleSystem>());
+        }
+    }
+
+    private void Update()
+    {
+        currentTerrain = TerrainChecker.Instance.TerrainType(this.transform.parent);
     }
 
     public void DoubleJumpVFX()
@@ -25,11 +38,64 @@ public class PlayerVFX : MonoBehaviour
     {
         if (isSprinting)
         {
-            sprintVFX.Play();
+            switch (currentTerrain)
+            {
+                case Terrain.Dirt:
+                    {                        
+                        foreach (ParticleSystem other in sprintVFX)
+                        {
+                            if (!other.name.Contains("Dirt") && other.isPlaying)
+                            {
+                                other.Stop();
+                            }
+                            else if (other.name.Contains("Dirt"))
+                            {
+                                other.Play();
+                            }
+                        }
+                        break;
+                    }
+                case Terrain.Grass:
+                    {
+                        foreach (ParticleSystem other in sprintVFX)
+                        {
+                            if (!other.name.Contains("Grass") && other.isPlaying)
+                            {
+                                other.Stop();
+                            }
+                            else if (other.name.Contains("Grass"))
+                            {
+                                other.Play();
+                            }
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        foreach (ParticleSystem other in sprintVFX)
+                        {
+                            if (!other.name.Contains("Dust") && other.isPlaying)
+                            {
+                                other.Stop();
+                            }
+                            else if (other.name.Contains("Dust"))
+                            {
+                                other.Play();
+                            }
+                        }
+                        break;
+                    }
+            }
         }
         else
         {
-            sprintVFX.Stop();
+            foreach (ParticleSystem sprintFX in sprintVFX)
+            {
+                if (sprintFX.isPlaying)
+                {
+                    sprintFX.Stop();
+                }
+            }
         }
     }
 
