@@ -6,8 +6,14 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseCanvas;
     [SerializeField] private GameObject pauseDefaultButton;
+    
+    [Header("Settings")]
     [SerializeField] private GameObject settingsCanvas;
     [SerializeField] private GameObject settingsDefaultButton;
+    /*[SerializeField] private GameObject baseSettings;
+    [SerializeField] private GameObject audioSettings;
+    [SerializeField] private GameObject videoSettings;
+    [SerializeField] private GameObject gameplaySettings;*/
 
     private PlayerManager playerManager;
     private bool isPaused;
@@ -17,7 +23,12 @@ public class MenuManager : MonoBehaviour
         playerManager = FindObjectOfType<PlayerManager>();
         
         pauseCanvas.SetActive(false);
+        
         settingsCanvas.SetActive(false);
+        /*baseSettings.SetActive(true);
+        audioSettings.SetActive(false);
+        videoSettings.SetActive(false);
+        gameplaySettings.SetActive(false);*/
     }
 
     private void Update()
@@ -88,6 +99,39 @@ public class MenuManager : MonoBehaviour
     {
         OpenPauseMenu();
     }
+
+    /*public void OnSubSettingsBack()
+    {
+        baseSettings.SetActive(true);
+        audioSettings.SetActive(false);
+        videoSettings.SetActive(false);
+        gameplaySettings.SetActive(false);
+    }
+
+    public void OnSubSetting(string type)
+    {
+        switch (type)
+        {
+            case ("Audio"):
+                baseSettings.SetActive(false);
+                audioSettings.SetActive(true);
+                videoSettings.SetActive(false);
+                gameplaySettings.SetActive(false);
+                break;
+            case ("Video"):
+                baseSettings.SetActive(false);
+                audioSettings.SetActive(false);
+                videoSettings.SetActive(true);
+                gameplaySettings.SetActive(false);
+                break;
+            case ("Gameplay"):
+                baseSettings.SetActive(false);
+                audioSettings.SetActive(false);
+                videoSettings.SetActive(false);
+                gameplaySettings.SetActive(true);
+                break;
+        }
+    }*/
 
     public void OnQuitPress()
     {
