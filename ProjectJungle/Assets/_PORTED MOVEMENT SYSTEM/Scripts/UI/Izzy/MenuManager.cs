@@ -9,10 +9,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject settingsCanvas;
     [SerializeField] private GameObject settingsDefaultButton;
 
+    private PlayerManager playerManager;
     private bool isPaused;
 
     private void Start()
     {
+        playerManager = FindObjectOfType<PlayerManager>();
+        
         pauseCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
     }
@@ -29,19 +32,21 @@ public class MenuManager : MonoBehaviour
     private void Pause()
     {
         isPaused = true;
-        //Time.timeScale = 0f;
+        Time.timeScale = 0.5f;
         OpenPauseMenu();
 
         Cursor.visible = true;
+        playerManager.DisableMovement = true;
     }
 
     private void Unpause()
     {
         isPaused = false;
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
         CloseAllMenus();
         
         Cursor.visible = false;
+        playerManager.DisableMovement = false;
     }
 
     private void OpenPauseMenu()

@@ -13,6 +13,8 @@ public enum States
 [RequireComponent(typeof(InputManager))]
 public class PlayerManager : MonoBehaviour
 {
+    [HideInInspector] public bool DisableMovement;
+    
     public static States State = States.Grounded;
     public static States PreviousState = State;
 
@@ -39,11 +41,15 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         currentState = State;
+
+        if (DisableMovement) return;
         inputManager.HandleAllInputs();
     }
 
     private void FixedUpdate()
     {
+        if (DisableMovement) return;
+        
         if (State != States.Aerial)
         {
             if (characterMesh.localPosition != Vector3.zero) characterMesh.localPosition = Vector3.zero;

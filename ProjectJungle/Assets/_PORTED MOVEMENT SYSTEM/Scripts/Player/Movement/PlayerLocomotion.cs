@@ -6,8 +6,6 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(PlayerManager)), SelectionBase]
 public class PlayerLocomotion : MonoBehaviour
 {
-    //[HideInInspector] public bool DisablePlayerLocomotion;
-
     [Header("Movement Speeds")] 
     [SerializeField] private float walkingSpeed = 3f;
     [SerializeField] private float runningSpeed = 6f;
