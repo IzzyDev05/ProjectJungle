@@ -8,7 +8,11 @@ public class SliderInput : MonoBehaviour
     {
         MASTER,
         AMBIENT,
-        SFX
+        SFX,
+        M_HORIZONTAL_SENS,
+        M_VERTICAL_SENS,
+        G_HORIZONTAL_SENS,
+        G_VERTICAL_SENS
     }
 
     [Header("Type")]
@@ -52,6 +56,26 @@ public class SliderInput : MonoBehaviour
                     slider.value = AudioManager.Instance.sfxVolume * 100;
                     break;
                 }
+            case TYPE.M_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.M_VERTICAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.G_HORIZONTAL_SENS:
+            {
+
+                break;
+            }
+            case TYPE.G_VERTICAL_SENS:
+            {
+
+                break;
+            }
         }
     }
 
@@ -77,6 +101,26 @@ public class SliderInput : MonoBehaviour
             case TYPE.SFX:
                 {
                     AudioManager.Instance.sfxVolume = adjustedValue;
+                    break;
+                }
+            case TYPE.M_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.M_VERTICAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.G_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.G_VERTICAL_SENS:
+                {
+
                     break;
                 }
         }
@@ -120,13 +164,32 @@ public class SliderInput : MonoBehaviour
                     AudioManager.Instance.sfxVolume = parsedVolumeValue;
                     break;
                 }
+            case TYPE.M_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.M_VERTICAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.G_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.G_VERTICAL_SENS:
+                {
+
+                    break;
+                }
         }
 
         MatchSliderToInputField(inputField.text);
     }
 
-    // VALUE MATCHERS
-
+    #region VALUE_MATCHERS
     /// <summary>
     /// Set the input field value to match the slider value
     /// </summary>
@@ -158,10 +221,9 @@ public class SliderInput : MonoBehaviour
 
         slider.value = parsedValue;
     }
+    #endregion
 
-
-    //HELPERS
-
+    #region HELPERS
     /// <summary>
     /// Checks if the string can be converted into a float
     /// </summary>
@@ -196,4 +258,5 @@ public class SliderInput : MonoBehaviour
         inputField.onValueChanged.AddListener(delegate { OnInputFieldValueChanged(); });
         #endregion
     }
+    #endregion
 }
