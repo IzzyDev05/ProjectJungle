@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Landing
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 3
   Default: 1
   ID:
     data1: 2598513299
@@ -26,6 +26,7 @@ MonoBehaviour:
   - Wood
   - Grass
   - Dirt
+  - Plant
   Exists: 1
 --- !u!114 &-5388285322301758513
 MonoBehaviour:
@@ -245,7 +246,7 @@ MonoBehaviour:
   - {fileID: 4890010317757656100}
   StringsBanks:
   - {fileID: 760444785104651037}
-  cacheTime: 638475282906914386
+  cacheTime: 638476848867530261
   cacheVersion: 131608
 --- !u!114 &760444785104651037
 MonoBehaviour:
@@ -414,10 +415,10 @@ MonoBehaviour:
   Path: Assets/FMod Projects/Untitled-Forest-Game/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638475282906914386
+  lastModified: 638476848867530261
   FileSizes:
   - Name: Desktop
-    Value: 246400
+    Value: 294272
   Exists: 1
 --- !u!114 &4517320553629587403
 MonoBehaviour:
@@ -505,7 +506,7 @@ MonoBehaviour:
   Name: Footsteps
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 3
   Default: 0
   ID:
     data1: 1746887920
@@ -516,6 +517,7 @@ MonoBehaviour:
   - Wood
   - Grass
   - Dirt
+  - Plant
   Exists: 1
 --- !u!114 &6121963480331081233
 MonoBehaviour:

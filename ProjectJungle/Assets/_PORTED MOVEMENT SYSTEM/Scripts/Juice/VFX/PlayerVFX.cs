@@ -30,7 +30,7 @@ public class PlayerVFX : MonoBehaviour
     {
         if (isSprinting)
         {
-            switch (TerrainChecker.Instance.CheckTerrainType(this.transform.parent))
+            switch (GetComponentInChildren<PlayerSounds>().groundType)
             {
                 case TerrainType.Dirt:
                     {                        

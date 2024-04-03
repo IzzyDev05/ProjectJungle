@@ -156,6 +156,10 @@ public class TerrainChecker : MonoBehaviour
                     {
                         return TerrainType.Grass;
                     }
+                case "Plant":
+                    {
+                        return TerrainType.Plantation;
+                    }
                 default:
                     {
                         return TerrainType.Other;

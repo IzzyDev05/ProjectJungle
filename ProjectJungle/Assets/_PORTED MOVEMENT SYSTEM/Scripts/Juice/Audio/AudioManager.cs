@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
 
 
     EventInstance ambienceEventInstance;
+    EventInstance levelTransitionEventInstance;
 
     List<EventInstance> eventInstances;
 
@@ -59,6 +60,8 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         InitializeAmbience(FModEvents.Instance.forest);
+
+        levelTransitionEventInstance = CreateEventInstance(FModEvents.Instance.levelTransition, Camera.main.transform);
     }
 
     private void Update()
@@ -153,6 +156,22 @@ public class AudioManager : MonoBehaviour
         {
             ambienceEventInstance.setPaused(false);
             
+        }
+    }
+
+    /// <summary>
+    /// Plays the SFX for level transition.
+    /// </summary>
+    /// <param name="pause">A boolean to stop the SFX early.</param>
+    public void PlayLevelChangeSound(bool pause = false)
+    {
+        if (pause) 
+        {
+            levelTransitionEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+        else
+        {
+            levelTransitionEventInstance.start();
         }
     }
 

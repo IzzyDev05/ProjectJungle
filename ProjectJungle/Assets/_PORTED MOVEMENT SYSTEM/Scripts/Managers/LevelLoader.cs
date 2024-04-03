@@ -15,6 +15,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLevel(int buildIndex)
     {
+
         StartCoroutine(LoadLevelRoutine(buildIndex));
     }
 
@@ -28,7 +29,10 @@ public class LevelLoader : MonoBehaviour
     {
         // Start animation
         animator.SetTrigger("FadeOut");
-        
+
+        // Play level load sound
+        AudioManager.Instance.PlayLevelChangeSound();
+
         // Wait
         yield return new WaitForSeconds(fadeOutTime);
 

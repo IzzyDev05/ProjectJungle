@@ -19,6 +19,8 @@ public class PlayerSounds : MonoBehaviour
     private EventInstance diving;
     #endregion
 
+    public TerrainType groundType { get; private set; }
+
     public void Start()
     {
         playerLoco = FindObjectOfType<PlayerLocomotion>();
@@ -39,7 +41,7 @@ public class PlayerSounds : MonoBehaviour
         if (footsteps.isValid() && playerLoco.isGrounded)
         {
             GroundTypeChecker();
-            SpeedToIntensitiy();
+            SpeedToIntensity();
 
             footsteps.start();
         }
@@ -123,7 +125,8 @@ public class PlayerSounds : MonoBehaviour
     /// </summary>
     private void GroundTypeChecker()
     {
-        switch (TerrainChecker.Instance.CheckTerrainType(this.transform.parent)) 
+        groundType = TerrainChecker.Instance.CheckTerrainType(this.transform.parent);
+        switch (groundType) 
         {
             case TerrainType.Wood:
                 {
@@ -143,10 +146,17 @@ public class PlayerSounds : MonoBehaviour
                     landing.setParameterByName("Landing", 2);
                     break;
                 }
+            case TerrainType.Plantation:
+                {
+                    footsteps.setParameterByName("Footsteps", 3);
+                    landing.setParameterByName("Landing", 3);
+                    break;
+                }
             default:
                 {
-                    footsteps.setParameterByName("Footsteps", 1);
-                    landing.setParameterByName("Landing", 1);
+                    // Wood Sounds
+                    footsteps.setParameterByName("Footsteps", 0);
+                    landing.setParameterByName("Landing", 0);
                     break;
                 }
         }
@@ -156,7 +166,7 @@ public class PlayerSounds : MonoBehaviour
     /// <summary>
     /// Controls the intensity of the footsteps in relation to the speed of the movement
     /// </summary>
-    private void SpeedToIntensitiy()
+    private void SpeedToIntensity()
     {        
         if (playerLoco.isSprinting)
         {
