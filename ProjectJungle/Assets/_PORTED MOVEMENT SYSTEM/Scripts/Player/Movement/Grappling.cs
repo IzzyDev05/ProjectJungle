@@ -161,29 +161,32 @@ public class Grappling : MonoBehaviour
         aimCam.SetActive(false);
         reticle.SetActive(false);
         
-        if (!currentlyGrappling) return;
         if (spring) Destroy(spring);
-        
-        var previousState = PlayerManager.PreviousState;
-        PlayerManager.UpdateState(previousState);
 
-        RumbleManager.Instance.StopRumble();
-
-        grapplePoint = Vector3.zero;
-        StartCoroutine(GrappleCooldown());
-        StartCoroutine(swinging.SwingCooldown());
-
-        Cursor.lockState = CursorLockMode.Confined;
-
-        rightHandIK.StopHandIK();
-        headIK.StopHeadIK();
-        bodyIK.StopBodyIK();
-
-        if (hasStartedGrappleRoutine)
+        if (currentlyGrappling)
         {
-            ropeRenderer.StopDrawingRope();
-            hasStartedGrappleRoutine = false;
+            var previousState = PlayerManager.PreviousState;
+            PlayerManager.UpdateState(previousState);
+
+            RumbleManager.Instance.StopRumble();
+
+            grapplePoint = Vector3.zero;
+            StartCoroutine(GrappleCooldown());
+            StartCoroutine(swinging.SwingCooldown());
+
+            Cursor.lockState = CursorLockMode.Confined;
+
+            rightHandIK.StopHandIK();
+            headIK.StopHeadIK();
+            bodyIK.StopBodyIK();
+
+            if (hasStartedGrappleRoutine)
+            {
+                ropeRenderer.StopDrawingRope();
+                hasStartedGrappleRoutine = false;
+            }
         }
+        
         currentlyGrappling = false;
         playerLocomotion.isAiming = false;
     }
