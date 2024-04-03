@@ -78,7 +78,16 @@ public class TerrainChecker : MonoBehaviour
 
                     // You can now access the terrain layer using the layerIndex
                     TerrainLayer currentLayer = terrainLayers[layerIndex];
-                    terrainTypeName = currentLayer.name;
+
+                    if (currentLayer.name.Contains("Dirt"))
+                    {
+                        terrainTypeName = "Dirt";
+                    }
+                    else if (currentLayer.name.Contains("Grass"))
+                    {
+                        terrainTypeName = "Grass";
+
+                    }
                 }
             }
             else

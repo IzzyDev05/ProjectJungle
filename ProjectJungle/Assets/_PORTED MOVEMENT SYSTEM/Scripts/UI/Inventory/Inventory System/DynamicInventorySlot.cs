@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DynamicInventorySlot : MonoBehaviour
 {
-    [SerializeField]Transform slotContainer;
+    [SerializeField] Transform slotContainer;
     [SerializeField] GameObject slotPrefab;
 
     [SerializeField] List<GameObject> trinketPrefabList;
@@ -30,4 +30,6 @@ public class DynamicInventorySlot : MonoBehaviour
             newSlot.GetComponent<NewSlotManager>().SetSlotItem = trinketPrefabList[i];
         }
     }
+
+    public int TrinketCount { get {  return trinketPrefabList.Count; } }
 }

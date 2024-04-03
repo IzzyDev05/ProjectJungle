@@ -11,6 +11,7 @@ public class NewInventoryManager : MonoBehaviour
 
     [SerializeField] GameObject inventoryUI;
     [SerializeField] GameObject slotContainer;
+    [SerializeField] DynamicInventorySlot slotAdder;
 
     [SerializeField] List<GameObject> slotList;
 
@@ -27,6 +28,7 @@ public class NewInventoryManager : MonoBehaviour
 
         inventoryUI = GameObject.FindGameObjectWithTag("Inventory");
         slotContainer = GameObject.FindGameObjectWithTag("InventorySlotContainer");
+        slotAdder = GetComponent<DynamicInventorySlot>();
     }
 
     // Start is called before the first frame update
@@ -43,7 +45,7 @@ public class NewInventoryManager : MonoBehaviour
         }
 
         EventSystem eventSystem = EventSystem.current;
-        if (eventSystem.firstSelectedGameObject == null) 
+        if (eventSystem.firstSelectedGameObject == null && slotAdder.TrinketCount > 0) 
         {
             eventSystem.firstSelectedGameObject = slotContainer.transform.GetChild(0).gameObject;
         }
