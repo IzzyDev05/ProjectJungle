@@ -96,4 +96,6 @@ public class NewSlotManager : MonoBehaviour
     #endregion
 
     public GameObject SetSlotItem { set { slotItem = value; } }
+
+    public bool IsCollected { get {  return isCollected; } }
 }

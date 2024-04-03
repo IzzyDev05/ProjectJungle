@@ -102,4 +102,29 @@ public class NewInventoryManager : MonoBehaviour
             AudioManager.Instance.PlayOneShot(FModEvents.Instance.pickupItem, GameManager.Player.transform.position);
         }
     }
+
+    /// <summary>
+    /// Checks if the inventory has all the slot items
+    /// </summary>
+    /// <returns>Returns true if all trinkets are collected. Otherwise return false.</returns>
+    public bool AllTrinketsCollected()
+    {
+        bool allCollected = false;
+
+        foreach (GameObject slot in slotList) 
+        {
+            NewSlotManager slotManager = slot.GetComponent<NewSlotManager>();
+
+            if (slotManager.IsCollected)
+            {
+                allCollected = true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return allCollected;
+    }
 }
