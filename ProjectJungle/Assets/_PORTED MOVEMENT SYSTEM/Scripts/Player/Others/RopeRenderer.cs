@@ -38,6 +38,7 @@ public class RopeRenderer : MonoBehaviour
     public void StartDrawingRope(Vector3 swingPoint)
     {
         ball.SetActive(true);
+        endPoint.position = ball.transform.position;
         rope.enabled = true;
 
         StartTransition(swingPoint);
