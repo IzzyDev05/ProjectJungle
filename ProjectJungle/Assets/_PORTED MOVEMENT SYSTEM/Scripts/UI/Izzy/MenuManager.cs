@@ -16,11 +16,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject gameplaySettings;*/
 
     private PlayerManager playerManager;
+    private Timer timer;
     private bool isPaused;
 
     private void Start()
     {
         playerManager = FindObjectOfType<PlayerManager>();
+        timer = FindObjectOfType<Timer>();
         
         pauseCanvas.SetActive(false);
         
@@ -29,6 +31,8 @@ public class MenuManager : MonoBehaviour
         audioSettings.SetActive(false);
         videoSettings.SetActive(false);
         gameplaySettings.SetActive(false);*/
+
+        timer.ShouldAddTime = true;
     }
 
     private void Update()
@@ -43,6 +47,7 @@ public class MenuManager : MonoBehaviour
     private void Pause()
     {
         isPaused = true;
+        timer.ShouldAddTime = false;
         Time.timeScale = 0.5f;
         OpenPauseMenu();
 
@@ -53,6 +58,7 @@ public class MenuManager : MonoBehaviour
     private void Unpause()
     {
         isPaused = false;
+        timer.ShouldAddTime = true;
         Time.timeScale = 1f;
         CloseAllMenus();
         
