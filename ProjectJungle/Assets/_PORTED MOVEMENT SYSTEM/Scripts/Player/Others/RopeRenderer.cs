@@ -33,6 +33,8 @@ public class RopeRenderer : MonoBehaviour
 
             if (percentageComplete >= 1.0f) isTransitioning = false;
         }
+        
+        if (!rope.enabled) endPoint.position = ball.transform.position;
     }
 
     public void StartDrawingRope(Vector3 swingPoint)
