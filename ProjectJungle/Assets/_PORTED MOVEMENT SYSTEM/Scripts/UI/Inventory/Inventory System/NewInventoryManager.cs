@@ -111,6 +111,11 @@ public class NewInventoryManager : MonoBehaviour
     {
         bool allCollected = false;
 
+        if (slotList.Count == 0)
+        {
+            return true;
+        }
+
         foreach (GameObject slot in slotList) 
         {
             NewSlotManager slotManager = slot.GetComponent<NewSlotManager>();
