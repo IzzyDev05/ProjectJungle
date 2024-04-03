@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Terrain 
+public enum TerrainType
 {
     None,
     Other,
     Grass,
     Wood,
-    Plantation
+    Plantation,
+    Dirt
 }
 
 
@@ -28,35 +29,88 @@ public class TerrainChecker : MonoBehaviour
         #endregion
     }
 
-    /// <summary>
-    /// Gets the type of terrain.
-    /// </summary>
-    /// <param name="rayOriginTransform"></param>
-    /// <returns></returns>
-    public Terrain TerrainType(Transform rayOriginTransform)
+    public TerrainType CheckTerrainType(Transform rayOriginTransform)
     {
+        string terrainTypeName = "";
+
         RaycastHit hit;
 
         Ray ray = new Ray(rayOriginTransform.position + Vector3.up * 0.5f, Vector3.down);
 
         if (Physics.Raycast(ray, out hit, 1.0f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
         {
-            Renderer groundRenderer = hit.collider.GetComponentInChildren<Renderer>();
+            Terrain ground = hit.collider.GetComponent<Terrain>();
 
-            if (groundRenderer)
+            if (ground != null)
             {
-                // Debug.Log(groundRenderer.material.name);
-                if (groundRenderer.material.name.Contains("Grass"))
+                // Check if the collider hit is on the terrain
+                TerrainCollider terrainCollider = hit.collider.GetComponent<TerrainCollider>();
+                Terrain terrain = hit.collider.GetComponent<Terrain>();
+
+                if (terrainCollider != null && terrain != null)
                 {
-                    return Terrain.Grass;
+                    // Get the terrain data
+                    TerrainData terrainData = terrain.terrainData;
+
+                    // Get the normalized position of the hit point
+                    Vector3 terrainLocalPos = hit.point - terrain.gameObject.transform.position;
+                    Vector3 normalizedPos = new Vector3(
+                        Mathf.InverseLerp(0, terrainData.size.x, terrainLocalPos.x),
+                        Mathf.InverseLerp(0, terrainData.size.y, terrainLocalPos.y),
+                        Mathf.InverseLerp(0, terrainData.size.z, terrainLocalPos.z)
+                    );
+
+                    // Get the terrain layers
+                    TerrainLayer[] terrainLayers = terrainData.terrainLayers;
+
+                    // Sample the alpha map to determine the terrain layer
+                    int layerIndex = 0;
+                    float maxOpacity = 0f;
+                    for (int i = 0; i < terrainLayers.Length; i++)
+                    {
+                        float opacity = terrainData.GetAlphamapTexture(0).GetPixelBilinear(normalizedPos.x, normalizedPos.z)[i];
+                        if (opacity > maxOpacity)
+                        {
+                            maxOpacity = opacity;
+                            layerIndex = i;
+                        }
+                    }
+
+                    // You can now access the terrain layer using the layerIndex
+                    TerrainLayer currentLayer = terrainLayers[layerIndex];
+                    terrainTypeName = currentLayer.name;
                 }
-                else
-                {
-                    return Terrain.Other;
-                }
+            }
+            else
+            {
+                terrainTypeName = hit.collider.tag;
+            }
+
+            switch (terrainTypeName)
+            {
+                case "Wood":
+                    {
+                        return TerrainType.Wood;
+                    }
+                case "Dirt":
+                    {
+                        return TerrainType.Dirt;
+                    }
+                case "Grass":
+                    {
+                        return TerrainType.Grass;
+                    }
+                case "Plant":
+                    {
+                        return TerrainType.Plantation;
+                    }
+                default:
+                    {
+                        return TerrainType.Other;
+                    }
             }
         }
 
-        return Terrain.None;
+        return TerrainType.None;
     }
 }

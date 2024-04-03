@@ -16,7 +16,10 @@ public class PlayerSounds : MonoBehaviour
     private EventInstance footsteps;
     private EventInstance jumping;
     private EventInstance landing;
+    private EventInstance diving;
     #endregion
+
+    public TerrainType groundType { get; private set; }
 
     public void Start()
     {
@@ -26,6 +29,7 @@ public class PlayerSounds : MonoBehaviour
         footsteps = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.footsteps, GameManager.Player.transform);
         jumping = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.jumpingSound, GameManager.Player.transform);
         landing = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.landingSound, GameManager.Player.transform);
+        diving = AudioManager.Instance.CreateEventInstance(FModEvents.Instance.divingSound, GameManager.Player.transform);
     }
 
     #region PUBLIC_SFX_PLAYERS
@@ -37,7 +41,7 @@ public class PlayerSounds : MonoBehaviour
         if (footsteps.isValid() && playerLoco.isGrounded)
         {
             GroundTypeChecker();
-            SpeedToIntensitiy();
+            SpeedToIntensity();
 
             footsteps.start();
         }
@@ -97,7 +101,21 @@ public class PlayerSounds : MonoBehaviour
         {
             GroundTypeChecker();
             landing.start();
+            StopGroundSlamFalling();
         }
+    }
+
+    public void PlayGroundSlamFalling()
+    {
+        if (playerLoco.isGroundSlamming)
+        {
+            diving.start();
+        }
+    }
+
+    public void StopGroundSlamFalling()
+    {
+        diving.stop(STOP_MODE.IMMEDIATE);
     }
     #endregion
 
@@ -107,18 +125,38 @@ public class PlayerSounds : MonoBehaviour
     /// </summary>
     private void GroundTypeChecker()
     {
-        switch (TerrainChecker.Instance.TerrainType(this.transform.parent)) 
+        groundType = TerrainChecker.Instance.CheckTerrainType(this.transform.parent);
+        switch (groundType)
         {
-            case Terrain.Other:
+            case TerrainType.Wood:
                 {
                     footsteps.setParameterByName("Footsteps", 0);
                     landing.setParameterByName("Landing", 0);
                     break;
                 }
-            case Terrain.Grass:
+            case TerrainType.Grass:
                 {
                     footsteps.setParameterByName("Footsteps", 1);
                     landing.setParameterByName("Landing", 1);
+                    break;
+                }
+            case TerrainType.Dirt:
+                {
+                    footsteps.setParameterByName("Footsteps", 2);
+                    landing.setParameterByName("Landing", 2);
+                    break;
+                }
+            case TerrainType.Plantation:
+                {
+                    footsteps.setParameterByName("Footsteps", 3);
+                    landing.setParameterByName("Landing", 3);
+                    break;
+                }
+            default:
+                {
+                    // Wood Sounds
+                    footsteps.setParameterByName("Footsteps", 0);
+                    landing.setParameterByName("Landing", 0);
                     break;
                 }
         }
@@ -128,8 +166,8 @@ public class PlayerSounds : MonoBehaviour
     /// <summary>
     /// Controls the intensity of the footsteps in relation to the speed of the movement
     /// </summary>
-    private void SpeedToIntensitiy()
-    {        
+    private void SpeedToIntensity()
+    {
         if (playerLoco.isSprinting)
         {
             //Debug.Log("Sprinting steps are louder");
