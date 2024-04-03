@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private float fadeOutTime = 1f;
-    
+
     private Animator animator;
 
     private void Start()

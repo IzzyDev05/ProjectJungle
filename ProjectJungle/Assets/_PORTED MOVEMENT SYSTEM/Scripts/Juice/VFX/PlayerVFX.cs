@@ -12,7 +12,7 @@ public class PlayerVFX : MonoBehaviour
     void Start()
     {
         doubleJumpVFX = GameObject.Find("Double Jump VFX").GetComponent<ParticleSystem>();
-        
+
         foreach (Transform child in GameObject.Find("Sprint VFX").transform)
         {
             sprintVFX.Add(child.GetComponent<ParticleSystem>());
@@ -33,7 +33,7 @@ public class PlayerVFX : MonoBehaviour
             switch (GetComponentInChildren<PlayerSounds>().groundType)
             {
                 case TerrainType.Dirt:
-                    {                        
+                    {
                         foreach (ParticleSystem other in sprintVFX)
                         {
                             if (!other.name.Contains("Dirt") && other.isPlaying)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TerrainType 
+public enum TerrainType
 {
     None,
     Other,
@@ -27,62 +27,6 @@ public class TerrainChecker : MonoBehaviour
 
         Instance = this;
         #endregion
-    }
-
-    /// <summary>
-    /// Gets the type of terrain.
-    /// </summary>
-    /// <param name="rayOriginTransform"></param>
-    /// <returns></returns>
-    public TerrainType TerrainCheck(Transform rayOriginTransform)
-    {
-        RaycastHit hit;
-
-        Ray ray = new Ray(rayOriginTransform.position + Vector3.up * 0.5f, Vector3.down);
-
-        if (Physics.Raycast(ray, out hit, 1.0f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-        {
-            //Renderer groundRenderer = hit.collider.GetComponentInChildren<Renderer>();
-
-            switch (hit.collider.tag)
-            {
-                case "Wood":
-                    {
-                        return TerrainType.Wood;
-                    }
-                case "Dirt":
-                    {
-                        return TerrainType.Dirt;     
-                    }
-                case "Grass":
-                    {
-                        return TerrainType.Grass;
-                    }
-                default:
-                    {
-                        return TerrainType.Other;
-                    }
-            }
-
-            /*if (groundRenderer)
-            {
-                // Debug.Log(groundRenderer.material.name);
-                if (groundRenderer.material.name.Contains("Wood"))
-                {
-                    return Terrain.Wood;
-                }
-                else if (groundRenderer.material.name.Contains("Grass"))
-                {
-                     return Terrain.Grass;
-                }
-                else
-                {
-                    return Terrain.Dirt;
-                }
-            }*/
-        }
-
-        return TerrainType.None;
     }
 
     public TerrainType CheckTerrainType(Transform rayOriginTransform)
@@ -134,7 +78,16 @@ public class TerrainChecker : MonoBehaviour
 
                     // You can now access the terrain layer using the layerIndex
                     TerrainLayer currentLayer = terrainLayers[layerIndex];
-                    terrainTypeName = currentLayer.name;
+
+                    if (currentLayer.name.Contains("Dirt"))
+                    {
+                        terrainTypeName = "Dirt";
+                    }
+                    else if (currentLayer.name.Contains("Grass"))
+                    {
+                        terrainTypeName = "Grass";
+
+                    }
                 }
             }
             else

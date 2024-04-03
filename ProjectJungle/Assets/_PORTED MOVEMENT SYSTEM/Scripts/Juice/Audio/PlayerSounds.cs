@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FMOD.Studio;
+using UnityEngine;
 
 /*
  *  Script Created using the help of Omnisepher Game & Sound's video: FMOD Time L02 - Switches & Footsteps | FMOD | Unity -> https://www.youtube.com/watch?v=naSl0DbqACA 
@@ -126,7 +124,7 @@ public class PlayerSounds : MonoBehaviour
     private void GroundTypeChecker()
     {
         groundType = TerrainChecker.Instance.CheckTerrainType(this.transform.parent);
-        switch (groundType) 
+        switch (groundType)
         {
             case TerrainType.Wood:
                 {
@@ -167,7 +165,7 @@ public class PlayerSounds : MonoBehaviour
     /// Controls the intensity of the footsteps in relation to the speed of the movement
     /// </summary>
     private void SpeedToIntensity()
-    {        
+    {
         if (playerLoco.isSprinting)
         {
             //Debug.Log("Sprinting steps are louder");

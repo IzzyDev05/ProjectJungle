@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
 
     #region VOLUME_CONTROL
     [Header("Volume")]
-    [Range(0,1)]
+    [Range(0, 1)]
 
     public float masterVolume = 1f;
     [Range(0, 1)]
@@ -150,12 +150,12 @@ public class AudioManager : MonoBehaviour
         if (pauseAmbientSound && isAmbientSoundPaused == false)
         {
             ambienceEventInstance.setPaused(true);
-            
+
         }
         else if (pauseAmbientSound == false && isAmbientSoundPaused)
         {
             ambienceEventInstance.setPaused(false);
-            
+
         }
     }
 
@@ -165,7 +165,7 @@ public class AudioManager : MonoBehaviour
     /// <param name="pause">A boolean to stop the SFX early.</param>
     public void PlayLevelChangeSound(bool pause = false)
     {
-        if (pause) 
+        if (pause)
         {
             levelTransitionEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         }

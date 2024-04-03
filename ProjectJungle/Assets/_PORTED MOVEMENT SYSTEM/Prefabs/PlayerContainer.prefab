@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2516574349462125051}
-  - {fileID: 8323014992018358236}
+  - {fileID: 7423643886023913139}
   m_Father: {fileID: 4448179997595989586}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5178710584978730207
@@ -150,7 +150,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1807971478}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1786565289928117760
+--- !u!1001 &886216730991452015
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -218,11 +218,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5632957362f65e489287c337433c4ef, type: 3}
---- !u!4 &8323014992018358236 stripped
+--- !u!4 &7423643886023913139 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7731112260834456028, guid: c5632957362f65e489287c337433c4ef,
     type: 3}
-  m_PrefabInstance: {fileID: 1786565289928117760}
+  m_PrefabInstance: {fileID: 886216730991452015}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2928247507999706796
 PrefabInstance:
@@ -412,6 +412,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8bc1cda1549652e478f119ec841dfe9f, type: 2}
+    - target: {fileID: 4781699946382337306, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9dc56267bdc5f4545b16ab18dbbcdcee, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -431,11 +436,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1520006361693742019, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5228625174889624129}
+      addedObject: {fileID: 7536053076113308031}
     - targetCorrespondingSourceObject: {fileID: 1520006361693742019, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2834675252951394308}
+      addedObject: {fileID: 5498532791270488362}
+    - targetCorrespondingSourceObject: {fileID: 1520006361693742019, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8482521213753833847}
+    - targetCorrespondingSourceObject: {fileID: 1520006361693742019, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 676371960800506650}
     - targetCorrespondingSourceObject: {fileID: 2303589819329160666, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
         type: 3}
       insertIndex: -1
@@ -479,9 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfxParent: {fileID: 1658676631}
   doubleJumpVFX: {fileID: 2516574349462125045}
-  sprintVFX:
-  - {fileID: 0}
-  currentTerrain: 0
+  sprintVFX: []
 --- !u!114 &1458699197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad29867ff5c0ed4a8faaeff54e6d72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5228625174889624129
+--- !u!114 &7536053076113308031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -508,7 +519,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FreelookCam: {fileID: 0}
   AimCam: {fileID: 0}
---- !u!114 &2834675252951394308
+--- !u!114 &5498532791270488362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448179996252974447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba1352736eb66f44aeb73dcd5bde5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8482521213753833847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448179996252974447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b948884b9ce754cab68e16333edc42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FreelookCam: {fileID: 0}
+  AimCam: {fileID: 0}
+--- !u!114 &676371960800506650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
