@@ -1,50 +1,60 @@
-using System.Collections;
+using System;
 using UnityEngine;
 
 public class RopeRenderer : MonoBehaviour
 {
     [SerializeField] private Transform endPoint;
     [SerializeField] private LineRenderer rope;
-    [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject ball; // The rope shoots from here
     [SerializeField] private float transitionDuration = 1.0f;
 
-    private PlayerLocomotion playerLocomotion;
+    private Vector3 targetPosition;
+    private Vector3 startPosition;
+    private float startTime;
+    private bool isTransitioning = false;
 
     private void Start()
     {
-        playerLocomotion = GetComponent<PlayerLocomotion>();
         rope.enabled = false;
         ball.SetActive(false);
+
+        startPosition = ball.transform.position;
+        endPoint.position = ball.transform.position;
+    }
+
+    private void Update()
+    {
+        if (isTransitioning)
+        {
+            float timeSinceStarted = Time.time - startTime;
+            float percentageComplete = timeSinceStarted / transitionDuration;
+
+            endPoint.position = Vector3.Lerp(startPosition, targetPosition, percentageComplete);
+
+            if (percentageComplete >= 1.0f) isTransitioning = false;
+        }
     }
 
     public void StartDrawingRope(Vector3 swingPoint)
     {
-        if (PlayerManager.State == States.Swinging || playerLocomotion.isGrappling)
-        {
-            ball.SetActive(true);
+        ball.SetActive(true);
+        rope.enabled = true;
 
-            StartCoroutine(MoveEndPointOverTime(endPoint.position, swingPoint, transitionDuration));
-            rope.enabled = true;
-        }
-        else
-        {
-            ball.SetActive(false);
-            rope.enabled = false;
-            endPoint.position = ball.transform.position;
-        }
+        StartTransition(swingPoint);
     }
 
-    private IEnumerator MoveEndPointOverTime(Vector3 startPosition, Vector3 targetPosition, float duration)
+    public void StopDrawingRope()
     {
-        float elapsedTime = 0;
+        rope.enabled = false;
+        endPoint.position = ball.transform.position;
+        ball.SetActive(false);
+    }
 
-        while (elapsedTime < duration)
-        {
-            endPoint.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        endPoint.position = targetPosition;
+    private void StartTransition(Vector3 newTargetPosition)
+    {
+        startPosition = endPoint.position; // Current position
+        targetPosition = newTargetPosition; // New target position
+        startTime = Time.time;
+        isTransitioning = true;
     }
 }

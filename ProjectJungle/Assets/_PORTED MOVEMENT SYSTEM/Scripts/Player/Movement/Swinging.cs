@@ -5,24 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerLocomotion))]
 public class Swinging : MonoBehaviour
 {
-    [Header("Swinging Variables")] 
-    [SerializeField] private float maxSwingDistance = 75f;
-    [SerializeField] private float raycastConeRadius = 5f; 
+    [Header("Swinging Variables")] [SerializeField]
+    private float maxSwingDistance = 75f;
+
+    [SerializeField] private float raycastConeRadius = 5f;
     [SerializeField] private LayerMask swingableLayer;
     [SerializeField] private Transform swingPointRef;
     [SerializeField] private float swingingCD = 0.75f;
     [SerializeField] private float swingingPointForwardOffset = 5f;
     [SerializeField] private float swingStartDelay = 0.4f;
-    
-    [Header("Joint Variables")] 
-    [SerializeField] private float swingForce = 4.5f;
+
+    [Header("Joint Variables")] [SerializeField]
+    private float swingForce = 4.5f;
+
     [SerializeField] private float springDamper = 7f;
     [SerializeField] private float springMassScale = 4.5f;
     [SerializeField, Range(0, 1f)] private float minDistanceMultiplier = 0.25f;
     [SerializeField, Range(0, 1f)] private float maxDistanceMultiplier = 0.75f;
 
-    [Header("Forces")] 
-    [SerializeField] private float initialForwardMomentum = 2.5f;
+    [Header("Forces")] [SerializeField] private float initialForwardMomentum = 2.5f;
     [SerializeField] private float initialUpwardMomentum = 2.5f;
     [SerializeField] private float swingEndThrust = 2.5f;
 
@@ -37,6 +38,7 @@ public class Swinging : MonoBehaviour
     private bool currentlySwinging;
     private bool canSwing = true;
     private float swingTime;
+    private bool hasStartedSwingRoutine;
 
     private void Start()
     {
@@ -49,20 +51,19 @@ public class Swinging : MonoBehaviour
 
     private void Update()
     {
-        if (inputManager.leftMouse && !playerLocomotion.isAiming) FindSwingPoint();
-        else EndSwing();
+        if (inputManager.leftMouse && !playerLocomotion.isAiming && !currentlySwinging) FindSwingPoint();
+        else if (!inputManager.leftMouse && currentlySwinging) EndSwing();
     }
 
     private void LateUpdate()
     {
-        ropeRenderer.StartDrawingRope(swingPoint);
         rightHandIK.StartHandIK(currentlySwinging, swingPoint);
     }
 
     private void FindSwingPoint()
     {
         if (currentlySwinging || !canSwing) return;
-        
+
         Vector3 forwardPos = transform.position + transform.forward * swingingPointForwardOffset;
 
         RaycastHit[] hits = Physics.SphereCastAll(forwardPos, raycastConeRadius, transform.up, maxSwingDistance,
@@ -102,8 +103,6 @@ public class Swinging : MonoBehaviour
 
         if (swingPoint != Vector3.zero)
         {
-            currentlySwinging = true;
-            PlayerManager.UpdateState(States.Swinging);
             StartCoroutine(DelayStartSwing(swingStartDelay));
         }
         else
@@ -116,12 +115,23 @@ public class Swinging : MonoBehaviour
             PlayerManager.UpdateState(newState);
         }
     }
-    
+
     private IEnumerator DelayStartSwing(float delay)
     {
         yield return new WaitForSeconds(delay);
 
-        if (currentlySwinging && canSwing) StartSwing();
+        if (!currentlySwinging && canSwing)
+        {
+            currentlySwinging = true;
+            PlayerManager.UpdateState(States.Swinging);
+            StartSwing();
+
+            if (!hasStartedSwingRoutine)
+            {
+                ropeRenderer.StartDrawingRope(swingPoint);
+                hasStartedSwingRoutine = true;
+            }
+        }
     }
 
     private void StartSwing()
@@ -130,7 +140,7 @@ public class Swinging : MonoBehaviour
 
         RumbleManager.Instance.StartRumble(playerLocomotion.lowRumbleFrequency, playerLocomotion.highRumbleFrequency,
             0f, true);
-        
+
         spring = gameObject.AddComponent<SpringJoint>();
 
         ApplySpringJointValues();
@@ -160,34 +170,39 @@ public class Swinging : MonoBehaviour
 
     private void EndSwing()
     {
-        if (spring)
-        {
-            rightHandIK.StopHandIK();
-            float swingSpeed = rb.velocity.magnitude;
-            float dynamicThrust = Mathf.Clamp(swingSpeed / 10f, 1f, 3f);
-            Vector3 swingDirection = rb.velocity.normalized;
-            
-            rb.AddForce(swingDirection * (swingEndThrust * dynamicThrust), ForceMode.Impulse);
-            
-            RumbleManager.Instance.StopRumble();
-            StopCoroutine(UpdateRumbleIntensity());
+        if (spring) Destroy(spring);
 
-            swingPoint = Vector3.zero;
-            Destroy(spring);
-        }
+        rightHandIK.StopHandIK();
+        float swingSpeed = rb.velocity.magnitude;
+        float dynamicThrust = Mathf.Clamp(swingSpeed / 10f, 1f, 3f);
+        Vector3 swingDirection = rb.velocity.normalized;
 
-        if (PlayerManager.State == States.Grounded || PlayerManager.State == States.Aerial) return;
+        rb.AddForce(swingDirection * (swingEndThrust * dynamicThrust), ForceMode.Impulse);
+
+        RumbleManager.Instance.StopRumble();
+        StopCoroutine(UpdateRumbleIntensity());
+
+        swingPoint = Vector3.zero;
+
+        //if (PlayerManager.State == States.Grounded || PlayerManager.State == States.Aerial) return;
 
         currentlySwinging = false;
 
         StartCoroutine(SwingCooldown());
         PlayerManager.UpdateState(States.Aerial);
+
+        if (hasStartedSwingRoutine) // Ensure we only stop the rope drawing once
+        {
+            ropeRenderer.StopDrawingRope();
+            hasStartedSwingRoutine = false;
+        }
     }
 
     public IEnumerator SwingCooldown()
     {
         canSwing = false;
         yield return new WaitForSeconds(swingingCD);
+
         canSwing = true;
     }
 
@@ -201,7 +216,7 @@ public class Swinging : MonoBehaviour
 
             float highFreq = Mathf.Lerp(playerLocomotion.lowRumbleFrequency, playerLocomotion.highRumbleFrequency,
                 swingTime / 10f);
-            
+
             RumbleManager.Instance.UpdateRumble(lowFreq, highFreq);
             yield return null;
         }
