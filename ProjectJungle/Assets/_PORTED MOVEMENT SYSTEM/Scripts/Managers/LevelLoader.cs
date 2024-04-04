@@ -14,7 +14,7 @@ public class LevelLoader : MonoBehaviour
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        worldMenus.SetActive(false);
+        worldMenus.SetActive(true);
         winCam.SetActive(false);
         winCanvas.SetActive(false);
     }
