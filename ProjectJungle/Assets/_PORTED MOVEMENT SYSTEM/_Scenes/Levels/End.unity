@@ -533,6 +533,143 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1058971851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1058971854}
+  - component: {fileID: 1058971853}
+  - component: {fileID: 1058971852}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1058971852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058971851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1823572d1f9b4db28062707f853c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: 1
+  ambientVolume: 1
+  sfxVolume: 1
+--- !u!114 &1058971853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058971851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d92167745e3d4c4ba0a57fd59756f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <backpack>k__BackingField:
+    Guid:
+      Data1: -618270063
+      Data2: 1150025915
+      Data3: 1404282776
+      Data4: 428702759
+    Path: event:/SFX/UI/Inventory/Backpack
+  <pickupItem>k__BackingField:
+    Guid:
+      Data1: -1638058154
+      Data2: 1307817589
+      Data3: 1447541414
+      Data4: 296193822
+    Path: event:/SFX/Character/Interaction/PickupItem
+  <footsteps>k__BackingField:
+    Guid:
+      Data1: 159073632
+      Data2: 1154029890
+      Data3: -964342132
+      Data4: 1842490077
+    Path: event:/SFX/Character/Movement/Footsteps
+  <jumpingSound>k__BackingField:
+    Guid:
+      Data1: 646169252
+      Data2: 1331380495
+      Data3: -790088807
+      Data4: 70426626
+    Path: event:/SFX/Character/Movement/Jump
+  <landingSound>k__BackingField:
+    Guid:
+      Data1: 1002633936
+      Data2: 1172059644
+      Data3: -1128553284
+      Data4: -128602875
+    Path: event:/SFX/Character/Movement/Landing
+  <divingSound>k__BackingField:
+    Guid:
+      Data1: 388307655
+      Data2: 1124975548
+      Data3: -1212553037
+      Data4: -842056846
+    Path: event:/SFX/Character/Movement/Diving
+  <grappleHit>k__BackingField:
+    Guid:
+      Data1: 1244256765
+      Data2: 1241537846
+      Data3: 919629470
+      Data4: 508639434
+    Path: event:/SFX/Character/Abilities/GrappleHit
+  <grappleRelease>k__BackingField:
+    Guid:
+      Data1: -1289157968
+      Data2: 1241016982
+      Data3: -669404010
+      Data4: -828199238
+    Path: event:/SFX/Character/Abilities/GrappleRelease
+  <grappleRetract>k__BackingField:
+    Guid:
+      Data1: -908372110
+      Data2: 1103896272
+      Data3: 1498858382
+      Data4: -1163308973
+    Path: event:/SFX/Character/Abilities/GrappleRetract
+  <levelTransition>k__BackingField:
+    Guid:
+      Data1: 1871644267
+      Data2: 1212296317
+      Data3: -1944655719
+      Data4: 1434580725
+    Path: event:/SFX/LevelChange
+  <forest>k__BackingField:
+    Guid:
+      Data1: 898049927
+      Data2: 1284655508
+      Data3: -333835856
+      Data4: -179043552
+    Path: event:/Ambient/PlaceholderAmbience
+--- !u!4 &1058971854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058971851}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1103796970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1230,6 +1367,7 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1058971854}
   - {fileID: 1103796970}
   - {fileID: 1967035131}
   - {fileID: 1839808774}
