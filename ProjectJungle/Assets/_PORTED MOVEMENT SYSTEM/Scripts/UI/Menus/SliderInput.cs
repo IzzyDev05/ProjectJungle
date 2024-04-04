@@ -16,20 +16,28 @@ public class SliderInput : MonoBehaviour
         LOOK_VERTICAL_SENS
     }
 
+    #region General
     [Header("Type")]
     [SerializeField] TYPE type;
 
     [SerializeField] Slider slider;
     [SerializeField] TMP_InputField inputField;
     [SerializeField] float sliderCap;
+    #endregion
 
+    #region Freelook
+    [Header("Freelook")]
     [SerializeField] GameObject freeLookCam;
-    float H_freeLookBaseSpeed;
-    float V_freeLookBaseSpeed;
+    [SerializeField] float H_freeLookBaseSpeed;
+    [SerializeField] float V_freeLookBaseSpeed;
+    #endregion
 
+    #region Aim
+    [Header("Aim")]
     [SerializeField] GameObject aimCam;
-    float H_AimBaseSpeed;
-    float V_AimBaseSpeed;
+    [SerializeField] float H_AimBaseSpeed;
+    [SerializeField] float V_AimBaseSpeed;
+    #endregion
 
     private void Awake()
     {
@@ -42,20 +50,22 @@ public class SliderInput : MonoBehaviour
         }
 
         slider.maxValue = sliderCap;
-        slider.value = sliderCap;
 
         foreach (Transform camera in GameObject.Find("Cameras").transform)
         {
             if (camera.name.Contains("FreeLook"))
             {
                 freeLookCam = camera.gameObject;
-                //H_freeLookBaseSpeed = freeLookCam.GetComponent<CinemachineFreeLook>().
+                H_freeLookBaseSpeed = freeLookCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
+                V_freeLookBaseSpeed = freeLookCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
 
             }
 
             if (camera.name.Contains("Aim"))
             {
                 aimCam = camera.gameObject;
+                H_AimBaseSpeed = aimCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
+                V_AimBaseSpeed = aimCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
             }
         }
 
@@ -89,26 +99,26 @@ public class SliderInput : MonoBehaviour
                     slider.value = AudioManager.Instance.sfxVolume * sliderCap;
                     break;
                 }
+            case TYPE.LOOK_HORIZONTAL_SENS:
+                {
+                    slider.value = freeLookCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed / FreeLookHorizontal;
+                    break;
+                }
+            case TYPE.LOOK_VERTICAL_SENS:
+                {
+                    slider.value = freeLookCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed / FreeLookVertical;
+                    break;
+                }
             case TYPE.AIM_HORIZONTAL_SENS:
                 {
-
+                    slider.value = aimCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed / AimHorizontal;
                     break;
                 }
             case TYPE.AIM_VERTICAL_SENS:
                 {
-
+                    slider.value = aimCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed / AimVertical;
                     break;
                 }
-            case TYPE.LOOK_HORIZONTAL_SENS:
-            {
-                slider.value = freeLookCam.GetComponent<Slider>().value;
-                break;
-            }
-            case TYPE.LOOK_VERTICAL_SENS:
-            {
-
-                break;
-            }
         }
     }
 
@@ -117,8 +127,9 @@ public class SliderInput : MonoBehaviour
     /// </summary>
     public void OnSliderValueChanged()
     {
-        // Ajust the value of the slider to be between 0 and 1.
+        // Adjust the value of the slider to be between 0 and 1.
         float adjustedValue = slider.value / sliderCap;
+
         switch (type)
         {
             case TYPE.MASTER:
@@ -136,24 +147,24 @@ public class SliderInput : MonoBehaviour
                     AudioManager.Instance.sfxVolume = adjustedValue;
                     break;
                 }
-            case TYPE.AIM_HORIZONTAL_SENS:
-                {
-
-                    break;
-                }
-            case TYPE.AIM_VERTICAL_SENS:
-                {
-
-                    break;
-                }
             case TYPE.LOOK_HORIZONTAL_SENS:
                 {
-
+                    freeLookCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = slider.value * FreeLookHorizontal;
                     break;
                 }
             case TYPE.LOOK_VERTICAL_SENS:
                 {
-
+                    freeLookCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = slider.value * FreeLookVertical;
+                    break;
+                }
+            case TYPE.AIM_HORIZONTAL_SENS:
+                {
+                    aimCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = slider.value * AimHorizontal;
+                    break;
+                }
+            case TYPE.AIM_VERTICAL_SENS:
+                {
+                    aimCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = slider.value * AimVertical;
                     break;
                 }
         }
@@ -173,50 +184,51 @@ public class SliderInput : MonoBehaviour
         }
 
         // Converted string and adjust to be between 0 and 1.
-        float parsedVolumeValue = int.Parse(inputField.text) / sliderCap;
+        float parsedValue = float.Parse(inputField.text) / sliderCap;
         
-        if (parsedVolumeValue < 0)
+        if (parsedValue < 0)
         {
-            parsedVolumeValue *= -1;
+            parsedValue *= -1;
         }
 
         switch (type) 
         {
             case TYPE.MASTER:
                 {
-                    AudioManager.Instance.masterVolume = parsedVolumeValue;
+                    AudioManager.Instance.masterVolume = parsedValue;
                     break;
                 }
             case TYPE.AMBIENT:
                 {
-                    AudioManager.Instance.ambientVolume = parsedVolumeValue;
+                    AudioManager.Instance.ambientVolume = parsedValue;
                     break;
                 }
             case TYPE.SFX:
                 {
-                    AudioManager.Instance.sfxVolume = parsedVolumeValue;
+                    AudioManager.Instance.sfxVolume = parsedValue;
                     break;
                 }
-            case TYPE.AIM_HORIZONTAL_SENS:
+            // For some reason this is not needed
+            /*case TYPE.LOOK_HORIZONTAL_SENS:
                 {
-
-                    break;
-                }
-            case TYPE.AIM_VERTICAL_SENS:
-                {
-
-                    break;
-                }
-            case TYPE.LOOK_HORIZONTAL_SENS:
-                {
-
+                    freeLookCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = parsedValue * FreeLookHorizontal;
                     break;
                 }
             case TYPE.LOOK_VERTICAL_SENS:
                 {
-
+                    freeLookCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = parsedValue * FreeLookVertical;
                     break;
                 }
+            case TYPE.AIM_HORIZONTAL_SENS:
+                {
+                    aimCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = parsedValue * AimHorizontal;
+                    break;
+                }
+            case TYPE.AIM_VERTICAL_SENS:
+                {
+                    aimCam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = parsedValue * AimVertical;
+                    break;
+                }*/
         }
 
         MatchSliderToInputField(inputField.text);
@@ -236,8 +248,14 @@ public class SliderInput : MonoBehaviour
             return;
         }
 
-        inputField.text = string.Format("{0:F0}", Mathf.Abs(sliderValue));
-
+        if (type == TYPE.LOOK_HORIZONTAL_SENS || type == TYPE.LOOK_VERTICAL_SENS || type == TYPE.AIM_HORIZONTAL_SENS || type == TYPE.AIM_VERTICAL_SENS)
+        {
+            inputField.text = sliderValue.ToString("0.##");
+        }
+        else
+        {
+            inputField.text = string.Format("{0:F0}", Mathf.Abs(sliderValue));
+        }
     }
 
     /// <summary>
@@ -249,10 +267,16 @@ public class SliderInput : MonoBehaviour
         float parsedValue = 0;
         if (isParsible(inputFieldValue) == true)
         {
-           parsedValue = Mathf.Abs(float.Parse(inputFieldValue));
+            if (type == TYPE.LOOK_HORIZONTAL_SENS || type == TYPE.LOOK_VERTICAL_SENS || type == TYPE.AIM_HORIZONTAL_SENS || type == TYPE.AIM_VERTICAL_SENS)
+            {
+                slider.value = float.Parse(inputFieldValue);
+            }
+            else
+            {
+                parsedValue = Mathf.Abs(float.Parse(inputFieldValue));
+                slider.value = parsedValue;
+            }    
         }
-
-        slider.value = parsedValue;
     }
     #endregion
 
@@ -291,5 +315,13 @@ public class SliderInput : MonoBehaviour
         inputField.onValueChanged.AddListener(delegate { OnInputFieldValueChanged(); });
         #endregion
     }
+    #endregion
+
+    #region Getters
+    float FreeLookHorizontal { get { return H_freeLookBaseSpeed; } }
+    float FreeLookVertical { get { return V_freeLookBaseSpeed; } }
+
+    float AimHorizontal { get { return H_AimBaseSpeed; } }
+    float AimVertical { get { return V_AimBaseSpeed;} }
     #endregion
 }
