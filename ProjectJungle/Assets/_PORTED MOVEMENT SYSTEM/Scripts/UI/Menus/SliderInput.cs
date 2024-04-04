@@ -101,7 +101,7 @@ public class SliderInput : MonoBehaviour
                 }
             case TYPE.LOOK_HORIZONTAL_SENS:
             {
-                slider.value = freeLookCam.GetComponent<>()
+                slider.value = freeLookCam.GetComponent<Slider>().value;
                 break;
             }
             case TYPE.LOOK_VERTICAL_SENS:
