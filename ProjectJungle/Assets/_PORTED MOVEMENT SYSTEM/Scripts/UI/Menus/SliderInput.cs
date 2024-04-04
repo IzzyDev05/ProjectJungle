@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class SliderInput : MonoBehaviour
 {
@@ -8,7 +9,11 @@ public class SliderInput : MonoBehaviour
     {
         MASTER,
         AMBIENT,
-        SFX
+        SFX,
+        AIM_HORIZONTAL_SENS,
+        AIM_VERTICAL_SENS,
+        LOOK_HORIZONTAL_SENS,
+        LOOK_VERTICAL_SENS
     }
 
     [Header("Type")]
@@ -16,11 +21,43 @@ public class SliderInput : MonoBehaviour
 
     [SerializeField] Slider slider;
     [SerializeField] TMP_InputField inputField;
+    [SerializeField] float sliderCap;
+
+    [SerializeField] GameObject freeLookCam;
+    float H_freeLookBaseSpeed;
+    float V_freeLookBaseSpeed;
+
+    [SerializeField] GameObject aimCam;
+    float H_AimBaseSpeed;
+    float V_AimBaseSpeed;
 
     private void Awake()
     {
         slider = this.GetComponentInChildren<Slider>();
         inputField = this.GetComponentInChildren<TMP_InputField>();
+
+        if (sliderCap <= 0)
+        {
+            sliderCap = 10f;
+        }
+
+        slider.maxValue = sliderCap;
+        slider.value = sliderCap;
+
+        foreach (Transform camera in GameObject.Find("Cameras").transform)
+        {
+            if (camera.name.Contains("FreeLook"))
+            {
+                freeLookCam = camera.gameObject;
+                //H_freeLookBaseSpeed = freeLookCam.GetComponent<CinemachineFreeLook>().
+
+            }
+
+            if (camera.name.Contains("Aim"))
+            {
+                aimCam = camera.gameObject;
+            }
+        }
 
         SetUpSliderInput();
     }
@@ -39,19 +76,39 @@ public class SliderInput : MonoBehaviour
         {
             case TYPE.MASTER:
                 {
-                    slider.value = AudioManager.Instance.masterVolume * 100;
+                    slider.value = AudioManager.Instance.masterVolume * sliderCap;
                     break;
                 }
             case TYPE.AMBIENT:
                 {
-                    slider.value = AudioManager.Instance.ambientVolume * 100;
+                    slider.value = AudioManager.Instance.ambientVolume * sliderCap;
                     break;
                 }
             case TYPE.SFX:
                 {
-                    slider.value = AudioManager.Instance.sfxVolume * 100;
+                    slider.value = AudioManager.Instance.sfxVolume * sliderCap;
                     break;
                 }
+            case TYPE.AIM_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.AIM_VERTICAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.LOOK_HORIZONTAL_SENS:
+            {
+                slider.value = freeLookCam.GetComponent<>()
+                break;
+            }
+            case TYPE.LOOK_VERTICAL_SENS:
+            {
+
+                break;
+            }
         }
     }
 
@@ -61,7 +118,7 @@ public class SliderInput : MonoBehaviour
     public void OnSliderValueChanged()
     {
         // Ajust the value of the slider to be between 0 and 1.
-        float adjustedValue = slider.value / 100f;
+        float adjustedValue = slider.value / sliderCap;
         switch (type)
         {
             case TYPE.MASTER:
@@ -77,6 +134,26 @@ public class SliderInput : MonoBehaviour
             case TYPE.SFX:
                 {
                     AudioManager.Instance.sfxVolume = adjustedValue;
+                    break;
+                }
+            case TYPE.AIM_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.AIM_VERTICAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.LOOK_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.LOOK_VERTICAL_SENS:
+                {
+
                     break;
                 }
         }
@@ -96,7 +173,7 @@ public class SliderInput : MonoBehaviour
         }
 
         // Converted string and adjust to be between 0 and 1.
-        float parsedVolumeValue = int.Parse(inputField.text) / 100f;
+        float parsedVolumeValue = int.Parse(inputField.text) / sliderCap;
         
         if (parsedVolumeValue < 0)
         {
@@ -120,13 +197,32 @@ public class SliderInput : MonoBehaviour
                     AudioManager.Instance.sfxVolume = parsedVolumeValue;
                     break;
                 }
+            case TYPE.AIM_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.AIM_VERTICAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.LOOK_HORIZONTAL_SENS:
+                {
+
+                    break;
+                }
+            case TYPE.LOOK_VERTICAL_SENS:
+                {
+
+                    break;
+                }
         }
 
         MatchSliderToInputField(inputField.text);
     }
 
-    // VALUE MATCHERS
-
+    #region VALUE_MATCHERS
     /// <summary>
     /// Set the input field value to match the slider value
     /// </summary>
@@ -158,10 +254,9 @@ public class SliderInput : MonoBehaviour
 
         slider.value = parsedValue;
     }
+    #endregion
 
-
-    //HELPERS
-
+    #region HELPERS
     /// <summary>
     /// Checks if the string can be converted into a float
     /// </summary>
@@ -196,4 +291,5 @@ public class SliderInput : MonoBehaviour
         inputField.onValueChanged.AddListener(delegate { OnInputFieldValueChanged(); });
         #endregion
     }
+    #endregion
 }
