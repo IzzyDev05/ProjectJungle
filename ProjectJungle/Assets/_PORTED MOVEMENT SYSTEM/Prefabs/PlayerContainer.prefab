@@ -294,10 +294,117 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9131520698770810831}
     m_Modifications:
+    - target: {fileID: 1790288283, guid: 846fdcb11614a824cb5c4f29a74e1bf6, type: 3}
+      propertyPath: m_DefaultVelocity.x
+      value: 0.00632751
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790288283, guid: 846fdcb11614a824cb5c4f29a74e1bf6, type: 3}
+      propertyPath: m_DefaultVelocity.y
+      value: -0.1179658
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790288283, guid: 846fdcb11614a824cb5c4f29a74e1bf6, type: 3}
+      propertyPath: m_DefaultVelocity.z
+      value: -0.5136042
+      objectReference: {fileID: 0}
     - target: {fileID: 1520006361693742019, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
         type: 3}
       propertyPath: m_Name
       value: PlayerMain
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: swingForce
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: swingingCD
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: springDamper
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: swingEndThrust
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: springMassScale
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: swingStartDelay
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: maxSwingDistance
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: raycastConeRadius
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: initialUpwardMomentum
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: maxDistanceMultiplier
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: minDistanceMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960002, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: initialForwardMomentum
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960003, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: jumpForce
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960003, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: fallingVelocity
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960003, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: leapingVelocity
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960003, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: groundSlamInitialForce
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960061, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: jointForce
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960061, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: grappleForce
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520006363571960061, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      propertyPath: grappleStartDelay
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1520006363571960062, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
         type: 3}
@@ -362,7 +469,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1520006363110533066, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8533818057250508842}
   m_SourcePrefab: {fileID: 100100000, guid: 846fdcb11614a824cb5c4f29a74e1bf6, type: 3}
 --- !u!4 &3558226642700477340 stripped
 Transform:
@@ -376,3 +487,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2928247507999706796}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4448179997654886758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1520006363110533066, guid: 846fdcb11614a824cb5c4f29a74e1bf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2928247507999706796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8533818057250508842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448179997654886758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160493830cc1bfc449e8db43ec707047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
