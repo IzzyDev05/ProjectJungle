@@ -7,6 +7,8 @@ public class PlayerTriggerManager : MonoBehaviour
     private LevelLoader levelLoader;
     private Tags objTag;
 
+    private bool hasKey;
+
     private void Start()
     {
         levelLoader = FindObjectOfType<LevelLoader>();
@@ -21,6 +23,17 @@ public class PlayerTriggerManager : MonoBehaviour
         {
             var respawnPoint = other.GetComponent<Respawner>().GetRespawnPoint();
             player.position = respawnPoint;
+        }
+
+        if (other.CompareTag("Key"))
+        {
+            hasKey = true;
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Win"))
+        {
+            if (hasKey) levelLoader.WinGame();
         }
     }
 }

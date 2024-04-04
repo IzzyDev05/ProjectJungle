@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private float fadeOutTime = 1f;
+    [SerializeField] private GameObject winCam;
     
     private Animator animator;
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        winCam.SetActive(false);
     }
 
     public void LoadLevel(int buildIndex)
@@ -34,6 +36,13 @@ public class LevelLoader : MonoBehaviour
 
         // Load scene
         SceneManager.LoadScene(buildIndex);
+    }
+
+    public void WinGame()
+    {
+        winCam.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void QuitGame()
