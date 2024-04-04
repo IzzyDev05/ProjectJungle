@@ -6,13 +6,17 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private float fadeOutTime = 1f;
     [SerializeField] private GameObject winCam;
+    [SerializeField] private GameObject winCanvas;
+    [SerializeField] private GameObject worldMenus;
     
     private Animator animator;
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        worldMenus.SetActive(false);
         winCam.SetActive(false);
+        winCanvas.SetActive(false);
     }
 
     public void LoadLevel(int buildIndex)
@@ -40,7 +44,10 @@ public class LevelLoader : MonoBehaviour
 
     public void WinGame()
     {
+        worldMenus.SetActive(true);
         winCam.SetActive(true);
+        winCanvas.SetActive(true);
+        
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
