@@ -38,14 +38,14 @@ public class WorldMenuManager : MonoBehaviour
         winCam.SetActive(false);
     }
 
-    public void MainMenu()
+    /*public void MainMenu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
         mainMenuCam.SetActive(true);
         settingsCam.SetActive(false);
         winCam.SetActive(false);
-    }
+    }*/
 
     public void QuitGame()
     {

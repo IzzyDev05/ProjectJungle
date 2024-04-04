@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -10,14 +11,11 @@ public class MenuManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private GameObject settingsCanvas;
     [SerializeField] private GameObject settingsDefaultButton;
-    /*[SerializeField] private GameObject baseSettings;
-    [SerializeField] private GameObject audioSettings;
-    [SerializeField] private GameObject videoSettings;
-    [SerializeField] private GameObject gameplaySettings;*/
 
     private PlayerManager playerManager;
     private Timer timer;
     private bool isPaused;
+    private int defaultX;
 
     private void Start()
     {
@@ -27,12 +25,10 @@ public class MenuManager : MonoBehaviour
         pauseCanvas.SetActive(false);
         
         settingsCanvas.SetActive(false);
-        /*baseSettings.SetActive(true);
-        audioSettings.SetActive(false);
-        videoSettings.SetActive(false);
-        gameplaySettings.SetActive(false);*/
-
         timer.ShouldAddTime = true;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Update()
@@ -48,7 +44,6 @@ public class MenuManager : MonoBehaviour
     {
         isPaused = true;
         timer.ShouldAddTime = false;
-        Time.timeScale = 0.5f;
         OpenPauseMenu();
 
         Cursor.visible = true;
@@ -59,7 +54,6 @@ public class MenuManager : MonoBehaviour
     {
         isPaused = false;
         timer.ShouldAddTime = true;
-        Time.timeScale = 1f;
         CloseAllMenus();
         
         Cursor.visible = false;
@@ -69,6 +63,7 @@ public class MenuManager : MonoBehaviour
     private void OpenPauseMenu()
     {
         pauseCanvas.SetActive(true);
+        print(pauseCanvas.activeInHierarchy);
         settingsCanvas.SetActive(false);
         
         EventSystem.current.SetSelectedGameObject(pauseDefaultButton);
@@ -106,38 +101,10 @@ public class MenuManager : MonoBehaviour
         OpenPauseMenu();
     }
 
-    /*public void OnSubSettingsBack()
+    public void OnMainMenu()
     {
-        baseSettings.SetActive(true);
-        audioSettings.SetActive(false);
-        videoSettings.SetActive(false);
-        gameplaySettings.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    public void OnSubSetting(string type)
-    {
-        switch (type)
-        {
-            case ("Audio"):
-                baseSettings.SetActive(false);
-                audioSettings.SetActive(true);
-                videoSettings.SetActive(false);
-                gameplaySettings.SetActive(false);
-                break;
-            case ("Video"):
-                baseSettings.SetActive(false);
-                audioSettings.SetActive(false);
-                videoSettings.SetActive(true);
-                gameplaySettings.SetActive(false);
-                break;
-            case ("Gameplay"):
-                baseSettings.SetActive(false);
-                audioSettings.SetActive(false);
-                videoSettings.SetActive(false);
-                gameplaySettings.SetActive(true);
-                break;
-        }
-    }*/
 
     public void OnQuitPress()
     {

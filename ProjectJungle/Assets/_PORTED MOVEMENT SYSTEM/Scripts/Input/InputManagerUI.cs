@@ -11,7 +11,7 @@ public class InputManagerUI : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction menuOpenCloseAction;
 
-    private void Awake()
+    private void Start()
     {
         Instance ??= this;
 
