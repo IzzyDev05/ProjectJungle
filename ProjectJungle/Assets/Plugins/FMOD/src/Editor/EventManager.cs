@@ -882,7 +882,7 @@ namespace FMODUnity
 
             if (platform == Settings.Instance.DefaultPlatform)
             {
-                Debug.LogWarningFormat("FMOD: Updating bank stubs: Unsupported platform {0}", buildTarget);
+                //Debug.LogWarningFormat("FMOD: Updating bank stubs: Unsupported platform {0}", buildTarget);
                 return;
             }
 
@@ -992,9 +992,9 @@ namespace FMODUnity
             }
             catch (Exception exception)
             {
-                Debug.LogErrorFormat("FMOD: Updating bank stubs in {0} to match {1}",
-                    bankTargetFolder, bankSourceFolder);
-                Debug.LogException(exception);
+                //Debug.LogErrorFormat("FMOD: Updating bank stubs in {0} to match {1}",
+                    //bankTargetFolder, bankSourceFolder);
+                //Debug.LogException(exception);
                 return;
             }
             finally
@@ -1006,7 +1006,7 @@ namespace FMODUnity
             {
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
-                Debug.LogFormat("FMOD: Updated bank stubs in {0} to match {1}", bankTargetFolder, bankSourceFolder);
+                //Debug.LogFormat("FMOD: Updated bank stubs in {0} to match {1}", bankTargetFolder, bankSourceFolder);
             }
         }
 

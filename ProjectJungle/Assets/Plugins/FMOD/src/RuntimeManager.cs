@@ -145,7 +145,7 @@ namespace FMODUnity
                 {
                     if (!Application.isPlaying)
                     {
-                        Debug.LogError("[FMOD] RuntimeManager accessed outside of runtime. Do not use RuntimeManager for Editor-only functionality, create your own System objects instead.");
+                        //Debug.LogError("[FMOD] RuntimeManager accessed outside of runtime. Do not use RuntimeManager for Editor-only functionality, create your own System objects instead.");
                         return null;
                     }
 

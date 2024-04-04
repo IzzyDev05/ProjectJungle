@@ -117,7 +117,6 @@ public class InputManager : MonoBehaviour
     {
         if (performDebugAction)
         {
-            print("Debug action");
             ragdollEnabler.ToggleRagdoll();
             performDebugAction = false;
         }

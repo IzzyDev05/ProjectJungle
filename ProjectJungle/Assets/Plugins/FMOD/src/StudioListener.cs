@@ -58,14 +58,14 @@ namespace FMODUnity
             // Is the listener already in the list?
             if (listeners.Contains(listener))
             {
-                Debug.LogWarning(string.Format(("[FMOD] Listener has already been added at index {0}."), listener.ListenerNumber));
+                //Debug.LogWarning(string.Format(("[FMOD] Listener has already been added at index {0}."), listener.ListenerNumber));
                 return;
             }
 
             // If already at the max numListeners
             if (listeners.Count >= FMOD.CONSTANTS.MAX_LISTENERS)
             {
-                Debug.LogWarning(string.Format(("[FMOD] Max number of listeners reached : {0}."), FMOD.CONSTANTS.MAX_LISTENERS));
+                //Debug.LogWarning(string.Format(("[FMOD] Max number of listeners reached : {0}."), FMOD.CONSTANTS.MAX_LISTENERS));
             }
 
             listeners.Add(listener);

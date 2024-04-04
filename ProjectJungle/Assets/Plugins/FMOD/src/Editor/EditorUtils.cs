@@ -1067,8 +1067,8 @@ namespace FMODUnity
 
                 if (!Directory.Exists(folderPath))
                 {
-                    Debug.LogErrorFormat("FMOD: Couldn't find base folder by GUID ({0}) or path ({1})",
-                        RuntimeUtils.BaseFolderGUID, RuntimeUtils.PluginBasePathDefault);
+                    //Debug.LogErrorFormat("FMOD: Couldn't find base folder by GUID ({0}) or path ({1})",
+                        //RuntimeUtils.BaseFolderGUID, RuntimeUtils.PluginBasePathDefault);
                     return;
                 }
 
@@ -1133,7 +1133,7 @@ namespace FMODUnity
                     return $"Couldn't find a line starting with '{GuidPrefix}' in {filePath}";
                 }
 
-                Debug.LogFormat("FMOD: Updated the GUID for {0} to {1}", assetPath, newGUID);
+                //Debug.LogFormat("FMOD: Updated the GUID for {0} to {1}", assetPath, newGUID);
 
                 AssetDatabase.ImportAsset(assetPath);
 
@@ -1141,7 +1141,7 @@ namespace FMODUnity
             }
             catch (Exception e)
             {
-                Debug.LogWarningFormat("FMOD: Failed to update the GUID for {0}: {1}", assetPath, e.Message);
+                //Debug.LogWarningFormat("FMOD: Failed to update the GUID for {0}: {1}", assetPath, e.Message);
 
                 return e.Message;
             }
@@ -1215,7 +1215,7 @@ namespace FMODUnity
 
                 File.WriteAllText(infoPlistPath, contents);
 
-                Debug.LogFormat("FMOD: Replaced CRLF line endings with LF in {0}", infoPlistPath);
+                //Debug.LogFormat("FMOD: Replaced CRLF line endings with LF in {0}", infoPlistPath);
             }
         }
 

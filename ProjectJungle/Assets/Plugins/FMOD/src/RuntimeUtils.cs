@@ -545,7 +545,7 @@ namespace FMODUnity
         {
             if (Settings.Instance == null || Settings.Instance.LoggingLevel == FMOD.DEBUG_FLAGS.LOG)
             {
-                Debug.Log(message);
+                //Debug.Log(message);
             }
         }
 
@@ -553,7 +553,7 @@ namespace FMODUnity
         {
             if (Settings.Instance == null || Settings.Instance.LoggingLevel == FMOD.DEBUG_FLAGS.LOG)
             {
-                Debug.LogFormat(format, args);
+                //Debug.LogFormat(format, args);
             }
         }
 
@@ -561,7 +561,7 @@ namespace FMODUnity
         {
             if (Settings.Instance == null || Settings.Instance.LoggingLevel >= FMOD.DEBUG_FLAGS.WARNING)
             {
-                Debug.LogWarning(message);
+                //Debug.LogWarning(message);
             }
         }
 
@@ -569,7 +569,7 @@ namespace FMODUnity
         {
             if (Settings.Instance == null || Settings.Instance.LoggingLevel >= FMOD.DEBUG_FLAGS.WARNING)
             {
-                Debug.LogWarningFormat(format, args);
+                //Debug.LogWarningFormat(format, args);
             }
         }
 
@@ -577,7 +577,7 @@ namespace FMODUnity
         {
             if (Settings.Instance == null || Settings.Instance.LoggingLevel >= FMOD.DEBUG_FLAGS.ERROR)
             {
-                Debug.LogError(message);
+                //Debug.LogError(message);
             }
         }
 
@@ -585,7 +585,7 @@ namespace FMODUnity
         {
             if (Settings.Instance == null || Settings.Instance.LoggingLevel >= FMOD.DEBUG_FLAGS.ERROR)
             {
-                Debug.LogErrorFormat(format, args);
+                //Debug.LogErrorFormat(format, args);
             }
         }
 
@@ -593,7 +593,7 @@ namespace FMODUnity
         {
             if (Settings.Instance == null || Settings.Instance.LoggingLevel >= FMOD.DEBUG_FLAGS.ERROR)
             {
-                Debug.LogException(e);
+                //Debug.LogException(e);
             }
         }
     }
